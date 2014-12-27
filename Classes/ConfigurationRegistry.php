@@ -175,9 +175,13 @@ class Tx_Oelib_ConfigurationRegistry
      *        the namespace of the configuration to retrieve, must not be empty
      *
      * @return Tx_Oelib_Configuration the TypoScript configuration for that namespace, might be empty
+     *
+     * @throws \BadMethodCallException
      */
     private function retrieveConfigurationFromTypoScriptSetup($namespace)
     {
+        throw new \BadMethodCallException('Real configuration: ' . $namespace, 1492007100736);
+
         $data = $this->getCompleteTypoScriptSetup();
 
         $namespaceParts = explode('.', $namespace);
