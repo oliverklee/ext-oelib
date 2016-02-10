@@ -1,6 +1,7 @@
 0.9.1 - currently working on
 
 Features:
+- [#5653] Add a configuration for PDF rendering of the manual
 
 Bug fixes:
 - [#5321] Update .htaccess to be Apache 2.4 compatible
