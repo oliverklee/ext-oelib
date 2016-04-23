@@ -3,6 +3,7 @@
 Features:
 
 Bug fixes:
+- [#5691] Warning about headers already sent when running the tests
 - [#5683] E-mail salutation is in German even for English BE
 
 Cleanup:

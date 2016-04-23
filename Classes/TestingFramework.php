@@ -1279,6 +1279,10 @@ final class Tx_Oelib_TestingFramework {
 		);
 		$GLOBALS['TSFE'] = NULL;
 		$GLOBALS['TT'] = NULL;
+		unset(
+			$GLOBALS['TYPO3_CONF_VARS']['FE']['dontSetCookie'],
+			$GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects']['TYPO3\\CMS\\Frontend\\Authentication\\FrontendUserAuthentication']
+		);
 
 		$this->hasFakeFrontEnd = FALSE;
 	}
