@@ -1,5 +1,8 @@
 1.0.2 - not released yet
 
+Bug fixes:
+- [#5761] Warning when using the ConfigurationProxy in unit tests
+
 
 1.0.1 - released 2016-08-10
 
