@@ -1,6 +1,7 @@
 1.0.2 - not released yet
 
 Bug fixes:
+- [#5766] Test failure in ConfigurationProxyTest
 - [#5761] Warning when using the ConfigurationProxy in unit tests
 
 
