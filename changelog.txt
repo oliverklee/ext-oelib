@@ -1,4 +1,4 @@
-1.0.2 - not released yet
+1.0.2 - released 2016-10-10
 
 Bug fixes:
 - [#5767] Stop using the deprecated BasicFileUtility::getUniqueName
