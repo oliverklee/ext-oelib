@@ -1,4 +1,4 @@
-1.1.1 - not released yet
+1.1.1 - released 2017-04-12
 
 Bug fixes:
 - [#5791] Test failure in Tx_Oelib_Tests_Unit_Mapper_FrontEndUserTest
