@@ -1,14 +1,11 @@
-0.9.2 - currently working on
+0.9.2 - released 2017-06-28
 
 Features:
+- [#5804] Add Mapper.reload($model)
 
 Bug fixes:
 - [#5691] Warning about headers already sent when running the tests
 - [#5683] E-mail salutation is in German even for English BE
-
-Cleanup:
-
-Changes:
 
 
 0.9.1 - released 2016-03-11

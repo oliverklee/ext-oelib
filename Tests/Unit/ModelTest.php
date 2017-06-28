@@ -134,6 +134,25 @@ class Tx_Oelib_Tests_Unit_ModelTest extends Tx_Phpunit_TestCase {
 		);
 	}
 
+    /**
+     * @test
+     */
+    public function getAfterResetDataReturnsTheSetValue()
+    {
+        $this->subject->resetData(['title' => 'bar']);
+
+        self::assertSame('bar', $this->subject->getTitle());
+    }
+
+    /**
+     * @test
+     */
+    public function resetDataCanBeCalledTwoTimes()
+    {
+        $this->subject->resetData(['title' => 'bar']);
+        $this->subject->resetData(['title' => 'foobar']);
+    }
+
 	/**
 	 * @test
 	 */
