@@ -1,4 +1,7 @@
-1.0.3 - not released yet
+1.0.3 - released 2017-06-28
+
+Features:
+- [#5804] Add Mapper.reload($model)
 
 
 1.0.2 - released 2016-10-10
