@@ -523,6 +523,24 @@ final class Tx_Oelib_TestingFramework
     }
 
     /**
+     * Creates a FE-Session.
+     *
+     * @param string $sessionKey
+     *        the key to store the sessiondata into
+     * @param mixed $data
+     *        the data to store in the session,
+     *
+     * @return void
+     */
+    public function createSessionWithoutFrontEndUser(
+        $sessionKey = 'oelib_test',
+        $data = 1
+    ) {
+        $frontEnd = $this->getFrontEndController();
+        $frontEnd->fe_user->setAndSaveSessionData($sessionKey, $data);
+    }
+
+    /**
      * Creates a BE user record.
      *
      * @param array $recordData

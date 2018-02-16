@@ -111,6 +111,19 @@ class Tx_Oelib_Tests_Unit_FrontEndLoginManagerTest extends Tx_Phpunit_TestCase
     /**
      * @test
      */
+    public function isLoggedInForFrontEndWithoutLoggedInUserWithSessionReturnsFalse()
+    {
+        $this->testingFramework->createFakeFrontEnd();
+        $this->testingFramework->createSessionWithoutFrontEndUser();
+
+        self::assertFalse(
+            $this->subject->isLoggedIn()
+        );
+    }
+
+    /**
+     * @test
+     */
     public function isLoggedInWithLoggedInFrontEndUserReturnsTrue()
     {
         $this->testingFramework->createFakeFrontEnd();
