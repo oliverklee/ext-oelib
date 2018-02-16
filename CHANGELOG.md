@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 - move the extension to GitHub
+- Fix check for logged in frontend user
 
 ### Deprecated
 
