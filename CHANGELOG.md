@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - remove obsolete TypoScript files (#8)
 
 ### Fixed
+- fix check for logged in user (#18)
 - Use $GLOBALS['TYPO3_CONF_VARS'] instead of $TYPO3_CONF_VARS (#16)
 - require static_info_tables for dev (#14)
 - skip tests that require static_info_tables if the extension is not installed (#11, #12, #13)
