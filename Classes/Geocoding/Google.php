@@ -46,9 +46,16 @@ class tx_oelib_Geocoding_Google implements tx_oelib_Interface_GeocodingLookup {
 	 * the amount of time (in seconds) that need to pass between subsequent
 	 * geocoding requests
 	 *
+	 * @see https://developers.google.com/maps/documentation/javascript/geocoding#UsageLimits
+	 *
 	 * @var float
 	 */
-	const GEOCODING_THROTTLING = 35.0;
+	const THROTTLING_IN_SECONDS = 1.0;
+
+	/**
+	 * @var int
+	 */
+	const MAXIMUM_ATTEMPTS = 5;
 
 	/**
 	 * the timestamp of the last geocoding request (will be 0.00 before the
@@ -56,7 +63,7 @@ class tx_oelib_Geocoding_Google implements tx_oelib_Interface_GeocodingLookup {
 	 *
 	 * @var float
 	 */
-	static private $lastGeocodingTimestamp = 0.00;
+	static private $lastGeocodingTimestamp = 0.0;
 
 	/**
 	 * The constructor. Do not call this constructor directly. Use getInstance()
@@ -69,7 +76,7 @@ class tx_oelib_Geocoding_Google implements tx_oelib_Interface_GeocodingLookup {
 	 * Frees as much memory that has been used by this object as possible.
 	 */
 	public function __destruct() {
-		self::$lastGeocodingTimestamp = 0.00;
+		self::$lastGeocodingTimestamp = 0.0;
 	}
 
 	/**
@@ -112,17 +119,17 @@ class tx_oelib_Geocoding_Google implements tx_oelib_Interface_GeocodingLookup {
 	}
 
 	/**
-	 * Looks up the geo coordinates of the address of an object and sets its
-	 * geo coordinates.
+	 * Looks up the geo coordinates of the address of an object and sets its geo coordinates.
 	 *
 	 * @param tx_oelib_Interface_Geo $geoObject
-	 *        the object for which the geo coordinates will be looked up and set
 	 *
 	 * @return void
+	 *
+	 * @throws \RuntimeException
 	 */
 	public function lookUp(tx_oelib_Interface_Geo $geoObject) {
 		if ($geoObject->hasGeoError() || $geoObject->hasGeoCoordinates()) {
-			return;
+		    return;
 		}
 		if (!$geoObject->hasGeoAddress()) {
 			$geoObject->setGeoError();
@@ -132,15 +139,35 @@ class tx_oelib_Geocoding_Google implements tx_oelib_Interface_GeocodingLookup {
 		$address = $geoObject->getGeoAddress();
 
 		$this->throttle();
-		$rawResult = $this->sendRequest($address);
-		if ($rawResult === FALSE) {
-			throw new RuntimeException('There was an error connecting to the Google geocoding server.', 1331488446);
+		$attempts = 0;
+
+		do {
+			$lookupError = false;
+
+			$retry = false;
+			$response = $this->sendRequest($address);
+
+			$httpError = $response === false;
+			if (!$httpError) {
+				$resultParts = json_decode($response, true);
+				$status = $resultParts['status'];
+				$lookupError = $status !== self::STATUS_OK;
+			}
+
+			if ($httpError || $lookupError) {
+				$attempts++;
+				if ($attempts < self::MAXIMUM_ATTEMPTS) {
+					$retry = true;
+					$this->throttle();
+				}
+			}
+		} while ($retry);
+
+		if ($httpError) {
+			throw new \RuntimeException('There was an error connecting to the Google geocoding server.', 1331488446);
 		}
 
-		$resultParts = json_decode($rawResult, TRUE);
-		$status = $resultParts['status'];
-
-		if ($status === self::STATUS_OK) {
+		if (!$lookupError) {
 			$coordinates = $resultParts['results'][0]['geometry']['location'];
 			$geoObject->setGeoCoordinates(
 				array(
@@ -176,8 +203,8 @@ class tx_oelib_Geocoding_Google implements tx_oelib_Interface_GeocodingLookup {
 	protected function throttle() {
 		if (self::$lastGeocodingTimestamp > 0.00) {
 			$secondsSinceLastRequest = microtime(TRUE) - self::$lastGeocodingTimestamp;
-			if ($secondsSinceLastRequest < self::GEOCODING_THROTTLING) {
-				usleep(1000000 * (self::GEOCODING_THROTTLING - $secondsSinceLastRequest));
+			if ($secondsSinceLastRequest < self::THROTTLING_IN_SECONDS) {
+				usleep(1000000 * (self::THROTTLING_IN_SECONDS - $secondsSinceLastRequest));
 			}
 		}
 

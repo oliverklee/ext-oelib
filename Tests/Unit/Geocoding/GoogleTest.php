@@ -24,7 +24,7 @@ class Tx_Oelib_Tests_Unit_Geocoding_GoogleTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @var tx_oelib_Geocoding_Google
 	 */
-	private $subject;
+	private $subject = null;
 
 	protected function setUp() {
 		$this->subject = tx_oelib_Geocoding_Google::getInstance();
@@ -172,8 +172,8 @@ class Tx_Oelib_Tests_Unit_Geocoding_GoogleTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
-	public function lookUpForAFullGermanAddressWithServerErrorSetsGeoProblem() {
-		$jsonResult = '{ "status" : "ZERO_RESULTS"}';
+	public function lookUpForAFullGermanAddressWithNoCoordinatesFoundSetsGeoProblem() {
+		$jsonResult = '{ "status": "ZERO_RESULTS"}';
 
 		$geo = new Tx_Oelib_Tests_Unit_Fixtures_TestingGeo();
 		$geo->setGeoAddress('Am Hof 1, 53113 Zentrum, Bonn, DE');
@@ -221,20 +221,20 @@ class Tx_Oelib_Tests_Unit_Geocoding_GoogleTest extends Tx_Phpunit_TestCase {
 	 * @test
 	 */
 	public function lookUpSetsCoordinatesFromSendRequest() {
-		$jsonResult = '{ "results" : [ { "address_components" : [ { "long_name" : "1", "short_name" : "1", ' .
-			'"types" : [ "street_number" ] }, { "long_name" : "Am Hof", "short_name" : "Am Hof", ' .
-			'"types" : [ "route" ] }, { "long_name" : "Bonn", "short_name" : "Bonn", ' .
-			'"types" : [ "sublocality", "political" ] }, { "long_name" : "Bonn", "short_name" : "Bonn", ' .
-			'"types" : [ "locality", "political" ] }, { "long_name" : "Bonn", "short_name" : "BN", ' .
-			'"types" : [ "administrative_area_level_2", "political" ] }, { "long_name" : "Nordrhein-Westfalen", ' .
-			'"short_name" : "Nordrhein-Westfalen", "types" : [ "administrative_area_level_1", "political" ] }, ' .
-			'{ "long_name" : "Germany", "short_name" : "DE", "types" : [ "country", "political" ] }, ' .
-			'{ "long_name" : "53113", "short_name" : "53113", "types" : [ "postal_code" ] } ], ' .
-			'"formatted_address" : "Am Hof 1, 53113 Bonn, Germany", "geometry" : { "location" : ' .
-			'{ "lat" : 50.733550, "lng" : 7.101430 }, "location_type" : "ROOFTOP", ' .
-			'"viewport" : { "northeast" : { "lat" : 50.73489898029150, "lng" : 7.102778980291502 }, ' .
-			'"southwest" : { "lat" : 50.73220101970850, "lng" : 7.100081019708497 } } }, ' .
-			'"types" : [ "street_address" ] } ], "status" : "OK"}';
+		$jsonResult = '{ "results": [ { "address_components": [ { "long_name": "1", "short_name": "1", ' .
+			'"types": [ "street_number" ] }, { "long_name": "Am Hof", "short_name": "Am Hof", ' .
+			'"types": [ "route" ] }, { "long_name": "Bonn", "short_name": "Bonn", ' .
+			'"types": [ "sublocality", "political" ] }, { "long_name": "Bonn", "short_name": "Bonn", ' .
+			'"types": [ "locality", "political" ] }, { "long_name": "Bonn", "short_name": "BN", ' .
+			'"types": [ "administrative_area_level_2", "political" ] }, { "long_name": "Nordrhein-Westfalen", ' .
+			'"short_name": "Nordrhein-Westfalen", "types": [ "administrative_area_level_1", "political" ] }, ' .
+			'{ "long_name": "Germany", "short_name": "DE", "types": [ "country", "political" ] }, ' .
+			'{ "long_name": "53113", "short_name": "53113", "types": [ "postal_code" ] } ], ' .
+			'"formatted_address": "Am Hof 1, 53113 Bonn, Germany", "geometry": { "location": ' .
+			'{ "lat": 50.733550, "lng": 7.101430 }, "location_type": "ROOFTOP", ' .
+			'"viewport": { "northeast": { "lat": 50.73489898029150, "lng": 7.102778980291502 }, ' .
+			'"southwest": { "lat": 50.73220101970850, "lng": 7.100081019708497 } } }, ' .
+			'"types": [ "street_address" ] } ], "status": "OK"}';
 
 		$geo = new Tx_Oelib_Tests_Unit_Fixtures_TestingGeo();
 		$geo->setGeoAddress('Am Hof 1, 53113 Zentrum, Bonn, DE');
@@ -263,23 +263,21 @@ class Tx_Oelib_Tests_Unit_Geocoding_GoogleTest extends Tx_Phpunit_TestCase {
 	/**
 	 * @test
 	 */
-	public function lookUpThrottlesRequestsByAtLeast35Seconds() {
-		self::markTestSkipped('This test usually is not executed because it takes more than 30 seconds to execute.');
-
-		$jsonResult = '{ "results" : [ { "address_components" : [ { "long_name" : "1", "short_name" : "1", ' .
-			'"types" : [ "street_number" ] }, { "long_name" : "Am Hof", "short_name" : "Am Hof", ' .
-			'"types" : [ "route" ] }, { "long_name" : "Bonn", "short_name" : "Bonn", ' .
-			'"types" : [ "sublocality", "political" ] }, { "long_name" : "Bonn", "short_name" : "Bonn", ' .
-			'"types" : [ "locality", "political" ] }, { "long_name" : "Bonn", "short_name" : "BN", ' .
-			'"types" : [ "administrative_area_level_2", "political" ] }, { "long_name" : "Nordrhein-Westfalen", ' .
-			'"short_name" : "Nordrhein-Westfalen", "types" : [ "administrative_area_level_1", "political" ] }, ' .
-			'{ "long_name" : "Germany", "short_name" : "DE", "types" : [ "country", "political" ] }, ' .
-			'{ "long_name" : "53113", "short_name" : "53113", "types" : [ "postal_code" ] } ], ' .
-			'"formatted_address" : "Am Hof 1, 53113 Bonn, Germany", "geometry" : { "location" : ' .
-			'{ "lat" : 50.733550, "lng" : 7.101430 }, "location_type" : "ROOFTOP", ' .
-			'"viewport" : { "northeast" : { "lat" : 50.73489898029150, "lng" : 7.102778980291502 }, ' .
-			'"southwest" : { "lat" : 50.73220101970850, "lng" : 7.100081019708497 } } }, ' .
-			'"types" : [ "street_address" ] } ], "status" : "OK"}';
+	public function lookUpThrottlesRequestsByAtLeastOneSecond() {
+		$jsonResult = '{ "results": [ { "address_components": [ { "long_name": "1", "short_name": "1", ' .
+			'"types": [ "street_number" ] }, { "long_name": "Am Hof", "short_name": "Am Hof", ' .
+			'"types": [ "route" ] }, { "long_name": "Bonn", "short_name": "Bonn", ' .
+			'"types": [ "sublocality", "political" ] }, { "long_name": "Bonn", "short_name": "Bonn", ' .
+			'"types": [ "locality", "political" ] }, { "long_name": "Bonn", "short_name": "BN", ' .
+			'"types": [ "administrative_area_level_2", "political" ] }, { "long_name": "Nordrhein-Westfalen", ' .
+			'"short_name": "Nordrhein-Westfalen", "types": [ "administrative_area_level_1", "political" ] }, ' .
+			'{ "long_name": "Germany", "short_name": "DE", "types": [ "country", "political" ] }, ' .
+			'{ "long_name": "53113", "short_name": "53113", "types": [ "postal_code" ] } ], ' .
+			'"formatted_address": "Am Hof 1, 53113 Bonn, Germany", "geometry": { "location": ' .
+			'{ "lat": 50.733550, "lng": 7.101430 }, "location_type": "ROOFTOP", ' .
+			'"viewport": { "northeast": { "lat": 50.73489898029150, "lng": 7.102778980291502 }, ' .
+			'"southwest": { "lat": 50.73220101970850, "lng": 7.100081019708497 } } }, ' .
+			'"types": [ "street_address" ] } ], "status": "OK"}';
 
 		$geo1 = new Tx_Oelib_Tests_Unit_Fixtures_TestingGeo();
 		$geo1->setGeoAddress('Am Hof 1, 53113 Zentrum, Bonn, DE');
@@ -303,9 +301,6 @@ class Tx_Oelib_Tests_Unit_Geocoding_GoogleTest extends Tx_Phpunit_TestCase {
 		$endTime = microtime(TRUE);
 
 		$timePassed = $endTime - $startTime;
-		self::assertGreaterThan(
-			35.0,
-			$timePassed
-		);
+		self::assertGreaterThan(1.0, $timePassed);
 	}
 }
