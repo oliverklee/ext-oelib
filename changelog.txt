@@ -1,4 +1,4 @@
-0.9.3 - not released yet.
+0.9.3 - released 2018-04-12
 
 Bug fixes:
 - Use multiple attempts for failed geocoding (#22)
