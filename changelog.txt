@@ -1,7 +1,14 @@
+0.9.x - not released yet
+
+Bug fixes:
+- Align the geocoding from the current master (#40)
+
+
 0.9.3 - released 2018-04-12
 
 Bug fixes:
 - Use multiple attempts for failed geocoding (#22)
+
 
 0.9.2 - released 2017-06-28
 
