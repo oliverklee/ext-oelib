@@ -3,16 +3,26 @@
 /**
  * This class represents a service to look up geo coordinates via Google Maps.
  *
+ * @see https://developers.google.com/maps/documentation/javascript/geocoding?#GeocodingStatusCodes
+ *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class tx_oelib_Geocoding_Google implements \tx_oelib_Interface_GeocodingLookup
 {
     /**
-     * status code for: okay, address was parsed
-     *
      * @var string
      */
     const STATUS_OK = 'OK';
+
+    /**
+     * @var string
+     */
+    const STATUS_ZERO_RESULTS = 'ZERO_RESULTS';
+
+    /**
+     * @var string
+     */
+    const STATUS_INVALID_REQUEST = 'INVALID_REQUEST';
 
     /**
      * the base URL of the Google Maps geo coding service
@@ -128,6 +138,10 @@ class tx_oelib_Geocoding_Google implements \tx_oelib_Interface_GeocodingLookup
                 $resultParts = json_decode($response, true);
                 $status = $resultParts['status'];
                 $lookupError = $status !== self::STATUS_OK;
+                $addressIsInvalid = \in_array($status, [self::STATUS_ZERO_RESULTS, self::STATUS_INVALID_REQUEST], true);
+                if ($addressIsInvalid) {
+                    break;
+                }
             }
 
             if ($httpError || $lookupError) {
