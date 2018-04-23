@@ -1,4 +1,4 @@
-0.9.x - not released yet
+0.9.4 - released 2018-04-23
 
 Features:
 - Log the reason for geocoding failures (#51)
