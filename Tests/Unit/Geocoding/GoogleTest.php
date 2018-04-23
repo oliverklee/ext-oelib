@@ -187,7 +187,7 @@ class Tx_Oelib_Tests_Unit_Geocoding_GoogleTest extends Tx_Phpunit_TestCase {
      *
      * @dataProvider noResultsStatusDataProvider
      */
-    public function lookUpForAFullGermanAddressWithNoCoordinatesFoundSetsGeoProblem($status)
+    public function lookUpForAFullGermanAddressWithNoCoordinatesFoundSetsGeoProblemAndLogsError($status)
     {
         $jsonResult = '{ "status": "' . $status . '" }';
 
@@ -207,14 +207,13 @@ class Tx_Oelib_Tests_Unit_Geocoding_GoogleTest extends Tx_Phpunit_TestCase {
         $subject->lookUp($geo);
 
         self::assertTrue($geo->hasGeoError());
+        self::assertSame($status, $geo->getGeoErrorReason());
     }
 
 	/**
 	 * @test
-	 *
-	 * @expectedException RuntimeException
 	 */
-	public function lookUpForAFullGermanAddressWithNetworkErrorThrowsException() {
+	public function lookUpForAFullGermanAddressWithNetworkErrorSetsGeoProblemAndLogsError() {
 		$geo = new Tx_Oelib_Tests_Unit_Fixtures_TestingGeo();
 		$geo->setGeoAddress('Am Hof 1, 53113 Zentrum, Bonn, DE');
 
@@ -229,6 +228,9 @@ class Tx_Oelib_Tests_Unit_Geocoding_GoogleTest extends Tx_Phpunit_TestCase {
 		$subject->expects(self::any())->method('sendRequest')->will(self::returnValue(FALSE));
 
 		$subject->lookUp($geo);
+
+        self::assertTrue($geo->hasGeoError());
+        self::assertSame('network problem', $geo->getGeoErrorReason());
 	}
 
 	/**
