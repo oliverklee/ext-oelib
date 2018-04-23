@@ -4,6 +4,7 @@ Features:
 - Add a composer.json (#46)
 
 Bug fixes:
+- Increase the delay when over the geocoding query limit (#48)
 - Directly bail from the geocoding for invalid addresses (#45)
 - Align the geocoding from the current master (#40)
 
