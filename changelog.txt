@@ -1,6 +1,7 @@
 0.9.x - not released yet
 
 Bug fixes:
+- Directly bail from the geocoding for invalid addresses (#45)
 - Align the geocoding from the current master (#40)
 
 
