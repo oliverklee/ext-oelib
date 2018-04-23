@@ -1,5 +1,8 @@
 0.9.x - not released yet
 
+Features:
+- Add a composer.json (#46)
+
 Bug fixes:
 - Directly bail from the geocoding for invalid addresses (#45)
 - Align the geocoding from the current master (#40)
