@@ -119,13 +119,11 @@ class tx_oelib_Geocoding_Google implements \tx_oelib_Interface_GeocodingLookup
     /**
      * Looks up the geo coordinates of the address of an object and sets its geo coordinates.
      *
-     * @param \Tx_Oelib_Interface_Geo $geoObject
+     * @param \tx_oelib_Interface_Geo $geoObject
      *
      * @return void
-     *
-     * @throws \RuntimeException
      */
-    public function lookUp(\Tx_Oelib_Interface_Geo $geoObject)
+    public function lookUp(\tx_oelib_Interface_Geo $geoObject)
     {
         if ($geoObject->hasGeoError() || $geoObject->hasGeoCoordinates()) {
             return;
@@ -141,13 +139,14 @@ class tx_oelib_Geocoding_Google implements \tx_oelib_Interface_GeocodingLookup
         $attempts = 0;
         do {
             $this->throttle($throttleTime);
-            $lookupError = false;
 
             $retry = false;
             $response = $this->sendRequest($address);
 
-            $httpError = $response === false;
-            if (!$httpError) {
+            $lookupError = $response === false;
+            if ($lookupError) {
+                $status = 'network problem';
+            } else {
                 $resultParts = json_decode($response, true);
                 $status = $resultParts['status'];
                 $lookupError = $status !== self::STATUS_OK;
@@ -160,7 +159,7 @@ class tx_oelib_Geocoding_Google implements \tx_oelib_Interface_GeocodingLookup
                 }
             }
 
-            if ($httpError || $lookupError) {
+            if ($lookupError) {
                 $attempts++;
                 if ($attempts < static::MAXIMUM_ATTEMPTS) {
                     $retry = true;
@@ -168,20 +167,16 @@ class tx_oelib_Geocoding_Google implements \tx_oelib_Interface_GeocodingLookup
             }
         } while ($retry);
 
-        if ($httpError) {
-            throw new \RuntimeException('There was an error connecting to the Google geocoding server.', 1331488446);
-        }
-
         if (!$lookupError) {
             $coordinates = $resultParts['results'][0]['geometry']['location'];
             $geoObject->setGeoCoordinates(
-                array(
+                [
                     'latitude' => (float)$coordinates['lat'],
                     'longitude' => (float)$coordinates['lng'],
-                )
+                ]
             );
         } else {
-            $geoObject->setGeoError();
+            $geoObject->setGeoError($status);
         }
     }
 

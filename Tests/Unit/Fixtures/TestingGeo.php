@@ -28,7 +28,12 @@ class Tx_Oelib_Tests_Unit_Fixtures_TestingGeo extends Tx_Oelib_Model implements 
 	 */
 	private $hasGeoError = FALSE;
 
-	/**
+    /**
+     * @var string
+     */
+    private $geoErrorReason = '';
+
+    /**
 	 * the address of this object
 	 *
 	 * @var string
@@ -139,19 +144,31 @@ class Tx_Oelib_Tests_Unit_Fixtures_TestingGeo extends Tx_Oelib_Model implements 
 
 	/**
 	 * Marks this object as having an error with the geo coordinates.
+     *
+     * @param string $reason
 	 *
 	 * @return void
 	 */
-	public function setGeoError() {
+    public function setGeoError($reason = '') {
 		$this->hasGeoError = TRUE;
+        $this->geoErrorReason = $reason;
 	}
 
-	/**
+    /**
+     * @return string
+     */
+    public function getGeoErrorReason()
+    {
+        return $this->geoErrorReason;
+    }
+
+    /**
 	 * Marks this object as not having an error with the geo coordinates.
 	 *
 	 * @return void
 	 */
 	public function clearGeoError() {
 		$this->hasGeoError = FALSE;
+        $this->geoErrorReason = '';
 	}
 }
