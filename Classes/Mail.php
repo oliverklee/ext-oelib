@@ -14,7 +14,12 @@ class Tx_Oelib_Mail extends \Tx_Oelib_Object
     /**
      * @var \Tx_Oelib_Interface_MailRole the sender of the e-mail
      */
-    private $sender = null;
+    private $sender;
+
+    /**
+     * @var \Tx_Oelib_Interface_MailRole the reply to address of the e-mail
+     */
+    private $replyTo;
 
     /**
      * @var \Tx_Oelib_Interface_MailRole[] the recipients of the e-mail
@@ -46,7 +51,7 @@ class Tx_Oelib_Mail extends \Tx_Oelib_Object
      */
     public function __destruct()
     {
-        unset($this->data, $this->sender, $this->recipients, $this->attachments);
+        unset($this->data, $this->sender, $this->replyTo, $this->recipients, $this->attachments);
     }
 
     /**
@@ -108,6 +113,37 @@ class Tx_Oelib_Mail extends \Tx_Oelib_Object
     public function hasSender()
     {
         return is_object($this->sender);
+    }
+
+    /**
+     * Returns ReplyTo
+     *
+     * @return Tx_Oelib_Interface_MailRole|null the reply mail role of the e-mail, will be NULL if it has not been set
+     */
+    public function getReplyTo()
+    {
+        return $this->replyTo;
+    }
+
+    /**
+     * Sets ReplyTo
+     *
+     * @param Tx_Oelib_Interface_MailRole $replyTo
+     * @return void
+     */
+    public function setReplyTo(Tx_Oelib_Interface_MailRole $replyTo)
+    {
+        $this->replyTo = $replyTo;
+    }
+
+    /**
+     * Returns whether the e-mail has a replyTo object.
+     *
+     * @return bool TRUE if the e-mail has a replyTo object, FALSE otherwise
+     */
+    public function hasReplyTo()
+    {
+        return is_object($this->replyTo);
     }
 
     /**
