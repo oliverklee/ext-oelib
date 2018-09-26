@@ -126,7 +126,7 @@ class Tx_Oelib_Mail extends \Tx_Oelib_Object
     }
 
     /**
-     * @return bool TRUE if the e-mail has a replyTo object, FALSE otherwise
+     * @return bool
      */
     public function hasReplyTo()
     {
