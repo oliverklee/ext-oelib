@@ -83,15 +83,13 @@ class Tx_Oelib_Tests_Unit_MailTest extends \Tx_Phpunit_TestCase
      */
     public function getReplyToInitiallyReturnsNull()
     {
-        self::assertNull(
-            $this->subject->getReplyTo()
-        );
+        self::assertNull($this->subject->getReplyTo());
     }
 
     /**
      * @test
      */
-    public function getReplyToForNonEmptySenderReturnsSender()
+    public function getReplyToForNonEmptyReplyToReturnsReplyTo()
     {
         $sender = new \Tx_Oelib_Tests_Unit_Fixtures_TestingMailRole(
             'John Doe',
@@ -100,10 +98,7 @@ class Tx_Oelib_Tests_Unit_MailTest extends \Tx_Phpunit_TestCase
 
         $this->subject->setReplyTo($sender);
 
-        self::assertSame(
-            $sender,
-            $this->subject->getReplyTo()
-        );
+        self::assertSame($sender, $this->subject->getReplyTo());
     }
 
     /**
@@ -111,15 +106,13 @@ class Tx_Oelib_Tests_Unit_MailTest extends \Tx_Phpunit_TestCase
      */
     public function hasReplyToInitiallyReturnsFalse()
     {
-        self::assertFalse(
-            $this->subject->hasReplyTo()
-        );
+        self::assertFalse($this->subject->hasReplyTo());
     }
 
     /**
      * @test
      */
-    public function hasReplyToWithSenderReturnsTrue()
+    public function hasReplyToWithReplyToReturnsTrue()
     {
         $sender = new \Tx_Oelib_Tests_Unit_Fixtures_TestingMailRole(
             'John Doe',
@@ -128,9 +121,7 @@ class Tx_Oelib_Tests_Unit_MailTest extends \Tx_Phpunit_TestCase
 
         $this->subject->setReplyTo($sender);
 
-        self::assertTrue(
-            $this->subject->hasReplyTo()
-        );
+        self::assertTrue($this->subject->hasReplyTo());
     }
 
     /*
