@@ -14,12 +14,12 @@ class Tx_Oelib_Mail extends \Tx_Oelib_Object
     /**
      * @var \Tx_Oelib_Interface_MailRole the sender of the e-mail
      */
-    private $sender;
+    private $sender = null;
 
     /**
-     * @var \Tx_Oelib_Interface_MailRole the reply to address of the e-mail
+     * @var \Tx_Oelib_Interface_MailRole
      */
-    private $replyTo;
+    private $replyTo = null;
 
     /**
      * @var \Tx_Oelib_Interface_MailRole[] the recipients of the e-mail
@@ -45,14 +45,6 @@ class Tx_Oelib_Mail extends \Tx_Oelib_Object
      * @var string the return path for the e-mails
      */
     private $returnPath = '';
-
-    /**
-     * Frees as much memory that has been used by this object as possible.
-     */
-    public function __destruct()
-    {
-        unset($this->data, $this->sender, $this->replyTo, $this->recipients, $this->attachments);
-    }
 
     /**
      * Sets the value of the data item for the key $key.
@@ -116,9 +108,7 @@ class Tx_Oelib_Mail extends \Tx_Oelib_Object
     }
 
     /**
-     * Returns ReplyTo
-     *
-     * @return Tx_Oelib_Interface_MailRole|null the reply mail role of the e-mail, will be NULL if it has not been set
+     * @return \Tx_Oelib_Interface_MailRole|null
      */
     public function getReplyTo()
     {
@@ -126,24 +116,23 @@ class Tx_Oelib_Mail extends \Tx_Oelib_Object
     }
 
     /**
-     * Sets ReplyTo
+     * @param \Tx_Oelib_Interface_MailRole $replyTo
      *
-     * @param Tx_Oelib_Interface_MailRole $replyTo
      * @return void
      */
-    public function setReplyTo(Tx_Oelib_Interface_MailRole $replyTo)
+    public function setReplyTo(\Tx_Oelib_Interface_MailRole $replyTo)
     {
         $this->replyTo = $replyTo;
     }
 
     /**
-     * Returns whether the e-mail has a replyTo object.
+     * Returns whether the e-mail has a reply-to address.
      *
      * @return bool TRUE if the e-mail has a replyTo object, FALSE otherwise
      */
     public function hasReplyTo()
     {
-        return is_object($this->replyTo);
+        return $this->replyTo !== null;
     }
 
     /**
