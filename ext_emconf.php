@@ -1,15 +1,5 @@
 <?php
 
-/***************************************************************
- * Extension Manager/Repository config file for ext "oelib".
- *
- * Auto generated 06-01-2015 19:56
- *
- * Manual updates:
- * Only the data in the array - everything else is removed by next
- * writing. "version" and "dependencies" must not be touched!
- ***************************************************************/
-
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'One is Enough Library',
 	'description' => 'This extension provides useful stuff for extension development: helper functions for unit testing, templating, automatic configuration checks and performance benchmarking.',
@@ -32,7 +22,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'CGLcompliance' => '',
 	'CGLcompliance_note' => '',
 	'author_company' => 'oliverklee.de',
-	'version' => '0.9.4',
+	'version' => '0.9.5',
 	'_md5_values_when_last_written' => '',
 	'constraints' => array(
 		'depends' => array(
