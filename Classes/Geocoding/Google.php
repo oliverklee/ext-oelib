@@ -15,19 +15,9 @@ class tx_oelib_Geocoding_Google implements \tx_oelib_Interface_GeocodingLookup
     const STATUS_OK = 'OK';
 
     /**
-     * @var string
+     * @var string[]
      */
-    const STATUS_ZERO_RESULTS = 'ZERO_RESULTS';
-
-    /**
-     * @var string
-     */
-    const STATUS_INVALID_REQUEST = 'INVALID_REQUEST';
-
-    /**
-     * @var string
-     */
-    const STATUS_OVER_QUERY_LIMIT = 'OVER_QUERY_LIMIT';
+    protected static $statusCodesForRetry = ['OVER_QUERY_LIMIT', 'UNKNOWN_ERROR'];
 
     /**
      * the base URL of the Google Maps geo coding service
@@ -44,32 +34,20 @@ class tx_oelib_Geocoding_Google implements \tx_oelib_Interface_GeocodingLookup
     private static $instance = null;
 
     /**
-     * the amount of time (in seconds) that need to pass between subsequent geocoding requests
+     * the amount of time (in microseconds) that need to pass between subsequent geocoding requests
      *
-     * @see https://developers.google.com/maps/documentation/javascript/geocoding#UsageLimits
-     *
-     * @var int
-     */
-    const THROTTLING_IN_SECONDS = 1;
-
-    /**
-     * the factor for the throttling when over the query limit
+     * @see https://developers.google.com/maps/documentation/geocoding/web-service-best-practices
      *
      * @var int
      */
-    const THROTTLING_BACK_AWAY_FACTORY = 4;
+    const INITIAL_DELAY_IN_MICROSECONDS = 100000;
 
     /**
+     * 120 seconds
+     *
      * @var int
      */
-    const MAXIMUM_ATTEMPTS = 5;
-
-    /**
-     * the timestamp of the last geocoding request (will be 0.0 before the first request)
-     *
-     * @var float
-     */
-    private $lastGeocodingTimestamp = 0.0;
+    const MAXIMUM_DELAY_IN_MICROSECONDS = 120000000;
 
     /**
      * The constructor. Do not call this constructor directly. Use getInstance() instead.
@@ -134,49 +112,40 @@ class tx_oelib_Geocoding_Google implements \tx_oelib_Interface_GeocodingLookup
         }
 
         $address = $geoObject->getGeoAddress();
-        $throttleTime = self::THROTTLING_IN_SECONDS;
+        $delayInMicroseconds = self::INITIAL_DELAY_IN_MICROSECONDS;
 
-        $attempts = 0;
-        do {
-            $this->throttle($throttleTime);
-
-            $retry = false;
+        while (true) {
+            \usleep($delayInMicroseconds);
             $response = $this->sendRequest($address);
-
-            $lookupError = $response === false;
-            if ($lookupError) {
-                $status = 'network problem';
+            if ($response === false) {
+                $status = 'General network problem.';
             } else {
-                $resultParts = json_decode($response, true);
+                $resultParts = \json_decode($response, true);
                 $status = $resultParts['status'];
-                $lookupError = $status !== self::STATUS_OK;
-                $addressIsInvalid = \in_array($status, [self::STATUS_ZERO_RESULTS, self::STATUS_INVALID_REQUEST], true);
-                if ($addressIsInvalid) {
+                if ($status === self::STATUS_OK) {
+                    $coordinates = $resultParts['results'][0]['geometry']['location'];
+                    $geoObject->setGeoCoordinates(
+                        [
+                            'latitude' => (float)$coordinates['lat'],
+                            'longitude' => (float)$coordinates['lng'],
+                        ]
+                    );
                     break;
                 }
-                if ($status === self::STATUS_OVER_QUERY_LIMIT) {
-                    $throttleTime *= self::THROTTLING_BACK_AWAY_FACTORY;
+                if (!\in_array($status, static::$statusCodesForRetry, true)) {
+                    $geoObject->setGeoError('Error: ' . $status);
+                    break;
                 }
             }
 
-            if ($lookupError) {
-                $attempts++;
-                if ($attempts < static::MAXIMUM_ATTEMPTS) {
-                    $retry = true;
-                }
+            if ($delayInMicroseconds * 2 > self::MAXIMUM_DELAY_IN_MICROSECONDS) {
+                $geoObject->setGeoError(
+                    'Maximum retries reached after ' . ($delayInMicroseconds / 1000000) .
+                    ' seconds delay. Last status: ' . $status
+                );
+                break;
             }
-        } while ($retry);
-
-        if (!$lookupError) {
-            $coordinates = $resultParts['results'][0]['geometry']['location'];
-            $geoObject->setGeoCoordinates(
-                [
-                    'latitude' => (float)$coordinates['lat'],
-                    'longitude' => (float)$coordinates['lng'],
-                ]
-            );
-        } else {
-            $geoObject->setGeoError($status);
+            $delayInMicroseconds *= 2;
         }
     }
 
@@ -191,26 +160,6 @@ class tx_oelib_Geocoding_Google implements \tx_oelib_Interface_GeocodingLookup
     {
         $baseUrlWithAddress = self::BASE_URL . '&address=';
 
-        return \t3lib_div::getUrl($baseUrlWithAddress . urlencode($address));
-    }
-
-    /**
-     * Makes sure the necessary amount of time has passed since the last
-     * geocoding request.
-     *
-     * @param int $delay in seconds
-     *
-     * @return void
-     */
-    protected function throttle($delay)
-    {
-        if ($this->lastGeocodingTimestamp > 0.0) {
-            $secondsSinceLastRequest = (microtime(true) - $this->lastGeocodingTimestamp);
-            if ($secondsSinceLastRequest < $delay) {
-                sleep((int)ceil($delay - $secondsSinceLastRequest));
-            }
-        }
-
-        $this->lastGeocodingTimestamp = microtime(true);
+        return \t3lib_div::getUrl($baseUrlWithAddress . \urlencode($address));
     }
 }
