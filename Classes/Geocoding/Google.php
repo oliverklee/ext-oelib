@@ -112,11 +112,14 @@ class tx_oelib_Geocoding_Google implements \tx_oelib_Interface_GeocodingLookup
         }
 
         $address = $geoObject->getGeoAddress();
+        $configuration = Tx_Oelib_ConfigurationRegistry::get('plugin.tx_oelib');
+        $apiKey = $configuration->getAsString('googleGeocodingApiKey');
+        $url = self::BASE_URL . '&key=' . \urlencode($apiKey) . '&address=' . \urlencode($address);
         $delayInMicroseconds = self::INITIAL_DELAY_IN_MICROSECONDS;
 
         while (true) {
             \usleep($delayInMicroseconds);
-            $response = $this->sendRequest($address);
+            $response = $this->sendRequest($url);
             if ($response === false) {
                 $status = 'General network problem.';
             } else {
@@ -152,14 +155,12 @@ class tx_oelib_Geocoding_Google implements \tx_oelib_Interface_GeocodingLookup
     /**
      * Sends a geocoding request to the Google Maps server.
      *
-     * @param string $address the address to look up, must not be empty
+     * @param string $url
      *
      * @return string|bool string with the JSON result from the Google Maps server, or false if an error has occurred
      */
-    protected function sendRequest($address)
+    protected function sendRequest($url)
     {
-        $baseUrlWithAddress = self::BASE_URL . '&address=';
-
-        return \t3lib_div::getUrl($baseUrlWithAddress . \urlencode($address));
+        return \t3lib_div::getUrl($url);
     }
 }

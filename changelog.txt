@@ -1,5 +1,8 @@
 0.9.5 - released 2018-10-10
 
+Features:
+- Add a configuration for the geocoding API key (#91, #93)
+
 Bug fixes:
 - Rework the geocoding throttling (#87, #90)
 
