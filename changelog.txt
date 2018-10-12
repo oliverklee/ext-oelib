@@ -1,5 +1,8 @@
 0.9.6 (unreleased)
 
+Features:
+- Log more details for geocoding failures (#107)
+
 Bug fixes:
 - Remove the "sensor" parameter from the Google geocoding (#102)
 
