@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add a configuration for the geocoding API key (#91, #99)
 
 ### Changed
 
