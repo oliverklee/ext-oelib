@@ -24,7 +24,7 @@ class Tx_Oelib_Tests_Unit_Geocoding_GoogleTest extends Tx_Phpunit_TestCase
         $this->configuration = new \Tx_Oelib_Configuration();
         $configurationRegistry->set('plugin.tx_oelib', $this->configuration);
 
-        $this->subject = tx_oelib_Geocoding_Google::getInstance();
+        $this->subject = \tx_oelib_Geocoding_Google::getInstance();
     }
 
     protected function tearDown()
@@ -157,9 +157,11 @@ class Tx_Oelib_Tests_Unit_Geocoding_GoogleTest extends Tx_Phpunit_TestCase
     {
         return [
             'zero results' => ['ZERO_RESULTS'],
-            'invalid request' => ['INVALID_REQUEST'],
             'over daily limit' => ['OVER_DAILY_LIMIT'],
+            'over query limit' => ['OVER_QUERY_LIMIT'],
             'request denied' => ['REQUEST_DENIED'],
+            'invalid request' => ['INVALID_REQUEST'],
+            'unknown error' => ['UNKNOWN_ERROR'],
         ];
     }
 
@@ -170,7 +172,7 @@ class Tx_Oelib_Tests_Unit_Geocoding_GoogleTest extends Tx_Phpunit_TestCase
      *
      * @dataProvider noResultsStatusDataProvider
      */
-    public function lookUpForAFullGermanAddressWithNoCoordinatesFoundSetsGeoProblemAndLogsError($status)
+    public function lookUpWithErrorSetsGeoProblem($status)
     {
         $jsonResult = '{ "status": "' . $status . '" }';
 
@@ -190,7 +192,89 @@ class Tx_Oelib_Tests_Unit_Geocoding_GoogleTest extends Tx_Phpunit_TestCase
         $subject->lookUp($geo);
 
         self::assertTrue($geo->hasGeoError());
+    }
+
+    /**
+     * @test
+     *
+     * @param string $status
+     *
+     * @dataProvider noResultsStatusDataProvider
+     */
+    public function lookUpWithErrorSetsGeoProblemAndLogsError($status)
+    {
+        $jsonResult = '{ "status": "' . $status . '" }';
+
+        $geo = new \Tx_Oelib_Tests_Unit_Fixtures_TestingGeo();
+        $geo->setGeoAddress('Am Hof 1, 53113 Zentrum, Bonn, DE');
+
+        /** @var \Tx_Oelib_Geocoding_Google|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
+            'tx_oelib_Geocoding_Google',
+            ['sendRequest'],
+            [],
+            '',
+            false
+        );
+        $subject->method('sendRequest')->will(self::returnValue($jsonResult));
+
+        $subject->lookUp($geo);
+
         self::assertContains($status, $geo->getGeoErrorReason());
+    }
+
+    /**
+     * @test
+     *
+     * @param string $status
+     *
+     * @dataProvider noResultsStatusDataProvider
+     */
+    public function lookUpWithErrorLogsErrorDetails($status)
+    {
+        $errorMessage = 'See you on the other side.';
+        $jsonResult = '{ "status": "' . $status . '", "error_message": "' . $errorMessage . '" }';
+
+        $geo = new \Tx_Oelib_Tests_Unit_Fixtures_TestingGeo();
+        $geo->setGeoAddress('Am Hof 1, 53113 Zentrum, Bonn, DE');
+
+        /** @var \Tx_Oelib_Geocoding_Google|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
+            'tx_oelib_Geocoding_Google',
+            ['sendRequest'],
+            [],
+            '',
+            false
+        );
+        $subject->method('sendRequest')->will(self::returnValue($jsonResult));
+
+        $subject->lookUp($geo);
+
+        self::assertContains($errorMessage, $geo->getGeoErrorReason());
+    }
+
+    /**
+     * @test
+     */
+    public function lookUpForAFullGermanAddressWithNetworkErrorSetsGeoProblemAndLogsError()
+    {
+        $geo = new \Tx_Oelib_Tests_Unit_Fixtures_TestingGeo();
+        $geo->setGeoAddress('Am Hof 1, 53113 Zentrum, Bonn, DE');
+
+        /** @var \Tx_Oelib_Geocoding_Google|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
+            'tx_oelib_Geocoding_Google',
+            ['sendRequest'],
+            [],
+            '',
+            false
+        );
+        $subject->method('sendRequest')->will(self::returnValue(false));
+
+        $subject->lookUp($geo);
+
+        self::assertTrue($geo->hasGeoError());
+        self::assertContains('network problem', $geo->getGeoErrorReason());
     }
 
     /**
