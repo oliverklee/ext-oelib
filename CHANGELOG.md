@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Auto-release to the TER (#109)
 - Log more details for geocoding failures (#106)
 - Add a configuration for the geocoding API key (#91, #99)
 
