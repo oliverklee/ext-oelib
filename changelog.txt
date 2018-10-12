@@ -1,3 +1,8 @@
+0.9.6 (unreleased)
+
+Bug fixes:
+- Remove the "sensor" parameter from the Google geocoding (#102)
+
 0.9.5 - released 2018-10-11
 
 Features:
