@@ -61,8 +61,8 @@ class Tx_Oelib_EmailCollector extends \Tx_Oelib_AbstractMailer
      *
      * @deprecated will be removed in oelib 2.0.0, use getSentEmails instead
      *
-     * @return array e-mail address, subject, message and headers of the last e-mail in an array, will be empty if there is
-     *               no e-mail
+     * @return array e-mail address, subject, message and headers of the last e-mail in an array, will be empty if
+     *     there is no e-mail
      */
     public function getLastEmail()
     {

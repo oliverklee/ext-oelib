@@ -1268,7 +1268,7 @@ class Emogrifier
      */
     private function createRawXmlDocument()
     {
-        $xmlDocument = new \DOMDocument;
+        $xmlDocument = new \DOMDocument();
         $xmlDocument->encoding = 'UTF-8';
         $xmlDocument->strictErrorChecking = false;
         $xmlDocument->formatOutput = true;
