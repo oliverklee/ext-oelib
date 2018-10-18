@@ -5,6 +5,6 @@
 $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
-return array(
-    'Pelago\\' => array($vendorDir . '/pelago/emogrifier/Classes'),
-);
+return [
+    'Pelago\\' => [$vendorDir . '/pelago/emogrifier/Classes'],
+];

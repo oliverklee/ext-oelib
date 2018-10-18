@@ -601,7 +601,7 @@ class Tx_Oelib_Tests_Unit_TestingFrameworkTest extends \Tx_Phpunit_TestCase
         $this->setExpectedException(
             'InvalidArgumentException',
             'The parameter $recordData must not contain changes to the field ' .
-                '"is_dummy_record". It is impossible to convert a dummy record into a regular record.'
+            '"is_dummy_record". It is impossible to convert a dummy record into a regular record.'
         );
         $uid = $this->subject->createRecord('tx_oelib_test', []);
 
@@ -1096,7 +1096,7 @@ class Tx_Oelib_Tests_Unit_TestingFrameworkTest extends \Tx_Phpunit_TestCase
         $count = $this->subject->countRecords(
             'tx_oelib_test_article_mm',
             'uid_local=' . $secondRecordUid . ' AND uid_foreign=' .
-                $firstRecordUid
+            $firstRecordUid
         );
         self::assertSame(
             1,
@@ -1278,7 +1278,7 @@ class Tx_Oelib_Tests_Unit_TestingFrameworkTest extends \Tx_Phpunit_TestCase
         \Tx_Oelib_Db::delete(
             'tx_oelib_test_article_mm',
             'uid_local = ' . $uidLocal . ' AND uid_foreign = ' . $uidForeign
-                . ' AND is_dummy_record = 0'
+            . ' AND is_dummy_record = 0'
         );
 
         // Checks whether the relation had been created further up.
@@ -1393,7 +1393,7 @@ class Tx_Oelib_Tests_Unit_TestingFrameworkTest extends \Tx_Phpunit_TestCase
         $outerDummyFolder = $this->subject->createDummyFolder('test_folder');
         $innerDummyFolder = $this->subject->createDummyFolder(
             $this->subject->getPathRelativeToUploadDirectory($outerDummyFolder) .
-                '/test_folder'
+            '/test_folder'
         );
 
         $this->subject->cleanUp();
@@ -3954,7 +3954,7 @@ class Tx_Oelib_Tests_Unit_TestingFrameworkTest extends \Tx_Phpunit_TestCase
         $this->setExpectedException(
             'InvalidArgumentException',
             'The file "' . $uniqueFileName . '" which you are ' .
-                'trying to delete does not exist and has never been created by this instance of the testing framework.'
+            'trying to delete does not exist and has never been created by this instance of the testing framework.'
         );
 
         $this->subject->deleteDummyFile(basename($uniqueFileName));
@@ -3995,7 +3995,7 @@ class Tx_Oelib_Tests_Unit_TestingFrameworkTest extends \Tx_Phpunit_TestCase
         $outerDummyFolder = $this->subject->createDummyFolder('test_folder');
         $innerDummyFolder = $this->subject->createDummyFolder(
             $this->subject->getPathRelativeToUploadDirectory($outerDummyFolder) .
-                '/test_folder'
+            '/test_folder'
         );
 
         self::assertTrue(is_dir($innerDummyFolder));
@@ -4069,7 +4069,7 @@ class Tx_Oelib_Tests_Unit_TestingFrameworkTest extends \Tx_Phpunit_TestCase
         $this->setExpectedException(
             'InvalidArgumentException',
             'The folder "' . $uniqueFolderName . '" which you are ' .
-                'trying to delete was not created by this instance of the testing framework.'
+            'trying to delete was not created by this instance of the testing framework.'
         );
 
         $this->subject->deleteDummyFolder(basename($uniqueFolderName));
@@ -4083,7 +4083,7 @@ class Tx_Oelib_Tests_Unit_TestingFrameworkTest extends \Tx_Phpunit_TestCase
         $outerDummyFolder = $this->subject->createDummyFolder('test_folder');
         $innerDummyFolder = $this->subject->createDummyFolder(
             $this->subject->getPathRelativeToUploadDirectory($outerDummyFolder) .
-                '/test_folder'
+            '/test_folder'
         );
 
         $this->subject->deleteDummyFolder(

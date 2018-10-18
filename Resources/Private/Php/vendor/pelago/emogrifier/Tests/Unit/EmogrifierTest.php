@@ -100,7 +100,9 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
      * @param string $html
+     *
      * @dataProvider contentWithoutHtmlTagDataProvider
      */
     public function emogrifyAddsMissingHtmlTag($html)
@@ -126,7 +128,9 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
      * @param string $html
+     *
      * @dataProvider contentWithoutHeadTagDataProvider
      */
     public function emogrifyAddsMissingHeadTag($html)
@@ -152,7 +156,9 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
      * @param string $html
+     *
      * @dataProvider contentWithoutBodyTagDataProvider
      */
     public function emogrifyAddsMissingBodyTag($html)
@@ -190,7 +196,9 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
      * @param string $codeNotToBeChanged
+     *
      * @dataProvider specialCharactersDataProvider
      */
     public function emogrifyKeepsSpecialCharacters($codeNotToBeChanged)
@@ -205,7 +213,9 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
      * @param string $codeNotToBeChanged
+     *
      * @dataProvider specialCharactersDataProvider
      */
     public function emogrifyBodyContentKeepsSpecialCharacters($codeNotToBeChanged)
@@ -227,18 +237,20 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
             'HTML5' => ['<!DOCTYPE html>'],
             'XHTML 1 strict' => [
                 '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" ' .
-                '"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">'
+                '"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',
             ],
             'HTML 4 transitional' => [
                 '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" ' .
-                '"http://www.w3.org/TR/REC-html40/loose.dtd">'
+                '"http://www.w3.org/TR/REC-html40/loose.dtd">',
             ],
         ];
     }
 
     /**
      * @test
+     *
      * @param string $documentType
+     *
      * @dataProvider documentTypeDataProvider
      */
     public function emogrifyForHtmlWithDocumentTypeKeepsDocumentType($documentType)
@@ -356,7 +368,7 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
             'class => with class' => ['.p-2 { %1$s }', '<p class="p-2" style="%1$s">'],
             'two classes s=> with both classes' => [
                 '.p-5.additional-class { %1$s }',
-                '<p class="p-5 additional-class" style="%1$s">'
+                '<p class="p-5 additional-class" style="%1$s">',
             ],
             'type & class => type with class' => ['p.p-2 { %1$s }', '<p class="p-2" style="%1$s">'],
             'ID => with ID' => ['#p4 { %1$s }', '<p class="p-4" id="p4" style="%1$s">'],
@@ -564,8 +576,10 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
      * @param string $css CSS statements, potentially with %1$s and $2$s placeholders for a CSS declaration
      * @param string $expectedHtml HTML, potentially with %1$s and $2$s placeholders for a CSS declaration
+     *
      * @dataProvider matchedCssDataProvider
      */
     public function emogrifyAppliesCssToMatchingElements($css, $expectedHtml)
@@ -664,8 +678,10 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
      * @param string $css CSS statements, potentially with %1$s and $2$s placeholders for a CSS declaration
      * @param string $expectedHtml HTML, potentially with %1$s and $2$s placeholders for a CSS declaration
+     *
      * @dataProvider nonMatchedCssDataProvider
      */
     public function emogrifyNotAppliesCssToNonMatchingElements($css, $expectedHtml)
@@ -756,15 +772,15 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
             => ['color: #000; width: 3px;', 'color: #000; width: 3px;'],
             'two declarations separated by semicolon & linefeed' => [
                 'color: #000;' . self::LF . 'width: 3px;',
-                'color: #000; width: 3px;'
+                'color: #000; width: 3px;',
             ],
             'two declarations separated by semicolon & Windows line ending' => [
                 "color: #000;\r\nwidth: 3px;",
-                'color: #000; width: 3px;'
+                'color: #000; width: 3px;',
             ],
             'one declaration with leading dash in property name' => [
                 '-webkit-text-size-adjust:none;',
-                '-webkit-text-size-adjust: none;'
+                '-webkit-text-size-adjust: none;',
             ],
         ];
     }
@@ -1168,7 +1184,7 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
                 '@media only screen { h1 { color:red; } }' .
                 '@media only all { h1 { color:red; } }' .
                 '@media print { * { color:#000 !important; } }' .
-                '@media { h1 { color:red; } }'
+                '@media { h1 { color:red; } }',
             ],
         ];
     }
@@ -2013,7 +2029,9 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
      * @param string $dataUriMediaType
+     *
      * @dataProvider dataUriMediaTypeDataProvider
      */
     public function dataUrisAreConserved($dataUriMediaType)
@@ -2107,6 +2125,7 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
      * @param string $body The HTML
      * @param string $css The complete CSS
      * @param string $tagName The name of the tag that should be modified
@@ -2164,6 +2183,7 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
      * @param string $body the HTML
      * @param string $css the complete CSS
      * @param string $attribute the attribute that must not be present on this element
@@ -2297,43 +2317,43 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
         return [
             'one !important rule only' => [
                 'width: 1px !important',
-                'width: 1px;'
+                'width: 1px;',
             ],
             'multiple !important rules only' => [
                 'width: 1px !important; height: 1px !important',
-                'width: 1px; height: 1px;'
+                'width: 1px; height: 1px;',
             ],
             'multiple declarations, one !important rule at the beginning' => [
                 'width: 1px !important; height: 1px; color: red',
-                'height: 1px; color: red; width: 1px;'
+                'height: 1px; color: red; width: 1px;',
             ],
             'multiple declarations, one !important rule somewhere in the middle' => [
                 'height: 1px; width: 1px !important; color: red',
-                'height: 1px; color: red; width: 1px;'
+                'height: 1px; color: red; width: 1px;',
             ],
             'multiple declarations, one !important rule at the end' => [
                 'height: 1px; color: red; width: 1px !important',
-                'height: 1px; color: red; width: 1px;'
+                'height: 1px; color: red; width: 1px;',
             ],
             'multiple declarations, multiple !important rules at the beginning' => [
                 'width: 1px !important; height: 1px !important; color: red; float: left',
-                'color: red; float: left; width: 1px; height: 1px;'
+                'color: red; float: left; width: 1px; height: 1px;',
             ],
             'multiple declarations, multiple consecutive !important rules somewhere in the middle (#1)' => [
                 'color: red; width: 1px !important; height: 1px !important; float: left',
-                'color: red; float: left; width: 1px; height: 1px;'
+                'color: red; float: left; width: 1px; height: 1px;',
             ],
             'multiple declarations, multiple consecutive !important rules somewhere in the middle (#2)' => [
                 'color: red; width: 1px !important; height: 1px !important; float: left; clear: both',
-                'color: red; float: left; clear: both; width: 1px; height: 1px;'
+                'color: red; float: left; clear: both; width: 1px; height: 1px;',
             ],
             'multiple declarations, multiple not consecutive !important rules somewhere in the middle' => [
                 'color: red; width: 1px !important; clear: both; height: 1px !important; float: left',
-                'color: red; clear: both; float: left; width: 1px; height: 1px;'
+                'color: red; clear: both; float: left; width: 1px; height: 1px;',
             ],
             'multiple declarations, multiple !important rules at the end' => [
                 'color: red; float: left; width: 1px !important; height: 1px !important',
-                'color: red; float: left; width: 1px; height: 1px;'
+                'color: red; float: left; width: 1px; height: 1px;',
             ],
         ];
     }
