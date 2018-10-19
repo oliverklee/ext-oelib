@@ -6,16 +6,22 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Add a configuration for the Google Maps API key (#92, #113)
-- Auto-release to the TER (#109)
-- Log more details for geocoding failures (#106)
-- Add a configuration for the geocoding API key (#91, #99)
 
 ### Changed
 
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+## 1.5.0
+
+### Added
+- Add a configuration for the Google Maps API key (#92, #113)
+- Auto-release to the TER (#109)
+- Log more details for geocoding failures (#106)
+- Add a configuration for the geocoding API key (#91, #99)
 
 ### Fixed
 - Update the Google Maps URL (#103)
