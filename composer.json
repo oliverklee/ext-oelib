@@ -28,16 +28,21 @@
         "typo3/cms-fluid": "^6.2.14 || ^7.6.23"
     },
     "require-dev": {
-        "sjbr/static-info-tables": "^6.3.7",
+        "typo3-ter/static-info-tables": "^6.5",
         "oliverklee/user-oelibtest": "@dev",
         "oliverklee/user-oelibtest2": "@dev",
 
-        "helhum/typo3-console": "^4.6.1",
+        "helhum/typo3-console": "^4.9",
 
-        "oliverklee/phpunit": "^4.8.37",
-        "phpunit/phpunit": "^4.8.0",
-        "phpunit/phpunit-selenium": "^2.0.0",
-        "mikey179/vfsStream": "^1.0.0"
+        "oliverklee/phpunit": "^4.8",
+        "phpunit/phpunit": "^4.8",
+        "phpunit/phpunit-selenium": "^2.0",
+        "mikey179/vfsStream": "^1.6",
+
+        "roave/security-advisories": "dev-master"
+    },
+    "conflict": {
+        "typo3-ter/static-info-tables": "6.7.1"
     },
     "replace": {
         "oelib": "self.version",
