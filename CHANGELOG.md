@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Prefer stable/dist packages by default (#120)
 
 ### Deprecated
 
