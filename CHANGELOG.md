@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Move the old tests to Tests/LegacyUnit/ and Tests/LegacyFunctional/ (#124)
 - Prefer stable/dist packages by default (#120)
 
 ### Deprecated
