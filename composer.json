@@ -35,6 +35,7 @@
         "helhum/typo3-console": "^4.9",
 
         "oliverklee/phpunit": "^4.8",
+        "nimut/testing-framework": "^2.0",
         "phpunit/phpunit": "^4.8",
         "phpunit/phpunit-selenium": "^2.0",
         "mikey179/vfsStream": "^1.6",
@@ -80,10 +81,14 @@
     },
     "scripts": {
         "ci:php:lint": "find *.php Classes/ Configuration/ Migrations/ TestExtensions/ Tests/ -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
+        "ci:tests:unit": "phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit/",
         "ci:tests:unit-legacy": ".Build/public/typo3/cli_dispatch.phpsh phpunit Tests/LegacyUnit/",
+        "ci:tests:functional": "phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml Tests/Functional/",
         "ci:tests:functional-legacy": ".Build/public/typo3/cli_dispatch.phpsh phpunit Tests/LegacyFunctional/",
         "ci:tests": [
+            "@ci:tests:unit",
             "@ci:tests:unit-legacy",
+            "@ci:tests:functional",
             "@ci:tests:functional-legacy"
         ],
         "ci:dynamic": [
@@ -109,6 +114,7 @@
             "dev-master": "2.0.x-dev"
         },
         "typo3/cms": {
+            "extension-key": "oelib",
             "cms-package-dir": "{$vendor-dir}/typo3/cms",
             "web-dir": ".Build/public"
         },
