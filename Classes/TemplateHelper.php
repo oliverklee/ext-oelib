@@ -243,7 +243,7 @@ class Tx_Oelib_TemplateHelper extends Tx_Oelib_SalutationSwitcher {
 		$confValue = isset($this->conf[$fieldName])
 			? $this->conf[$fieldName] : '';
 
-		return ($flexformsValue) ? $flexformsValue : $confValue;
+		return $flexformsValue ?: $confValue;
 	}
 
 	/**

@@ -511,7 +511,7 @@ class Tx_Oelib_Tests_Unit_DataMapperTest extends Tx_Phpunit_TestCase {
      */
     public function reloadForTestingOnlyGhostThrowsException()
     {
-        $this->setExpectedException(\InvalidArgumentException::class);
+        $this->setExpectedException('InvalidArgumentException');
 
         $model = $this->subject->getNewGhost();
         $this->subject->load($model);
@@ -522,7 +522,7 @@ class Tx_Oelib_Tests_Unit_DataMapperTest extends Tx_Phpunit_TestCase {
      */
     public function reloadForModelWithoutUidThrowsException()
     {
-        $this->setExpectedException(\InvalidArgumentException::class);
+        $this->setExpectedException('InvalidArgumentException');
 
         $model = new Tx_Oelib_Tests_Unit_Fixtures_TestingModel();
         $this->subject->load($model);
