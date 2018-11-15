@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Only clean up tables that have a dummy column (#168)
 - Use the current composer names of static_info_tables (#127)
 
 ## 1.5.0
