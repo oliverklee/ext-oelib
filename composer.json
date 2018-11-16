@@ -113,6 +113,11 @@
         "branch-alias": {
             "dev-master": "2.0.x-dev"
         },
+        "typo3/class-alias-loader": {
+            "class-alias-maps": [
+                "Migrations/Code/ClassAliasMap.php"
+            ]
+        },
         "typo3/cms": {
             "extension-key": "oelib",
             "cms-package-dir": "{$vendor-dir}/typo3/cms",

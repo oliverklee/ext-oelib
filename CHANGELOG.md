@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Static data of the geo coordinates of German ZIP codes (#152, #175)
 - Starter tests with nimut/testing-framework (#130)
 
 ### Changed

@@ -111,11 +111,10 @@ class Tx_Oelib_Tests_LegacyUnit_TemplateHelperTest extends \Tx_Phpunit_TestCase
      */
     public function initMarksObjectAsInitialized()
     {
-        $this->subject->init();
+        $subject = new \Tx_Oelib_TemplateHelper();
+        $subject->init();
 
-        self::assertTrue(
-            $this->subject->isInitialized()
-        );
+        self::assertTrue($subject->isInitialized());
     }
 
     /**
@@ -123,9 +122,10 @@ class Tx_Oelib_Tests_LegacyUnit_TemplateHelperTest extends \Tx_Phpunit_TestCase
      */
     public function initInitializesContentObjectRenderer()
     {
-        $this->subject->init();
+        $subject = new \Tx_Oelib_TemplateHelper();
+        $subject->init();
 
-        self::assertInstanceOf(ContentObjectRenderer::class, $this->subject->cObj);
+        self::assertInstanceOf(ContentObjectRenderer::class, $subject->cObj);
     }
 
     ////////////////////////////////////////////////////////

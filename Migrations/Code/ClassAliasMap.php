@@ -10,6 +10,8 @@ return [
     'Tx_Oelib_ConfigurationRegistry' => \Tx_Oelib_ConfigurationRegistry::class,
     'Tx_Oelib_DataMapper' => \Tx_Oelib_DataMapper::class,
     'Tx_Oelib_Db' => \Tx_Oelib_Db::class,
+    'Tx_Oelib_Domain_Model_GermanZipCode' => \OliverKlee\Oelib\Domain\Model\GermanZipCode::class,
+    'Tx_Oelib_Domain_Repository_GermanZipCodeRepository' => \OliverKlee\Oelib\Domain\Repository\GermanZipCodeRepository::class,
     'Tx_Oelib_Double3Validator' => \Tx_Oelib_Double3Validator::class,
     'Tx_Oelib_EmailCollector' => \Tx_Oelib_EmailCollector::class,
     'Tx_Oelib_Exception_AccessDenied' => \Tx_Oelib_Exception_AccessDenied::class,
