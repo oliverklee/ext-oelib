@@ -116,19 +116,59 @@ class Tx_Oelib_TemplateHelper extends \Tx_Oelib_SalutationSwitcher
         }
 
         $this->ensureContentObject();
-        $this->pi_setPiVarDefaults();
-        $this->pi_loadLL();
 
-        if (($this->extKey !== '')
-            && \Tx_Oelib_ConfigurationProxy::getInstance($this->extKey)
-                ->getAsBoolean('enableConfigCheck')) {
-            $configurationCheckClassName = 'tx_' . $this->extKey . '_configcheck';
-            if (class_exists($configurationCheckClassName, true)) {
-                $this->configurationCheck = GeneralUtility::makeInstance($configurationCheckClassName, $this);
-            }
+        if ($this->extKey !== '') {
+            $this->pi_setPiVarDefaults();
+            $this->pi_loadLL();
+            $this->initializeConfigurationCheck();
         }
 
         $this->isInitialized = true;
+    }
+
+    /**
+     * @return void
+     */
+    protected function initializeConfigurationCheck()
+    {
+        if (!$this->isConfigurationCheckEnabled()) {
+            return;
+        }
+
+        $className = $this->getConfigurationCheckClassName();
+        if ($className !== '') {
+            $this->configurationCheck = GeneralUtility::makeInstance($className, $this);
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isConfigurationCheckEnabled()
+    {
+        if ($this->extKey === '') {
+            return false;
+        }
+
+        return \Tx_Oelib_ConfigurationProxy::getInstance($this->extKey)->getAsBoolean('enableConfigCheck');
+    }
+
+    /**
+     * @return string might be empty
+     */
+    protected function getConfigurationCheckClassName()
+    {
+        $camelCaseClassName = 'Tx_' . ucfirst($this->extKey) . '_ConfigCheck';
+        $lowercaseClassName = \strtolower($camelCaseClassName);
+        if (\class_exists($camelCaseClassName)) {
+            $className = $camelCaseClassName;
+        } elseif (\class_exists($lowercaseClassName)) {
+            $className = $lowercaseClassName;
+        } else {
+            $className = '';
+        }
+
+        return $className;
     }
 
     /**
