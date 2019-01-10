@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Run the functional tests in parallel to each other (#183)
 
 ### Deprecated
+- Remove the "Trait" suffix from the trait names (#189)
 
 ### Removed
 
