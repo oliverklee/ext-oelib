@@ -532,7 +532,7 @@ abstract class Tx_Oelib_DataMapper {
 		$uidList = isset($data[$key]) ? trim($data[$key]) : '';
 		if ($uidList !== '') {
 			$mapper = Tx_Oelib_MapperRegistry::get($this->relations[$key]);
-			$uids = t3lib_div::intExplode(',', $uidList);
+			$uids = t3lib_div::intExplode(',', $uidList, true);
 
 			foreach ($uids as $uid) {
 				// Some relations might have a junk 0 in it. We ignore it to avoid crashing.
@@ -566,23 +566,27 @@ abstract class Tx_Oelib_DataMapper {
 		$list = t3lib_div::makeInstance('Tx_Oelib_List');
 		$list->setParentModel($model);
 
-		if ($data[$key] > 0) {
+		if ((int)$data[$key] > 0) {
 			$mapper = Tx_Oelib_MapperRegistry::get($this->relations[$key]);
 			$relationConfiguration = $this->getRelationConfigurationFromTca($key);
 			$mnTable = $relationConfiguration['MM'];
 
 			if (!isset($relationConfiguration['MM_opposite_field'])) {
 				$relationUids = Tx_Oelib_Db::selectColumnForMultiple(
-					'uid_foreign', $mnTable, 'uid_local = ' . $data['uid'], '', 'sorting'
+					'uid_foreign', $mnTable, 'uid_local = ' . (int)$data['uid'], '', 'sorting'
 				);
 			} else {
 				$relationUids = Tx_Oelib_Db::selectColumnForMultiple(
-					'uid_local', $mnTable, 'uid_foreign = ' . $data['uid'], '', 'uid_local'
+					'uid_local', $mnTable, 'uid_foreign = ' . (int)$data['uid'], '', 'uid_local'
 				);
 			}
 
 			foreach ($relationUids as $relationUid) {
-				$list->add($mapper->find($relationUid));
+                // Some relations might have a junk 0 in it. We ignore it to avoid crashing.
+                if ((int)$relationUid === 0) {
+                    continue;
+                }
+				$list->add($mapper->find((int)$relationUid));
 			}
 		}
 

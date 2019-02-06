@@ -1,6 +1,7 @@
 0.9.7 (unreleased)
 
 Bug fixes:
+- Ignore relations with a foreign UID of 0 (#197)
 - Only clean up tables that have a dummy column (#169)
 
 0.9.6 - released 2018-10-12
