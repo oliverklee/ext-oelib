@@ -130,6 +130,22 @@ class Tx_Oelib_Tests_LegacyFunctional_DataMapperTest extends \Tx_Phpunit_TestCas
         );
     }
 
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
+    public function silentlyIgnoresCommaSeparatedOneToManyRelationWithZeroForeignUid()
+    {
+        $uid = $this->testingFramework->createRecord(
+            'tx_oelib_test',
+            ['children' => '0']
+        );
+        /** @var \Tx_Oelib_Tests_LegacyUnit_Fixtures_TestingModel $model */
+        $model = $this->subject->find($uid);
+        // load any property to trigger loading the data
+        $model->getTitle();
+    }
+
     /*
      * Tests concerning the m:n mapping using an m:n table
      */
@@ -157,6 +173,20 @@ class Tx_Oelib_Tests_LegacyFunctional_DataMapperTest extends \Tx_Phpunit_TestCas
             $relatedTitle,
             $firstRelatedModel->getTitle()
         );
+    }
+
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
+    public function silentlyIgnoresManyToManyRelationWithZeroForeignUid()
+    {
+        $uid = $this->testingFramework->createRecord('tx_oelib_test', ['related_records' => 1]);
+        $this->testingFramework->createRecord('tx_oelib_test_article_mm', ['uid_local' => $uid, 'uid_foreign' => 0]);
+        /** @var \Tx_Oelib_Tests_LegacyUnit_Fixtures_TestingModel $model */
+        $model = $this->subject->find($uid);
+        // load any property to trigger loading the data
+        $model->getTitle();
     }
 
     /*
