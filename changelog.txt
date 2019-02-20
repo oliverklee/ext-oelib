@@ -1,3 +1,8 @@
+0.9.8 - not released yet
+
+Bug fixes:
+- Throw exception for empty Google geocoding API key (#202)
+
 0.9.7 - released 2019-02-12
 
 Bug fixes:
