@@ -174,6 +174,8 @@ class Tx_Oelib_Tests_Unit_Geocoding_GoogleTest extends Tx_Phpunit_TestCase
      */
     public function lookUpWithErrorSetsGeoProblem($status)
     {
+        $this->configuration->setAsString('googleGeocodingApiKey', 'iugo7t4zq3ewrdsxc');
+
         $jsonResult = '{ "status": "' . $status . '" }';
 
         $geo = new \Tx_Oelib_Tests_Unit_Fixtures_TestingGeo();
@@ -203,6 +205,8 @@ class Tx_Oelib_Tests_Unit_Geocoding_GoogleTest extends Tx_Phpunit_TestCase
      */
     public function lookUpWithErrorSetsGeoProblemAndLogsError($status)
     {
+        $this->configuration->setAsString('googleGeocodingApiKey', 'iugo7t4zq3ewrdsxc');
+
         $jsonResult = '{ "status": "' . $status . '" }';
 
         $geo = new \Tx_Oelib_Tests_Unit_Fixtures_TestingGeo();
@@ -232,6 +236,8 @@ class Tx_Oelib_Tests_Unit_Geocoding_GoogleTest extends Tx_Phpunit_TestCase
      */
     public function lookUpWithErrorLogsErrorDetails($status)
     {
+        $this->configuration->setAsString('googleGeocodingApiKey', 'iugo7t4zq3ewrdsxc');
+
         $errorMessage = 'See you on the other side.';
         $jsonResult = '{ "status": "' . $status . '", "error_message": "' . $errorMessage . '" }';
 
@@ -258,6 +264,8 @@ class Tx_Oelib_Tests_Unit_Geocoding_GoogleTest extends Tx_Phpunit_TestCase
      */
     public function lookUpForAFullGermanAddressWithNetworkErrorSetsGeoProblemAndLogsError()
     {
+        $this->configuration->setAsString('googleGeocodingApiKey', 'iugo7t4zq3ewrdsxc');
+
         $geo = new \Tx_Oelib_Tests_Unit_Fixtures_TestingGeo();
         $geo->setGeoAddress('Am Hof 1, 53113 Zentrum, Bonn, DE');
 
@@ -282,6 +290,8 @@ class Tx_Oelib_Tests_Unit_Geocoding_GoogleTest extends Tx_Phpunit_TestCase
      */
     public function lookUpSetsCoordinatesFromSendRequest()
     {
+        $this->configuration->setAsString('googleGeocodingApiKey', 'iugo7t4zq3ewrdsxc');
+
         $jsonResult = '{ "results": [ { "address_components": [ { "long_name": "1", "short_name": "1", ' .
             '"types": [ "street_number" ] }, { "long_name": "Am Hof", "short_name": "Am Hof", ' .
             '"types": [ "route" ] }, { "long_name": "Bonn", "short_name": "Bonn", ' .
@@ -319,6 +329,34 @@ class Tx_Oelib_Tests_Unit_Geocoding_GoogleTest extends Tx_Phpunit_TestCase
             ],
             $geo->getGeoCoordinates()
         );
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException \UnexpectedValueException
+     */
+    public function lookUpForEmptyApiKeyThrowsException()
+    {
+        $this->configuration->setAsString('googleGeocodingApiKey', '');
+
+        $geo = new \Tx_Oelib_Tests_Unit_Fixtures_TestingGeo();
+        $geo->setGeoAddress('Am Hof 1, 53113 Zentrum, Bonn, DE');
+
+        $this->subject->lookUp($geo);
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException \UnexpectedValueException
+     */
+    public function lookUpForMissingApiKeyThrowsException()
+    {
+        $geo = new \Tx_Oelib_Tests_Unit_Fixtures_TestingGeo();
+        $geo->setGeoAddress('Am Hof 1, 53113 Zentrum, Bonn, DE');
+
+        $this->subject->lookUp($geo);
     }
 
     /**
