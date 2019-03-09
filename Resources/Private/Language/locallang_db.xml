@@ -11,6 +11,18 @@
 		<languageKey index="default" type="array">
 			<label index="tx_oelib_test">oelib test records</label>
 			<label index="tx_oelib_test.title">Title:</label>
+			<label index="tx_oelib_domain_model_germanzipcode">German ZIP codes</label>
+			<label index="tx_oelib_domain_model_germanzipcode.zip_code">ZIP code</label>
+			<label index="tx_oelib_domain_model_germanzipcode.city_name">City</label>
+			<label index="tx_oelib_domain_model_germanzipcode.longitude">Longitude</label>
+			<label index="tx_oelib_domain_model_germanzipcode.latitude">Latitude</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="tx_oelib_domain_model_germanzipcode">Deutsche Postleitzahlen</label>
+			<label index="tx_oelib_domain_model_germanzipcode.zip_code">Postleitzahl</label>
+			<label index="tx_oelib_domain_model_germanzipcode.city_name">Ort</label>
+			<label index="tx_oelib_domain_model_germanzipcode.longitude">Längengrad</label>
+			<label index="tx_oelib_domain_model_germanzipcode.latitude">Breitengrad</label>
 		</languageKey>
 	</data>
 </T3locallang>
