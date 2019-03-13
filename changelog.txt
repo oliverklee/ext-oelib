@@ -1,4 +1,7 @@
-0.9.8 - not released yet
+0.9.8 - released 2019-03-13
+
+Features:
+- Static data geo coordinates of German ZIP codes (#205)
 
 Bug fixes:
 - Throw exception for empty Google geocoding API key (#202)
