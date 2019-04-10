@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Prevent rounding errors with the coordinates (#208, #209, #210)
 - Throw exception for empty Google geocoding API key (#201)
 - Fix the casing of the vfsstream package (#199)
 - Ignore relations with a foreign UID of 0 (#195)
