@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Remove dependency on specific FE-user extensions (#213, #214)
 - Prevent rounding errors with the coordinates (#208, #209, #210)
 - Throw exception for empty Google geocoding API key (#201)
 - Fix the casing of the vfsstream package (#199)
