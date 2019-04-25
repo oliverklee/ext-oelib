@@ -6,16 +6,24 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 1.6.0
+
+### Added
 - Static data of the geo coordinates of German ZIP codes (#152, #175)
 - Starter tests with nimut/testing-framework (#130)
 
 ### Changed
 - Move the old tests to Tests/LegacyUnit/ and Tests/LegacyFunctional/ (#124)
 - Prefer stable/dist packages by default (#120)
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 - Remove dependency on specific FE-user extensions (#213, #214)
