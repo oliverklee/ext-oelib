@@ -25,6 +25,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 7.6 (#273, #287)
 
 ### Fixed
+- Fix the name of the DB port environment variable in .travis.yml (#294)
 - Stop using deprecated oelib functionality in the tests (#284)
 - Stop using the removed getMock() method (#276)
 
