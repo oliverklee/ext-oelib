@@ -5,14 +5,16 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ## x.y.z
 
-### Added
-
-### Changed
-
 ### Deprecated
 - Deprecate `Mapper_BackEndUser::findByCliKey` (#324)
 
-### Removed
+### Fixed
+- Fix potentially undefined variable (#322)
+
+## 2.3.5
+
+### Deprecated
+- Deprecate `Mapper_BackEndUser::findByCliKey` (#324)
 
 ### Fixed
 - Fix potentially undefined variable (#322)
