@@ -54,19 +54,18 @@ class Tx_Oelib_Mapper_BackEndUser extends \Tx_Oelib_DataMapper
     /**
      * Finds a back-end user by CLI key.
      *
-     * Note: This function must only be called if the constant "TYPO3_cliKey"
-     * is defined.
+     * Note: This function must only be called if the constant "TYPO3_cliKey" is defined.
      *
-     * @return \Tx_Oelib_Model_BackEndUser model of the back-end user for the
-     *                                    defined CLI key
+     * @deprecated will be removed in oelib 3.0.0
+     *
+     * @return \Tx_Oelib_Model_BackEndUser model of the back-end user for the defined CLI key
      */
     public function findByCliKey()
     {
         if (!defined('TYPO3_cliKey')) {
             throw new \BadMethodCallException(
-                'Please make sure the constant "TYPO3_cliKey" is defined before using this function. Usually this is done '
-                .
-                'automatically when executing "/typo3/cli_dispatch.phpsh".',
+                'Please make sure the constant "TYPO3_cliKey" is defined before using this function. Usually this is ' .
+                'done automatically when executing "/typo3/cli_dispatch.phpsh".',
                 1331488485
             );
         }
