@@ -7,6 +7,8 @@ namespace OliverKlee\Oelib\DataStructures;
 /**
  * This class represents an object that allows getting and setting its data via public methods.
  *
+ * phpcs:disable Generic.CodeAnalysis.UselessOverridingMethod
+ *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAccessors

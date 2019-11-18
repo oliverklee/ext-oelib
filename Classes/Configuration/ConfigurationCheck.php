@@ -32,6 +32,8 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  *
  * @deprecated will be removed in oelib 4.0, use the new `AbstractConfigurationCheck` instead
  *
+ * phpcs:disable Generic.CodeAnalysis.UnusedFunctionParameter
+ *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class ConfigurationCheck

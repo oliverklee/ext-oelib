@@ -7,6 +7,8 @@ namespace OliverKlee\Oelib\Domain\Repository\Traits;
 /**
  * This trait marks repositories as read-only.
  *
+ * phpcs:disable Generic.CodeAnalysis.UnusedFunctionParameter
+ *
  * @author Oliver Klee <typo3-coding@oliverklee.de
  */
 trait ReadOnly

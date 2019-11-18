@@ -33,14 +33,14 @@ class TestingMapper extends AbstractDataMapper
      * @var string[] the (possible) relations of the created models in the format DB column name => mapper name
      */
     protected $relations = [
-        'friend' => TestingMapper::class,
+        'friend' => self::class,
         'owner' => FrontEndUserMapper::class,
-        'children' => TestingMapper::class,
-        'related_records' => TestingMapper::class,
+        'children' => self::class,
+        'related_records' => self::class,
         'composition' => TestingChildMapper::class,
         'composition2' => TestingChildMapper::class,
         'composition_without_sorting' => TestingChildMapper::class,
-        'bidirectional' => TestingMapper::class,
+        'bidirectional' => self::class,
     ];
 
     /**
@@ -184,6 +184,8 @@ class TestingMapper extends AbstractDataMapper
      * @return void
      *
      * @see cacheModelByCompoundKey
+     *
+     * phpcs:disable Generic.CodeAnalysis.UnusedFunctionParameter
      */
     protected function cacheModelByCombinedKeys(AbstractModel $model, array $data)
     {

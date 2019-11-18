@@ -28,6 +28,6 @@ class BackEndUserGroupMapper extends AbstractDataMapper
      *      column name => mapper name
      */
     protected $relations = [
-        'subgroup' => BackEndUserGroupMapper::class,
+        'subgroup' => self::class,
     ];
 }
