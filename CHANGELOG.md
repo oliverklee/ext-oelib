@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Improve the code autoformatting (#370)
 - Sort the entries in the `.gitignore` and `.gitattributes` (#368)
 
 ### Deprecated
@@ -15,7 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
-- Improve the code autoformatting (#370)
+- Stop using a deprecated TYPO3 Console option (#372)
 
 ## 3.0.3
 
