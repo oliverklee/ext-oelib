@@ -16,6 +16,7 @@ services:
 env:
   global:
   - typo3DatabaseUsername=travis typo3DatabaseHost=localhost typo3DatabaseName=typo3 typo3DatabasePassword=''
+  - TYPO3_PATH_WEB=$PWD/.Build/public
 
 cache:
   directories:
@@ -59,13 +60,22 @@ jobs:
   include:
   - stage: test
     php: "7.4"
+    env: TYPO3=^10.3
+  - stage: test
+    php: "7.4"
     env: TYPO3=^9.5
+  - stage: test
+    php: "7.3"
+    env: TYPO3=^10.3
   - stage: test
     php: "7.3"
     env: TYPO3=^9.5
   - stage: test
     php: "7.3"
     env: TYPO3=^8.7
+  - stage: test
+    php: "7.2"
+    env: TYPO3=^10.3
   - stage: test
     php: "7.2"
     env: TYPO3=^9.5
