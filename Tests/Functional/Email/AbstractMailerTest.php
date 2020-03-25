@@ -8,6 +8,7 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Email\Attachment;
 use OliverKlee\Oelib\Email\EmailCollector;
 use OliverKlee\Oelib\Email\Mail;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Oelib\Tests\Unit\Email\Fixtures\TestingMailRole;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -42,6 +43,10 @@ class AbstractMailerTest extends FunctionalTestCase
     protected function setUp()
     {
         parent::setUp();
+
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
 
         $this->subject = new EmailCollector();
 

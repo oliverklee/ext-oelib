@@ -12,6 +12,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Oelib\Tests\Unit\Mapper\Fixtures\TestingChildMapper;
 use OliverKlee\Oelib\Tests\Unit\Mapper\Fixtures\TestingMapper;
 use OliverKlee\Oelib\Tests\Unit\Model\Fixtures\ReadOnlyModel;
@@ -2990,6 +2991,9 @@ class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function findByWhereClauseForNoGivenParameterAndTwoRecordsFindsBothRecords()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', []);
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', []);
 
@@ -3004,6 +3008,9 @@ class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function findByWhereClauseForGivenWhereClauseAndOneMatchingRecordFindsThisRecord()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', ['title' => 'foo']);
         $foundRecordUid = (int)$this->getDatabaseConnection()->lastInsertId();
 
@@ -3018,6 +3025,9 @@ class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function findByWhereClauseForGivenWhereClauseAndTwoRecordsOneMatchingOneNotDoesNotFindNonMatchingRecord()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', ['title' => 'foo']);
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', ['title' => 'bar']);
         $notMatchingUid = (int)$this->getDatabaseConnection()->lastInsertId();
@@ -3033,6 +3043,9 @@ class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function findByWhereClauseForNoSortingProvidedSortsRecordsByDefaultSorting()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', []);
         $uid1 = (int)$this->getDatabaseConnection()->lastInsertId();
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', []);
@@ -3049,6 +3062,9 @@ class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function findByWhereClauseForSortingProvidedSortsRecordsByGivenSorting()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', ['title' => 'foo']);
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', ['title' => 'bar']);
         $firstEntryUid = (int)$this->getDatabaseConnection()->lastInsertId();
@@ -3064,6 +3080,9 @@ class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function findByWhereClauseForSortingAndWhereClauseProvidedSortsMatchingRecords()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', ['title' => 'foo', 'sorting' => 2]);
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', ['title' => 'foo', 'sorting' => 0]);
         $firstMatchingUid = (int)$this->getDatabaseConnection()->lastInsertId();
@@ -3081,6 +3100,9 @@ class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function findByWhereClauseWithoutLimitFindsAllRecords()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', ['title' => 'foo']);
         $firstUid = (int)$this->getDatabaseConnection()->lastInsertId();
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', ['title' => 'bar']);
@@ -3097,6 +3119,9 @@ class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function findByWhereClauseWithTwoRecordsAndLimitOneFindsOnlyFirstRecord()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', ['title' => 'foo']);
         $firstUid = (int)$this->getDatabaseConnection()->lastInsertId();
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', ['title' => 'bar']);
@@ -3112,6 +3137,9 @@ class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function findByWhereClauseWithThreeRecordsAndLimitBeginOneAndMaximumOneFindsOnlySecondRecord()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', ['title' => 'foo']);
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', ['title' => 'bar']);
         $secondUid = (int)$this->getDatabaseConnection()->lastInsertId();
@@ -3770,6 +3798,9 @@ class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function countByWhereClauseWithoutWhereClauseCountsAllRecords()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', []);
 
         self::assertSame(
@@ -3783,6 +3814,9 @@ class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function countByWhereClauseWithoutMatchingRecordReturnsZero()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', ['title' => 'foo']);
 
         self::assertSame(
@@ -3796,6 +3830,9 @@ class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function countByWhereClauseWithOneMatchingRecordsReturnsOne()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', ['title' => 'foo']);
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', ['title' => 'bar']);
 
@@ -3810,6 +3847,9 @@ class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function countByWhereClauseWithTwoMatchingRecordsReturnsTwo()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', ['title' => 'bar']);
         $this->getDatabaseConnection()->insertArray('tx_oelib_test', ['title' => 'bar']);
 

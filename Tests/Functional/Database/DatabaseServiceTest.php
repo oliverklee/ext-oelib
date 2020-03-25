@@ -30,6 +30,9 @@ class DatabaseServiceTest extends FunctionalTestCase
     protected function setUp()
     {
         parent::setUp();
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 10000000) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
 
         $GLOBALS['SIM_EXEC_TIME'] = $this->now;
     }

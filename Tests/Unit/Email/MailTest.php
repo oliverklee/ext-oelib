@@ -7,6 +7,7 @@ namespace OliverKlee\Oelib\Tests\Unit\Email;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Email\Attachment;
 use OliverKlee\Oelib\Email\Mail;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Oelib\Tests\Unit\Email\Fixtures\TestingMailRole;
 
 /**
@@ -23,6 +24,9 @@ class MailTest extends UnitTestCase
 
     protected function setUp()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
         $this->subject = new Mail();
     }
 

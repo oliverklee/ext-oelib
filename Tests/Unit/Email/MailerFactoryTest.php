@@ -7,6 +7,7 @@ namespace OliverKlee\Oelib\Tests\Unit\Email;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Email\EmailCollector;
 use OliverKlee\Oelib\Email\MailerFactory;
+use OliverKlee\Oelib\System\Typo3Version;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /**
@@ -24,6 +25,9 @@ class MailerFactoryTest extends UnitTestCase
 
     protected function setUp()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
         $this->subject = new MailerFactory();
     }
 
