@@ -202,12 +202,22 @@ final class Tx_Oelib_TestingFramework
      * @param string[] $additionalTablePrefixes
      *        the additional table name prefixes of the extensions for which this instance of the testing framework
      *     should be used, may be empty
+     *
+     * @throws \UnexpectedValueException if PATH_site is not defined
      */
     public function __construct(string $tablePrefix, array $additionalTablePrefixes = [])
     {
+        if ((Typo3Version::isNotHigherThan(8)) && !defined('PATH_site')) {
+            throw new \UnexpectedValueException('PATH_site is not set.', 1475862825228);
+        }
+
         $this->tablePrefix = $tablePrefix;
         $this->additionalTablePrefixes = $additionalTablePrefixes;
-        $this->uploadFolderPath = Environment::getPublicPath() . '/uploads/' . $this->tablePrefix . '/';
+        if (Typo3Version::isNotHigherThan(8)) {
+            $this->uploadFolderPath = PATH_site . 'typo3temp/' . $this->tablePrefix . '/';
+        } else {
+            $this->uploadFolderPath = Environment::getPublicPath() . '/typo3temp/' . $this->tablePrefix . '/';
+        }
 
         /** @var array $rootLineCacheConfiguration */
         $rootLineCacheConfiguration =
