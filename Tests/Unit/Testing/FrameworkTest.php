@@ -6,6 +6,7 @@ namespace OliverKlee\Oelib\Tests\Unit\Testing;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use org\bovigo\vfs\vfsStream;
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -80,7 +81,7 @@ class FrameworkTest extends UnitTestCase
      */
     public function cleanUpWithoutDatabaseDeletesCreatedDummyUploadFolder()
     {
-        $this->subject->setUploadFolderPath(PATH_site . 'typo3temp/tx_oelib_test/');
+        $this->subject->setUploadFolderPath(Environment::getPublicPath() . '/typo3temp/tx_oelib_test/');
         $this->subject->createDummyFile();
 
         self::assertDirectoryExists($this->subject->getUploadFolderPath());
@@ -209,7 +210,7 @@ class FrameworkTest extends UnitTestCase
      */
     public function createDummyFileForNonExistentUploadFolderSetCreatesUploadFolder()
     {
-        $this->subject->setUploadFolderPath(PATH_site . 'typo3temp/tx_oelib_test/');
+        $this->subject->setUploadFolderPath(Environment::getPublicPath() . '/typo3temp/tx_oelib_test/');
         $this->subject->createDummyFile();
 
         self::assertDirectoryExists($this->subject->getUploadFolderPath());
@@ -220,7 +221,7 @@ class FrameworkTest extends UnitTestCase
      */
     public function createDummyFileForNonExistentUploadFolderSetCreatesFileInCreatedUploadFolder()
     {
-        $this->subject->setUploadFolderPath(PATH_site . 'typo3temp/tx_oelib_test/');
+        $this->subject->setUploadFolderPath(Environment::getPublicPath() . '/typo3temp/tx_oelib_test/');
         $dummyFile = $this->subject->createDummyFile();
 
         self::assertFileExists($dummyFile);
@@ -310,7 +311,7 @@ class FrameworkTest extends UnitTestCase
      */
     public function createDummyFolderForNonExistentUploadFolderSetCreatesUploadFolder()
     {
-        $this->subject->setUploadFolderPath(PATH_site . 'typo3temp/tx_oelib_test/');
+        $this->subject->setUploadFolderPath(Environment::getPublicPath() . '/typo3temp/tx_oelib_test/');
         $this->subject->createDummyFolder('test_folder');
 
         self::assertDirectoryExists($this->subject->getUploadFolderPath());
@@ -321,7 +322,7 @@ class FrameworkTest extends UnitTestCase
      */
     public function createDummyFolderForNonExistentUploadFolderSetCreatesFileInCreatedUploadFolder()
     {
-        $this->subject->setUploadFolderPath(PATH_site . 'typo3temp/tx_oelib_test/');
+        $this->subject->setUploadFolderPath(Environment::getPublicPath() . '/typo3temp/tx_oelib_test/');
         $dummyFolder = $this->subject->createDummyFolder('test_folder');
 
         self::assertDirectoryExists($dummyFolder);
@@ -387,7 +388,7 @@ class FrameworkTest extends UnitTestCase
             'The first parameter $absolutePath is not within the calling extension\'s upload directory.'
         );
 
-        $this->subject->getPathRelativeToUploadDirectory(PATH_site);
+        $this->subject->getPathRelativeToUploadDirectory(Environment::getPublicPath() . '/');
     }
 
     /*

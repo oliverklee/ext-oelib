@@ -7,6 +7,7 @@ namespace OliverKlee\Oelib\Tests\Functional\Testing;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Tests\Functional\Templating\Fixtures\TestingTemplateHelper;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\TypoScript\TemplateService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
@@ -1032,7 +1033,7 @@ class FrameworkTest extends FunctionalTestCase
      */
     public function cleanUpDeletesCreatedDummyUploadFolder()
     {
-        $this->subject->setUploadFolderPath(PATH_site . 'typo3temp/tx_oelib_test/');
+        $this->subject->setUploadFolderPath(Environment::getPublicPath() . '/typo3temp/tx_oelib_test/');
         $this->subject->createDummyFile();
 
         self::assertDirectoryExists($this->subject->getUploadFolderPath());
