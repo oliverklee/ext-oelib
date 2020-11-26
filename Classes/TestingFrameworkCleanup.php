@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Oelib;
+
 use OliverKlee\Oelib\Geocoding\GoogleGeocoding;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -10,7 +12,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Oelib_TestingFrameworkCleanup
+class TestingFrameworkCleanup
 {
     /**
      * Cleans up oelib after running a test.

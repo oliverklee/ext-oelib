@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Oelib\Mapper;
 
+use OliverKlee\Oelib\AbstractDataMapper;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -14,7 +15,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class FrontEndUserMapper extends \Tx_Oelib_DataMapper
+class FrontEndUserMapper extends AbstractDataMapper
 {
     /**
      * @var string the name of the database table for this mapper

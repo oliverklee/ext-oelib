@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Oelib;
+
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class returns either an instance of the \Tx_Oelib_RealHeaderProxy which
- * adds HTTP headers or an instance of the \Tx_Oelib_HeaderCollector. The
+ * adds HTTP headers or an instance of the HeaderCollector. The
  * collector stores the headers that were added and does not send them. This
  * mode is for testing purposes.
  *
@@ -14,7 +16,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Saskia Metzler <saskia@merlin.owl.de>
  */
-class Tx_Oelib_HeaderProxyFactory
+class HeaderProxyFactory
 {
     /**
      * @var \Tx_Oelib_HeaderProxyFactory
@@ -27,7 +29,7 @@ class Tx_Oelib_HeaderProxyFactory
     private $isTestMode = false;
 
     /**
-     * @var \Tx_Oelib_AbstractHeaderProxy
+     * @var AbstractHeaderProxy
      */
     private $headerProxy = null;
 
@@ -56,13 +58,12 @@ class Tx_Oelib_HeaderProxyFactory
      * Retrieves the singleton header proxy instance. Depending on the mode,
      * this instance is either a header collector or a real header proxy.
      *
-     * @return \Tx_Oelib_AbstractHeaderProxy|\Tx_Oelib_HeaderCollector|\Tx_Oelib_RealHeaderProxy the singleton header
-     *     proxy
+     * @return AbstractHeaderProxy|HeaderCollector|\Tx_Oelib_RealHeaderProxy the singleton header proxy
      */
     public function getHeaderProxy()
     {
         if ($this->isTestMode) {
-            $className = \Tx_Oelib_HeaderCollector::class;
+            $className = HeaderCollector::class;
         } else {
             $className = \Tx_Oelib_RealHeaderProxy::class;
         }

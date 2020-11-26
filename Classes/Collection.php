@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Oelib;
+
 use OliverKlee\Oelib\Interfaces\Sortable;
+use SplObjectStorage;
 
 /**
  * This class represents a list of models.
@@ -10,7 +13,7 @@ use OliverKlee\Oelib\Interfaces\Sortable;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Oelib_List extends SplObjectStorage
+class Collection extends SplObjectStorage
 {
     /**
      * @var int[] the UIDs in the list using the UIDs as both the keys and values

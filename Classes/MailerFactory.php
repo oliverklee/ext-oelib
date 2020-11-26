@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Oelib;
+
+use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -12,7 +15,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Saskia Metzler <saskia@merlin.owl.de>
  */
-class Tx_Oelib_MailerFactory implements \TYPO3\CMS\Core\SingletonInterface
+class MailerFactory implements SingletonInterface
 {
     /**
      * @var bool whether the test mode is set
@@ -20,7 +23,7 @@ class Tx_Oelib_MailerFactory implements \TYPO3\CMS\Core\SingletonInterface
     private $isTestMode = false;
 
     /**
-     * @var \Tx_Oelib_AbstractMailer the mailer
+     * @var AbstractMailer the mailer
      */
     private $mailer = null;
 
@@ -40,7 +43,7 @@ class Tx_Oelib_MailerFactory implements \TYPO3\CMS\Core\SingletonInterface
      * Retrieves the singleton mailer instance. Depending on the mode, this
      * instance is either an e-mail collector or a real mailer.
      *
-     * @return \Tx_Oelib_AbstractMailer|\Tx_Oelib_RealMailer|\Tx_Oelib_EmailCollector the singleton mailer object
+     * @return AbstractMailer|\Tx_Oelib_RealMailer|\Tx_Oelib_EmailCollector the singleton mailer object
      */
     public function getMailer()
     {

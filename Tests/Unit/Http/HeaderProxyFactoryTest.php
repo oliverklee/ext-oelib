@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Oelib\Tests\Unit\Http;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use OliverKlee\Oelib\HeaderCollector;
 
 /**
  * Test case.
@@ -15,9 +16,9 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 class HeaderProxyFactoryTest extends UnitTestCase
 {
     /**
-     * @var \Tx_Oelib_HeaderCollector
+     * @var HeaderCollector
      */
-    private $subject = null;
+    private $subject;
 
     protected function setUp()
     {
@@ -39,7 +40,7 @@ class HeaderProxyFactoryTest extends UnitTestCase
     public function getHeaderProxyInTestMode()
     {
         self::assertSame(
-            \Tx_Oelib_HeaderCollector::class,
+            HeaderCollector::class,
             \get_class($this->subject)
         );
     }

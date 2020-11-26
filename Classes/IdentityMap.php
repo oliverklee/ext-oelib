@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Oelib;
+
 use OliverKlee\Oelib\Exception\NotFoundException;
 
 /**
@@ -9,7 +11,7 @@ use OliverKlee\Oelib\Exception\NotFoundException;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Oelib_IdentityMap
+class IdentityMap
 {
     /**
      * @var \Tx_Oelib_Model[] the items in this map with their UIDs as keys

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Oelib;
+
 use OliverKlee\Oelib\Interfaces\MailRole;
 use Pelago\Emogrifier\CssInliner;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -13,7 +15,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Oelib_Mail extends \Tx_Oelib_Object
+class Mail extends \Tx_Oelib_Object
 {
     /**
      * @var MailRole the sender of the e-mail

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Oelib;
+
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -9,7 +11,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Oelib_TemplateRegistry
+class TemplateRegistry
 {
     /**
      * @var \Tx_Oelib_TemplateRegistry the Singleton instance

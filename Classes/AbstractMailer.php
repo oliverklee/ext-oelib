@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Oelib;
+
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -13,7 +15,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Saskia Metzler <saskia@merlin.owl.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-abstract class Tx_Oelib_AbstractMailer
+abstract class AbstractMailer
 {
     /**
      * @var bool whether an e-mail should be formatted before it is sent

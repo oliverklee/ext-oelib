@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Oelib\Mapper;
 
+use OliverKlee\Oelib\AbstractDataMapper;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Model\BackEndUser;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
@@ -14,7 +15,7 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
  * @author Saskia Metzler <saskia@merlin.owl.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class BackEndUserMapper extends \Tx_Oelib_DataMapper
+class BackEndUserMapper extends AbstractDataMapper
 {
     /**
      * @var string the name of the database table for this mapper

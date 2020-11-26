@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Oelib\Mapper;
 
+use OliverKlee\Oelib\AbstractDataMapper;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Model\Language;
 
@@ -13,7 +14,7 @@ use OliverKlee\Oelib\Model\Language;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class LanguageMapper extends \Tx_Oelib_DataMapper
+class LanguageMapper extends AbstractDataMapper
 {
     /**
      * @var string the name of the database table for this mapper

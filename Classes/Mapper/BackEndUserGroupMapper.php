@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Oelib\Mapper;
 
+use OliverKlee\Oelib\AbstractDataMapper;
 use OliverKlee\Oelib\Model\BackEndUserGroup;
 
 /**
@@ -11,7 +12,7 @@ use OliverKlee\Oelib\Model\BackEndUserGroup;
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class BackEndUserGroupMapper extends \Tx_Oelib_DataMapper
+class BackEndUserGroupMapper extends AbstractDataMapper
 {
     /**
      * @var string the name of the database table for this mapper

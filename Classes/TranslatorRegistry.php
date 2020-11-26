@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Oelib;
+
 use TYPO3\CMS\Core\Localization\LocalizationFactory;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -17,7 +19,7 @@ use TYPO3\CMS\Lang\LanguageService;
  * @author Benjamin Schulte <benj@minschulte.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Oelib_TranslatorRegistry
+class TranslatorRegistry
 {
     /**
      * @var \Tx_Oelib_TranslatorRegistry the Singleton instance

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Oelib;
+
 /**
  * This class stores HTTP header which were meant to be sent instead of really
  * sending them and provides various functions to get them for testing purposes.
@@ -12,7 +14,7 @@ declare(strict_types=1);
  *
  * @author Saskia Metzler <saskia@merlin.owl.de>
  */
-class Tx_Oelib_HeaderCollector extends \Tx_Oelib_AbstractHeaderProxy
+class HeaderCollector extends AbstractHeaderProxy
 {
     /**
      * headers which were meant to be sent

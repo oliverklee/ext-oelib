@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Oelib;
+
 /**
  * This class represents a set of configuration options within a certain
  * namespace.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Oelib_Configuration extends \Tx_Oelib_PublicObject
+class Configuration extends \Tx_Oelib_PublicObject
 {
     /**
      * @var array the data for this configuration

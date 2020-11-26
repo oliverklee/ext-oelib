@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Oelib;
+
 /**
  * This class declares the function addHeader() for its inheritants. So they
  * need to implement the concrete behavior.
@@ -10,7 +12,7 @@ declare(strict_types=1);
  *
  * @author Saskia Metzler <saskia@merlin.owl.de>
  */
-abstract class Tx_Oelib_AbstractHeaderProxy
+abstract class AbstractHeaderProxy
 {
     /**
      * This function usually should add a HTTP header.

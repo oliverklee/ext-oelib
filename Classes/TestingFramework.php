@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Oelib;
+
 use OliverKlee\Oelib\Exception\DatabaseException;
 use OliverKlee\Oelib\Frontend\UserWithoutCookies;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
@@ -26,7 +28,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  * @author Saskia Metzler <saskia@merlin.owl.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-final class Tx_Oelib_TestingFramework
+final class TestingFramework
 {
     /**
      * @var int

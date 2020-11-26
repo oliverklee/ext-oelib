@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Oelib;
+
 use OliverKlee\Oelib\Exception\NotFoundException;
 use TYPO3\CMS\Core\TypoScript\TemplateService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -13,7 +15,7 @@ use TYPO3\CMS\Frontend\Page\PageRepository;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Oelib_TemplateHelper extends \Tx_Oelib_SalutationSwitcher
+class TemplateHelper extends \Tx_Oelib_SalutationSwitcher
 {
     /**
      * @var string the prefix used for CSS classes

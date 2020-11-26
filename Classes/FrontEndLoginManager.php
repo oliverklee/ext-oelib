@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Oelib;
+
 use OliverKlee\Oelib\Interfaces\LoginManager;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
 use OliverKlee\Oelib\Model\FrontEndUser;
@@ -15,7 +17,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Oelib_FrontEndLoginManager implements LoginManager
+class FrontEndLoginManager implements LoginManager
 {
     /**
      * @var \Tx_Oelib_FrontEndLoginManager the Singleton instance

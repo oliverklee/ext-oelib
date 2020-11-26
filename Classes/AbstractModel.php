@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Oelib;
+
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Interfaces\Identity;
 
@@ -13,7 +15,7 @@ use OliverKlee\Oelib\Interfaces\Identity;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-abstract class Tx_Oelib_Model extends \Tx_Oelib_Object implements Identity
+abstract class AbstractModel extends \Tx_Oelib_Object implements Identity
 {
     /**
      * @var int a status indicating that this model has neither data nor UID yet
@@ -118,7 +120,7 @@ abstract class Tx_Oelib_Model extends \Tx_Oelib_Object implements Identity
      * The data which is set via this function is considered to be the initial
      * data. Fields with relations must already be filled with the constituted
      * models/lists, not just with the UIDs (unlike the format that
-     * \Tx_Oelib_DataMapper::getLoadedTestingModel takes).
+     * AbstractDataMapper::getLoadedTestingModel takes).
      *
      * This function should be called directly after instantiation and must only
      * be called once. Usually, this function is called on only a few occasions:
