@@ -8,6 +8,8 @@ declare(strict_types=1);
  *
  * Regarding the Strategy pattern, addHeader() represents the abstract strategy.
  *
+ * @deprecated will be removed in oelib 4.0
+ *
  * @author Saskia Metzler <saskia@merlin.owl.de>
  */
 abstract class Tx_Oelib_AbstractHeaderProxy
