@@ -444,7 +444,7 @@ class Tx_Oelib_Model_FrontEndUser extends \Tx_Oelib_Model implements
 
         $isMember = false;
 
-        foreach (GeneralUtility::trimExplode(',', $uidList, true) as $uid) {
+        foreach (GeneralUtility::intExplode(',', $uidList, true) as $uid) {
             if ($this->getUserGroups()->hasUid($uid)) {
                 $isMember = true;
                 break;

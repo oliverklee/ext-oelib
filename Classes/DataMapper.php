@@ -823,7 +823,7 @@ abstract class Tx_Oelib_DataMapper
             $this->prepareDataForNewRecord($data);
             $tableName = $this->getTableName();
             $this->getConnection()->insert($tableName, $data);
-            $model->setUid($this->getConnection()->lastInsertId($tableName));
+            $model->setUid((int)$this->getConnection()->lastInsertId($tableName));
             $this->map->add($model);
         }
 
