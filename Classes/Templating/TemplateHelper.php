@@ -92,8 +92,10 @@ class TemplateHelper extends SalutationSwitcher
             return;
         }
         if (!$this->templateService instanceof MarkerBasedTemplateService) {
+            // $frontEndController = $this->getFrontEndController() ?? new TypoScriptFrontendController(null, 0, 0);
+
             // Calls the base class's constructor manually as this isn't done automatically.
-            parent::__construct();
+            // parent::__construct(null, $frontEndController);
         }
 
         $this->conf = $configuration;
