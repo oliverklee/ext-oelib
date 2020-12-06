@@ -28,8 +28,6 @@ final class TestingSalutationSwitcher extends SalutationSwitcher
      */
     public function __construct(array $configuration)
     {
-        parent::__construct();
-
         $this->conf = $configuration;
 
         $this->pi_setPiVarDefaults();
