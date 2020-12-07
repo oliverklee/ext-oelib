@@ -105,7 +105,8 @@ class Tx_Oelib_ConfigurationProxy extends \Tx_Oelib_PublicObject
     {
         if (isset($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extensionKey])) {
             $this->configuration = (array)\unserialize(
-                $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extensionKey]
+                (string)$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extensionKey],
+                ['allowed_classes' => false]
             );
         } else {
             $this->configuration = [];

@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Harden `unserialize` calls of extension configuration (#510)
 - Add necessary int casts (#502)
 - Fix Composer cache keys in the CI configuration file (#433)
 

@@ -139,7 +139,7 @@ class Tx_Oelib_Model_BackEndUser extends \Tx_Oelib_Model implements \Tx_Oelib_In
     private function getConfiguration(): array
     {
         if (empty($this->configuration)) {
-            $this->configuration = (array)\unserialize($this->getAsString('uc'));
+            $this->configuration = (array)\unserialize($this->getAsString('uc'), ['allowed_classes' => false]);
         }
 
         return $this->configuration;
