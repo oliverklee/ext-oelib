@@ -43,5 +43,5 @@ abstract class Tx_Oelib_Time
      *
      * @var int
      */
-    const SECONDS_PER_YEAR = 220752000;
+    const SECONDS_PER_YEAR = self::SECONDS_PER_DAY * 365;
 }
