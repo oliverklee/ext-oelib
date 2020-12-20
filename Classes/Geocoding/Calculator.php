@@ -19,7 +19,7 @@ class Tx_Oelib_Geocoding_Calculator implements \TYPO3\CMS\Core\SingletonInterfac
     /**
      * @var float
      */
-    const ONE_DEGREE_LATITUDE_IN_KILOMETERS = 111.2;
+    const ONE_DEGREE_LATITUDE_IN_KILOMETERS = 111.0;
 
     /**
      * Calculates the great-circle distance in kilometers between two geo

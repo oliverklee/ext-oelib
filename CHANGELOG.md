@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Fix the constant for one degree latitude (#525)
 - Fix the seconds per year constant (#520)
 - Harden `unserialize` calls of extension configuration (#510)
 - Add necessary int casts (#502)
