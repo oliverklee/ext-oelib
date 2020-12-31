@@ -3,18 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
-## x.y.z
-
-### Added
+## 3.1.1
 
 ### Changed
 - Move the CI from Travis CI to GitHub Actions (#427, #428)
 - Switch the default git branch from `master` to `main` (#424)
 - Move the testing framework dummy files from `uploads/` folder to `typo3temp/` (#399, #403)
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 - Fix the constant for one degree latitude (#525)
