@@ -85,19 +85,7 @@ abstract class AbstractMailer
         }
 
         foreach ($email->getAttachments() as $attachment) {
-            if (($attachment->getFileName() !== '') && ($attachment->getContent() === '')) {
-                $swiftAttachment =
-                    \Swift_Attachment::fromPath($attachment->getFileName(), $attachment->getContentType());
-            } else {
-                $fileName = $attachment->getFileName() !== '' ? $attachment->getFileName() : null;
-                $swiftAttachment = \Swift_Attachment::newInstance(
-                    $attachment->getContent(),
-                    $fileName,
-                    $attachment->getContentType()
-                );
-            }
-
-            $swiftMail->attach($swiftAttachment);
+            $swiftMail->attach($attachment);
         }
 
         foreach ($email->getRecipients() as $recipient) {

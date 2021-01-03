@@ -66,9 +66,12 @@ class AbstractMailerTest extends FunctionalTestCase
      */
     public function sendCanAddOneAttachmentFromFile()
     {
-        $attachment = new Attachment();
-        $attachment->setFileName(__DIR__ . '/Fixtures/test.txt');
-        $attachment->setContentType('text/plain');
+        /** @var \Swift_Attachment $attachment */
+        $attachment = \Swift_Attachment::newInstance(
+            null,
+            __DIR__ . '/Fixtures/test.txt',
+            'text/plain'
+        );
 
         $sender = new TestingMailRole('', 'any-sender@email-address.org');
         $recipient = new TestingMailRole('John Doe', self::EMAIL['recipient']);
@@ -101,9 +104,12 @@ class AbstractMailerTest extends FunctionalTestCase
     public function sendCanAddOneAttachmentFromContent()
     {
         $content = '<p>Hello world!</p>';
-        $attachment = new Attachment();
-        $attachment->setContent($content);
-        $attachment->setContentType('text/html');
+        /** @var \Swift_Attachment $attachment */
+        $attachment = \Swift_Attachment::newInstance(
+            $content,
+            null,
+            'text/html'
+        );
 
         $sender = new TestingMailRole('', 'any-sender@email-address.org');
         $recipient = new TestingMailRole('John Doe', self::EMAIL['recipient']);
@@ -137,10 +143,12 @@ class AbstractMailerTest extends FunctionalTestCase
     {
         $content = '<p>Hello world!</p>';
         $fileName = 'greetings.html';
-        $attachment = new Attachment();
-        $attachment->setContent($content);
-        $attachment->setFileName($fileName);
-        $attachment->setContentType('text/html');
+        /** @var \Swift_Attachment $attachment */
+        $attachment = \Swift_Attachment::newInstance(
+            $content,
+            $fileName,
+            'text/html'
+        );
 
         $sender = new TestingMailRole('', 'any-sender@email-address.org');
         $recipient = new TestingMailRole('John Doe', self::EMAIL['recipient']);
@@ -184,13 +192,20 @@ class AbstractMailerTest extends FunctionalTestCase
         $eMail->setSubject(self::EMAIL['subject']);
         $eMail->setMessage(self::EMAIL['message']);
 
-        $attachment1 = new Attachment();
-        $attachment1->setFileName(__DIR__ . '/Fixtures/test.txt');
-        $attachment1->setContentType('text/plain');
+        /** @var \Swift_Attachment $attachment1 */
+        $attachment1 = \Swift_Attachment::newInstance(
+            'Test',
+            __DIR__ . '/Fixtures/test.txt',
+            'text/plain'
+        );
         $eMail->addAttachment($attachment1);
-        $attachment2 = new Attachment();
-        $attachment2->setFileName(__DIR__ . '/Fixtures/test_2.css');
-        $attachment2->setContentType('text/css');
+
+        /** @var \Swift_Attachment $attachment2 */
+        $attachment2 = \Swift_Attachment::newInstance(
+            'Test',
+            __DIR__ . '/Fixtures/test_2.css',
+            'text/css'
+        );
         $eMail->addAttachment($attachment2);
 
         $this->subject->send($eMail);

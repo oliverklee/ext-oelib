@@ -39,7 +39,7 @@ class Mail extends AbstractObjectWithAccessors
     private $data = [];
 
     /**
-     * @var array<int, Attachment> attachments of the e-mail
+     * @var array<int, \Swift_Attachment> attachments of the e-mail
      */
     private $attachments = [];
 
@@ -291,11 +291,11 @@ class Mail extends AbstractObjectWithAccessors
     /**
      * Adds an attachment to the e-mail.
      *
-     * @param Attachment $attachment the attachment to add
+     * @param \Swift_Attachment $attachment the attachment to add
      *
      * @return void
      */
-    public function addAttachment(Attachment $attachment)
+    public function addAttachment(\Swift_Attachment $attachment)
     {
         $this->attachments[] = $attachment;
     }
@@ -303,7 +303,7 @@ class Mail extends AbstractObjectWithAccessors
     /**
      * Returns the attachments of the e-mail.
      *
-     * @return array<int, Attachment> the attachments of the e-mail, might be empty
+     * @return array<int, \Swift_Attachment> the attachments of the e-mail, might be empty
      */
     public function getAttachments(): array
     {

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Oelib\Tests\Unit\Email;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use OliverKlee\Oelib\Email\Attachment;
 use OliverKlee\Oelib\Email\Mail;
 use OliverKlee\Oelib\Tests\Unit\Email\Fixtures\TestingMailRole;
 
@@ -423,10 +422,13 @@ class MailTest extends UnitTestCase
      */
     public function getAttachmentsWithOneAttachmentReturnsOneAttachment()
     {
-        $attachment = new Attachment();
-        $attachment->setFileName('test.txt');
-        $attachment->setContentType('text/plain');
-        $attachment->setContent('Test');
+        /** @var \Swift_Attachment $attachment */
+        $attachment = \Swift_Attachment::newInstance(
+            'Test',
+            'test.txt',
+            'text/plain'
+        );
+
         $this->subject->addAttachment($attachment);
 
         self::assertSame(
@@ -440,16 +442,20 @@ class MailTest extends UnitTestCase
      */
     public function getAttachmentsWithTwoAttachmentsReturnsTwoAttachments()
     {
-        $attachment = new Attachment();
-        $attachment->setFileName('test.txt');
-        $attachment->setContentType('text/plain');
-        $attachment->setContent('Test');
+        /** @var \Swift_Attachment $attachment */
+        $attachment = \Swift_Attachment::newInstance(
+            'Test',
+            'test.txt',
+            'text/plain'
+        );
         $this->subject->addAttachment($attachment);
 
-        $otherAttachment = new Attachment();
-        $otherAttachment->setFileName('second_test.txt');
-        $otherAttachment->setContentType('text/plain');
-        $otherAttachment->setContent('Second Test');
+        /** @var \Swift_Attachment $otherAttachment */
+        $otherAttachment = \Swift_Attachment::newInstance(
+            'Second Test',
+            'second_test.txt',
+            'text/plain'
+        );
         $this->subject->addAttachment($otherAttachment);
 
         self::assertSame(
