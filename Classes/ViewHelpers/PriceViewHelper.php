@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\CurrencyMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\Currency;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * This class represents a view helper for formatting a price.

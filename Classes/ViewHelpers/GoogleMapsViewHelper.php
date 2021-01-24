@@ -7,8 +7,8 @@ namespace OliverKlee\Oelib\ViewHelpers;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Interfaces\Identity;
 use OliverKlee\Oelib\Interfaces\MapPoint;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * This ViewHelper creates a Google Map with markers/points on it.

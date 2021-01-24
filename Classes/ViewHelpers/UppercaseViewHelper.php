@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Oelib\ViewHelpers;
 
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * This view helper converts strings to uppercase.

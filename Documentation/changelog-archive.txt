@@ -126,7 +126,7 @@ Changes:
 - [#5449] Rename tx_oelib_Tests_Unit_Fixtures_TestingChildMapper to Tx_Oelib_Tests_Unit_Fixtures_TestingChildMapper
 - [#5450] Rename tx_oelib_Tests_Unit_Fixtures_TestingModel to Tx_Oelib_Tests_Unit_Fixtures_TestingModel
 - [#5447] Rename tx_oelib_Interface_MailRole to Tx_Oelib_Interface_MailRole
-- [#5442] Change Tx_Fluid_Core_ViewHelper_AbstractViewHelper to \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+- [#5442] Change Tx_Fluid_Core_ViewHelper_AbstractViewHelper to \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 - [#5440] Change t3lib_pageSelect to \TYPO3\CMS\Frontend\Page\PageRepository
 - [#5438] Change tslib_cObj to ContentObjectRenderer
 - [#5437] Change tslib_pibase to \TYPO3\CMS\Frontend\Plugin\AbstractPlugin

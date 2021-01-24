@@ -7,9 +7,9 @@ namespace OliverKlee\Oelib\Tests\Unit\ViewHelpers;
 use Nimut\TestingFramework\TestCase\ViewHelperBaseTestcase;
 use OliverKlee\Oelib\ViewHelpers\DynamicDateViewHelper;
 use PHPUnit\Framework\MockObject\MockObject;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3\CMS\Fluid\Core\ViewHelper\Exception as ViewHelperException;
-use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Exception as ViewHelperException;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Facets\CompilableInterface;
 
 /**
  * Test case.
