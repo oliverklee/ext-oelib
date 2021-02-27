@@ -7,6 +7,7 @@ namespace OliverKlee\Oelib\Tests\Unit\Email;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Email\Mail;
 use OliverKlee\Oelib\Email\RealMailer;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Oelib\Tests\Unit\Email\Fixtures\TestingMailRole;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -31,6 +32,9 @@ class RealMailerTest extends UnitTestCase
 
     protected function setUp()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
         $this->subject = new RealMailer();
 
         $this->message = $this->getMockBuilder(MailMessage::class)->setMethods(['send'])->getMock();

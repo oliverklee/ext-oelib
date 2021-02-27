@@ -8,6 +8,7 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Http\RealHeaderProxy;
+use OliverKlee\Oelib\System\Typo3Version;
 
 /**
  * Test case.
@@ -24,6 +25,9 @@ class HeaderProxyFactoryTest extends UnitTestCase
 
     protected function setUp()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
         // Only the instance with an enabled test mode can be tested as in the
         // non-test mode added headers are not accessible.
         HeaderProxyFactory::getInstance()->enableTestMode();

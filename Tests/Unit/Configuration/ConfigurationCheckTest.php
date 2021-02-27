@@ -7,6 +7,7 @@ namespace OliverKlee\Oelib\Tests\Unit\Configuration;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationCheck;
 use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Oelib\Tests\Unit\Configuration\Fixtures\DummyObjectToCheck;
 
 /**
@@ -79,6 +80,10 @@ class ConfigurationCheckTest extends UnitTestCase
      */
     public function setFlavorReturnsFlavor()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
+
         $this->subject->setFlavor('foo');
 
         self::assertSame(

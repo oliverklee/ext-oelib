@@ -7,6 +7,7 @@ namespace OliverKlee\Oelib\Tests\Unit\Email;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Email\GeneralEmailRole;
 use OliverKlee\Oelib\Interfaces\MailRole;
+use OliverKlee\Oelib\System\Typo3Version;
 
 /**
  * Test case.
@@ -15,6 +16,13 @@ use OliverKlee\Oelib\Interfaces\MailRole;
  */
 class GeneralEmailRoleTest extends UnitTestCase
 {
+    protected function setUp()
+    {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
+    }
+
     /**
      * @test
      */

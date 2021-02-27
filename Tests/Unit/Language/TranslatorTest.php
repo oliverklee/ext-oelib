@@ -6,6 +6,7 @@ namespace OliverKlee\Oelib\Tests\Unit\Language;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Language\Translator;
+use OliverKlee\Oelib\System\Typo3Version;
 
 /**
  * Test case.
@@ -15,6 +16,13 @@ use OliverKlee\Oelib\Language\Translator;
  */
 class TranslatorTest extends UnitTestCase
 {
+    protected function setUp()
+    {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
+    }
+
     /**
      * @test
      */

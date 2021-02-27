@@ -11,6 +11,7 @@ use OliverKlee\Oelib\Configuration\TypoScriptConfiguration;
 use OliverKlee\Oelib\Language\Translator;
 use OliverKlee\Oelib\Language\TranslatorRegistry;
 use OliverKlee\Oelib\Model\BackEndUser;
+use OliverKlee\Oelib\System\Typo3Version;
 use Prophecy\Prophecy\ProphecySubjectInterface;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\CMS\Lang\LanguageService;
@@ -31,6 +32,10 @@ class TranslatorRegistryTest extends FunctionalTestCase
     protected function setUp()
     {
         parent::setUp();
+
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
 
         $configurationRegistry = ConfigurationRegistry::getInstance();
         $configurationRegistry->set('config', new TypoScriptConfiguration());

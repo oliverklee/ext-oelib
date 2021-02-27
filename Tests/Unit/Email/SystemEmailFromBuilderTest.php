@@ -7,6 +7,7 @@ namespace OliverKlee\Oelib\Tests\Unit\Email;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Email\GeneralEmailRole;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
+use OliverKlee\Oelib\System\Typo3Version;
 
 /**
  * Test case.
@@ -85,6 +86,10 @@ class SystemEmailFromBuilderTest extends UnitTestCase
      */
     public function buildForInvalidDataThrowsException()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
+
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
 
@@ -98,6 +103,10 @@ class SystemEmailFromBuilderTest extends UnitTestCase
      */
     public function buildForValidDataReturnSystemEmailSubjectWithGivenData()
     {
+        if (Typo3Version::isAtLeast(10)) {
+            self::markTestSkipped('These tests cannot be run in TYPO3 version 10.');
+        }
+
         $emailAddress = 'elena@example.com';
         $name = 'Elena Alene';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $emailAddress;
