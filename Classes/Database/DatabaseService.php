@@ -337,7 +337,7 @@ class DatabaseService
      * @param string $groupBy GROUP BY field(s), may be empty
      * @param string $orderBy ORDER BY field(s), may be empty
      *
-     * @return array<string, string> the single result row, will not be empty
+     * @return array<string, string|int> the single result row, will not be empty
      *
      * @throws EmptyQueryResultException if there is no matching record
      */
@@ -366,7 +366,7 @@ class DatabaseService
      * @param string $orderBy ORDER BY field(s), may be empty
      * @param string|int $limit LIMIT value ([begin,]max), may be empty
      *
-     * @return array<int, array<string, string>> the query result rows, will be empty if there are no matching records
+     * @return array<int, array<string, string|int>> the query result rows, will be empty if there are no matches
      *
      * @throws \InvalidArgumentException
      */
@@ -406,7 +406,7 @@ class DatabaseService
      * @param string $groupBy GROUP BY field(s), may be empty
      * @param string $orderBy ORDER BY field(s), may be empty
      *
-     * @return array<string, string> one column from the query result rows,
+     * @return array<int, array<string, string|int>> one column from the query result rows,
      *         will be empty if there are no matching records
      */
     public static function selectColumnForMultiple(
@@ -416,7 +416,7 @@ class DatabaseService
         string $groupBy = '',
         string $orderBy = ''
     ): array {
-        /** @var array<string, string> $result */
+        /** @var array<int, array<string, string|int>> $result */
         $result = [];
         foreach (self::selectMultiple($fieldName, $tableNames, $whereClause, $groupBy, $orderBy) as $row) {
             $result[] = $row[$fieldName];
