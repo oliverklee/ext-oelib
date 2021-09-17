@@ -14,6 +14,10 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+
+## 3.6.2
+
+### Fixed
 - Stop using patches for dependencies (714)
 - Improve some type annotations (#711)
 
