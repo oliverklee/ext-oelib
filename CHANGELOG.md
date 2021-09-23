@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Always display the incorrect value in the configuration check (#754)
 
 ## 3.6.2
 
