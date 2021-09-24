@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Improve the styling of the config check warnings (#755)
 
 ### Deprecated
 
@@ -19,7 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## 3.6.2
 
 ### Fixed
-- Stop using patches for dependencies (714)
+- Stop using patches for dependencies (#714)
 - Improve some type annotations (#711)
 
 ## 3.6.1
