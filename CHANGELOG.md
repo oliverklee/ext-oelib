@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Improve the styling of the config check warnings (#755)
 
 ### Deprecated
+- Deprecate `ConfigurationCheckable` (#766)
 
 ### Removed
 
