@@ -179,10 +179,10 @@ class ConfigurationProxy extends AbstractObjectWithPublicAccessors implements Co
      *
      * The configuration setters are intended to be used for testing purposes only.
      *
-     * @param string $key
-     *        key of the value to set, must not be empty
-     * @param mixed $value
-     *        the value to set
+     * @deprecated will be removed in oelib 4.0; use the `DummyConfiguration` in tests instead
+     *
+     * @param string $key key of the value to set, must not be empty
+     * @param mixed $value the value to set
      *
      * @return void
      */

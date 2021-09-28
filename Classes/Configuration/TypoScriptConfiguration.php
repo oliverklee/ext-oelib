@@ -35,10 +35,10 @@ class TypoScriptConfiguration extends AbstractObjectWithPublicAccessors implemen
     /**
      * Sets the value of the data item for the key $key.
      *
-     * @param string $key
-     *        the key of the data item to get, must not be empty
-     * @param mixed $value
-     *        the data for the key $key
+     * @deprecated will be removed in oelib 4.0; use the `DummyConfiguration` in tests instead
+     *
+     * @param string $key the key of the data item to get, must not be empty
+     * @param mixed $value the data for the key $key
      *
      * @return void
      */
