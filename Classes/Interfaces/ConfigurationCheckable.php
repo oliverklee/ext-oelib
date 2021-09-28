@@ -6,6 +6,8 @@ namespace OliverKlee\Oelib\Interfaces;
 
 /**
  * This interface represents an object that can have an automatic configuration check.
+ *
+ * @deprecated will be removed in oelib 4.0; use `AbstractConfigurationCheck` instead (without any interface)
  */
 interface ConfigurationCheckable
 {
