@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Improve some type annotations (#791)
 - Recognize flexforms data converted to an array (#756)
 - Always display the incorrect value in the configuration check (#754)
 
