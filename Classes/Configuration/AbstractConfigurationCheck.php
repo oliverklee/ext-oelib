@@ -417,6 +417,7 @@ abstract class AbstractConfigurationCheck
 
         $okay = true;
 
+        /** @var array<int, non-empty-string> $values */
         $values = GeneralUtility::trimExplode(',', $this->configuration->getAsString($key), true);
 
         foreach ($values as $value) {

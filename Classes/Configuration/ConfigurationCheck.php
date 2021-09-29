@@ -900,6 +900,7 @@ class ConfigurationCheck
         array $allowedValues
     ) {
         if ($this->objectToCheck->hasConfValueString($key, $sheet)) {
+            /** @var array<int, non-empty-string> $allValues */
             $allValues = GeneralUtility::trimExplode(',', $this->objectToCheck->getConfValueString($key, $sheet), true);
 
             foreach ($allValues as $currentValue) {

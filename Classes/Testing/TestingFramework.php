@@ -1954,6 +1954,7 @@ class TestingFramework
     {
         $this->initializeDatabase();
 
+        /** @var non-empty-string $currentTable */
         foreach (GeneralUtility::trimExplode(',', $tableNames) as $currentTable) {
             if ($this->isNoneSystemTableNameAllowed($currentTable)) {
                 $this->dirtyTables[$currentTable] = $currentTable;
