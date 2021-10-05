@@ -8,13 +8,21 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 3.6.3
+
+### Changed
 - Improve the styling of the config check warnings (#755)
 
 ### Deprecated
 - Deprecate the setters of `ConfigurationProxy` and `TypoScriptConfiguration` (#774)
 - Deprecate `ConfigurationCheckable` (#766)
-
-### Removed
 
 ### Fixed
 - Improve some type annotations (#791)
