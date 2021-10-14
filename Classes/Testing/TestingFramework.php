@@ -219,9 +219,7 @@ final class TestingFramework
         $rootLineCacheConfiguration['backend'] = NullBackend::class;
         $rootLineCacheConfiguration['options'] = [];
         $cacheConfigurations = [$cacheKey => $rootLineCacheConfiguration];
-        /** @var CacheManager $cacheManager */
-        $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
-        $cacheManager->setCacheConfigurations($cacheConfigurations);
+        GeneralUtility::makeInstance(CacheManager::class)->setCacheConfigurations($cacheConfigurations);
     }
 
     private function initializeDatabase(): void
@@ -346,10 +344,7 @@ final class TestingFramework
      */
     private function getConnectionPool(): ConnectionPool
     {
-        /** @var ConnectionPool $pool */
-        $pool = GeneralUtility::makeInstance(ConnectionPool::class);
-
-        return $pool;
+        return GeneralUtility::makeInstance(ConnectionPool::class);
     }
 
     /**
@@ -1162,7 +1157,6 @@ final class TestingFramework
         $GLOBALS['_SERVER']['HTTP_HOST'] = 'typo3-test.dev';
         if (Typo3Version::isAtLeast(10)) {
             $this->disableCoreCaches();
-            /** @var TypoScriptFrontendController $frontEnd */
             $frontEnd = GeneralUtility::makeInstance(
                 TypoScriptFrontendController::class,
                 $GLOBALS['TYPO3_CONF_VARS'],
@@ -1170,7 +1164,6 @@ final class TestingFramework
                 new SiteLanguage(0, 'en_US.utf8', new Uri(), [])
             );
         } else {
-            /** @var TypoScriptFrontendController $frontEnd */
             $frontEnd = GeneralUtility::makeInstance(
                 TypoScriptFrontendController::class,
                 $GLOBALS['TYPO3_CONF_VARS'],
@@ -1180,7 +1173,6 @@ final class TestingFramework
         }
         $GLOBALS['TSFE'] = $frontEnd;
 
-        /** @var FrontendUserAuthentication $frontEndUser */
         $frontEndUser = GeneralUtility::makeInstance(FrontendUserAuthentication::class);
         $frontEndUser->start();
         $frontEndUser->unpack_uc();
@@ -1195,10 +1187,8 @@ final class TestingFramework
         $frontEnd->config = [];
 
         if (($pageUid > 0) && in_array('sys_template', $this->dirtySystemTables, true)) {
-            /** @var RootlineUtility $rootLineUtility */
-            $rootLineUtility = GeneralUtility::makeInstance(RootlineUtility::class, $pageUid);
             try {
-                $rootLine = $rootLineUtility->get();
+                $rootLine = GeneralUtility::makeInstance(RootlineUtility::class, $pageUid)->get();
             } catch (PageNotFoundException $e) {
                 $rootLine = [];
             }
@@ -1933,9 +1923,7 @@ final class TestingFramework
             return;
         }
 
-        /** @var NullBackend $backEnd */
         $backEnd = GeneralUtility::makeInstance(NullBackend::class, 'Testing');
-        /** @var VariableFrontend $frontEnd */
         $frontEnd = GeneralUtility::makeInstance(VariableFrontend::class, $cacheKey, $backEnd);
         $cacheManager->registerCache($frontEnd);
     }
@@ -1947,10 +1935,7 @@ final class TestingFramework
 
     private function getCacheManager(): CacheManager
     {
-        /** @var CacheManager $cacheManager */
-        $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
-
-        return $cacheManager;
+        return GeneralUtility::makeInstance(CacheManager::class);
     }
 
     /**
