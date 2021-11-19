@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Fix incorrect access to TSFE in the legacy config check (#877)
 
 ## 3.6.3
 

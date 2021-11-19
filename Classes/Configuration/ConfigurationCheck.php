@@ -1685,7 +1685,7 @@ class ConfigurationCheck
      */
     protected function getFrontEndController()
     {
-        return $GLOBALS['TypoScriptFE'] ?? null;
+        return $GLOBALS['TSFE'] ?? null;
     }
 
     /**
