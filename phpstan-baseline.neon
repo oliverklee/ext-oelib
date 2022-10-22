@@ -766,6 +766,6 @@ parameters:
 			path: Tests/Unit/Model/FrontEndUserTest.php
 
 		-
-			message: "#^Cannot access offset class\\-string\\<OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Testing\\\\Fixtures\\\\TestingCleanup\\>&class\\-string\\<PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\> on mixed\\.$#"
+			message: "#^Cannot access offset class\\-string\\<OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Testing\\\\Fixtures\\\\TestingCleanup&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\> on mixed\\.$#"
 			count: 1
 			path: Tests/Unit/Testing/TestingFrameworkTest.php
