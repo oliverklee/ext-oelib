@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+Fix property name in the `ChangeDate` trait (#1238)
 
 ## 4.3.0
 
