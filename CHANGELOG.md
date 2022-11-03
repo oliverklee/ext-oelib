@@ -12,7 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Switch to the TYPO3 coding standard (#1221)
 
 ### Deprecated
-- Deprecate the `LazyLoadingModel` trait (#1235)
+- Deprecate the `LazyLoadingModel` trait (#1236)
 
 ### Removed
 
