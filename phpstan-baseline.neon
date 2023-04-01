@@ -7,12 +7,12 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'EXTENSIONS' on mixed\\.$#"
-			count: 1
+			count: 2
 			path: Classes/Configuration/ConfigurationProxy.php
 
 		-
 			message: "#^Cannot access offset non\\-empty\\-string on mixed\\.$#"
-			count: 1
+			count: 2
 			path: Classes/Configuration/ConfigurationProxy.php
 
 		-
@@ -97,7 +97,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset non\\-empty\\-string on mixed\\.$#"
-			count: 1
+			count: 2
 			path: Classes/Mapper/AbstractDataMapper.php
 
 		-
@@ -202,12 +202,12 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'MM' on mixed\\.$#"
-			count: 1
+			count: 3
 			path: Classes/Testing/TestingFramework.php
 
 		-
 			message: "#^Cannot access offset 'MM_opposite_field' on mixed\\.$#"
-			count: 1
+			count: 2
 			path: Classes/Testing/TestingFramework.php
 
 		-
@@ -282,7 +282,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'config' on mixed\\.$#"
-			count: 1
+			count: 6
 			path: Classes/Testing/TestingFramework.php
 
 		-
@@ -307,7 +307,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset non\\-empty\\-string on mixed\\.$#"
-			count: 1
+			count: 2
 			path: Classes/Testing/TestingFramework.php
 
 		-
