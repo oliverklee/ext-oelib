@@ -337,7 +337,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'Objects' on mixed\\.$#"
-			count: 1
+			count: 2
 			path: Classes/Testing/TestingFramework.php
 
 		-
@@ -397,7 +397,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'SYS' on mixed\\.$#"
-			count: 1
+			count: 2
 			path: Classes/Testing/TestingFramework.php
 
 		-
@@ -542,7 +542,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
-			count: 2
+			count: 5
 			path: Tests/Unit/Configuration/AbstractConfigurationCheckTest.php
 
 		-
@@ -552,7 +552,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'EXTENSIONS' on mixed\\.$#"
-			count: 1
+			count: 3
 			path: Tests/Unit/Configuration/ConfigurationProxyTest.php
 
 		-
@@ -571,6 +571,11 @@ parameters:
 			path: Tests/Unit/DataStructures/CollectionTest.php
 
 		-
+			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
+			count: 14
+			path: Tests/Unit/Email/SystemEmailFromBuilderTest.php
+
+		-
 			message: "#^Cannot access offset 'defaultMailFromAddr…' on mixed\\.$#"
 			count: 7
 			path: Tests/Unit/Email/SystemEmailFromBuilderTest.php
@@ -582,12 +587,12 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'columns' on mixed\\.$#"
-			count: 1
+			count: 2
 			path: Tests/Unit/Model/FrontEndUserTest.php
 
 		-
 			message: "#^Cannot access offset 'fe_users' on mixed\\.$#"
-			count: 3
+			count: 4
 			path: Tests/Unit/Model/FrontEndUserTest.php
 
 		-
