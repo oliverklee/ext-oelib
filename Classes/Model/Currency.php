@@ -92,10 +92,12 @@ class Currency extends AbstractModel
     /**
      * Returns the number of decimal digits.
      *
-     * @return int the number of decimal digits, will be >= 0
+     * @return int<0, max> the number of decimal digits
      */
     public function getDecimalDigits(): int
     {
-        return $this->getAsInteger('cu_decimal_digits');
+        $digits = $this->getAsInteger('cu_decimal_digits');
+
+        return $digits > 0 ? $digits : 0;
     }
 }

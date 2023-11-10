@@ -129,7 +129,8 @@ class BackEndUser extends AbstractModel implements MailRole, ConvertableToMimeAd
             foreach ($groupsToProcess as $group) {
                 /** @var BackEndUserGroup $subgroup */
                 foreach ($group->getSubgroups() as $subgroup) {
-                    if (!$result->hasUid($subgroup->getUid())) {
+                    $subgroupUid = $subgroup->getUid();
+                    if ($subgroupUid > 0 && !$result->hasUid($subgroupUid)) {
                         $groupsForNextStep->add($subgroup);
                     }
                 }
