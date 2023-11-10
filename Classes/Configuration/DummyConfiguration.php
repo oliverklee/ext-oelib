@@ -63,7 +63,7 @@ final class DummyConfiguration extends AbstractObjectWithPublicAccessors impleme
     /**
      * Gets the value of the data item for the key $key.
      *
-     * @param string $key the key of the data item to get, must not be empty
+     * @param non-empty-string $key
      *
      * @return mixed the data for the key $key, will be null if the key has not been set yet
      */
@@ -77,7 +77,7 @@ final class DummyConfiguration extends AbstractObjectWithPublicAccessors impleme
      *
      * Use `setData` if you want to set all data in one step.
      *
-     * @param string $key the key of the data item to get, must not be empty
+     * @param non-empty-string $key
      * @param mixed $value the data for the key $key
      */
     protected function set(string $key, $value): void

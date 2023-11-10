@@ -20,10 +20,10 @@ class PageRepository implements SingletonInterface
      * Recursively finds all pages within the given page, and returns them as a sorted list (including the provided
      * parent pages).
      *
-     * @param array<array-key, positive-int> $pageUids
+     * @param array<positive-int> $pageUids
      * @param int<0, max> $recursion
      *
-     * @return array<int, positive-int>
+     * @return list<positive-int>
      *
      * @throws \InvalidArgumentException
      */
@@ -50,9 +50,9 @@ class PageRepository implements SingletonInterface
     /**
      * Filters and int-casts the given UIDs and returns only positive integers, discarding the rest.
      *
-     * @param array <array-key, int|string> $uids
+     * @param array<int|numeric-string> $uids
      *
-     * @return array<int, positive-int> sorted, filtered UIDs
+     * @return list<positive-int> sorted, filtered UIDs
      */
     private function cleanUids(array $uids): array
     {
@@ -69,9 +69,9 @@ class PageRepository implements SingletonInterface
     }
 
     /**
-     * @param array<int, positive-int> $pageUids
+     * @param list<positive-int> $pageUids
      *
-     * @return array<int, positive-int>
+     * @return list<positive-int>
      */
     private function findDirectSubpages(array $pageUids): array
     {

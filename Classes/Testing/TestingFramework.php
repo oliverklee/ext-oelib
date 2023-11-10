@@ -43,7 +43,7 @@ final class TestingFramework
      * all system table names to which this instance of the testing framework
      * has access
      *
-     * @var array<int, non-empty-string>
+     * @var list<non-empty-string>
      */
     private const ALLOWED_SYSTEM_TABLES = [
         'be_users',
@@ -100,7 +100,7 @@ final class TestingFramework
     /**
      * all own DB table names to which this instance of the testing framework has access
      *
-     * @var array<int, non-empty-string>
+     * @var list<non-empty-string>
      */
     private $ownAllowedTables = [];
 
@@ -123,7 +123,7 @@ final class TestingFramework
     /**
      * sorting values of all relation tables
      *
-     * @var array<string, array<int, int>>
+     * @var array<non-empty-string, array<positive-int, int<0, max>>>
      */
     private $relationSorting = [];
 
@@ -152,7 +152,7 @@ final class TestingFramework
     /**
      * hook objects for this class
      *
-     * @var array<int, object>
+     * @var list<object>
      */
     private static $hooks = [];
 
@@ -528,7 +528,7 @@ final class TestingFramework
      *
      * @param non-empty-string $table the name of the table
      * @param positive-int $uid the UID of the record to change
-     * @param array<string, string|int|bool|float> $rawData the values to be changed as key-value pairs
+     * @param non-empty-array<string, string|int|bool|float> $rawData the values to be changed as key-value pairs
      *
      * @throws \InvalidArgumentException
      * @throws \BadMethodCallException
@@ -542,6 +542,7 @@ final class TestingFramework
         if ($uid === 0) {
             throw new \InvalidArgumentException('The parameter $uid must not be zero.', 1331490003);
         }
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($rawData === []) {
             throw new \InvalidArgumentException('The array with the new record data must not be empty.', 1331490008);
         }
@@ -1193,7 +1194,7 @@ routes: {  }";
      * Returns a list of all table names that are available in the current
      * database.
      *
-     * @return array<int, non-empty-string> table names
+     * @return list<non-empty-string> table names
      */
     private function getAllTableNames(): array
     {
@@ -1245,7 +1246,7 @@ routes: {  }";
      * the extension to test.
      *
      * The array with the allowed table names is written directly to
-     * $this->ownAllowedTables.
+     * `$this->ownAllowedTables`.
      */
     private function createListOfOwnAllowedTables(): void
     {
@@ -1371,8 +1372,6 @@ routes: {  }";
      *
      * @param non-empty-string $table the name of the table to query
      * @param positive-int $uid the UID of the record to look up
-     *
-     * @return bool
      *
      * @deprecated will be removed in oelib 6.0
      */
@@ -1597,9 +1596,7 @@ routes: {  }";
 
         $this->relationSorting[$table][$uidLocal]++;
 
-        $sorting = $this->relationSorting[$table][$uidLocal];
-
-        return $sorting > 0 ? $sorting : 1;
+        return $this->relationSorting[$table][$uidLocal];
     }
 
     /**
@@ -1642,7 +1639,7 @@ routes: {  }";
     /**
      * Gets all hooks for this class.
      *
-     * @return array<int, object> the hook objects, will be empty if no hooks have been set
+     * @return list<object> the hook objects, will be empty if no hooks have been set
      */
     private function getHooks(): array
     {

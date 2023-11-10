@@ -2002,7 +2002,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     }
 
     /**
-     * @return array<string, array<int, string|float|int>>
+     * @return array<string, array{0: non-empty-string, 1: non-empty-string|float|int}>
      */
     public function dataTypeDataProvider(): array
     {

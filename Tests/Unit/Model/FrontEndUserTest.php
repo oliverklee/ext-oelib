@@ -117,6 +117,7 @@ final class FrontEndUserTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->setUserName('');
     }
 
@@ -168,6 +169,7 @@ final class FrontEndUserTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->setPassword('');
     }
 
@@ -1138,6 +1140,7 @@ final class FrontEndUserTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->hasGroupMembership('');
     }
 

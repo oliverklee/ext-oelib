@@ -13,9 +13,6 @@ use OliverKlee\Oelib\Model\FrontEndUser;
  */
 class TestingModel extends AbstractModel
 {
-    /**
-     * @return string
-     */
     public function getTitle(): string
     {
         return $this->getAsString('title');
@@ -214,9 +211,7 @@ class TestingModel extends AbstractModel
     }
 
     /**
-     * @param string $key
-     *
-     * @return bool
+     * @param non-empty-string $key
      */
     public function existsKey(string $key): bool
     {
@@ -232,9 +227,7 @@ class TestingModel extends AbstractModel
     }
 
     /**
-     * @param string $key
-     *
-     * @return bool
+     * @param non-empty-string $key
      */
     public function getAsBoolean(string $key): bool
     {
@@ -242,7 +235,7 @@ class TestingModel extends AbstractModel
     }
 
     /**
-     * @param string $key
+     * @param non-empty-string $key
      */
     public function getAsInteger(string $key): int
     {

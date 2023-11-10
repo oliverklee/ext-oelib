@@ -16,7 +16,7 @@ use OliverKlee\Oelib\Model\AbstractModel;
 class Collection extends \SplObjectStorage
 {
     /**
-     * @var array<int, int> the UIDs in the list using the UIDs as both the keys and values
+     * @var array<positive-int, positive-int> the UIDs in the list using the UIDs as both the keys and values
      */
     private $uids = [];
 
@@ -60,6 +60,7 @@ class Collection extends \SplObjectStorage
 
         if ($model->hasUid()) {
             $uid = $model->getUid();
+            \assert($uid > 0);
             // This should never happen, but still seems to happen sometimes.
             // This exception should help debugging the problem.
             if (!\is_array($this->uids)) {
@@ -157,6 +158,7 @@ class Collection extends \SplObjectStorage
         foreach ($this as $item) {
             if ($item->hasUid()) {
                 $uid = $item->getUid();
+                \assert($uid > 0);
                 $this->uids[$uid] = $uid;
             } else {
                 $this->hasItemWithoutUid = true;
@@ -172,7 +174,7 @@ class Collection extends \SplObjectStorage
      * second one, 1 means that the second parameter is sorted before the first
      * one and 0 means the parameters stay in order.
      *
-     * @param callable $callbackFunction callback function to use with the models stored in the list, must not be empty
+     * @param callable $callbackFunction callback function to use with the models stored in the list
      */
     public function sort(callable $callbackFunction): void
     {
@@ -369,11 +371,11 @@ class Collection extends \SplObjectStorage
     /**
      * Returns the elements of this list in an array.
      *
-     * @return array<int, M> the elements of this list, might be empty
+     * @return list<M> the elements of this list, might be empty
      */
     public function toArray(): array
     {
-        /** @var array<int, M> $elements */
+        /** @var list<M> $elements */
         $elements = [];
         foreach ($this as $item) {
             $elements[] = $item;

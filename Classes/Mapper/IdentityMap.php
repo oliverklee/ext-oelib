@@ -13,7 +13,7 @@ use OliverKlee\Oelib\Model\AbstractModel;
 class IdentityMap
 {
     /**
-     * @var array<int, AbstractModel> the items in this map with their UIDs as keys
+     * @var array<positive-int, AbstractModel> the items in this map with their UIDs as keys
      */
     protected $items = [];
 
@@ -33,7 +33,9 @@ class IdentityMap
             throw new \InvalidArgumentException('Add() requires a model that has a UID.', 1331488748);
         }
 
-        $this->items[$model->getUid()] = $model;
+        $uid = $model->getUid();
+        \assert($uid > 0);
+        $this->items[$uid] = $model;
         $this->highestUid = max($this->highestUid, $model->getUid());
     }
 

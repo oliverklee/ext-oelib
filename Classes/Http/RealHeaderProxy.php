@@ -17,7 +17,7 @@ class RealHeaderProxy implements HeaderProxy
     /**
      * Adds a header.
      *
-     * @param string $header HTTP header to send, must not be empty
+     * @param non-empty-string $header HTTP header to send
      */
     public function addHeader(string $header): void
     {

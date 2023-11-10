@@ -12,7 +12,7 @@ namespace OliverKlee\Oelib\Visibility;
 class Node
 {
     /**
-     * @var array<int, Node> all direct children of this node
+     * @var list<Node> all direct children of this node
      */
     private $children = [];
 
@@ -88,7 +88,7 @@ class Node
     /**
      * Returns the children set for the current node.
      *
-     * @return array<int, Node> this node's children, will be empty if no children are set
+     * @return list<Node> this node's children, will be empty if no children are set
      */
     public function getChildren(): array
     {

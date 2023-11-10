@@ -38,7 +38,7 @@ final class TestingMapper extends AbstractDataMapper
     protected $compoundKeyParts = ['title', 'header'];
 
     /**
-     * @var array<int, AbstractModel>
+     * @var list<AbstractModel>
      */
     protected $cachedModels = [];
 
@@ -47,7 +47,7 @@ final class TestingMapper extends AbstractDataMapper
      *
      * This function is intended for testing whether models have been cached.
      *
-     * @return array<int, AbstractModel>
+     * @return list<AbstractModel>
      */
     public function getCachedModels(): array
     {

@@ -28,7 +28,7 @@ final class ExtbaseConfiguration extends AbstractReadOnlyObjectWithPublicAccesso
     /**
      * Gets the value of the data item for the key $key.
      *
-     * @param string $key the key of the data item to get, must not be empty
+     * @param non-empty-string $key
      *
      * @return mixed the data for the key $key, will be null if the key has not been set yet
      */

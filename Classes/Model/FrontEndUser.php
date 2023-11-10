@@ -42,7 +42,7 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
     public const GENDER_UNKNOWN = 99;
 
     /**
-     * @var array<int, self::GENDER_*>
+     * @var list<self::GENDER_*>
      */
     private const GENDERS = [self::GENDER_MALE, self::GENDER_FEMALE, self::GENDER_DIVERSE, self::GENDER_UNKNOWN];
 
@@ -59,12 +59,13 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
     /**
      * Sets this user's username (login name).
      *
-     * @param string $username the username to set, must not be empty
+     * @param non-empty-string $username
      *
      * @throws \InvalidArgumentException
      */
     public function setUserName(string $username): void
     {
+        // @phpstan-ignore-next-line We're checking for a contract violation here.
         if ($username === '') {
             throw new \InvalidArgumentException('$username must not be empty.');
         }
@@ -85,12 +86,13 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
     /**
      * Sets the password.
      *
-     * @param string $password the password to set, must not be empty
+     * @param non-empty-string $password
      *
      * @throws \InvalidArgumentException
      */
     public function setPassword(string $password): void
     {
+        // @phpstan-ignore-next-line We're checking for a contract violation here.
         if ($password === '') {
             throw new \InvalidArgumentException('$password must not be empty.');
         }
@@ -422,8 +424,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Checks whether this user is a member of at least one of the user groups
      * provided as comma-separated UID list.
      *
-     * @param string $uidList comma-separated list of user group UIDs, can also consist of only
-     *        one UID, but must not be empty
+     * @param non-empty-string $uidList comma-separated list of user group UIDs, can also consist of only
+     *        one UID
      *
      * @return bool TRUE if the user is member of at least one of the user groups provided, FALSE otherwise
      *
@@ -431,6 +433,7 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      */
     public function hasGroupMembership(string $uidList): bool
     {
+        // @phpstan-ignore-next-line We're checking for a contract violation here.
         if ($uidList === '') {
             throw new \InvalidArgumentException('$uidList must not be empty.', 1331488635);
         }

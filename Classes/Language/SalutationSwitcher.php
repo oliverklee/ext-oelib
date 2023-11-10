@@ -19,7 +19,7 @@ abstract class SalutationSwitcher extends AbstractPlugin
      * A list of language keys for which the localizations have been loaded
      * (or NULL if the list has not been compiled yet).
      *
-     * @var array<int, string>|null
+     * @var array<string>|null
      */
     private $availableLanguages;
 
@@ -28,19 +28,19 @@ abstract class SalutationSwitcher extends AbstractPlugin
      * localizations in the preferred order of formality (or NULL if the list
      * has not been compiled yet).
      *
-     * @var array<int, string>|null
+     * @var list<'_formal'|'_informal'|''>|null
      */
     private $suffixesToTry;
 
     /**
-     * @var array<string, string>
+     * @var array<non-empty-string, string>
      */
     protected $translationCache = [];
 
     /**
      * Makes this object serializable.
      *
-     * @return array<int, string>
+     * @return list<non-empty-string>
      */
     public function __sleep(): array
     {
@@ -84,7 +84,7 @@ abstract class SalutationSwitcher extends AbstractPlugin
      * If it doesn't exist, this functions tries to use the string with the key
      * 'greeting'.
      *
-     * @param non-empty-string $key the local language key for which to return the value, must not be empty
+     * @param non-empty-string $key the local language key for which to return the value
      *
      * @return string the requested local language key, might be empty
      *
@@ -151,7 +151,7 @@ abstract class SalutationSwitcher extends AbstractPlugin
      * If it doesn't exist, this functions tries to use the string with the key
      * 'greeting'.
      *
-     * @param non-empty-string $key the local language key for which to return the value, must not be empty
+     * @param non-empty-string $key the local language key for which to return the value
      *
      * @return string the requested local language key, might be empty
      */
@@ -182,7 +182,7 @@ abstract class SalutationSwitcher extends AbstractPlugin
     /**
      * Compiles a list of language keys for which localizations have been loaded.
      *
-     * @return array<int, string> a list of language keys (may be empty)
+     * @return array<string> a list of language keys (might be empty)
      */
     private function getAvailableLanguages(): array
     {
@@ -212,7 +212,7 @@ abstract class SalutationSwitcher extends AbstractPlugin
      * Gets an ordered list of language label suffixes that should be tried to
      * get localizations in the preferred order of formality.
      *
-     * @return array<int, string> ordered list of suffixes from "", "_formal" and "_informal", will not be empty
+     * @return list<'_formal'|'_informal'|''> ordered list of suffixes, will not be empty
      */
     private function getSuffixesToTry(): array
     {

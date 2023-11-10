@@ -21,7 +21,7 @@ parameters:
 			path: Classes/Configuration/ConfigurationProxy.php
 
 		-
-			message: "#^Cannot access offset string on mixed\\.$#"
+			message: "#^Cannot access offset non\\-empty\\-string on mixed\\.$#"
 			count: 1
 			path: Classes/Configuration/ConfigurationProxy.php
 
@@ -69,21 +69,6 @@ parameters:
 			message: "#^Method OliverKlee\\\\Oelib\\\\Configuration\\\\TypoScriptConfiguration\\:\\:getAsMultidimensionalArray\\(\\) should return array\\<string, array\\<int\\|string, mixed\\>\\|int\\|string\\> but returns array\\.$#"
 			count: 1
 			path: Classes/Configuration/TypoScriptConfiguration.php
-
-		-
-			message: "#^Cannot cast mixed to float\\.$#"
-			count: 1
-			path: Classes/DataStructures/AbstractObjectWithAccessors.php
-
-		-
-			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
-			path: Classes/DataStructures/AbstractObjectWithAccessors.php
-
-		-
-			message: "#^Cannot cast mixed to string\\.$#"
-			count: 1
-			path: Classes/DataStructures/AbstractObjectWithAccessors.php
 
 		-
 			message: "#^Cannot cast mixed to float\\.$#"
@@ -209,11 +194,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$dataOfModels of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<M of OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\:\\:getListOfModels\\(\\) expects array\\<array\\<string, bool\\|float\\|int\\|string\\|null\\>\\>, array given\\.$#"
 			count: 2
 			path: Classes/Mapper/AbstractDataMapper.php
-
-		-
-			message: "#^Property OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\:\\:\\$data \\(array\\<string, bool\\|float\\|int\\|object\\|string\\|null\\>\\) does not accept array\\<string, mixed\\>\\.$#"
-			count: 1
-			path: Classes/Model/AbstractModel.php
 
 		-
 			message: "#^Method OliverKlee\\\\Oelib\\\\Model\\\\BackEndUser\\:\\:getConfiguration\\(\\) should return array\\<string, string\\> but returns array\\.$#"
@@ -491,7 +471,7 @@ parameters:
 			path: Classes/ViewHelpers/DynamicDateViewHelper.php
 
 		-
-			message: "#^Parameter \\#1 \\$treeStructure of method OliverKlee\\\\Oelib\\\\Visibility\\\\Tree\\:\\:buildTreeFromArray\\(\\) expects array\\<string, array\\<string, mixed\\>\\|bool\\>, array\\<string, mixed\\> given\\.$#"
+			message: "#^Parameter \\#1 \\$treeStructure of method OliverKlee\\\\Oelib\\\\Visibility\\\\Tree\\:\\:buildTreeFromArray\\(\\) expects array\\<non\\-empty\\-string, array\\<non\\-empty\\-string, mixed\\>\\|bool\\>, array\\<non\\-empty\\-string, mixed\\> given\\.$#"
 			count: 1
 			path: Classes/Visibility/Tree.php
 

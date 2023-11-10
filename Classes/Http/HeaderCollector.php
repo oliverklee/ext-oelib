@@ -17,14 +17,14 @@ class HeaderCollector implements HeaderProxy
     /**
      * headers which were meant to be sent
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     private $headers = [];
 
     /**
      * Stores an HTTP header which was meant to be sent.
      *
-     * @param string $header HTTP header to send, must not be empty
+     * @param non-empty-string $header HTTP header to send
      */
     public function addHeader(string $header): void
     {
@@ -48,7 +48,7 @@ class HeaderCollector implements HeaderProxy
     /**
      * Returns all headers added with this instance or an empty array if there is none.
      *
-     * @return array<int, string> all added headers, will be empty if there is none
+     * @return list<string> all added headers, will be empty if there is none
      */
     public function getAllAddedHeaders(): array
     {

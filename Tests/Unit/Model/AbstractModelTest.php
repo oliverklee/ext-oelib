@@ -408,6 +408,7 @@ final class AbstractModelTest extends UnitTestCase
             '$key must not be empty.'
         );
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->getAsModel('');
     }
 
@@ -495,6 +496,7 @@ final class AbstractModelTest extends UnitTestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$key must not be empty.');
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->getAsCollection('');
     }
 
