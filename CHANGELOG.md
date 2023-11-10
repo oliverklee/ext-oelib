@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 - Make some type annotations more specific
-  (#1405, #1406, #1411, #1412, #1415, #1416)
+  (#1401, #1405, #1406, #1411, #1412, #1415, #1416)
 
 ### Deprecated
 - Deprecate `FrontEndUser::getAge` (#1408)

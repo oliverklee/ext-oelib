@@ -76,14 +76,34 @@ final class AbstractDataMapperTest extends UnitTestCase
      */
     public function getModelWithArrayWithoutUidElementProvidedThrowsException(): void
     {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            '$data must contain an element "uid".'
-        );
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('$data must contain an element "uid".');
 
         $this->subject->getModel([]);
+    }
+
+    /**
+     * @test
+     */
+    public function getModelWithArrayWithZeroUidThrowsException(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('$data["uid"] must be a positive integer.');
+        $this->expectExceptionCode(1699655040);
+
+        $this->subject->getModel(['uid' => 0]);
+    }
+
+    /**
+     * @test
+     */
+    public function getModelWithArrayWithNegativeUidThrowsException(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('$data["uid"] must be a positive integer.');
+        $this->expectExceptionCode(1699655040);
+
+        $this->subject->getModel(['uid' => -1]);
     }
 
     // Tests concerning load and reload
@@ -158,6 +178,7 @@ final class AbstractDataMapperTest extends UnitTestCase
             '$uid must be > 0.'
         );
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->find(0);
     }
 
@@ -173,6 +194,7 @@ final class AbstractDataMapperTest extends UnitTestCase
             '$uid must be > 0.'
         );
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->find(-1);
     }
 
@@ -268,10 +290,12 @@ final class AbstractDataMapperTest extends UnitTestCase
     public function getNewGhostCreatesRegisteredModel(): void
     {
         $ghost = $this->subject->getNewGhost();
+        $uid = $ghost->getUid();
+        \assert($uid >= 1);
 
         self::assertSame(
             $ghost,
-            $this->subject->find($ghost->getUid())
+            $this->subject->find($uid)
         );
     }
 

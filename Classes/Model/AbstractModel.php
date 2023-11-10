@@ -48,7 +48,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     protected $readOnly = false;
 
     /**
-     * @var int this model's UID, will be 0 if this model has been created in memory
+     * @var int<0, max> this model's UID, will be 0 if this model has been created in memory
      */
     private $uid = 0;
 
@@ -158,7 +158,9 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
             if (!$this->hasUid()) {
                 $rawUid = $this->data['uid'];
                 $uid = (\is_int($rawUid) || \is_string($rawUid)) ? (int)$rawUid : 0;
-                $this->setUid($uid);
+                if ($uid > 0) {
+                    $this->setUid($uid);
+                }
             }
             unset($this->data['uid']);
         }
@@ -216,7 +218,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
      * If this function is called on an empty model, the model state is changed
      * to ghost.
      *
-     * @param int $uid the UID to set, must be > 0
+     * @param positive-int $uid the UID to set
      */
     public function setUid(int $uid): void
     {
@@ -399,7 +401,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     /**
      * Gets this model's UID.
      *
-     * @return int this model's UID, will be zero if this model does not have a UID yet
+     * @return int<0, max> this model's UID, will be zero if this model does not have a UID yet
      */
     public function getUid(): int
     {
@@ -587,11 +589,13 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     }
 
     /**
-     * @return int
+     * @return int<0, max>
      */
     public function getModificationDateAsUnixTimeStamp(): int
     {
-        return $this->getAsInteger('tstamp');
+        $timestamp = $this->getAsInteger('tstamp');
+
+        return $timestamp > 0 ? $timestamp : 0;
     }
 
     /**
@@ -599,15 +603,18 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
      */
     public function setTimestamp(): void
     {
-        $this->setAsInteger('tstamp', $GLOBALS['SIM_EXEC_TIME']);
+        $timestamp = $GLOBALS['SIM_EXEC_TIME'] > 0 ? $GLOBALS['SIM_EXEC_TIME'] : 0;
+        $this->setAsInteger('tstamp', $timestamp);
     }
 
     /**
-     * @return int
+     * @return int<0, max>
      */
     public function getCreationDateAsUnixTimeStamp(): int
     {
-        return $this->getAsInteger('crdate');
+        $timestamp = $this->getAsInteger('crdate');
+
+        return $timestamp > 0 ? $timestamp : 0;
     }
 
     /**
@@ -619,26 +626,30 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
             throw new \BadMethodCallException('Only new objects (without UID) may receive "crdate".', 1331489449);
         }
 
-        $this->setAsInteger('crdate', $GLOBALS['SIM_EXEC_TIME']);
+        $timestamp = $GLOBALS['SIM_EXEC_TIME'] > 0 ? $GLOBALS['SIM_EXEC_TIME'] : 0;
+        $this->setAsInteger('crdate', $timestamp);
     }
 
     /**
      * Returns the page UID of this model.
      *
-     * @return int the page UID of this model, will be >= 0
+     * @return int<0, max> the page UID of this model, will be >= 0
      */
     public function getPageUid(): int
     {
-        return $this->getAsInteger('pid');
+        $pageUid = $this->getAsInteger('pid');
+
+        return $pageUid >= 0 ? $pageUid : 0;
     }
 
     /**
      * Sets this model's page UID.
      *
-     * @param int $pageUid the page to set, must be >= 0
+     * @param int<0, max> $pageUid the page to set
      */
     public function setPageUid(int $pageUid): void
     {
+        // @phpstan-ignore-next-line We're explicitly checking for a contract violation here.
         if ($pageUid < 0) {
             throw new \InvalidArgumentException('$pageUid must be >= 0.');
         }

@@ -90,7 +90,7 @@ class BackEndLoginManager implements LoginManager
     /**
      * Returns the UID of the currently logged-in user.
      *
-     * @return int will be zero if no user is logged in
+     * @return int<0, max> will be zero if no user is logged in
      */
     public function getLoggedInUserUid(): int
     {
@@ -105,6 +105,8 @@ class BackEndLoginManager implements LoginManager
 
         $userData = $user->user;
 
-        return \is_array($userData) ? (int)$userData['uid'] : 0;
+        $uid = \is_array($userData) ? (int)$userData['uid'] : 0;
+
+        return $uid > 0 ? $uid : 0;
     }
 }

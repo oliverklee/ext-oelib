@@ -35,7 +35,7 @@ interface LoginManager
     /**
      * Returns the UID of the currently logged-in user.
      *
-     * @return int will be zero if no user is logged in
+     * @return int<0, max> will be zero if no user is logged in
      */
     public function getLoggedInUserUid(): int;
 }

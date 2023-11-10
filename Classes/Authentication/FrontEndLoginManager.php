@@ -92,7 +92,7 @@ class FrontEndLoginManager implements LoginManager
     /**
      * Returns the UID of the currently logged-in user.
      *
-     * @return int will be zero if no user is logged in
+     * @return int<0, max> will be zero if no user is logged in
      */
     public function getLoggedInUserUid(): int
     {
@@ -100,6 +100,8 @@ class FrontEndLoginManager implements LoginManager
             return $this->loggedInUser->getUid();
         }
 
-        return (int)$this->getContext()->getPropertyFromAspect('frontend.user', 'id');
+        $uid = (int)$this->getContext()->getPropertyFromAspect('frontend.user', 'id');
+
+        return $uid > 0 ? $uid : 0;
     }
 }

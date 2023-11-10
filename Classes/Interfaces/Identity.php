@@ -12,8 +12,7 @@ interface Identity
     /**
      * Gets this object's UID.
      *
-     * @return int
-     *         this object's UID, will be zero if this object does not have a UID yet
+     * @return int<0, max> this object's UID, will be zero if this object does not have a UID yet
      */
     public function getUid(): int;
 
@@ -29,7 +28,7 @@ interface Identity
      *
      * This function may only be called on objects that do not have a UID yet.
      *
-     * @param int $uid the UID to set, must be > 0
+     * @param positive-int $uid the UID to set
      */
     public function setUid(int $uid): void;
 }
