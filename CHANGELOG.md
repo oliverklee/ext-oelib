@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Make some type annotations more specific (#1405, #1406)
 
 ### Deprecated
+- Deprecate `FrontEndUser::getAge` (#1408)
 
 ### Removed
 

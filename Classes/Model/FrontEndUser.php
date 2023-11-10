@@ -607,6 +607,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Note: This function only works correctly for users that were born after
      * 1970-01-01 and that were not born in the future.
      *
+     * @deprecated #1407 will be removed in oelib 6.0
+     *
      * @return int<0, max> this user's age in years, will be 0 if this user has no birthdate set
      */
     public function getAge(): int
