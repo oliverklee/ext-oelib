@@ -81,17 +81,21 @@ final class BackEndUserTest extends FunctionalTestCase
     public function getAllGroupsForTwoGroupsReturnsBothGroups(): void
     {
         $group1 = MapperRegistry::get(BackEndUserGroupMapper::class)->getLoadedTestingModel([]);
+        $group1Uid = $group1->getUid();
+        \assert($group1Uid > 0);
         $group2 = MapperRegistry::get(BackEndUserGroupMapper::class)->getLoadedTestingModel([]);
+        $group2Uid = $group2->getUid();
+        \assert($group2Uid > 0);
         $groups = new Collection();
         $groups->add($group1);
         $groups->add($group2);
         $this->subject->setData(['usergroup' => $groups]);
 
         self::assertTrue(
-            $this->subject->getAllGroups()->hasUid($group1->getUid())
+            $this->subject->getAllGroups()->hasUid($group1Uid)
         );
         self::assertTrue(
-            $this->subject->getAllGroups()->hasUid($group2->getUid())
+            $this->subject->getAllGroups()->hasUid($group2Uid)
         );
     }
 
@@ -101,17 +105,21 @@ final class BackEndUserTest extends FunctionalTestCase
     public function getAllGroupsForGroupWithSubgroupReturnsBothGroups(): void
     {
         $subgroup = MapperRegistry::get(BackEndUserGroupMapper::class)->getLoadedTestingModel([]);
+        $subgroupUid = $subgroup->getUid();
+        \assert($subgroupUid > 0);
         $group = MapperRegistry::get(BackEndUserGroupMapper::class)
-            ->getLoadedTestingModel(['subgroup' => $subgroup->getUid()]);
+            ->getLoadedTestingModel(['subgroup' => $subgroupUid]);
+        $groupUid = $group->getUid();
+        \assert($groupUid > 0);
         $groups = new Collection();
         $groups->add($group);
         $this->subject->setData(['usergroup' => $groups]);
 
         self::assertTrue(
-            $this->subject->getAllGroups()->hasUid($group->getUid())
+            $this->subject->getAllGroups()->hasUid($groupUid)
         );
         self::assertTrue(
-            $this->subject->getAllGroups()->hasUid($subgroup->getUid())
+            $this->subject->getAllGroups()->hasUid($subgroupUid)
         );
     }
 
@@ -130,8 +138,10 @@ final class BackEndUserTest extends FunctionalTestCase
         $groups->add($group);
         $this->subject->setData(['usergroup' => $groups]);
 
+        $subSubGroupUid = $subSubGroup->getUid();
+        \assert($subSubGroupUid > 0);
         self::assertTrue(
-            $this->subject->getAllGroups()->hasUid($subSubGroup->getUid())
+            $this->subject->getAllGroups()->hasUid($subSubGroupUid)
         );
     }
 

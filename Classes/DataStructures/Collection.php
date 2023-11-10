@@ -126,7 +126,7 @@ class Collection extends \SplObjectStorage
     /**
      * Checks whether a model with a certain UID exists in this list
      *
-     * @param int $uid UID to test, must be > 0
+     * @param positive-int $uid UID to test
      *
      * @return bool TRUE if a model with the UID $uid exists in this list, FALSE otherwise
      */
@@ -319,16 +319,18 @@ class Collection extends \SplObjectStorage
      * If this list's end lies within the requested range, all elements up to
      * the list's end will be returned.
      *
-     * @param int $start the zero-based start position, must be >= 0
-     * @param int $length the number of elements to return, must be >= 0
+     * @param int<0, max> $start the zero-based start position
+     * @param int<0, max> $length the number of elements to return
      *
      * @return Collection<M> the selected elements starting at $start
      */
     public function inRange(int $start, int $length): Collection
     {
+        // @phpstan-ignore-next-line We're explicitly checking for a contract violation here.
         if ($start < 0) {
             throw new \InvalidArgumentException('$start must be >= 0.');
         }
+        // @phpstan-ignore-next-line We're explicitly checking for a contract violation here.
         if ($length < 0) {
             throw new \InvalidArgumentException('$length must be >= 0.');
         }
@@ -355,7 +357,7 @@ class Collection extends \SplObjectStorage
     /**
      * Returns the model at position $position.
      *
-     * @param int $position the zero-based position of the model to retrieve, must be >= 0
+     * @param int<0, max> $position the zero-based position of the model to retrieve, must be >= 0
      *
      * @return M|null
      */
