@@ -553,7 +553,7 @@ abstract class AbstractDataMapper
             $mapper = $this->getRelationMapperByKey($key);
             foreach (GeneralUtility::intExplode(',', $uidList, true) as $uid) {
                 // Some relations might have a junk 0 in it. We ignore it to avoid crashing.
-                if ($uid === 0) {
+                if ($uid <= 0) {
                     continue;
                 }
 
@@ -608,7 +608,7 @@ abstract class AbstractDataMapper
 
             foreach (\array_column($resultRows, $leftColumn) as $relationUid) {
                 // Some relations might have a junk 0 in it. We ignore it to avoid crashing.
-                if ((int)$relationUid === 0) {
+                if ((int)$relationUid <= 0) {
                     continue;
                 }
                 $list->add($mapper->find((int)$relationUid));
