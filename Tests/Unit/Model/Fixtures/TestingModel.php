@@ -243,8 +243,6 @@ class TestingModel extends AbstractModel
 
     /**
      * @param string $key
-     *
-     * @return int
      */
     public function getAsInteger(string $key): int
     {
