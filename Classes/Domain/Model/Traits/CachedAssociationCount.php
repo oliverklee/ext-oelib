@@ -23,16 +23,16 @@ use TYPO3\CMS\Extbase\Persistence\Generic\LazyObjectStorage;
 trait CachedAssociationCount
 {
     /**
-     * @var array<string, int>
+     * @var array<non-empty-string, int<0, max>>
      */
     protected $cachedRelationCountsCount = [];
 
     /**
      * Retrieves and caches the relation count for the given property.
      *
-     * @param string $propertyName the name of the relation (plural, lower camelCase)
+     * @param non-empty-string $propertyName the name of the relation (plural, lower camelCase)
      *
-     * @return int
+     * @return int<0, max>
      */
     protected function getCachedRelationCount(string $propertyName): int
     {
@@ -48,7 +48,7 @@ trait CachedAssociationCount
     /**
      * Flushes the internal relation count cache for the given property.
      *
-     * @param string $propertyName the name of the relation (plural, lower camelCase)
+     * @param non-empty-string $propertyName the name of the relation (plural, lower camelCase)
      */
     protected function flushRelationCountCache(string $propertyName): void
     {
@@ -63,9 +63,9 @@ trait CachedAssociationCount
      *
      * This method does not cache its results.
      *
-     * @param string $propertyName the name of the relation (plural, lower camelCase)
+     * @param non-empty-string $propertyName the name of the relation (plural, lower camelCase)
      *
-     * @return int
+     * @return int<0, max>
      *
      * @throws \ReflectionException
      */
