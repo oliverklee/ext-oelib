@@ -228,8 +228,7 @@ class TemplateHelper extends SalutationSwitcher
      * @param string $fieldName field name to extract
      * @param string $sheet sheet pointer, eg. "sDEF"
      *
-     * @return int the int value of the corresponding flexforms or
-     *                 TypoScript setup entry
+     * @return int the int value of the corresponding flexforms or TypoScript setup entry
      */
     public function getConfValueInteger(string $fieldName, string $sheet = 'sDEF'): int
     {
