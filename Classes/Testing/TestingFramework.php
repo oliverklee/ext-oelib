@@ -229,7 +229,7 @@ final class TestingFramework
      * @param array<string, string|int|bool> $recordData data to save in the new record, may be empty,
      *        but must not contain the key "uid"
      *
-     * @return int the UID of the new record, will be > 0
+     * @return positive-int the UID of the new record
      *
      * @throws \InvalidArgumentException
      */
@@ -350,7 +350,7 @@ final class TestingFramework
      * @param int $parentId
      *        UID of the page on which the system folder should be created
      *
-     * @return int the UID of the new system folder, will be > 0
+     * @return positive-int the UID of the new system folder
      */
     public function createSystemFolder(int $parentId = 0): int
     {
@@ -364,7 +364,7 @@ final class TestingFramework
      * The record will be created on the page with the UID given by the second
      * parameter $parentId.
      *
-     * @param int $documentType document type of the record to create, must be > 0
+     * @param positive-int $documentType document type of the record to create
      * @param int $parentId UID of the page on which the record should be created
      * @param array<string, string|int|bool> $recordData data to save in the record, may be empty,
      *        but must not contain the keys "uid", "pid" or "doktype"
@@ -395,17 +395,17 @@ final class TestingFramework
     /**
      * Creates a template on the page with the UID given by the first parameter $pageId.
      *
-     * @param int $pageId
-     *        UID of the page on which the template should be created, must be > 0
+     * @param positive-int $pageId UID of the page on which the template should be created
      * @param array<string, string|int|bool> $recordData data to save, may be empty,
      *        but must not contain the keys "uid" or "pid"
      *
-     * @return int the UID of the new template, will be > 0
+     * @return positive-int the UID of the new template
      *
      * @throws \InvalidArgumentException
      */
     public function createTemplate(int $pageId, array $recordData = []): int
     {
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($pageId <= 0) {
             throw new \InvalidArgumentException('$pageId must be > 0.', 1331489774);
         }
@@ -427,7 +427,7 @@ final class TestingFramework
      *
      * @param array<string, string|int|bool> $recordData data to save, may be empty, but must not contain the key "uid"
      *
-     * @return int the UID of the new user group, will be > 0
+     * @return positive-int the UID of the new user group
      *
      * @throws \InvalidArgumentException
      */
@@ -449,7 +449,7 @@ final class TestingFramework
      * @param array<string, string|int|bool> $recordData data to save, may be empty,
      *        but must not contain the keys "uid" or "usergroup"
      *
-     * @return int the UID of the new FE user, will be > 0
+     * @return positive-int the UID of the new FE user
      *
      * @throws \InvalidArgumentException
      */
@@ -488,7 +488,7 @@ final class TestingFramework
      * @param array<string, string|int|bool> $recordData data to save, may be empty,
      *        but must not contain the keys "uid" or "usergroup"
      *
-     * @return int the UID of the new FE user, will be > 0
+     * @return positive-int the UID of the new FE user
      */
     public function createAndLoginFrontEndUser($frontEndUserGroups = '', array $recordData = []): int
     {
@@ -504,7 +504,7 @@ final class TestingFramework
      *
      * @param array<string, string|int|bool> $recordData data to save, may be empty, but must not contain the key "uid"
      *
-     * @return int the UID of the new BE user, will be > 0
+     * @return positive-int the UID of the new BE user
      *
      * @deprecated will be removed in oelib 6.0
      */
@@ -527,7 +527,7 @@ final class TestingFramework
      * you have to create a new record!
      *
      * @param non-empty-string $table the name of the table
-     * @param int $uid the UID of the record to change
+     * @param positive-int $uid the UID of the record to change
      * @param array<string, string|int|bool|float> $rawData the values to be changed as key-value pairs
      *
      * @throws \InvalidArgumentException
@@ -538,7 +538,8 @@ final class TestingFramework
         $this->initializeDatabase();
         $this->assertTableNameIsAllowed($table);
         $dummyColumnName = $this->getDummyColumnName($table);
-        if ($uid <= 0) {
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
+        if ($uid === 0) {
             throw new \InvalidArgumentException('The parameter $uid must not be zero.', 1331490003);
         }
         if ($rawData === []) {
@@ -573,8 +574,8 @@ final class TestingFramework
      * m:n relation).
      *
      * @param non-empty-string $table name of the m:n table to which the record should be added
-     * @param int $uidLocal UID of the local table, must be > 0
-     * @param int $uidForeign UID of the foreign table, must be > 0
+     * @param positive-int $uidLocal UID of the local table
+     * @param positive-int $uidForeign UID of the foreign table
      *
      * @throws \InvalidArgumentException
      */
@@ -587,9 +588,11 @@ final class TestingFramework
             throw new \InvalidArgumentException($errorMessage, 1331490358);
         }
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($uidLocal <= 0) {
             throw new \InvalidArgumentException('$uidLocal must be > 0, but is: ' . $uidLocal, 1331490370);
         }
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($uidForeign <= 0) {
             throw new \InvalidArgumentException('$uidForeign must be > 0, but is: ' . $uidForeign, 1331490378);
         }
@@ -611,8 +614,8 @@ final class TestingFramework
      * regarding the relation.
      *
      * @param non-empty-string $tableName name of the table from which a relation should be created
-     * @param int $uidLocal UID of the record in the local table, must be > 0
-     * @param int $uidForeign UID of the record in the foreign table, must be > 0
+     * @param positive-int $uidLocal UID of the record in the local table
+     * @param positive-int $uidForeign UID of the record in the foreign table
      * @param non-empty-string $columnName name of the column in which the relation counter should be updated
      *
      * @throws \InvalidArgumentException
@@ -626,12 +629,14 @@ final class TestingFramework
     ): void {
         $this->initializeDatabase();
         $this->assertTableNameIsAllowed($tableName);
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($uidLocal <= 0) {
             throw new \InvalidArgumentException(
                 '$uidLocal must be > 0, but actually is "' . $uidLocal . '"',
                 1331490425
             );
         }
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($uidForeign <= 0) {
             throw new \InvalidArgumentException(
                 '$uidForeign must be  > 0, but actually is "' . $uidForeign . '"',
@@ -870,7 +875,7 @@ final class TestingFramework
      *
      * @param positive-int $pageUid UID of a page record to use
      *
-     * @return int the UID of the used front-end page, will be > 0
+     * @return positive-int the UID of the used front-end page
      *
      * @throws \InvalidArgumentException if $pageUid is < 0
      */
@@ -1093,13 +1098,14 @@ routes: {  }";
      * Note: To set the logged-in users group data properly, the front-end user
      *       and his groups must actually exist in the database.
      *
-     * @param int $userId UID of the FE user, must not necessarily exist in the database, must be > 0
+     * @param positive-int $userId UID of the FE user, must not necessarily exist in the database
      *
      * @throws \InvalidArgumentException
      * @throws \BadMethodCallException if no front end has been created
      */
     private function loginFrontEndUser(int $userId): void
     {
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($userId <= 0) {
             throw new \InvalidArgumentException('The user ID must be > 0.', 1331490798);
         }
@@ -1326,7 +1332,7 @@ routes: {  }";
      * @param non-empty-string $table the name of the table to query
      * @param array<string, string|int|bool> $criteria key-value pairs to match
      *
-     * @return int the number of records that have been found, will be >= 0
+     * @return int<0, max> the number of records that have been found, will be >= 0
      *
      * @throws \InvalidArgumentException
      *
@@ -1356,7 +1362,7 @@ routes: {  }";
             $count = (int)$result->fetchColumn();
         }
 
-        return $count;
+        return $count >= 0 ? $count : 0;
     }
 
     /**
@@ -1364,7 +1370,7 @@ routes: {  }";
      * parameter $table that has the given UID.
      *
      * @param non-empty-string $table the name of the table to query
-     * @param int $uid the UID of the record to look up, must be > 0
+     * @param positive-int $uid the UID of the record to look up
      *
      * @return bool
      *
@@ -1376,6 +1382,7 @@ routes: {  }";
         if ($table === '') {
             throw new \InvalidArgumentException('$table must not be empty.', 1569785503);
         }
+        // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
         if ($uid <= 0) {
             throw new \InvalidArgumentException('$uid must be > 0.', 1331490872);
         }
@@ -1465,7 +1472,7 @@ routes: {  }";
     /**
      * Sets the threshold for resetAutoIncrementLazily.
      *
-     * @param int $threshold threshold, must be > 0
+     * @param positive-int $threshold
      *
      * @throws \InvalidArgumentException
      *
@@ -1473,6 +1480,7 @@ routes: {  }";
      */
     public function setResetAutoIncrementThreshold(int $threshold): void
     {
+        // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
         if ($threshold <= 0) {
             throw new \InvalidArgumentException('$threshold must be > 0.', 1331490913);
         }
@@ -1489,7 +1497,7 @@ routes: {  }";
      *
      * @param non-empty-string $table the name of an existing table that has the "uid" column
      *
-     * @return int the highest UID from this table, will be >= 0
+     * @return int<0, max> the highest UID from this table, will be >= 0
      *
      * @deprecated will be removed in oelib 6.0
      */
@@ -1504,7 +1512,9 @@ routes: {  }";
             $data = $queryResult->fetchAll();
         }
 
-        return (int)($data['uid'] ?? 0);
+        $maximumUid = (int)($data['uid'] ?? 0);
+
+        return $maximumUid >= 0 ? $maximumUid : 0;
     }
 
     /**
@@ -1515,7 +1525,7 @@ routes: {  }";
      *
      * @param non-empty-string $table the name of the table for which the auto increment value should be retrieved
      *
-     * @return int|null the current auto_increment value of table $table, will be > 0, or null if the table has none
+     * @return positive-int|null the auto_increment value of table $table, will be > 0, or null if the table has none
      *
      * @deprecated will be removed in oelib 6.0
      */
@@ -1533,10 +1543,9 @@ routes: {  }";
             $row = $queryResult->fetch();
         }
 
-        \assert(\is_array($row));
-        $autoIncrement = $row['Auto_increment'];
+        $autoIncrement = \is_array($row) && \is_numeric($row['Auto_increment']) ? (int)$row['Auto_increment'] : null;
 
-        return \is_numeric($autoIncrement) ? (int)$autoIncrement : null;
+        return (\is_int($autoIncrement) && $autoIncrement > 0) ? $autoIncrement : null;
     }
 
     /**
@@ -1576,9 +1585,9 @@ routes: {  }";
      * @see https://bugs.oliverklee.com/show_bug.cgi?id=1423
      *
      * @param non-empty-string $table the relation table
-     * @param int $uidLocal UID of the local table, must be > 0
+     * @param positive-int $uidLocal UID of the local table
      *
-     * @return int the next sorting value to use (> 0)
+     * @return positive-int the next sorting value to use
      */
     private function getRelationSorting(string $table, int $uidLocal): int
     {
@@ -1588,7 +1597,9 @@ routes: {  }";
 
         $this->relationSorting[$table][$uidLocal]++;
 
-        return $this->relationSorting[$table][$uidLocal];
+        $sorting = $this->relationSorting[$table][$uidLocal];
+
+        return $sorting > 0 ? $sorting : 1;
     }
 
     /**
@@ -1598,7 +1609,7 @@ routes: {  }";
      * The field to update must be of type int.
      *
      * @param non-empty-string $tableName name of the table
-     * @param int $uid the UID of the record to modify, must be > 0
+     * @param positive-int $uid the UID of the record to modify
      * @param non-empty-string $fieldName the field name of the field to modify
      *
      * @throws \InvalidArgumentException

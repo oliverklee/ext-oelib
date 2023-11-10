@@ -404,6 +404,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The parameter $uid must not be zero.');
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->changeRecord('tx_oelib_test', 0, ['title' => 'foo']);
     }
 
@@ -556,6 +557,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $uid = $this->subject->createRecord('tx_oelib_test');
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->createRelation('tx_oelib_test_article_mm', 0, $uid);
     }
 
@@ -569,6 +571,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $uid = $this->subject->createRecord('tx_oelib_test');
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->createRelation('tx_oelib_test_article_mm', $uid, 0);
     }
 
@@ -582,6 +585,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $uid = $this->subject->createRecord('tx_oelib_test');
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->createRelation('tx_oelib_test_article_mm', -1, $uid);
     }
 
@@ -595,6 +599,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $uid = $this->subject->createRecord('tx_oelib_test');
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->createRelation('tx_oelib_test_article_mm', $uid, -1);
     }
 
@@ -1300,6 +1305,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$uid must be > 0.');
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->existsRecordWithUid('tx_oelib_test', 0);
     }
 
@@ -1311,6 +1317,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$uid must be > 0.');
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->existsRecordWithUid('tx_oelib_test', -1);
     }
 
@@ -1369,6 +1376,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
         $connection->insert('tx_oelib_test', ['title' => 'foo']);
         $uid = (int)$connection->lastInsertId('tx_oelib_test');
+        \assert($uid > 0);
 
         $testResult = $this->subject->existsRecordWithUid('tx_oelib_test', $uid);
 
@@ -1480,6 +1488,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$threshold must be > 0.');
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->setResetAutoIncrementThreshold(0);
     }
 
@@ -1491,6 +1500,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$threshold must be > 0.');
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->setResetAutoIncrementThreshold(-1);
     }
 
@@ -1818,6 +1828,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$pageId must be > 0.');
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->createTemplate(0);
     }
 
@@ -1829,6 +1840,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$pageId must be > 0.');
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->createTemplate(-1);
     }
 
