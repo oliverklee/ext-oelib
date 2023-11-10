@@ -538,7 +538,7 @@ final class TestingFramework
         $this->initializeDatabase();
         $this->assertTableNameIsAllowed($table);
         $dummyColumnName = $this->getDummyColumnName($table);
-        if ($uid === 0) {
+        if ($uid <= 0) {
             throw new \InvalidArgumentException('The parameter $uid must not be zero.', 1331490003);
         }
         if ($rawData === []) {

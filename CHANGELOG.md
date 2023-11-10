@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Validate UIDs in the ORM more strictly (#1402)
 
 ## 5.1.0
 
