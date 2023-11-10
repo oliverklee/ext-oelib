@@ -32,7 +32,7 @@ final class CollectionTest extends UnitTestCase
      * @param TestingModel $firstModel
      * @param TestingModel $secondModel
      *
-     * @return int
+     * @return -1|0|1
      */
     public function sortByTitleAscending(TestingModel $firstModel, TestingModel $secondModel): int
     {
@@ -43,7 +43,7 @@ final class CollectionTest extends UnitTestCase
      * @param TestingModel $firstModel
      * @param TestingModel $secondModel
      *
-     * @return int
+     * @return -1|0|1
      */
     public function sortByTitleDescending(TestingModel $firstModel, TestingModel $secondModel): int
     {
@@ -1041,6 +1041,7 @@ final class CollectionTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->at(-1);
     }
 
@@ -1140,6 +1141,7 @@ final class CollectionTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->inRange(-1, 1);
     }
 
@@ -1150,6 +1152,7 @@ final class CollectionTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->inRange(1, -1);
     }
 
