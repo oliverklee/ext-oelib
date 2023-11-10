@@ -45,7 +45,7 @@ final class ParentModel extends AbstractEntity
     }
 
     /**
-     * @return int
+     * @return int<0, max>
      */
     public function getChildrenCount(): int
     {

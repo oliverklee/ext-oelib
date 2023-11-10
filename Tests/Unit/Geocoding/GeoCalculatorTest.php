@@ -355,7 +355,7 @@ final class GeoCalculatorTest extends UnitTestCase
     }
 
     /**
-     * @return int[][]
+     * @return array<string, array{0: int<0, 359>}>
      */
     public function directionDataProvider(): array
     {
@@ -375,7 +375,7 @@ final class GeoCalculatorTest extends UnitTestCase
      * @test
      * @dataProvider directionDataProvider
      *
-     * @param int $direction
+     * @param int<0, 359> $direction
      */
     public function moveMovesByGivenDistanceWithPositiveDistance(int $direction): void
     {
@@ -394,7 +394,7 @@ final class GeoCalculatorTest extends UnitTestCase
      * @test
      * @dataProvider directionDataProvider
      *
-     * @param int $direction
+     * @param int<0, 359> $direction
      */
     public function moveMovesByGivenDistanceWithNegativeDistance(int $direction): void
     {
@@ -433,7 +433,7 @@ final class GeoCalculatorTest extends UnitTestCase
      * @test
      * @dataProvider directionDataProvider
      *
-     * @param int $direction
+     * @param int<0, 359> $direction
      */
     public function moveByRandomDistanceChangesCoordinates(int $direction): void
     {
@@ -449,7 +449,7 @@ final class GeoCalculatorTest extends UnitTestCase
      * @test
      * @dataProvider directionDataProvider
      *
-     * @param int $direction
+     * @param int<0, 359> $direction
      */
     public function moveByRandomDistanceMovesAtMostByGivenDistanceWithPositiveDistance(int $direction): void
     {

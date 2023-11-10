@@ -49,6 +49,9 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('fe_users');
         $connection->insert('fe_users', ['usergroup' => $groupUids]);
         $uid = (int)$connection->lastInsertId('fe_users');
+        if ($uid <= 0) {
+            throw new \RuntimeException('Could not create test record.', 1699653406);
+        }
 
         /** @var FrontEndUser $user */
         $user = $this->subject->find($uid);
