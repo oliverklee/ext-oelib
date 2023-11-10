@@ -44,13 +44,19 @@ final class AbstractModelTest extends FunctionalTestCase
     }
 
     /**
-     * @return int the UID
+     * @return positive-int the UID
      */
     private function createTestRecord(): int
     {
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
         $connection->insert('tx_oelib_test', ['title' => self::TEST_RECORD_TITLE]);
-        return (int)$connection->lastInsertId('tx_oelib_test');
+        $uid = (int)$connection->lastInsertId('tx_oelib_test');
+
+        if ($uid <= 0) {
+            throw new \RuntimeException('Could not create test record.', 1699653383);
+        }
+
+        return $uid;
     }
 
     // Tests concerning __clone
