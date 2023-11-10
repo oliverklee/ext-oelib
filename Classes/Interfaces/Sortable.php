@@ -14,7 +14,7 @@ interface Sortable
      *
      * This is the sorting as used in the back end.
      *
-     * @return int the sorting value of this object, will be >= 0
+     * @return int<0, max> the sorting value of this object
      */
     public function getSorting(): int;
 
@@ -23,7 +23,7 @@ interface Sortable
      *
      * This is the sorting as used in the back end.
      *
-     * @param int $sorting the sorting value of this object, must be >= 0
+     * @param int<0, max> $sorting the sorting value of this object
      */
     public function setSorting(int $sorting): void;
 }
