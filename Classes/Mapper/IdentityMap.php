@@ -18,7 +18,7 @@ class IdentityMap
     protected $items = [];
 
     /**
-     * @var int the highest used UID
+     * @var int<0, max> the highest used UID
      */
     private $highestUid = 0;
 
@@ -40,7 +40,7 @@ class IdentityMap
     /**
      * Retrieves a model from the map by UID.
      *
-     * @param int $uid the UID of the model to retrieve, must be > 0
+     * @param positive-int $uid the UID of the model to retrieve
      *
      * @return AbstractModel the stored model with the UID $uid
      *
@@ -48,6 +48,7 @@ class IdentityMap
      */
     public function get(int $uid): AbstractModel
     {
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($uid <= 0) {
             throw new \InvalidArgumentException('$uid must be > 0.', 1331488761);
         }
@@ -66,7 +67,7 @@ class IdentityMap
      * Gets a UID that has not been used in the map before and that is greater
      * than the greatest used UID.
      *
-     * @return int a new UID, will be > 0
+     * @return positive-int a new UID, will be > 0
      */
     public function getNewUid(): int
     {

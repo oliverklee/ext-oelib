@@ -140,7 +140,7 @@ abstract class AbstractDataMapper
      * Note: This function does not check that a record with the UID $uid
      * actually exists in the database.
      *
-     * @param int $uid the UID of the record to retrieve, must be > 0
+     * @param positive-int $uid the UID of the record to retrieve
      *
      * @return M the model with the UID $uid
      */
@@ -172,7 +172,11 @@ abstract class AbstractDataMapper
             throw new \InvalidArgumentException('$data must contain an element "uid".', 1331319491);
         }
 
-        $model = $this->find((int)$data['uid']);
+        $uid = (int)$data['uid'];
+        if ($uid <= 0) {
+            throw new \InvalidArgumentException('$data["uid"] must be a positive integer.', 1699655040);
+        }
+        $model = $this->find($uid);
 
         if ($model->isGhost()) {
             $this->fillModel($model, $data);
@@ -233,7 +237,7 @@ abstract class AbstractDataMapper
      * Checks whether a model with a certain UID actually exists in the database
      * and could be loaded.
      *
-     * @param int $uid the UID of the record to retrieve, must be > 0
+     * @param positive-int $uid the UID of the record to retrieve
      * @param bool $allowHidden whether hidden records should be allowed to be retrieved
      *
      * @return bool TRUE if a model with the UID $uid exists in the database,
@@ -278,8 +282,10 @@ abstract class AbstractDataMapper
             );
         }
 
+        $uid = $model->getUid();
+        \assert($uid > 0);
         try {
-            $data = $this->retrieveRecordByUid($model->getUid());
+            $data = $this->retrieveRecordByUid($uid);
             $this->fillModel($model, $data);
         } catch (NotFoundException $exception) {
             $model->markAsDead();
@@ -317,8 +323,10 @@ abstract class AbstractDataMapper
             );
         }
 
+        $uid = $model->getUid();
+        \assert($uid > 0);
         try {
-            $data = $this->retrieveRecordByUid($model->getUid());
+            $data = $this->retrieveRecordByUid($uid);
             $this->refillModel($model, $data);
         } catch (NotFoundException $exception) {
             $model->markAsDead();
@@ -672,7 +680,7 @@ abstract class AbstractDataMapper
      * Reads a record from the database by UID (from this mapper's table).
      * Hidden records will be retrieved as well.
      *
-     * @param int $uid the UID of the record to retrieve, must be > 0
+     * @param positive-int $uid the UID of the record to retrieve
      *
      * @return DatabaseRow the record from the database, will not be empty
      *
@@ -686,7 +694,7 @@ abstract class AbstractDataMapper
     /**
      * Creates a new ghost model with the UID $uid and registers it.
      *
-     * @param int $uid the UID of the to-create ghost
+     * @param positive-int $uid the UID of the to-create ghost
      *
      * @return M a ghost model with the UID $uid
      */
@@ -810,7 +818,11 @@ abstract class AbstractDataMapper
             $this->prepareDataForNewRecord($data);
             $tableName = $this->getTableName();
             $this->getConnection()->insert($tableName, $data);
-            $model->setUid((int)$this->getConnection()->lastInsertId($tableName));
+            $lastInsertId = (int)$this->getConnection()->lastInsertId($tableName);
+            if ($lastInsertId <= 0) {
+                throw new \UnexpectedValueException('No last insert ID available.', 1699640499);
+            }
+            $model->setUid($lastInsertId);
             $this->map->add($model);
         }
 

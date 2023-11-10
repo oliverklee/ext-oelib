@@ -1389,6 +1389,7 @@ final class AbstractModelTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->setPageUid(-1);
     }
 

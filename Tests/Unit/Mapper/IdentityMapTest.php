@@ -42,6 +42,7 @@ final class IdentityMapTest extends UnitTestCase
             '$uid must be > 0.'
         );
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->get(0);
     }
 
@@ -57,6 +58,7 @@ final class IdentityMapTest extends UnitTestCase
             '$uid must be > 0.'
         );
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->get(-1);
     }
 
