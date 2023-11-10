@@ -438,7 +438,7 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
         $isMember = false;
 
         foreach (GeneralUtility::intExplode(',', $uidList, true) as $uid) {
-            if ($this->getUserGroups()->hasUid($uid)) {
+            if ($uid > 0 && $this->getUserGroups()->hasUid($uid)) {
                 $isMember = true;
                 break;
             }
@@ -582,12 +582,13 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
     /**
      * Gets this user's date of birth as a UNIX timestamp.
      *
-     * @return int the user's date of birth, will be zero if no date has
-     *                 been set
+     * @return int<0, max> the user's date of birth, will be zero if no date has been set
      */
     public function getDateOfBirth(): int
     {
-        return $this->getAsInteger('date_of_birth');
+        $timestamp = $this->getAsInteger('date_of_birth');
+
+        return $timestamp > 0 ? $timestamp : 0;
     }
 
     /**
@@ -606,7 +607,7 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Note: This function only works correctly for users that were born after
      * 1970-01-01 and that were not born in the future.
      *
-     * @return int this user's age in years, will be 0 if this user has no birthdate set
+     * @return int<0, max> this user's age in years, will be 0 if this user has no birthdate set
      */
     public function getAge(): int
     {
@@ -615,7 +616,7 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
         }
 
         $currentTimestamp = $GLOBALS['EXEC_TIME'];
-        \assert(\is_int($currentTimestamp));
+        \assert(\is_int($currentTimestamp) && $currentTimestamp >= 0);
         $birthTimestamp = $this->getDateOfBirth();
 
         $currentYear = (int)\date('Y', $currentTimestamp);
@@ -634,17 +635,19 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
             }
         }
 
-        return $age;
+        return \max($age, 0);
     }
 
     /**
      * Gets this user's last login date and time as a UNIX timestamp.
      *
-     * @return int the user's last login date and time, will be zero if the user has never logged in
+     * @return int<0, max> the user's last login date and time, will be zero if the user has never logged in
      */
     public function getLastLoginAsUnixTimestamp(): int
     {
-        return $this->getAsInteger('lastlogin');
+        $timestamp = $this->getAsInteger('lastlogin');
+
+        return $timestamp > 0 ? $timestamp : 0;
     }
 
     /**
