@@ -66,13 +66,18 @@ final class TestingChildModel extends AbstractModel implements Sortable
     }
 
     /**
-     * @return int
+     * @return int<0, max>
      */
     public function getSorting(): int
     {
-        return $this->getAsInteger('sorting');
+        $sorting = $this->getAsInteger('sorting');
+
+        return $sorting >= 0 ? $sorting : 0;
     }
 
+    /**
+     * @param int<0, max> $sorting
+     */
     public function setSorting(int $sorting): void
     {
         $this->setAsInteger('sorting', $sorting);
