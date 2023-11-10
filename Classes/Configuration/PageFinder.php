@@ -48,7 +48,7 @@ class PageFinder
     private $storedPageUid = 0;
 
     /**
-     * @var int the source the page is retrieved from
+     * @var self::SOURCE_* the source the page is retrieved from
      */
     private $manualPageUidSource = self::SOURCE_AUTO;
 
@@ -89,36 +89,37 @@ class PageFinder
      * into the manually set page UID, then if a FE page UID is present
      * and finally if a BE page UID is present.
      *
-     * @return int the ID of the current page, will be zero if no page is
+     * @return int<0, max> the ID of the current page, will be zero if no page is
      *                 present or no page source could be found
      */
     public function getPageUid(): int
     {
         switch ($this->getCurrentSource()) {
             case self::SOURCE_MANUAL:
-                $result = $this->storedPageUid;
+                $pageUid = $this->storedPageUid;
                 break;
             case self::SOURCE_FRONT_END:
                 $controller = $this->getFrontEndController();
-                $result = $controller instanceof TypoScriptFrontendController ? (int)$controller->id : 0;
+                $pageUid = $controller instanceof TypoScriptFrontendController ? (int)$controller->id : 0;
                 break;
             case self::SOURCE_BACK_END:
-                $result = (int)GeneralUtility::_GP('id');
+                $pageUid = (int)GeneralUtility::_GP('id');
                 break;
             default:
-                $result = 0;
+                $pageUid = 0;
         }
 
-        return $result;
+        return $pageUid > 0 ? $pageUid : 0;
     }
 
     /**
      * Manually sets a page UID which will always be returned by `getPageUid`.
      *
-     * @param int $uidToStore the page UID to store manually, must be > 0
+     * @param positive-int $uidToStore the page UID to store manually
      */
     public function setPageUid(int $uidToStore): void
     {
+        // @phpstan-ignore-next-line We're explicitly checking for a contract violation here.
         if ($uidToStore <= 0) {
             throw new \InvalidArgumentException(
                 'The given page UID was "' . $uidToStore . '". Only integer values greater than zero are allowed.',
@@ -132,7 +133,7 @@ class PageFinder
      * Forces the getPageUid function to get the page UID from a specific
      * source, ignoring an empty value or the original precedence.
      *
-     * @param int $modeToForce SOURCE_BACK_END or SOURCE_FRONT_END
+     * @param self::SOURCE_* $modeToForce SOURCE_BACK_END or SOURCE_FRONT_END
      */
     public function forceSource(int $modeToForce): void
     {
@@ -142,8 +143,7 @@ class PageFinder
     /**
      * Returns the current source for the page UID.
      *
-     * @return int either SOURCE_BACK_END, SOURCE_FRONT_END or SOURCE_MANUAL,
-     *                 will be NO_SOURCE_FOUND if no source could be detected
+     * @return self::SOURCE_*|self::NO_SOURCE_FOUND
      */
     public function getCurrentSource(): int
     {

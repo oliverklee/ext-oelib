@@ -93,6 +93,7 @@ final class PageFinderTest extends UnitTestCase
             'The given page UID was "0". Only integer values greater than zero are allowed.'
         );
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->setPageUid(0);
     }
 
@@ -108,6 +109,7 @@ final class PageFinderTest extends UnitTestCase
             'The given page UID was "-21". Only integer values greater than zero are allowed.'
         );
 
+        // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->setPageUid(-21);
     }
 }
