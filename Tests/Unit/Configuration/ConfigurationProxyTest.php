@@ -96,6 +96,7 @@ final class ConfigurationProxyTest extends UnitTestCase
         $this->expectExceptionMessage('The extension key was not set.');
         $this->expectExceptionCode(1331318826);
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         ConfigurationProxy::getInstance('');
     }
 

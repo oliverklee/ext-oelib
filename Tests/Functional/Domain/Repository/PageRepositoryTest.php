@@ -51,7 +51,7 @@ final class PageRepositoryTest extends FunctionalTestCase
     }
 
     /**
-     * @return array<int, array{0: int}>
+     * @return list<array{0: int}>
      */
     public function recursionDataProvider(): array
     {
@@ -76,7 +76,7 @@ final class PageRepositoryTest extends FunctionalTestCase
     }
 
     /**
-     * @return array<string, array<int, array<int, positive-int>>>
+     * @return array<string, array{0: list<positive-int>}>
      */
     public function pagesWithoutSubpagesDataProvider(): array
     {
@@ -92,7 +92,7 @@ final class PageRepositoryTest extends FunctionalTestCase
     }
 
     /**
-     * @return array<string, array<int, array<int, positive-int>>>
+     * @return array<string, array{0: list<positive-int>, 1: list<positive-int>}>
      */
     public function pagesWithDirectSubpagesDataProvider(): array
     {
@@ -106,7 +106,7 @@ final class PageRepositoryTest extends FunctionalTestCase
     /**
      * @test
      *
-     * @param array<int, positive-int> $pageUids
+     * @param list<positive-int> $pageUids
      *
      * @dataProvider pagesWithoutSubpagesDataProvider
      * @dataProvider pagesWithDirectSubpagesDataProvider
@@ -121,7 +121,7 @@ final class PageRepositoryTest extends FunctionalTestCase
     /**
      * @test
      *
-     * @param array<int, positive-int> $pageUids
+     * @param list<positive-int> $pageUids
      *
      * @dataProvider pagesWithoutSubpagesDataProvider
      * @dataProvider pagesWithDirectSubpagesDataProvider
@@ -136,8 +136,8 @@ final class PageRepositoryTest extends FunctionalTestCase
     /**
      * @test
      *
-     * @param array<int, positive-int> $parentUids
-     * @param array<int, positive-int> $childUids
+     * @param array<positive-int> $parentUids
+     * @param list<positive-int> $childUids
      *
      * @dataProvider pagesWithDirectSubpagesDataProvider
      */

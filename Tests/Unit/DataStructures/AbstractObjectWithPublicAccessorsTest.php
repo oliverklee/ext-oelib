@@ -56,6 +56,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
         $this->expectExceptionMessage('$key must not be empty.');
         $this->expectExceptionCode(1331488963);
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->getAsString('');
     }
 
@@ -68,6 +69,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
         $this->expectExceptionMessage('$key must not be empty.');
         $this->expectExceptionCode(1331488963);
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->setAsString('', 'bar');
     }
 
@@ -80,7 +82,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
     }
 
     /**
-     * @return array<string, array<int, string|int|bool>>
+     * @return array<string, array{0: string|int|bool, 1: string}>
      */
     public function stringDataProvider(): array
     {
@@ -96,7 +98,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
     /**
      * @test
      *
-     * @param mixed $inputValue
+     * @param string|int|bool $inputValue
      *
      * @dataProvider stringDataProvider
      */
@@ -111,7 +113,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
     /**
      * @test
      *
-     * @param mixed $inputValue
+     * @param string|int|bool $inputValue
      *
      * @dataProvider stringDataProvider
      */
@@ -143,6 +145,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
         $this->expectExceptionMessage('$key must not be empty.');
         $this->expectExceptionCode(1331488963);
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->getAsInteger('');
     }
 
@@ -155,6 +158,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
         $this->expectExceptionMessage('$key must not be empty.');
         $this->expectExceptionCode(1331488963);
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->setAsInteger('', 42);
     }
 
@@ -167,7 +171,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
     }
 
     /**
-     * @return array<string, array<int, int|string|float|bool>>
+     * @return array<string, array{0: int|string|float|bool, 1: int}>
      */
     public function integerDataProvider(): array
     {
@@ -185,7 +189,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
     /**
      * @test
      *
-     * @param mixed $inputValue
+     * @param int|string|float|bool $inputValue
      *
      * @dataProvider integerDataProvider
      */
@@ -200,7 +204,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
     /**
      * @test
      *
-     * @param mixed $inputValue
+     * @param int|string|float|bool $inputValue
      *
      * @dataProvider integerDataProvider
      */
@@ -221,6 +225,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
         $this->expectExceptionMessage('$key must not be empty.');
         $this->expectExceptionCode(1331488963);
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->getAsTrimmedArray('');
     }
 
@@ -233,6 +238,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
         $this->expectExceptionMessage('$key must not be empty.');
         $this->expectExceptionCode(1331488963);
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->getAsIntegerArray('');
     }
 
@@ -245,6 +251,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
         $this->expectExceptionMessage('$key must not be empty.');
         $this->expectExceptionCode(1331488963);
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->setAsArray('', ['bar']);
     }
 
@@ -370,6 +377,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
         $this->expectExceptionMessage('$key must not be empty.');
         $this->expectExceptionCode(1331488963);
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->getAsBoolean('');
     }
 
@@ -382,6 +390,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
         $this->expectExceptionMessage('$key must not be empty.');
         $this->expectExceptionCode(1331488963);
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->setAsBoolean('', false);
     }
 
@@ -413,7 +422,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
     /**
      * @test
      *
-     * @param mixed $inputValue
+     * @param bool|int|string $inputValue
      *
      * @dataProvider booleanDataProvider
      */
@@ -428,7 +437,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
     /**
      * @test
      *
-     * @param mixed $inputValue
+     * @param bool|int|string $inputValue
      *
      * @dataProvider booleanDataProvider
      */
@@ -449,6 +458,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
         $this->expectExceptionMessage('$key must not be empty.');
         $this->expectExceptionCode(1331488963);
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->getAsFloat('');
     }
 
@@ -461,6 +471,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
         $this->expectExceptionMessage('$key must not be empty.');
         $this->expectExceptionCode(1331488963);
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->setAsFloat('', 42.5);
     }
 
@@ -499,7 +510,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
     /**
      * @test
      *
-     * @param mixed $inputValue
+     * @param float|string|int|bool $inputValue
      *
      * @dataProvider floatDataProvider
      */
@@ -514,7 +525,7 @@ final class AbstractObjectWithPublicAccessorsTest extends UnitTestCase
     /**
      * @test
      *
-     * @param mixed $inputValue
+     * @param float|string|int|bool $inputValue
      *
      * @dataProvider floatDataProvider
      */

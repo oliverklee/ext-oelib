@@ -14,7 +14,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class Tree
 {
     /**
-     * @var array<string, Node> all nodes within the tree referenced by their keys
+     * @var array<non-empty-string, Node> all nodes within the tree referenced by their keys
      */
     private $nodes = [];
 
@@ -38,7 +38,8 @@ class Tree
      * it has the value FALSE it will be invisible.
      * These elements represent leaves in the visibility tree.
      *
-     * @param array<string, array<string, mixed>|bool> $treeStructure the tree structure in a nested array, may be empty
+     * @param array<non-empty-string, array<non-empty-string, mixed>|bool> $treeStructure
+     *        tree structure in a nested array, may be empty
      */
     public function __construct(array $treeStructure)
     {
@@ -50,7 +51,7 @@ class Tree
     /**
      * Builds the node tree from the given structure.
      *
-     * @param array<string, array<string, mixed>|bool> $treeStructure the tree structure as array, may be empty
+     * @param array<non-empty-string, array<non-empty-string, mixed>|bool> $treeStructure tree structure, may be empty
      * @param Node $parentNode the parent node for the current key
      */
     private function buildTreeFromArray(
@@ -77,7 +78,7 @@ class Tree
      * The output of this function can be used for
      * `Template::hideSubpartsArray`.
      *
-     * @return array<int, string> the keys of the subparts which are hidden, will be empty if no elements are hidden
+     * @return list<non-empty-string> the keys of the subparts which are hidden, will be empty if no elements are hidden
      */
     public function getKeysOfHiddenSubparts(): array
     {

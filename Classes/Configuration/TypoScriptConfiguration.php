@@ -44,7 +44,7 @@ class TypoScriptConfiguration extends AbstractReadOnlyObjectWithPublicAccessors 
     /**
      * Gets the value of the data item for the key $key.
      *
-     * @param string $key the key of the data item to get, must not be empty
+     * @param non-empty-string $key
      *
      * @return string|mixed the data for the key $key, will be an empty string if the key has not been set yet
      */
@@ -60,7 +60,7 @@ class TypoScriptConfiguration extends AbstractReadOnlyObjectWithPublicAccessors 
     /**
      * Checks whether a data item with a certain key exists.
      *
-     * @param string $key the key of the data item to check, must not be empty
+     * @param non-empty-string $key
      *
      * @return bool whether a data item with the key $key exists
      */
@@ -76,7 +76,7 @@ class TypoScriptConfiguration extends AbstractReadOnlyObjectWithPublicAccessors 
      *
      * @param string $key the key of the data item to get the array keys for, may be empty
      *
-     * @return array<int, string|int> the array keys of the data item for the key $key, may be empty
+     * @return list<string|int> the array keys of the data item for the key $key, may be empty
      */
     public function getArrayKeys(string $key = ''): array
     {
@@ -99,7 +99,7 @@ class TypoScriptConfiguration extends AbstractReadOnlyObjectWithPublicAccessors 
      * - if the data item is not an array,
      * - if the key does not exist in $this->data.
      *
-     * @param string $key the key of the data item to get as a multidimensional array, must not be empty
+     * @param non-empty-string $key the key of the data item to get as a multidimensional array
      *
      * @return array<string, array<string|int, mixed>|string|int> the data for the key $key, may be empty
      */

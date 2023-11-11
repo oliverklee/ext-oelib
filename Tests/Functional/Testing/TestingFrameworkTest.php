@@ -417,11 +417,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->expectExceptionMessage('The array with the new record data must not be empty.');
         $uid = $this->subject->createRecord('tx_oelib_test', []);
 
-        $this->subject->changeRecord(
-            'tx_oelib_test',
-            $uid,
-            []
-        );
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
+        $this->subject->changeRecord('tx_oelib_test', $uid, []);
     }
 
     /**
@@ -2504,7 +2501,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
     }
 
     /**
-     * @return array<string, array<int, string>>
+     * @return array<non-empty-string, array{0: non-empty-string, 1: non-empty-string}>
      */
     public function pageSpecificGlobalsWithPageUidDataProvider(): array
     {

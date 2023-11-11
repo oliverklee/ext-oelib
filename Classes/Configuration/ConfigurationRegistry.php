@@ -22,7 +22,7 @@ class ConfigurationRegistry
     private static $instance;
 
     /**
-     * @var array<string, ConfigurationInterface> already created configurations (by namespace)
+     * @var array<non-empty-string, ConfigurationInterface> already created configurations (by namespace)
      */
     private $configurations = [];
 
@@ -36,7 +36,7 @@ class ConfigurationRegistry
     /**
      * Destructs a configuration for a given namespace and drops the reference to it.
      *
-     * @param string $namespace the namespace of the configuration to drop, must not be empty,
+     * @param non-empty-string $namespace the namespace of the configuration to drop,
      *        must have been set in this registry
      */
     private function dropConfiguration(string $namespace): void
@@ -69,7 +69,7 @@ class ConfigurationRegistry
     /**
      * Retrieves a Configuration by namespace.
      *
-     * @param string $namespace the name of a configuration namespace, e.g., "plugin.tx_oelib", must not be empty
+     * @param non-empty-string $namespace the name of a configuration namespace, e.g., "plugin.tx_oelib"
      *
      * @return ConfigurationInterface the configuration for the given namespace
      *
@@ -83,7 +83,7 @@ class ConfigurationRegistry
     /**
      * Retrieves a Configuration by namespace.
      *
-     * @param string $namespace the name of a configuration namespace, e.g., "plugin.tx_oelib", must not be empty
+     * @param non-empty-string $namespace the name of a configuration namespace, e.g., "plugin.tx_oelib"
      *
      * @return ConfigurationInterface the configuration for the given namespace
      */
@@ -101,7 +101,7 @@ class ConfigurationRegistry
     /**
      * Sets a configuration for a certain namespace.
      *
-     * @param string $namespace the namespace of the configuration to set, must not be empty
+     * @param non-empty-string $namespace the namespace of the configuration to set
      */
     public function set(string $namespace, ConfigurationInterface $configuration): void
     {
@@ -129,7 +129,7 @@ class ConfigurationRegistry
     /**
      * Retrieves the configuration from TypoScript setup of the current page for a given namespace.
      *
-     * @param string $namespace the namespace of the configuration to retrieve, must not be empty
+     * @param non-empty-string $namespace the namespace of the configuration to retrieve
      *
      * @return TypoScriptConfiguration the TypoScript configuration for that namespace, might be empty
      */

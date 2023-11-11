@@ -23,7 +23,7 @@ class TemplateHelper extends SalutationSwitcher
     private const LABEL_PATTERN = '/###(LABEL_([A-Z\\d_]+))###/';
 
     /**
-     * @var array<int, null|false|''|0|'0'>
+     * @var list<null|false|''|0|'0'>
      */
     private const FALSEY_VALUES = [null, false, '', 0, '0'];
 
@@ -524,8 +524,8 @@ class TemplateHelper extends SalutationSwitcher
      * If the prefix is empty and the list is "one,two", the subparts
      * "###ONE###" and "###TWO###" will be unhidden.
      *
-     * @param string $subparts comma-separated list of subpart names to unhide (case-insensitive, will get uppercased),
-     *        must not be empty
+     * @param non-empty-string $subparts comma-separated list of subpart names to unhide
+     *        (case-insensitive, will get uppercased)
      * @param string $permanentlyHiddenSubparts comma-separated list of subpart names that shouldn't get unhidden
      * @param string $prefix prefix to the subpart names (may be empty, case-insensitive, will get uppercased)
      */

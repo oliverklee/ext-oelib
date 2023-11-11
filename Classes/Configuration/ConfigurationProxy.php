@@ -26,7 +26,7 @@ class ConfigurationProxy extends AbstractReadOnlyObjectWithPublicAccessors imple
     private $configuration = [];
 
     /**
-     * @var string key of the extension for which the EM configuration is stored
+     * @var non-empty-string key of the extension for which the EM configuration is stored
      */
     private $extensionKey;
 
@@ -38,9 +38,9 @@ class ConfigurationProxy extends AbstractReadOnlyObjectWithPublicAccessors imple
     /**
      * Don't call this constructor; use getInstance instead.
      *
-     * @param string $extensionKey extension key without the 'tx' prefix, used to retrieve the EM
+     * @param non-empty-string $extensionKey extension key without the 'tx' prefix, used to retrieve the EM
      *        configuration and as identifier for an extension's instance of
-     *        this class, must not be empty
+     *        this class
      */
     private function __construct(string $extensionKey)
     {
@@ -62,9 +62,9 @@ class ConfigurationProxy extends AbstractReadOnlyObjectWithPublicAccessors imple
     /**
      * Retrieves the configuration for the given extension key.
      *
-     * @param string $extensionKey extension key without the 'tx' prefix, used to retrieve the EM
+     * @param non-empty-string $extensionKey extension key without the 'tx' prefix, used to retrieve the EM
      *        configuration and as identifier for an extension's instance of
-     *        this class, must not be empty
+     *        this class
      *
      * @return ConfigurationInterface the configuration for the given extension key
      *
@@ -72,6 +72,7 @@ class ConfigurationProxy extends AbstractReadOnlyObjectWithPublicAccessors imple
      */
     public static function getInstance(string $extensionKey): ConfigurationInterface
     {
+        // @phpstan-ignore-next-line We're checking for a contract violation here.
         if ($extensionKey === '') {
             throw new \InvalidArgumentException('The extension key was not set.', 1331318826);
         }
@@ -141,7 +142,7 @@ class ConfigurationProxy extends AbstractReadOnlyObjectWithPublicAccessors imple
     /**
      * Checks whether a certain key exists in an extension's configuration.
      *
-     * @param string $key key to check, must not be empty
+     * @param non-empty-string $key
      *
      * @return bool whether $key occurs in the configuration array of the extension named $this->extensionKey
      */
@@ -155,7 +156,7 @@ class ConfigurationProxy extends AbstractReadOnlyObjectWithPublicAccessors imple
     /**
      * Returns a string configuration value.
      *
-     * @param string $key key of the value to get, must not be empty
+     * @param non-empty-string $key
      *
      * @return mixed configuration value string, might be empty
      */
@@ -177,7 +178,7 @@ class ConfigurationProxy extends AbstractReadOnlyObjectWithPublicAccessors imple
      *
      * The configuration setters are intended to be used for testing purposes only.
      *
-     * @param string $key key of the value to set, must not be empty
+     * @param non-empty-string $key key of the value to set
      * @param mixed $value the value to set
      */
     protected function set(string $key, $value): void

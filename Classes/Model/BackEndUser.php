@@ -55,7 +55,7 @@ class BackEndUser extends AbstractModel implements MailRole, ConvertableToMimeAd
      * Gets this user's language. Will be a two-letter "lg_typo3" key of the
      * "static_languages" table or "default" for the default language.
      *
-     * @return string this user's language key, will not be empty
+     * @return non-empty-string this user's language key
      */
     public function getLanguage(): string
     {
@@ -69,11 +69,12 @@ class BackEndUser extends AbstractModel implements MailRole, ConvertableToMimeAd
     /**
      * Sets this user's default language.
      *
-     * @param string $language this user's language key, must be a two-letter "lg_typo3" key of
+     * @param non-empty-string $language this user's language key, must be a two-letter "lg_typo3" key of
      *        the "static_languages" table or "default" for the default language
      */
     public function setDefaultLanguage(string $language): void
     {
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         if ($language === '') {
             throw new \InvalidArgumentException('$language must not be empty.', 1331488621);
         }

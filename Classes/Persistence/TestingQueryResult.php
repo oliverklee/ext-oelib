@@ -131,7 +131,7 @@ final class TestingQueryResult implements QueryResultInterface
     }
 
     /**
-     * @return array<int, Model>
+     * @return array<Model>
      */
     public function toArray(): array
     {

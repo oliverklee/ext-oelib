@@ -55,7 +55,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     /**
      * data for this object (without the UID)
      *
-     * @var array<string, string|int|float|bool|object|null> $data
+     * @var array<non-empty-string, string|int|float|bool|object|null> $data
      */
     private $data = [];
 
@@ -133,7 +133,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
      * 2. when a new model is created in some unit tests
      * 3. before a new model should be saved to the database
      *
-     * @param array<string, string|int|float|bool|object|null> $data
+     * @param array<non-empty-string, string|int|float|bool|object|null> $data
      */
     public function setData(array $data): void
     {
@@ -149,7 +149,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
      *
      * This function may be called more than once.
      *
-     * @param array<string, string|int|float|bool|object|null> $data
+     * @param array<non-empty-string, string|int|float|bool|object|null> $data
      */
     public function resetData(array $data): void
     {
@@ -243,8 +243,8 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     /**
      * Sets the value of the data item for the key $key.
      *
-     * @param string $key the key of the data item to get, must not be empty
-     * @param mixed $value the data for the given key
+     * @param non-empty-string $key
+     * @param string|int|float|bool|object|null $value the data for the given key
      */
     protected function set(string $key, $value): void
     {
@@ -272,7 +272,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
      *
      * Before this function may be called, `setData()` or `set()` must have been called once.
      *
-     * @param string $key the key of the data item to get, must not be empty
+     * @param non-empty-string $key
      *
      * @return string|int|float|bool|object|null the data for the key $key,
      *         will be an empty string if the key has not been set yet
@@ -307,10 +307,9 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     /**
      * Checks whether a data item with a certain key exists.
      *
-     * @param string $key the key of the data item to check, must not be empty
+     * @param non-empty-string $key
      *
-     * @return bool TRUE if a data item with the key $key exists, FALSE
-     *                 otherwise
+     * @return bool true if a data item with the key $key exists, false otherwise
      */
     protected function existsKey(string $key): bool
     {
@@ -320,7 +319,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     /**
      * Gets the value stored in under the key $key as a model.
      *
-     * @param string $key the key of the element to retrieve, must not be empty
+     * @param non-empty-string $key
      *
      * @throws \UnexpectedValueException if there is a data item stored for the key $key that is not a model instance
      */
@@ -346,7 +345,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     /**
      * Gets the value stored in under the key $key as a collection of models.
      *
-     * @param string $key the key of the element to retrieve, must not be empty
+     * @param non-empty-string $key
      *
      * @return Collection<AbstractModel> the data item for the given key
      *
@@ -604,6 +603,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     public function setTimestamp(): void
     {
         $timestamp = $GLOBALS['SIM_EXEC_TIME'] > 0 ? $GLOBALS['SIM_EXEC_TIME'] : 0;
+        \assert(\is_int($timestamp));
         $this->setAsInteger('tstamp', $timestamp);
     }
 
@@ -627,6 +627,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
         }
 
         $timestamp = $GLOBALS['SIM_EXEC_TIME'] > 0 ? $GLOBALS['SIM_EXEC_TIME'] : 0;
+        \assert(\is_int($timestamp));
         $this->setAsInteger('crdate', $timestamp);
     }
 

@@ -13,16 +13,16 @@ abstract class AbstractObjectWithAccessors extends AbstractReadOnlyObjectWithAcc
     /**
      * Sets the value of the data item for the key $key.
      *
-     * @param string $key the key of the data item to get, must not be empty
-     * @param mixed $value the data for the key $key
+     * @param non-empty-string $key
+     * @param string|int|float|bool|object|null $value the data for the key $key
      */
     abstract protected function set(string $key, $value): void;
 
     /**
      * Sets a value for the key $key (and converts it to a string).
      *
-     * @param string $key the key of the element to set, must not be empty
-     * @param mixed $value the value to set, may be empty
+     * @param non-empty-string $key
+     * @param string|int|float|bool|null $value the value to set, may be empty
      */
     protected function setAsString(string $key, $value): void
     {
@@ -34,8 +34,8 @@ abstract class AbstractObjectWithAccessors extends AbstractReadOnlyObjectWithAcc
     /**
      * Sets a value for the key $key (and converts it to an integer).
      *
-     * @param string $key the key of the element to set, must not be empty
-     * @param mixed $value the value to set, may be empty
+     * @param non-empty-string $key
+     * @param string|int|float|bool|null $value the value to set, may be empty
      */
     protected function setAsInteger(string $key, $value): void
     {
@@ -52,8 +52,8 @@ abstract class AbstractObjectWithAccessors extends AbstractReadOnlyObjectWithAcc
      * getAsIntegerArray to split that element at the comma. This is a known
      * limitation.
      *
-     * @param string $key the key of the element to set, must not be empty
-     * @param array<array-key, string|int> $value the value to set, may be empty
+     * @param non-empty-string $key
+     * @param array<string|int> $value the value to set, may be empty
      *
      * @see getAsIntegerArray
      * @see getAsTrimmedArray
@@ -66,8 +66,8 @@ abstract class AbstractObjectWithAccessors extends AbstractReadOnlyObjectWithAcc
     /**
      * Sets a value for the key $key (and converts it to a boolean).
      *
-     * @param string $key the key of the element to set, must not be empty
-     * @param mixed $value the value to set, may be empty
+     * @param non-empty-string $key
+     * @param string|int|float|bool|null $value the value to set, may be empty
      */
     protected function setAsBoolean(string $key, $value): void
     {
@@ -79,8 +79,8 @@ abstract class AbstractObjectWithAccessors extends AbstractReadOnlyObjectWithAcc
     /**
      * Sets a value for the key $key (and converts it to a float).
      *
-     * @param string $key the key of the element to set, must not be empty
-     * @param mixed $value the value to set, may be empty
+     * @param non-empty-string $key
+     * @param string|int|float|bool|null $value the value to set, may be empty
      */
     protected function setAsFloat(string $key, $value): void
     {

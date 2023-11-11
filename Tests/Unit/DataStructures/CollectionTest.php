@@ -54,7 +54,7 @@ final class CollectionTest extends UnitTestCase
      * Adds models with the given titles to the subject, one for each title
      * given in $titles.
      *
-     * @param array<int, string> $titles the titles for the models, must not be empty
+     * @param array<string> $titles the titles for the models, must not be empty
      */
     private function addModelsToFixture(array $titles = ['']): void
     {

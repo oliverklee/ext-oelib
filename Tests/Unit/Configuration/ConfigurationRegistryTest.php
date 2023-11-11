@@ -63,6 +63,7 @@ final class ConfigurationRegistryTest extends UnitTestCase
             '$namespace must not be empty.'
         );
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         ConfigurationRegistry::get('');
     }
 
@@ -78,6 +79,7 @@ final class ConfigurationRegistryTest extends UnitTestCase
             '$namespace must not be empty.'
         );
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         ConfigurationRegistry::getInstance()->set('', new DummyConfiguration());
     }
 

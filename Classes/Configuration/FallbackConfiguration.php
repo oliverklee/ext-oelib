@@ -70,9 +70,9 @@ class FallbackConfiguration implements ConfigurationInterface
     /**
      * Gets the value stored under the provided key, converted to an array of trimmed strings.
      *
-     * @param string $key the key of the element to retrieve, must not be empty
+     * @param non-empty-string $key
      *
-     * @return array<int, string> the array value of the given key, may be empty
+     * @return list<string> the array value of the given key, may be empty
      */
     public function getAsTrimmedArray(string $key): array
     {

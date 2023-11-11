@@ -206,6 +206,7 @@ final class BackEndUserTest extends UnitTestCase
             '$language must not be empty.'
         );
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->setDefaultLanguage('');
     }
 

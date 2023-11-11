@@ -74,7 +74,7 @@ class MapperRegistry
      *
      * @template M of AbstractDataMapper
      *
-     * @param class-string<M> $className the name of an existing mapper class, must not be empty
+     * @param class-string<M> $className the name of an existing mapper class
      *
      * @return M the mapper instance of the provided class
      *
@@ -92,7 +92,7 @@ class MapperRegistry
      *
      * @template M of AbstractDataMapper
      *
-     * @param class-string<M> $className the name of an existing mapper class, must not be empty
+     * @param class-string<M> $className the name of an existing mapper class
      *
      * @return M the mapper instance of the provided class
      *

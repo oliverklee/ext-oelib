@@ -49,7 +49,7 @@ abstract class AbstractConfigurationDependentValidator extends AbstractValidator
     protected $acceptsEmptyValues = false;
 
     /**
-     * @var array<int, string>
+     * @var list<non-empty-string>
      */
     private $requiredFields = [];
 

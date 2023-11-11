@@ -15,7 +15,7 @@ namespace OliverKlee\Oelib\Session;
 class FakeSession extends Session
 {
     /**
-     * @var array<string, mixed> the data for this session
+     * @var array<non-empty-string, mixed> the data for this session
      */
     private $sessionData = [];
 
@@ -36,7 +36,7 @@ class FakeSession extends Session
     /**
      * Gets the value of the data item for the key $key.
      *
-     * @param string $key the key of the data item to get, must not be empty
+     * @param non-empty-string $key
      *
      * @return mixed the data for the key $key, will be an empty string if the key has not been set yet
      */
@@ -48,7 +48,7 @@ class FakeSession extends Session
     /**
      * Sets the value of the data item for the key $key.
      *
-     * @param string $key the key of the data item to get, must not be empty
+     * @param non-empty-string $key
      * @param mixed $value the data for the key $key
      */
     protected function set(string $key, $value): void

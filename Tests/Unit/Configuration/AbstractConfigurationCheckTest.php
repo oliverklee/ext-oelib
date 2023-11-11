@@ -463,7 +463,7 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
     }
 
     /**
-     * @return array<string, array<int, string>>
+     * @return array<string, array{0: string}>
      */
     public function nonBooleanStringDataProvider(): array
     {
@@ -1187,7 +1187,7 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
     }
 
     /**
-     * @return array<string, array<int, string>>
+     * @return array<string, array{0: non-empty-string}>
      */
     public function validNonEmptyIntegerListDataProvider(): array
     {
@@ -1208,7 +1208,7 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
     }
 
     /**
-     * @return array<string, array<int, string>>
+     * @return array<string, array{0: non-empty-string}>
      */
     public function invalidIntegerListDataProvider(): array
     {
@@ -1317,7 +1317,7 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
     }
 
     /**
-     * @return array<string, array<int, string>>
+     * @return array<string, array{0: non-empty-string}>
      */
     public function validEmailDataProvider(): array
     {
@@ -1328,7 +1328,7 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
     }
 
     /**
-     * @return array<string, array<int, string>>
+     * @return array<string, array{0: non-empty-string}>
      */
     public function invalidEmailDataProvider(): array
     {

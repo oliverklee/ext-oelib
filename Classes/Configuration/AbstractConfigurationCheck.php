@@ -23,7 +23,7 @@ abstract class AbstractConfigurationCheck
     protected $configuration;
 
     /**
-     * @var array<int, non-empty-string>
+     * @var list<non-empty-string>
      */
     protected $warnings = [];
 
@@ -133,7 +133,7 @@ abstract class AbstractConfigurationCheck
     }
 
     /**
-     * @return array<int, non-empty-string>
+     * @return list<non-empty-string>
      */
     public function getWarningsAsHtml(): array
     {
@@ -200,9 +200,9 @@ abstract class AbstractConfigurationCheck
     /**
      * Retrieves the column names of a given DB table name.
      *
-     * @param non-empty-string $tableName the name of an existing DB table (must not be empty, must exist)
+     * @param non-empty-string $tableName the name of an existing DB table (must exist)
      *
-     * @return array<int, non-empty-string> column names as values
+     * @return list<non-empty-string> column names as values
      */
     private function getDbColumnNames(string $tableName): array
     {
@@ -311,7 +311,7 @@ abstract class AbstractConfigurationCheck
      *
      * @param non-empty-string $key
      * @param non-empty-string $explanation
-     * @param array<string|int, string> $allowedValues allowed values (must not be empty)
+     * @param array<string> $allowedValues allowed values
      */
     protected function checkIfSingleInSetNotEmpty(string $key, string $explanation, array $allowedValues): bool
     {
@@ -324,7 +324,7 @@ abstract class AbstractConfigurationCheck
      *
      * @param non-empty-string $key
      * @param non-empty-string $explanation
-     * @param array<string|int, string> $allowedValues allowed values (must not be empty)
+     * @param array<string> $allowedValues allowed values
      */
     protected function checkIfSingleInSetOrEmpty(string $key, string $explanation, array $allowedValues): bool
     {
@@ -450,7 +450,7 @@ abstract class AbstractConfigurationCheck
      *
      * @param non-empty-string $key
      * @param non-empty-string $explanation
-     * @param array<string|int, string> $allowedValues allowed values (must not be empty)
+     * @param array<string> $allowedValues allowed values
      */
     protected function checkIfMultiInSetNotEmpty(string $key, string $explanation, array $allowedValues): bool
     {
@@ -464,7 +464,7 @@ abstract class AbstractConfigurationCheck
      *
      * @param non-empty-string $key
      * @param non-empty-string $explanation
-     * @param array<string|int, string> $allowedValues allowed values (must not be empty)
+     * @param array<string> $allowedValues allowed values
      */
     protected function checkIfMultiInSetOrEmpty(string $key, string $explanation, array $allowedValues): bool
     {
@@ -474,7 +474,6 @@ abstract class AbstractConfigurationCheck
 
         $okay = true;
 
-        /** @var array<int, non-empty-string> $values */
         $values = GeneralUtility::trimExplode(',', $this->configuration->getAsString($key), true);
 
         foreach ($values as $value) {

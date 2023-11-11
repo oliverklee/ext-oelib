@@ -29,7 +29,7 @@ class Session extends AbstractObjectWithPublicAccessors
     public const TYPE_TEMPORARY = 2;
 
     /**
-     * @var array<int, string> available type codes for the FE session functions
+     * @var array<self::TYPE_*, non-empty-string> available type codes for the FE session functions
      */
     private static $types = [
         self::TYPE_USER => 'user',
@@ -37,19 +37,19 @@ class Session extends AbstractObjectWithPublicAccessors
     ];
 
     /**
-     * @var int the type of this session (::TYPE_USER or ::TYPE_TEMPORARY)
+     * @var self::TYPE_* the type of this session (::TYPE_USER or ::TYPE_TEMPORARY)
      */
-    private $type = 0;
+    private $type;
 
     /**
-     * @var array<int, Session> the instances, using the type as key
+     * @var array<self::TYPE_*, Session> the instances, using the type as key
      */
     private static $instances = [];
 
     /**
      * The constructor. Use getInstance() instead.
      *
-     * @param int $type the type of the session to use; either TYPE_USER or TYPE_TEMPORARY
+     * @param self::TYPE_* $type the type of the session to use
      *
      * @throws \BadMethodCallException if there is no front end
      */
@@ -69,12 +69,10 @@ class Session extends AbstractObjectWithPublicAccessors
     /**
      * Returns an instance of this class.
      *
-     * @param int $type
-     *        the type of the session to use; either TYPE_USER (persistent)
-     *        or TYPE_TEMPORARY (only for the lifetime of the session cookie)
+     * @param self::TYPE_* $type the type of the session to use; either `TYPE_USER` (persistent)
+     *        or `TYPE_TEMPORARY` (only for the lifetime of the session cookie)
      *
-     * @return Session the current Singleton instance for the given
-     *                          type
+     * @return Session the current Singleton instance for the given type
      */
     public static function getInstance(int $type): Session
     {
@@ -90,7 +88,7 @@ class Session extends AbstractObjectWithPublicAccessors
     /**
      * Sets the instance for the given type.
      *
-     * @param int $type the type to set, must be either TYPE_USER or TYPE_TEMPORARY
+     * @param self::TYPE_* $type the type to set
      * @param Session $instance the instance to set
      */
     public static function setInstance(int $type, Session $instance): void
@@ -105,7 +103,7 @@ class Session extends AbstractObjectWithPublicAccessors
      *
      * @param int $type the type ID to check
      *
-     * @throws \InvalidArgumentException if $type is neither ::TYPE_USER nor ::TYPE_TEMPORARY
+     * @throws \InvalidArgumentException if $type is neither `::TYPE_USER` nor `::TYPE_TEMPORARY`
      */
     protected static function checkType(int $type): void
     {
@@ -128,7 +126,7 @@ class Session extends AbstractObjectWithPublicAccessors
     /**
      * Gets the value of the data item for the key `$key`.
      *
-     * @param string $key the key of the data item to get, must not be empty
+     * @param non-empty-string $key
      *
      * @return mixed the data for the key `$key`, will be an empty string if the key has not been set yet
      */
@@ -145,7 +143,7 @@ class Session extends AbstractObjectWithPublicAccessors
     /**
      * Sets the value of the data item for the key `$key`.
      *
-     * @param string $key the key of the data item to get, must not be empty
+     * @param non-empty-string $key
      * @param mixed $value the data for the key `$key`
      */
     protected function set(string $key, $value): void

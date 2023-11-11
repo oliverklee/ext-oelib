@@ -48,7 +48,7 @@ abstract class AbstractDataMapper
     protected $map;
 
     /**
-     * @var array<int, true> UIDs of models that are memory-only models that must not be saved,
+     * @var array<positive-int, true> UIDs of models that are memory-only models that must not be saved,
      *      using the UIDs as keys and TRUE as value
      */
     protected $uidsOfMemoryOnlyDummyModels = [];
@@ -60,7 +60,7 @@ abstract class AbstractDataMapper
     protected $relations = [];
 
     /**
-     * @var array<int, non-empty-string> the column names of additional string keys
+     * @var array<non-empty-string> the column names of additional string keys
      */
     protected $additionalKeys = [];
 
@@ -217,7 +217,7 @@ abstract class AbstractDataMapper
      *
      * @param non-empty-array<string, string|int> $whereClauseParts WHERE clause parts for the record to retrieve,
      *        each element must consist of a column name as key and a value to search for as value
-     *        (will automatically get quoted), must not be empty
+     *        (will automatically get quoted)
      *
      * @return M the model
      *
@@ -630,9 +630,9 @@ abstract class AbstractDataMapper
      * Reads a record from the database (from this mapper's table) by the
      * WHERE clause provided. Hidden records will be retrieved as well.
      *
-     * @param array<string, string|int> $whereClauseParts
+     * @param non-empty-array<string, string|int> $whereClauseParts
      *        WHERE clause parts for the record to retrieve, each element must consist of a column name as key and a
-     *        value to search for as value (will automatically get quoted), must not be empty
+     *        value to search for as value (will automatically get quoted)
      *
      * @return DatabaseRow the record from the database, will not be empty
      *
@@ -1205,7 +1205,9 @@ abstract class AbstractDataMapper
             return;
         }
 
-        $this->uidsOfMemoryOnlyDummyModels[$model->getUid()] = true;
+        $uid = $model->getUid();
+        \assert($uid > 0);
+        $this->uidsOfMemoryOnlyDummyModels[$uid] = true;
     }
 
     /**
@@ -1289,7 +1291,7 @@ abstract class AbstractDataMapper
      * database, though.
      *
      * @param non-empty-string $key an existing key
-     * @param non-empty-string $value the value for the key of the model to find, must not be empty
+     * @param non-empty-string $value the value for the key of the model to find
      *
      * @return M the cached model
      *
@@ -1449,8 +1451,8 @@ abstract class AbstractDataMapper
      * will try to find the model in the database.
      *
      * @param non-empty-array<string, string> $compoundKeyValues
-     *        existing key value pairs, must not be empty
-     *        The array must have all the keys that are set in the additionalCompoundKey array.
+     *        existing key-value pairs
+     *        The array must have all the keys that are set in the `additionalCompoundKey` array.
      *        The array values contain the model data with which to look up.
      *
      * @return M the cached model
@@ -1481,7 +1483,7 @@ abstract class AbstractDataMapper
      * Extracting the key value from model data.
      *
      * @param non-empty-array<string, string> $compoundKeyValues
-     *        existing key value pairs, must not be empty
+     *        existing key-value pairs
      *        The array must have all the keys that are set in the additionalCompoundKey array.
      *        The array values contain the model data with which to look up.
      *

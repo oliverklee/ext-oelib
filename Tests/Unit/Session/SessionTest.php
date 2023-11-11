@@ -57,6 +57,7 @@ final class SessionTest extends UnitTestCase
 
         $this->createFakeFrontEnd();
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         Session::getInstance(42);
     }
 
@@ -139,6 +140,7 @@ final class SessionTest extends UnitTestCase
             'Only the types ::TYPE_USER and ::TYPE_TEMPORARY are allowed.'
         );
 
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         Session::setInstance(42, new FakeSession());
     }
 

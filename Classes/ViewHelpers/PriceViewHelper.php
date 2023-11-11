@@ -46,7 +46,7 @@ class PriceViewHelper extends AbstractViewHelper
      * Sets the currency of the price to render based on the currency's ISO
      * alpha 3 code, e.g. "EUR" for Euro, "USD" for US dollars.
      *
-     * @param string $isoAlpha3Code the ISO alpha 3 code of the currency to set, must not be empty
+     * @param non-empty-string $isoAlpha3Code the ISO alpha 3 code of the currency to set
      */
     public function setCurrencyFromIsoAlpha3Code(string $isoAlpha3Code): void
     {

@@ -68,7 +68,7 @@ class IsFieldEnabledViewHelper extends AbstractConditionViewHelper
     }
 
     /**
-     * @param array<mixed> $arguments
+     * @param array<string, mixed> $arguments
      */
     public static function verdict(array $arguments, RenderingContextInterface $renderingContext): bool
     {
@@ -86,9 +86,9 @@ class IsFieldEnabledViewHelper extends AbstractConditionViewHelper
     }
 
     /**
-     * @param array<mixed> $arguments
+     * @param array<string, mixed> $arguments
      *
-     * @return array<int, string>
+     * @return list<non-empty-string>
      *
      * @throws \InvalidArgumentException
      */
@@ -105,13 +105,16 @@ class IsFieldEnabledViewHelper extends AbstractConditionViewHelper
             throw new \InvalidArgumentException('The argument "fieldName" must not be empty.', 1651155957);
         }
 
-        return GeneralUtility::trimExplode('|', $fieldsNamesArgument, true);
+        /** @var list<non-empty-string> $result */
+        $result = GeneralUtility::trimExplode('|', $fieldsNamesArgument, true);
+
+        return $result;
     }
 
     /**
      * @param RenderingContextInterface $renderingContext
      *
-     * @return array<int, string>
+     * @return list<non-empty-string>
      *
      * @throws \UnexpectedValueException
      */

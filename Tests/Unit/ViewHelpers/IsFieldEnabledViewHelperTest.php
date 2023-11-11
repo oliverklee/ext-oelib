@@ -132,7 +132,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
     }
 
     /**
-     * @return array<string, array<int, array{}|positive-int>>
+     * @return array<string, list<array{}|positive-int>>
      */
     public function nonStringSettingDataProvider(): array
     {

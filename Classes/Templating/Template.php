@@ -35,7 +35,7 @@ class Template
      * all lowercased label marker names in the current template without the hashes,
      * for example ("label_foo", "label_bar")
      *
-     * @var array<int, non-empty-string>
+     * @var list<non-empty-string>
      */
     private $labelMarkerNames = [];
 
@@ -126,7 +126,7 @@ class Template
      * Finds all markers within the current HTML template and writes their names
      * to $this->markerNames.
      *
-     * In addition, it stores the lowercased label marker names in $this->labelMarkerNames.
+     * In addition, it stores the lowercased label marker names in `$this->labelMarkerNames`.
      */
     private function findMarkers(): void
     {
@@ -151,7 +151,7 @@ class Template
      *
      * If there are no matches, an empty array is returned.
      *
-     * @return array<int, non-empty-string> matching marker names (lowercased), might be empty
+     * @return list<non-empty-string> matching marker names (lowercased), might be empty
      */
     public function getLabelMarkerNames(): array
     {
@@ -306,7 +306,6 @@ class Template
      */
     public function hideSubparts(string $subparts, string $prefix = ''): void
     {
-        /** @var array<int, non-empty-string> $subpartNames */
         $subpartNames = GeneralUtility::trimExplode(',', $subparts, true);
 
         $this->hideSubpartsArray($subpartNames, $prefix);
@@ -352,8 +351,8 @@ class Template
      * If the prefix is empty and the list is "one,two", the subparts
      * "###ONE###" and "###TWO###" will be unhidden.
      *
-     * @param string $subparts comma-separated list of subpart names to unhide (case-insensitive, will get uppercased),
-     *        must not be empty
+     * @param non-empty-string $subparts comma-separated list of subpart names to unhide
+     *        (case-insensitive, will get uppercased)
      * @param string $permanentlyHiddenSubparts comma-separated list of subpart names that shouldn't get unhidden
      * @param string $prefix prefix to the subpart names (may be empty, case-insensitive, will get uppercased)
      */
@@ -362,10 +361,8 @@ class Template
         string $permanentlyHiddenSubparts = '',
         string $prefix = ''
     ): void {
-        /** @var array<int, non-empty-string> $subpartNames */
         $subpartNames = GeneralUtility::trimExplode(',', $subparts, true);
 
-        /** @var array<int, non-empty-string> $hiddenSubpartNames */
         $hiddenSubpartNames = GeneralUtility::trimExplode(',', $permanentlyHiddenSubparts, true);
 
         $this->unhideSubpartsArray($subpartNames, $hiddenSubpartNames, $prefix);
@@ -533,7 +530,7 @@ class Template
      * @param non-empty-string $markerName the name of the marker
      * @param string $prefix an optional prefix, may be empty
      *
-     * @return non-empty-string the created marker name (including the hashes), will not be empty
+     * @return non-empty-string the created marker name (including the hashes)
      */
     private function createMarkerName(string $markerName, string $prefix = ''): string
     {

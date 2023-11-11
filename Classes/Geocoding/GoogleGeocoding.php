@@ -24,12 +24,12 @@ class GoogleGeocoding implements GeocodingLookup
     /**
      * the base URL of the Google Maps geocoding service
      *
-     * @var string
+     * @var non-empty-string
      */
     private const BASE_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
 
     /**
-     * @var array<int, string>
+     * @var list<non-empty-string>
      */
     protected const STATUS_CODES_FOR_RETRY = ['OVER_QUERY_LIMIT', 'UNKNOWN_ERROR'];
 
@@ -38,7 +38,7 @@ class GoogleGeocoding implements GeocodingLookup
      *
      * @see https://developers.google.com/maps/documentation/geocoding/web-service-best-practices
      *
-     * @var int
+     * @var positive-int
      */
     private const INITIAL_DELAY_IN_MICROSECONDS = 100000;
 
@@ -52,7 +52,7 @@ class GoogleGeocoding implements GeocodingLookup
     /**
      * 120 seconds
      *
-     * @var int
+     * @var positive-int
      */
     private $maximumDelayInMicroseconds = 120000000;
 
@@ -99,6 +99,8 @@ class GoogleGeocoding implements GeocodingLookup
 
     /**
      * Sets the maximum delay.
+     *
+     * @param positive-int $delay
      */
     public function setMaximumDelay(int $delay): void
     {

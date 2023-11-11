@@ -22,8 +22,8 @@ class FederalStateMapper extends AbstractDataMapper
     /**
      * Finds a federal state by its ISO 3166-1 and ISO 3166-2 code.
      *
-     * @param string $isoAlpha2CountryCode the ISO 3166-1 alpha-2 country code to find, must not be empty
-     * @param string $isoAlpha2ZoneCode the ISO 3166-2 code to find, must not be empty
+     * @param non-empty-string $isoAlpha2CountryCode the ISO 3166-1 alpha-2 country code to find
+     * @param non-empty-string $isoAlpha2ZoneCode the ISO 3166-2 code to find
      *
      * @return FederalState the federal state with the requested code
      */

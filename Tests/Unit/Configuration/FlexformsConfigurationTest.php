@@ -299,7 +299,7 @@ final class FlexformsConfigurationTest extends UnitTestCase
     }
 
     /**
-     * @return array<string, array<int, array<string, array<string, array<string, array<string, mixed>>>>>>
+     * @return array<string, list<array<string, array<string, array<string, array<string, mixed>>>>>>
      */
     public function stringValueInArrayDataProvider(): array
     {
@@ -348,7 +348,7 @@ final class FlexformsConfigurationTest extends UnitTestCase
     }
 
     /**
-     * @return array<string, array<int, array<string, array<string, array<string, array<string, mixed>>>>>>
+     * @return array<string, list<array<string, array<string, array<string, array<string, mixed>>>>>>
      */
     public function integerValueInArrayDataProvider(): array
     {
@@ -399,7 +399,7 @@ final class FlexformsConfigurationTest extends UnitTestCase
     }
 
     /**
-     * @return array<string, array<int, array<string, array<string, array<string, array<string, mixed>>>>>>
+     * @return array<string, list<array<string, array<string, array<string, array<string, mixed>>>>>>
      */
     public function booleanValueInArrayDataProvider(): array
     {
