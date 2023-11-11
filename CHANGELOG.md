@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 5.2.0
+
+### Added
 - Add support for PHP 8.3 (#1422)
 
 ### Changed
@@ -14,8 +26,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Deprecated
 - Deprecate `FrontEndUser::getAge` (#1408)
-
-### Removed
 
 ### Fixed
 - Validate UIDs in the ORM more strictly (#1402)
