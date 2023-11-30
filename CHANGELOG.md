@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add support for Symfony 7 (#1440)
 - Add the Crowdin configuration (#1437)
 
 ### Changed
