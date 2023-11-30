@@ -167,6 +167,8 @@
 			"rm .gitattributes",
 			"rm .gitignore",
 			"rm .php-cs-fixer.php",
+			"rm composer.lock",
+			"rm crowdin.yml",
 			"rm phpcs.xml.dist",
 			"rm phpstan-baseline.neon",
 			"rm phpstan.neon",
