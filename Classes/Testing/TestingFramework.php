@@ -19,6 +19,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Exception\Page\PageNotFoundException;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\Locales;
 use TYPO3\CMS\Core\Routing\PageArguments;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -739,7 +740,9 @@ final class TestingFramework
             }
         }
 
-        RootlineUtility::purgeCaches();
+        if ((new Typo3Version())->getMajorVersion() <= 11) {
+            RootlineUtility::purgeCaches();
+        }
     }
 
     /**

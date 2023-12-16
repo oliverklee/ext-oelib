@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Avoid calling the removed `RootlineUtility::purgeCaches()` in 12LTS (#1461)
 - Add missing singletons reset in a test (#1460)
 - Drop a nonsensical test (#1459)
 - Remove the deprecated `cruser_id` configuration for the test tables (#1458)
