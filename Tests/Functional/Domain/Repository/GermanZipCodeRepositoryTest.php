@@ -6,9 +6,6 @@ namespace OliverKlee\Oelib\Tests\Functional\Domain\Repository;
 
 use OliverKlee\Oelib\Domain\Model\GermanZipCode;
 use OliverKlee\Oelib\Domain\Repository\GermanZipCodeRepository;
-use TYPO3\CMS\Core\Information\Typo3Version;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -29,12 +26,7 @@ final class GermanZipCodeRepositoryTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        if ((new Typo3Version())->getMajorVersion() >= 11) {
-            $this->subject = GeneralUtility::makeInstance(GermanZipCodeRepository::class);
-        } else {
-            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-            $this->subject = $objectManager->get(GermanZipCodeRepository::class);
-        }
+        $this->subject = $this->get(GermanZipCodeRepository::class);
 
         $this->importDataSet(__DIR__ . '/Fixtures/ZipCodes.xml');
     }
