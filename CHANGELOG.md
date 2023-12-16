@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Remove the deprecated `cruser_id` configuration for the test tables (#1458)
 - Avoid using the deprecated `ObjectManager` in tests (#1457)
 - Add a 12LTS-specific method to `TestingQueryResult` (#1454)
 - Improve some type annotations (#1453)
