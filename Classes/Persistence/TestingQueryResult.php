@@ -36,6 +36,11 @@ final class TestingQueryResult implements QueryResultInterface
         $this->objectStorage = $storage;
     }
 
+    public function setQuery(QueryInterface $query): void
+    {
+        // no-op
+    }
+
     /**
      * @return Model|null
      */
