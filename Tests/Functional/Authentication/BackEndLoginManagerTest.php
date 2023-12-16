@@ -36,9 +36,10 @@ final class BackEndLoginManagerTest extends FunctionalTestCase
         $this->subject = BackEndLoginManager::getInstance();
     }
 
-    private function logInBackEndUser(): void
+    private function createAndLogInBackEndUser(): void
     {
-        $this->setUpBackendUserFromFixture(1);
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/BackEndUser.csv');
+        $this->setUpBackendUser(1);
     }
 
     // Tests concerning isLoggedIn
@@ -56,7 +57,7 @@ final class BackEndLoginManagerTest extends FunctionalTestCase
      */
     public function isLoggedInWithLoggedInBackEndUserReturnsTrue(): void
     {
-        $this->logInBackEndUser();
+        $this->createAndLogInBackEndUser();
 
         self::assertTrue($this->subject->isLoggedIn());
     }
