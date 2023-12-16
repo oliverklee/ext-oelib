@@ -23,6 +23,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\ViewHelperInterface;
  */
 final class AbstractConfigurationCheckViewHelperTest extends UnitTestCase
 {
+    protected $resetSingletonInstances = true;
+
     /**
      * @var \Closure
      */
