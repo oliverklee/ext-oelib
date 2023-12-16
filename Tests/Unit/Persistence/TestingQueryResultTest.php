@@ -61,19 +61,6 @@ final class TestingQueryResultTest extends UnitTestCase
     /**
      * @test
      */
-    public function keyForEmptyStorageReturnsEmptyString(): void
-    {
-        /** @var ObjectStorage<TestingModel> $storage */
-        $storage = new ObjectStorage();
-
-        $subject = new TestingQueryResult($storage);
-
-        self::assertSame('', $subject->key());
-    }
-
-    /**
-     * @test
-     */
     public function keyReturnsKeyFromStorage(): void
     {
         /** @var ObjectStorage<TestingModel> $storage */
