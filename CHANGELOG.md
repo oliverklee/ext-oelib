@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Avoid the deprecated `setUpBackendUserFromFixture` (#1465)
 - Avoid accessing the protected `AbstractPlugin->cObj` (#1462)
 - Avoid calling the removed `RootlineUtility::purgeCaches()` in 12LTS (#1461)
 - Add missing singletons reset in a test (#1460)
