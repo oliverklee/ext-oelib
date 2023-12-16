@@ -25,23 +25,6 @@ final class TemplateTest extends UnitTestCase
         $this->subject = new Template();
     }
 
-    // Tests for reading the HTML from a file.
-
-    /**
-     * @test
-     */
-    public function processTemplateFromFileProcessesTemplateFromFile(): void
-    {
-        $this->subject->processTemplateFromFile(
-            'EXT:oelib/Tests/Functional/Fixtures/Template.html'
-        );
-
-        self::assertSame(
-            "Hello world!\n",
-            $this->subject->render()
-        );
-    }
-
     // Tests for getting subparts.
 
     /**
