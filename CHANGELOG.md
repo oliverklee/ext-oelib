@@ -16,6 +16,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Add a 12LTS-specific method to `TestingQueryResult` (#1454)
+- Improve some type annotations (#1453)
 
 ## 5.2.0
 
@@ -30,7 +32,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Deprecate `FrontEndUser::getAge` (#1408)
 
 ### Fixed
-- Improve some type annotations (#1453)
 - Validate UIDs in the ORM more strictly (#1402)
 
 ## 5.1.0
