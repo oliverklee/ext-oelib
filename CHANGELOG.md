@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Avoid accessing the protected `AbstractPlugin->cObj` (#1462)
 - Avoid calling the removed `RootlineUtility::purgeCaches()` in 12LTS (#1461)
 - Add missing singletons reset in a test (#1460)
 - Drop a nonsensical test (#1459)

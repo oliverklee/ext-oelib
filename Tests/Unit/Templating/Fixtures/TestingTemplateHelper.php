@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Oelib\Tests\Unit\Templating\Fixtures;
 
 use OliverKlee\Oelib\Templating\TemplateHelper;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This is mere a class used for unit tests. Don't use it for any other purpose.
@@ -72,5 +73,20 @@ final class TestingTemplateHelper extends TemplateHelper
     public function ensureContentObject(): void
     {
         parent::ensureContentObject();
+    }
+
+    public function getContentObjectRenderer(): ?ContentObjectRenderer
+    {
+        return $this->cObj;
+    }
+
+    public function setContentObjectRenderer(ContentObjectRenderer $contentObjectRenderer): void
+    {
+        $this->cObj = $contentObjectRenderer;
+    }
+
+    public function dropContentObjectRenderer(): void
+    {
+        $this->cObj = null;
     }
 }
