@@ -71,7 +71,7 @@ final class TemplateHelperTest extends UnitTestCase
     {
         $this->subject->init();
 
-        self::assertInstanceOf(ContentObjectRenderer::class, $this->subject->cObj);
+        self::assertInstanceOf(ContentObjectRenderer::class, $this->subject->getContentObjectRenderer());
     }
 
     /////////////////////////////////////////////////////////////
@@ -183,7 +183,7 @@ final class TemplateHelperTest extends UnitTestCase
     public function getConfValueStringWithoutContentObjectReturnsSetValue(): void
     {
         $subject = new TestingTemplateHelper([]);
-        $subject->cObj = null;
+        $subject->dropContentObjectRenderer();
 
         $key = 'test';
         $value = 'This is a test.';
@@ -4016,13 +4016,13 @@ final class TemplateHelperTest extends UnitTestCase
     public function ensureContentObjectForExistingContentObjectLeavesItUntouched(): void
     {
         $contentObject = new ContentObjectRenderer();
-        $this->subject->cObj = $contentObject;
+        $this->subject->setContentObjectRenderer($contentObject);
 
         $this->subject->ensureContentObject();
 
         self::assertSame(
             $contentObject,
-            $this->subject->cObj
+            $this->subject->getContentObjectRenderer()
         );
     }
 
@@ -4031,7 +4031,7 @@ final class TemplateHelperTest extends UnitTestCase
      */
     public function ensureContentObjectForMissingContentObjectWithFrontEndUsesContentObjectFromFrontEnd(): void
     {
-        $this->subject->cObj = null;
+        $this->subject->dropContentObjectRenderer();
 
         $this->subject->ensureContentObject();
 
@@ -4039,7 +4039,7 @@ final class TemplateHelperTest extends UnitTestCase
         $frontEndController = $GLOBALS['TSFE'];
         self::assertSame(
             $frontEndController->cObj,
-            $this->subject->cObj
+            $this->subject->getContentObjectRenderer()
         );
     }
 }
