@@ -24,8 +24,12 @@ final class GermanZipCodeRepositoryTest extends UnitTestCase
     {
         parent::setUp();
 
-        $objectManagerStub = $this->createMock(ObjectManagerInterface::class);
-        $this->subject = new GermanZipCodeRepository($objectManagerStub);
+        if (\interface_exists(ObjectManagerInterface::class)) {
+            $objectManagerStub = $this->createStub(ObjectManagerInterface::class);
+            $this->subject = new GermanZipCodeRepository($objectManagerStub);
+        } else {
+            $this->subject = new GermanZipCodeRepository();
+        }
     }
 
     /**

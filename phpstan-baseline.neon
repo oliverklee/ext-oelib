@@ -551,6 +551,16 @@ parameters:
 			path: Tests/Unit/DataStructures/CollectionTest.php
 
 		-
+			message: "#^Class OliverKlee\\\\Oelib\\\\Domain\\\\Repository\\\\GermanZipCodeRepository constructor invoked with 0 parameters, 1 required\\.$#"
+			count: 1
+			path: Tests/Unit/Domain/Repository/GermanZipCodeRepositoryTest.php
+
+		-
+			message: "#^Class OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Domain\\\\Repository\\\\Fixtures\\\\DirectPersistRepository constructor invoked with 0 parameters, 1 required\\.$#"
+			count: 1
+			path: Tests/Unit/Domain/Repository/Traits/DirectPersistTest.php
+
+		-
 			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
 			count: 14
 			path: Tests/Unit/Email/SystemEmailFromBuilderTest.php

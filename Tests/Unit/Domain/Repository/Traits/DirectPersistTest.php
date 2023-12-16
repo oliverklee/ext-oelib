@@ -30,8 +30,12 @@ final class DirectPersistTest extends UnitTestCase
     {
         parent::setUp();
 
-        $objectManagerStub = $this->createMock(ObjectManagerInterface::class);
-        $this->subject = new DirectPersistRepository($objectManagerStub);
+        if (\interface_exists(ObjectManagerInterface::class)) {
+            $objectManagerStub = $this->createStub(ObjectManagerInterface::class);
+            $this->subject = new DirectPersistRepository($objectManagerStub);
+        } else {
+            $this->subject = new DirectPersistRepository();
+        }
 
         $this->persistenceManagerMock = $this->createMock(PersistenceManagerInterface::class);
         $this->subject->injectPersistenceManager($this->persistenceManagerMock);
