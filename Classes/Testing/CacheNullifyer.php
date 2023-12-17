@@ -9,6 +9,8 @@ use TYPO3\CMS\Core\Cache\Backend\SimpleFileBackend;
 use TYPO3\CMS\Core\Cache\Backend\TransientMemoryBackend;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Cache\Frontend\PhpFrontend;
+use TYPO3\CMS\Core\Cache\Frontend\VariableFrontend;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\Core\Cache\FluidTemplateCache;
 
@@ -18,31 +20,244 @@ use TYPO3\CMS\Fluid\Core\Cache\FluidTemplateCache;
 final class CacheNullifyer
 {
     /**
+     * @see https://github.com/TYPO3/typo3/blob/main/typo3/sysext/core/Configuration/DefaultConfiguration.php
+     */
+    private const CACHE_CONFIGURATIONS = [
+        10 => [
+            'core' => [
+                'frontend' => PhpFrontend::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+            'hash' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => NullBackend::class,
+                'options' => [],
+                'groups' => ['pages'],
+            ],
+            'pages' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => NullBackend::class,
+                'options' => [],
+                'groups' => ['pages'],
+            ],
+            'pagesection' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => NullBackend::class,
+                'options' => [],
+                'groups' => ['pages'],
+            ],
+            'runtime' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => TransientMemoryBackend::class,
+                'options' => [],
+                'groups' => [],
+            ],
+            'rootline' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => NullBackend::class,
+                'options' => [],
+                'groups' => ['pages'],
+            ],
+            'imagesizes' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => NullBackend::class,
+                'options' => [],
+                'groups' => ['lowlevel'],
+            ],
+            'assets' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+            'l10n' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+            'fluid_template' => [
+                'frontend' => FluidTemplateCache::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+            'extbase' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+        ],
+        11 => [
+            'core' => [
+                'frontend' => PhpFrontend::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+            'hash' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => NullBackend::class,
+                'options' => [],
+                'groups' => ['pages'],
+            ],
+            'pages' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => NullBackend::class,
+                'options' => [],
+                'groups' => ['pages'],
+            ],
+            'pagesection' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => NullBackend::class,
+                'options' => [],
+                'groups' => ['pages'],
+            ],
+            'runtime' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => TransientMemoryBackend::class,
+                'options' => [],
+                'groups' => [],
+            ],
+            'rootline' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => NullBackend::class,
+                'options' => [],
+                'groups' => ['pages'],
+            ],
+            'imagesizes' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => NullBackend::class,
+                'options' => [],
+                'groups' => ['lowlevel'],
+            ],
+            'assets' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+            'l10n' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+            'fluid_template' => [
+                'frontend' => FluidTemplateCache::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+            'extbase' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+            'ratelimiter' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+        ],
+        12 => [
+            'core' => [
+                'frontend' => PhpFrontend::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+            'hash' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => NullBackend::class,
+                'options' => [],
+                'groups' => ['pages'],
+            ],
+            'pages' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => NullBackend::class,
+                'options' => [],
+                'groups' => ['pages'],
+            ],
+            'runtime' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => TransientMemoryBackend::class,
+                'options' => [],
+                'groups' => [],
+            ],
+            'rootline' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => NullBackend::class,
+                'options' => [],
+                'groups' => ['pages'],
+            ],
+            'imagesizes' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => NullBackend::class,
+                'options' => [],
+                'groups' => ['lowlevel'],
+            ],
+            'assets' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+            'l10n' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+            'fluid_template' => [
+                'frontend' => FluidTemplateCache::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+            'extbase' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+            'ratelimiter' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+            'typoscript' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+            'database_schema' => [
+                'frontend' => VariableFrontend::class,
+                'backend' => SimpleFileBackend::class,
+                'options' => [],
+                'groups' => ['system'],
+            ],
+        ],
+    ];
+
+    /**
      * Sets all Core caches to make testing easier, either to a null backend (for page, page section, rootline)
      * or a simple file backend.
      */
     public function setAllCoreCaches(): void
     {
-        $this->setCoreCachesForVersion10();
-    }
-
-    private function setCoreCachesForVersion10(): void
-    {
-        $this->getCacheManager()->setCacheConfigurations(
-            [
-                'assets' => ['backend' => SimpleFileBackend::class],
-                'core' => ['backend' => SimpleFileBackend::class, 'frontend' => PhpFrontend::class],
-                'extbase' => ['backend' => SimpleFileBackend::class],
-                'fluid_template' => ['backend' => SimpleFileBackend::class, 'frontend' => FluidTemplateCache::class],
-                'hash' => ['backend' => SimpleFileBackend::class],
-                'imagesizes' => ['backend' => NullBackend::class],
-                'l10n' => ['backend' => SimpleFileBackend::class],
-                'pages' => ['backend' => NullBackend::class],
-                'pagesection' => ['backend' => NullBackend::class],
-                'rootline' => ['backend' => NullBackend::class],
-                'runtime' => ['backend' => TransientMemoryBackend::class],
-            ]
-        );
+        $typo3Version = (new Typo3Version())->getMajorVersion();
+        if (!array_key_exists($typo3Version, self::CACHE_CONFIGURATIONS)) {
+            throw new \UnexpectedValueException('Unsupported TYPO3 version: ' . $typo3Version, 1702811886);
+        }
+        $this->getCacheManager()->setCacheConfigurations(self::CACHE_CONFIGURATIONS[$typo3Version]);
     }
 
     private function getCacheManager(): CacheManager
