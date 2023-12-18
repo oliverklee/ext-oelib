@@ -6,7 +6,9 @@ namespace OliverKlee\Oelib\Tests\Functional\Validation;
 
 use OliverKlee\Oelib\Tests\Functional\Validation\Fixtures\TestingConfigurationDependentValidator;
 use OliverKlee\Oelib\Tests\Functional\Validation\Fixtures\TestingValidatableModel;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Validation\Error;
@@ -29,7 +31,12 @@ final class AbstractConfigurationDependentValidatorTest extends FunctionalTestCa
     protected function setUp(): void
     {
         parent::setUp();
-        $GLOBALS['LANG'] = GeneralUtility::makeInstance(LanguageService::class);
+        if ((new Typo3Version())->getMajorVersion() >= 11) {
+            $languageService = GeneralUtility::makeInstance(LanguageServiceFactory::class)->create('default');
+        } else {
+            $languageService = LanguageService::create('default');
+        }
+        $GLOBALS['LANG'] = $languageService;
 
         $this->subject = new TestingConfigurationDependentValidator();
     }

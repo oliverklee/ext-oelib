@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Properly create the `LanguageService` in a functional test (#1473)
 - Avoid using the deprecated `Query::execute()` (#1470)
 - Use a TYPO3-version-specific cache configuration again (#1469)
 - Avoid the deprecated `setUpBackendUserFromFixture` (#1465)
