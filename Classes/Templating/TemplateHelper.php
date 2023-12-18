@@ -23,7 +23,7 @@ class TemplateHelper extends SalutationSwitcher
     private const LABEL_PATTERN = '/###(LABEL_([A-Z\\d_]+))###/';
 
     /**
-     * @var list<null|false|''|0|'0'>
+     * @var list<false|''|0|'0'|null>
      */
     private const FALSEY_VALUES = [null, false, '', 0, '0'];
 
