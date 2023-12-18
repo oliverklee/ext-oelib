@@ -6,15 +6,23 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 5.2.1
+
+### Added
 - Add support for Symfony 7 (#1440)
 - Add the Crowdin configuration (#1437)
 
 ### Changed
 - Also run the PHP 8.2/8.3 functional tests with the lowest dependencies (#1220)
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 - Properly create the `LanguageService` in a functional test (#1473)
