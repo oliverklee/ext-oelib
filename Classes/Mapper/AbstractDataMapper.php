@@ -655,9 +655,13 @@ abstract class AbstractDataMapper
         foreach ($whereClauseParts as $identifier => $value) {
             $query->andWhere($query->expr()->eq($identifier, $query->createNamedParameter($value)));
         }
-        $result = $query->execute();
-        if (!$result instanceof ResultStatement) {
-            throw new \UnexpectedValueException('Expected ResultStatement, got int instead.', 1646321598);
+        if (\method_exists($query, 'executeQuery')) {
+            $result = $query->executeQuery();
+        } else {
+            $result = $query->execute();
+            if (!$result instanceof ResultStatement) {
+                throw new \UnexpectedValueException('Expected ResultStatement, got int instead.', 1646321598);
+            }
         }
 
         if (\method_exists($result, 'fetchAssociative')) {
@@ -1243,9 +1247,13 @@ abstract class AbstractDataMapper
         $this->addPageUidRestriction($query, (string)$pageUids);
         $this->addOrdering($query, $sorting);
 
-        $result = $query->execute();
-        if (!$result instanceof ResultStatement) {
-            throw new \UnexpectedValueException('Expected ResultStatement, got int instead.', 1646321575);
+        if (\method_exists($query, 'executeQuery')) {
+            $result = $query->executeQuery();
+        } else {
+            $result = $query->execute();
+            if (!$result instanceof ResultStatement) {
+                throw new \UnexpectedValueException('Expected ResultStatement, got int instead.', 1646321575);
+            }
         }
 
         if (\method_exists($result, 'fetchAllAssociative')) {
@@ -1541,9 +1549,13 @@ abstract class AbstractDataMapper
             );
         }
 
-        $result = $query->execute();
-        if (!$result instanceof ResultStatement) {
-            throw new \UnexpectedValueException('Expected ResultStatement, got int instead.', 1646321551);
+        if (\method_exists($query, 'executeQuery')) {
+            $result = $query->executeQuery();
+        } else {
+            $result = $query->execute();
+            if (!$result instanceof ResultStatement) {
+                throw new \UnexpectedValueException('Expected ResultStatement, got int instead.', 1646321551);
+            }
         }
 
         if (\method_exists($result, 'fetchAllAssociative')) {

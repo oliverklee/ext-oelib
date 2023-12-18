@@ -82,22 +82,32 @@ class PageRepository implements SingletonInterface
         );
 
         $subpageUids = [];
-        $queryResult = $query->execute();
-        if ($queryResult instanceof ResultStatement) {
-            if (\method_exists($queryResult, 'fetchAllAssociative')) {
-                foreach ($queryResult->fetchAllAssociative() as $row) {
-                    /** @var positive-int $uid */
-                    $uid = (int)$row['uid'];
-                    $subpageUids[] = $uid;
-                }
-            } else {
-                foreach ($queryResult->fetchAll() as $row) {
-                    /** @var positive-int $uid */
-                    $uid = (int)$row['uid'];
-                    $subpageUids[] = $uid;
+        if (\method_exists($query, 'executeQuery')) {
+            $queryResult = $query->executeQuery();
+            foreach ($queryResult->fetchAllAssociative() as $row) {
+                /** @var positive-int $uid */
+                $uid = (int)$row['uid'];
+                $subpageUids[] = $uid;
+            }
+        } else {
+            $queryResult = $query->execute();
+            if ($queryResult instanceof ResultStatement) {
+                if (\method_exists($queryResult, 'fetchAllAssociative')) {
+                    foreach ($queryResult->fetchAllAssociative() as $row) {
+                        /** @var positive-int $uid */
+                        $uid = (int)$row['uid'];
+                        $subpageUids[] = $uid;
+                    }
+                } else {
+                    foreach ($queryResult->fetchAll() as $row) {
+                        /** @var positive-int $uid */
+                        $uid = (int)$row['uid'];
+                        $subpageUids[] = $uid;
+                    }
                 }
             }
         }
+
         return $subpageUids;
     }
 

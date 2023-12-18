@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Avoid using the deprecated `Query::execute()` (#1470)
 - Use a TYPO3-version-specific cache configuration again (#1469)
 - Avoid the deprecated `setUpBackendUserFromFixture` (#1465)
 - Avoid accessing the protected `AbstractPlugin->cObj` (#1462)
