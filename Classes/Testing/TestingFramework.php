@@ -1355,9 +1355,13 @@ routes: {  }";
         foreach ($allCriteria as $identifier => $value) {
             $query->andWhere($query->expr()->eq($identifier, $query->createNamedParameter($value)));
         }
-        $result = $query->execute();
-        if (!$result instanceof ResultStatement) {
-            throw new \UnexpectedValueException('Expected ResultStatement, got int instead.', 1646321756);
+        if (\method_exists($query, 'executeQuery')) {
+            $result = $query->executeQuery();
+        } else {
+            $result = $query->execute();
+            if (!$result instanceof ResultStatement) {
+                throw new \UnexpectedValueException('Expected ResultStatement, got int instead.', 1646321756);
+            }
         }
 
         if (\method_exists($result, 'fetchOne')) {

@@ -31,7 +31,12 @@ class GermanZipCodeRepository extends Repository
         }
 
         $query = $this->createQuery();
-        $result = $query->matching($query->equals('zipCode', $zipCode))->setLimit(1)->execute();
+        $query->matching($query->equals('zipCode', $zipCode))->setLimit(1);
+        if (\method_exists($query, 'executeQuery')) {
+            $result = $query->executeQuery();
+        } else {
+            $result = $query->execute();
+        }
 
         /** @var GermanZipCode|null $firstMatch */
         $firstMatch = $result->getFirst();
