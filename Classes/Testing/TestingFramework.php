@@ -14,6 +14,7 @@ use OliverKlee\Oelib\Model\FrontEndUserGroup;
 use Psr\Log\NullLogger;
 use TYPO3\CMS\Core\Configuration\SiteConfiguration;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\UserAspect;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -1163,6 +1164,8 @@ routes: {  }";
                 $frontEndUser->fetchGroupData(new ServerRequest());
             }
         }
+
+        GeneralUtility::makeInstance(Context::class)->setAspect('frontend.user', new UserAspect($frontEndUser));
     }
 
     /**
@@ -1191,6 +1194,7 @@ routes: {  }";
         }
 
         FrontEndLoginManager::getInstance()->logInUser();
+        GeneralUtility::makeInstance(Context::class)->setAspect('frontend.user', new UserAspect());
     }
 
     /**
@@ -1206,7 +1210,7 @@ routes: {  }";
             throw new \BadMethodCallException('Please create a front end before calling isLoggedIn.', 1331490846);
         }
 
-        return FrontEndLoginManager::getInstance()->isLoggedIn();
+        return (bool)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'isLoggedIn');
     }
 
     // ----------------------------------------------------------------------
