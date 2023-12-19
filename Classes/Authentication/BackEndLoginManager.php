@@ -6,7 +6,8 @@ namespace OliverKlee\Oelib\Authentication;
 
 use OliverKlee\Oelib\Interfaces\LoginManager;
 use OliverKlee\Oelib\Model\AbstractModel;
-use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class represents a manager for back-end logins, providing access to the logged-in user.
@@ -64,7 +65,7 @@ class BackEndLoginManager implements LoginManager
     public function isLoggedIn(): bool
     {
         return $this->loggedInUser instanceof AbstractModel
-            || $this->getBackEndUserAuthentication() instanceof BackendUserAuthentication;
+            || (bool)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('backend.user', 'isLoggedIn');
     }
 
     /**
@@ -80,14 +81,6 @@ class BackEndLoginManager implements LoginManager
     }
 
     /**
-     * Returns $GLOBALS['BE_USER'].
-     */
-    protected function getBackEndUserAuthentication(): ?BackendUserAuthentication
-    {
-        return $GLOBALS['BE_USER'] ?? null;
-    }
-
-    /**
      * Returns the UID of the currently logged-in user.
      *
      * @return int<0, max> will be zero if no user is logged in
@@ -98,15 +91,6 @@ class BackEndLoginManager implements LoginManager
             return $this->loggedInUser->getUid();
         }
 
-        $user = $this->getBackEndUserAuthentication();
-        if (!$user instanceof BackendUserAuthentication) {
-            return 0;
-        }
-
-        $userData = $user->user;
-
-        $uid = \is_array($userData) ? (int)$userData['uid'] : 0;
-
-        return $uid > 0 ? $uid : 0;
+        return (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('backend.user', 'id');
     }
 }

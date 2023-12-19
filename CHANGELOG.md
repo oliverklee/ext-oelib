@@ -25,6 +25,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add the Crowdin configuration (#1437)
 
 ### Changed
+- Migrate the login functions to the Context API (#1483)
 - Also run the PHP 8.2/8.3 functional tests with the lowest dependencies (#1220)
 
 ### Fixed

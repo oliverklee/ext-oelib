@@ -1,7 +1,12 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Method OliverKlee\\\\Oelib\\\\Authentication\\\\BackEndLoginManager\\:\\:getBackEndUserAuthentication\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Authentication\\\\BackendUserAuthentication\\|null but returns mixed\\.$#"
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: Classes/Authentication/BackEndLoginManager.php
+
+		-
+			message: "#^Method OliverKlee\\\\Oelib\\\\Authentication\\\\BackEndLoginManager\\:\\:getLoggedInUserUid\\(\\) should return int\\<0, max\\> but returns int\\.$#"
 			count: 1
 			path: Classes/Authentication/BackEndLoginManager.php
 

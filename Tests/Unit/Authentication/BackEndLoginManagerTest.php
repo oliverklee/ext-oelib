@@ -13,6 +13,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class BackEndLoginManagerTest extends UnitTestCase
 {
+    protected $resetSingletonInstances = true;
+
     /**
      * @var BackEndLoginManager
      */
