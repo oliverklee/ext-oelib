@@ -100,7 +100,7 @@ final class ConfigurationRegistryTest extends FunctionalTestCase
     {
         $pageUid = $this->testingFramework->createFrontEndPage();
         $this->testingFramework->createTemplate($pageUid, ['config' => 'plugin.tx_oelib.test = 42']);
-        $_POST['id'] = $pageUid;
+        $_GET['id'] = $pageUid;
 
         PageFinder::getInstance()->forceSource(PageFinder::SOURCE_BACK_END);
 
