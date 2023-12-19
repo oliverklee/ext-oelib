@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Mark some classes as `@internal` (#1478)
 
 ### Deprecated
 

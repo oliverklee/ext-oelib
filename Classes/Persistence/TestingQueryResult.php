@@ -13,6 +13,8 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
  *
  * This class is intended to be used in unit tests (usually for repositories).
  *
+ * @internal
+ *
  * @template Model
  * @implements QueryResultInterface<Model>
  */

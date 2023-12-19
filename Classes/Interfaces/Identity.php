@@ -6,6 +6,8 @@ namespace OliverKlee\Oelib\Interfaces;
 
 /**
  * This interface represents something that has an identity, i.e., a UID.
+ *
+ * @internal
  */
 interface Identity
 {
