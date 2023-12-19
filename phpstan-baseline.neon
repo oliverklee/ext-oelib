@@ -161,12 +161,57 @@ parameters:
 			path: Classes/Geocoding/GoogleGeocoding.php
 
 		-
+			message: "#^Cannot call method getLanguage\\(\\) on mixed\\.$#"
+			count: 1
+			path: Classes/Language/SalutationSwitcher.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 3
+			path: Classes/Language/SalutationSwitcher.php
+
+		-
 			message: "#^Method OliverKlee\\\\Oelib\\\\Language\\\\SalutationSwitcher\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null but returns mixed\\.$#"
 			count: 1
 			path: Classes/Language/SalutationSwitcher.php
 
 		-
 			message: "#^Method OliverKlee\\\\Oelib\\\\Language\\\\SalutationSwitcher\\:\\:getLanguageService\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null but returns mixed\\.$#"
+			count: 1
+			path: Classes/Language/SalutationSwitcher.php
+
+		-
+			message: "#^Only booleans are allowed in an elseif condition, string given\\.$#"
+			count: 1
+			path: Classes/Language/SalutationSwitcher.php
+
+		-
+			message: "#^Property OliverKlee\\\\Oelib\\\\Language\\\\SalutationSwitcher\\:\\:\\$LLtestPrefix \\(string\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: Classes/Language/SalutationSwitcher.php
+
+		-
+			message: "#^Property OliverKlee\\\\Oelib\\\\Language\\\\SalutationSwitcher\\:\\:\\$LLtestPrefixAlt \\(string\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: Classes/Language/SalutationSwitcher.php
+
+		-
+			message: "#^Property OliverKlee\\\\Oelib\\\\Language\\\\SalutationSwitcher\\:\\:\\$LOCAL_LANG type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Language/SalutationSwitcher.php
+
+		-
+			message: "#^Property OliverKlee\\\\Oelib\\\\Language\\\\SalutationSwitcher\\:\\:\\$LOCAL_LANG_UNSET type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Language/SalutationSwitcher.php
+
+		-
+			message: "#^Property OliverKlee\\\\Oelib\\\\Language\\\\SalutationSwitcher\\:\\:\\$conf type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Language/SalutationSwitcher.php
+
+		-
+			message: "#^Property OliverKlee\\\\Oelib\\\\Language\\\\SalutationSwitcher\\:\\:\\$frontendController \\(TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\) does not accept mixed\\.$#"
 			count: 1
 			path: Classes/Language/SalutationSwitcher.php
 

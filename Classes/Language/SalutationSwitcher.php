@@ -5,16 +5,105 @@ declare(strict_types=1);
 namespace OliverKlee\Oelib\Language;
 
 use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Localization\Locales;
+use TYPO3\CMS\Core\Localization\LocalizationFactory;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
-use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * This class provides functions for localization.
  *
  * @deprecated will be removed in oelib 6.0
  */
-abstract class SalutationSwitcher extends AbstractPlugin
+abstract class SalutationSwitcher
 {
+    /**
+     * Path to the plugin class script relative to extension directory, eg. 'pi1/class.tx_newfaq_pi1.php'
+     *
+     * @var string
+     */
+    public $scriptRelPath;
+
+    /**
+     * Extension key.
+     *
+     * @var string
+     */
+    public $extKey;
+
+    /**
+     * Should normally be set in the main function with the TypoScript content passed to the method.
+     *
+     * $conf[LOCAL_LANG][_key_] is reserved for Local Language overrides.
+     * $conf[userFunc] reserved for setting up the USER / USER_INT object. See TSref
+     *
+     * @var array
+     */
+    public $conf = [];
+
+    /**
+     * Property for accessing TypoScriptFrontendController centrally
+     *
+     * @var TypoScriptFrontendController
+     */
+    protected $frontendController;
+
+    /**
+     * Local Language content
+     *
+     * @var array
+     */
+    public $LOCAL_LANG = [];
+
+    /**
+     * Contains those LL keys, which have been set to (empty) in TypoScript.
+     * This is necessary, as we cannot distinguish between a nonexisting
+     * translation and a label that has been cleared by TS.
+     * In both cases ['key'][0]['target'] is "".
+     *
+     * @var array
+     */
+    protected $LOCAL_LANG_UNSET = [];
+
+    /**
+     * Flag that tells if the locallang file has been fetch (or tried to
+     * be fetched) already.
+     *
+     * @var bool
+     */
+    public $LOCAL_LANG_loaded = false;
+
+    /**
+     * Pointer to the language to use.
+     *
+     * @var string
+     */
+    public $LLkey = 'default';
+
+    /**
+     * Pointer to alternative fall-back language to use.
+     *
+     * @var string
+     */
+    public $altLLkey = '';
+
+    /**
+     * You can set this during development to some value that makes it
+     * easy for you to spot all labels that ARe delivered by the getLL function.
+     *
+     * @var string
+     */
+    public $LLtestPrefix = '';
+
+    /**
+     * Save as LLtestPrefix, but additional prefix for the alternative value
+     * in getLL() function calls
+     *
+     * @var string
+     */
+    public $LLtestPrefixAlt = '';
+
     /**
      * A list of language keys for which the localizations have been loaded
      * (or NULL if the list has not been compiled yet).
@@ -36,6 +125,21 @@ abstract class SalutationSwitcher extends AbstractPlugin
      * @var array<non-empty-string, string>
      */
     protected $translationCache = [];
+
+    public function __construct()
+    {
+        $this->frontendController = $GLOBALS['TSFE'] ?? null;
+
+        $this->LLkey = $this->frontendController->getLanguage()->getTypo3Language();
+
+        $locales = GeneralUtility::makeInstance(Locales::class);
+        if (in_array($this->LLkey, $locales->getLocales(), true)) {
+            foreach ($locales->getLocaleDependencies($this->LLkey) as $language) {
+                $this->altLLkey .= $language . ',';
+            }
+            $this->altLLkey = rtrim($this->altLLkey, ',');
+        }
+    }
 
     /**
      * Makes this object serializable.
@@ -242,5 +346,89 @@ abstract class SalutationSwitcher extends AbstractPlugin
     protected function getLanguageService(): ?LanguageService
     {
         return $GLOBALS['LANG'] ?? null;
+    }
+
+    /**
+     * Returns the localized label of the LOCAL_LANG key, $key
+     * Notice that for debugging purposes prefixes for the output values can be set with the internal vars
+     * ->LLtestPrefixAlt and ->LLtestPrefix
+     *
+     * @param string $key The key from the LOCAL_LANG array for which to return the value.
+     * @param string $alternativeLabel Alternative string to return IF no value is found set for the key,
+     *        neither for the local language nor the default.
+     * @return string The value from LOCAL_LANG.
+     */
+    // phpcs:ignore
+    public function pi_getLL(string $key, string $alternativeLabel = ''): string
+    {
+        $word = null;
+        if (
+            !empty($this->LOCAL_LANG[$this->LLkey][$key][0]['target'])
+            || isset($this->LOCAL_LANG_UNSET[$this->LLkey][$key])
+        ) {
+            $word = $this->LOCAL_LANG[$this->LLkey][$key][0]['target'];
+        } elseif ($this->altLLkey) {
+            $alternativeLanguageKeys = GeneralUtility::trimExplode(',', $this->altLLkey, true);
+            $alternativeLanguageKeys = array_reverse($alternativeLanguageKeys);
+            foreach ($alternativeLanguageKeys as $languageKey) {
+                if (
+                    !empty($this->LOCAL_LANG[$languageKey][$key][0]['target'])
+                    || isset($this->LOCAL_LANG_UNSET[$languageKey][$key])
+                ) {
+                    // Alternative language translation for key exists
+                    $word = $this->LOCAL_LANG[$languageKey][$key][0]['target'];
+                    break;
+                }
+            }
+        }
+        if ($word === null) {
+            if (
+                !empty($this->LOCAL_LANG['default'][$key][0]['target'])
+                || isset($this->LOCAL_LANG_UNSET['default'][$key])
+            ) {
+                // Get default translation (without charset conversion, english)
+                $word = $this->LOCAL_LANG['default'][$key][0]['target'];
+            } else {
+                // Return alternative string or empty
+                $word = isset($this->LLtestPrefixAlt) ? $this->LLtestPrefixAlt . $alternativeLabel : $alternativeLabel;
+            }
+        }
+        return isset($this->LLtestPrefix) ? $this->LLtestPrefix . $word : $word;
+    }
+
+    /**
+     * Loads local-language values from the file passed as a parameter or
+     * by looking for a "locallang" file in the
+     * plugin class directory ($this->scriptRelPath).
+     * Also locallang values set in the TypoScript property "_LOCAL_LANG" are
+     * merged onto the values found in the "locallang" file.
+     * Supported file extensions xlf
+     *
+     * @param string $languageFilePath path to the plugin language file in format EXT:....
+     */
+    // phpcs:ignore
+    public function pi_loadLL($languageFilePath = ''): void
+    {
+        if ($this->LOCAL_LANG_loaded) {
+            return;
+        }
+
+        if ($this->scriptRelPath !== '') {
+            $languageFilePath = 'EXT:' . $this->extKey . '/' . PathUtility::dirname(
+                $this->scriptRelPath
+            ) . '/locallang.xlf';
+        }
+        if ($languageFilePath !== '') {
+            $languageFactory = GeneralUtility::makeInstance(LocalizationFactory::class);
+            $this->LOCAL_LANG = $languageFactory->getParsedData($languageFilePath, $this->LLkey);
+            $alternativeLanguageKeys = GeneralUtility::trimExplode(',', $this->altLLkey, true);
+            foreach ($alternativeLanguageKeys as $languageKey) {
+                $tempLL = $languageFactory->getParsedData($languageFilePath, $languageKey);
+                if ($this->LLkey !== 'default' && isset($tempLL[$languageKey])) {
+                    $this->LOCAL_LANG[$languageKey] = $tempLL[$languageKey];
+                }
+            }
+        }
+        $this->LOCAL_LANG_loaded = true;
     }
 }
