@@ -6,16 +6,17 @@ namespace OliverKlee\Oelib\Templating;
 
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Exception\NotFoundException;
-use OliverKlee\Oelib\Language\SalutationSwitcher;
+use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * This utility class provides some commonly-used functions for handling
  * templates (in addition to all functionality provided by the base classes).
  */
-class TemplateHelper extends SalutationSwitcher
+class TemplateHelper extends AbstractPlugin
 {
     /**
      * @var non-empty-string the regular expression used to find subparts
@@ -56,6 +57,28 @@ class TemplateHelper extends SalutationSwitcher
      * @var Template|null this object's (only) template
      */
     private $template;
+
+    /**
+     * A list of language keys for which the localizations have been loaded
+     * (or NULL if the list has not been compiled yet).
+     *
+     * @var array<string>|null
+     */
+    private $availableLanguages;
+
+    /**
+     * An ordered list of language label suffixes that should be tried to get
+     * localizations in the preferred order of formality (or NULL if the list
+     * has not been compiled yet).
+     *
+     * @var list<'_formal'|'_informal'|''>|null
+     */
+    private $suffixesToTry;
+
+    /**
+     * @var array<non-empty-string, string>
+     */
+    protected $translationCache = [];
 
     /**
      * Initializes the FE plugin stuff and reads the configuration.
@@ -838,5 +861,212 @@ class TemplateHelper extends SalutationSwitcher
     public function getListViewConfValueBoolean(string $fieldName): bool
     {
         return (bool)$this->getListViewConfigurationValue($fieldName);
+    }
+
+    /**
+     * Makes this object serializable.
+     *
+     * @return list<non-empty-string>
+     */
+    public function __sleep(): array
+    {
+        $propertyNames = [];
+        foreach ((new \ReflectionClass($this))->getProperties() as $property) {
+            $propertyName = $property->getName();
+            if ($propertyName === 'frontendController') {
+                continue;
+            }
+            $propertyNames[] = $property->isPrivate() ? (static::class . ':' . $propertyName) : $propertyName;
+        }
+
+        return $propertyNames;
+    }
+
+    /**
+     * Restores data that got lost during the serialization.
+     */
+    public function __wakeup(): void
+    {
+        $controller = $this->getFrontEndController();
+        if ($controller instanceof TypoScriptFrontendController) {
+            $this->frontendController = $controller;
+        }
+    }
+
+    /**
+     * Retrieves the localized string for the local language key $key.
+     *
+     * This function checks whether the FE or BE localization functions are
+     * available and then uses the appropriate method.
+     *
+     * In $this->conf['salutation'], a suffix to the key may be set (which may
+     * be either 'formal' or 'informal'). If a corresponding key exists, the
+     * formal/informal localized string is used instead.
+     * If the formal/informal key doesn't exist, this function just uses the
+     * regular string.
+     *
+     * Example: key = 'greeting', suffix = 'informal'. If the key
+     * 'greeting_informal' exists, that string is used.
+     * If it doesn't exist, this functions tries to use the string with the key
+     * 'greeting'.
+     *
+     * @param non-empty-string $key the local language key for which to return the value
+     *
+     * @return string the requested local language key, might be empty
+     *
+     * @deprecated will be removed in oelib 6.0
+     */
+    public function translate(string $key): string
+    {
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
+        if ($key === '') {
+            throw new \InvalidArgumentException('$key must not be empty.', 1331489025);
+        }
+        if ($this->extKey === '') {
+            return $key;
+        }
+        if (isset($this->translationCache[$key])) {
+            return $this->translationCache[$key];
+        }
+
+        $this->pi_loadLL();
+        if (\is_array($this->LOCAL_LANG) && $this->getFrontEndController() !== null) {
+            $result = $this->translateInFrontEnd($key);
+        } elseif ($this->getLanguageService() !== null) {
+            $result = $this->translateInBackEnd($key);
+        } else {
+            $result = $key;
+        }
+
+        $this->translationCache[$key] = $result;
+
+        return $result;
+    }
+
+    /**
+     * Retrieves the localized string for the local language key $key, using the
+     * BE localization methods.
+     *
+     * @param non-empty-string $key the local language key for which to return the value
+     *
+     * @return string the requested local language key, might be empty
+     */
+    private function translateInBackEnd(string $key): string
+    {
+        $languageService = $this->getLanguageService();
+
+        if (!$languageService instanceof LanguageService) {
+            throw new \RuntimeException('No initialized language service.', 1646321243);
+        }
+
+        return $languageService->getLL($key);
+    }
+
+    /**
+     * Retrieves the localized string for the local language key $key, using the
+     * FE localization methods.
+     *
+     * In $this->conf['salutation'], a suffix to the key may be set (which may
+     * be either 'formal' or 'informal'). If a corresponding key exists, the
+     * formal/informal localized string is used instead.
+     * If the formal/informal key doesn't exist, this function just uses the
+     * regular string.
+     *
+     * Example: key = 'greeting', suffix = 'informal'. If the key
+     * 'greeting_informal' exists, that string is used.
+     * If it doesn't exist, this functions tries to use the string with the key
+     * 'greeting'.
+     *
+     * @param non-empty-string $key the local language key for which to return the value
+     *
+     * @return string the requested local language key, might be empty
+     */
+    private function translateInFrontEnd(string $key): string
+    {
+        $hasFoundATranslation = false;
+        $result = '';
+
+        $availableLanguages = $this->getAvailableLanguages();
+        foreach ($this->getSuffixesToTry() as $suffix) {
+            $completeKey = $key . $suffix;
+            foreach ($availableLanguages as $language) {
+                if (isset($this->LOCAL_LANG[$language][$completeKey])) {
+                    $result = $this->pi_getLL($completeKey);
+                    $hasFoundATranslation = true;
+                    break 2;
+                }
+            }
+        }
+
+        if (!$hasFoundATranslation) {
+            $result = $key;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Compiles a list of language keys for which localizations have been loaded.
+     *
+     * @return array<string> a list of language keys (might be empty)
+     */
+    private function getAvailableLanguages(): array
+    {
+        if ($this->availableLanguages === null) {
+            $this->availableLanguages = [];
+
+            if ($this->LLkey !== '') {
+                $this->availableLanguages[] = $this->LLkey;
+            }
+            // The key for English is "default", not "en".
+            $this->availableLanguages = \str_replace('en', 'default', $this->availableLanguages);
+            // Remove duplicates in case the default language is the same as the fall-back language.
+            $this->availableLanguages = \array_unique($this->availableLanguages);
+
+            // Now check that we only keep languages for which we have translations.
+            foreach ($this->availableLanguages as $index => $code) {
+                if (!isset($this->LOCAL_LANG[$code])) {
+                    unset($this->availableLanguages[$index]);
+                }
+            }
+        }
+
+        return $this->availableLanguages;
+    }
+
+    /**
+     * Gets an ordered list of language label suffixes that should be tried to
+     * get localizations in the preferred order of formality.
+     *
+     * @return list<'_formal'|'_informal'|''> ordered list of suffixes, will not be empty
+     */
+    private function getSuffixesToTry(): array
+    {
+        if ($this->suffixesToTry === null) {
+            $this->suffixesToTry = [];
+
+            if (isset($this->conf['salutation'])) {
+                if ($this->conf['salutation'] === 'informal') {
+                    $this->suffixesToTry[] = '_informal';
+                }
+                $this->suffixesToTry[] = '_formal';
+            }
+            $this->suffixesToTry[] = '';
+        }
+
+        return $this->suffixesToTry;
+    }
+
+    protected function getFrontEndController(): ?TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'] ?? null;
+    }
+
+    /**
+     * Returns $GLOBALS['LANG'].
+     */
+    protected function getLanguageService(): ?LanguageService
+    {
+        return $GLOBALS['LANG'] ?? null;
     }
 }

@@ -251,6 +251,16 @@ parameters:
 			path: Classes/Templating/Template.php
 
 		-
+			message: "#^Method OliverKlee\\\\Oelib\\\\Templating\\\\TemplateHelper\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null but returns mixed\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
+			message: "#^Method OliverKlee\\\\Oelib\\\\Templating\\\\TemplateHelper\\:\\:getLanguageService\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Localization\\\\LanguageService\\|null but returns mixed\\.$#"
+			count: 1
+			path: Classes/Templating/TemplateHelper.php
+
+		-
 			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetchAll\\(\\)\\.$#"
 			count: 1
 			path: Classes/Testing/TestingFramework.php
