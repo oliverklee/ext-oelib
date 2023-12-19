@@ -414,9 +414,10 @@ abstract class SalutationSwitcher
         }
 
         if ($this->scriptRelPath !== '') {
-            $languageFilePath = 'EXT:' . $this->extKey . '/' . PathUtility::dirname(
-                $this->scriptRelPath
-            ) . '/locallang.xlf';
+            $languageFilePath = 'EXT:' . $this->extKey . '/'
+                . PathUtility::dirname($this->scriptRelPath) . '/locallang.xlf';
+        } else {
+            $languageFilePath = '';
         }
         if ($languageFilePath !== '') {
             $languageFactory = GeneralUtility::makeInstance(LocalizationFactory::class);
