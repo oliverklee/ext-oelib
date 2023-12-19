@@ -6,7 +6,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Provide a `DummyRequest` for testing (#1477, #1479)
 
 ### Changed
 - Mark some classes as `@internal` (#1478)
