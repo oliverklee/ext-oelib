@@ -935,7 +935,12 @@ final class TestingFramework
             $frontEnd->id = $pageUid;
         }
         $frontEnd->determineId($request);
-        $frontEnd->tmpl = GeneralUtility::makeInstance(TemplateService::class);
+        if ((new Typo3Version())->getMajorVersion() <= 11) {
+            $template = GeneralUtility::makeInstance(TemplateService::class);
+            $frontEnd->tmpl = $template;
+        } else {
+            $template = null;
+        }
         $frontEnd->config = [
             'config' => ['MP_disableTypolinkClosestMPvalue' => true, 'typolinkLinkAccessRestrictedPages' => true],
         ];
@@ -947,9 +952,11 @@ final class TestingFramework
                 $rootLine = [];
             }
 
-            $frontEnd->tmpl->runThroughTemplates($rootLine);
-            $frontEnd->tmpl->generateConfig();
-            $frontEnd->tmpl->loaded = true;
+            if ($template !== null) {
+                $frontEnd->tmpl->runThroughTemplates($rootLine);
+                $frontEnd->tmpl->generateConfig();
+                $frontEnd->tmpl->loaded = true;
+            }
             Locales::setSystemLocaleFromSiteLanguage($frontEnd->getLanguage());
         }
 
