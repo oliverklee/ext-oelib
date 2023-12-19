@@ -19,6 +19,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Exception\Page\PageNotFoundException;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\Locales;
 use TYPO3\CMS\Core\Routing\PageArguments;
@@ -897,9 +898,17 @@ final class TestingFramework
         $this->setRequestUriForFakeFrontEnd($pageUid);
 
         $frontEndUser = GeneralUtility::makeInstance(FrontendUserAuthentication::class);
-        $frontEndUser->start();
-        $frontEndUser->unpack_uc();
-        $frontEndUser->fetchGroupData();
+        $request = new ServerRequest();
+        if ((new Typo3Version())->getMajorVersion() <= 10) {
+            $frontEndUser->start();
+            $frontEndUser->fetchGroupData();
+        } else {
+            $frontEndUser->start($request);
+            $frontEndUser->fetchGroupData($request);
+        }
+        if ((new Typo3Version())->getMajorVersion() <= 11) {
+            $frontEndUser->unpack_uc();
+        }
 
         $this->createDummySite($pageUid);
         $allSites = GeneralUtility::makeInstance(SiteConfiguration::class)->getAllExistingSites(false);
@@ -919,8 +928,12 @@ final class TestingFramework
         $GLOBALS['TSFE'] = $frontEnd;
 
         $frontEnd->fe_user = $frontEndUser;
-        $frontEnd->id = (string)$pageUid;
-        $frontEnd->determineId();
+        if ((new Typo3Version())->getMajorVersion() <= 10) {
+            $frontEnd->id = (string)$pageUid;
+        } else {
+            $frontEnd->id = $pageUid;
+        }
+        $frontEnd->determineId($request);
         $frontEnd->tmpl = GeneralUtility::makeInstance(TemplateService::class);
         $frontEnd->config = [
             'config' => ['MP_disableTypolinkClosestMPvalue' => true, 'typolinkLinkAccessRestrictedPages' => true],
@@ -943,6 +956,9 @@ final class TestingFramework
         /** @var ContentObjectRenderer $contentObject */
         $contentObject = $frontEnd->cObj;
         $contentObject->setLogger(new NullLogger());
+        if ((new Typo3Version())->getMajorVersion() >= 11) {
+            $contentObject->setRequest($request);
+        }
 
         $this->hasFakeFrontEnd = true;
         $this->logoutFrontEndUser();
@@ -1141,7 +1157,11 @@ routes: {  }";
         if ($frontEndUser instanceof FrontendUserAuthentication) {
             $frontEndUser->createUserSession(['uid' => $userId, 'disableIPlock' => true]);
             $frontEndUser->user = $dataToSet;
-            $frontEndUser->fetchGroupData();
+            if ((new Typo3Version())->getMajorVersion() <= 10) {
+                $frontEndUser->fetchGroupData();
+            } else {
+                $frontEndUser->fetchGroupData(new ServerRequest());
+            }
         }
     }
 
