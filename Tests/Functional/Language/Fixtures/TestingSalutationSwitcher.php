@@ -24,6 +24,44 @@ final class TestingSalutationSwitcher extends SalutationSwitcher
     public $extKey = 'oelib';
 
     /**
+     * Flag that tells if the locallang file has been fetch (or tried to
+     * be fetched) already.
+     *
+     * @var bool
+     */
+    public $LOCAL_LANG_loaded = false;
+
+    /**
+     * Pointer to the language to use.
+     *
+     * @var string
+     */
+    public $LLkey = 'default';
+
+    /**
+     * Pointer to alternative fall-back language to use.
+     *
+     * @var string
+     */
+    public $altLLkey = '';
+
+    /**
+     * You can set this during development to some value that makes it
+     * easy for you to spot all labels that ARe delivered by the getLL function.
+     *
+     * @var string
+     */
+    public $LLtestPrefix = '';
+
+    /**
+     * Save as LLtestPrefix, but additional prefix for the alternative value
+     * in getLL() function calls
+     *
+     * @var string
+     */
+    public $LLtestPrefixAlt = '';
+
+    /**
      * The constructor.
      *
      * @param array<string, mixed> $configuration TypoScript setup configuration, may be empty
@@ -34,7 +72,6 @@ final class TestingSalutationSwitcher extends SalutationSwitcher
 
         $this->conf = $configuration;
 
-        $this->pi_setPiVarDefaults();
         $this->pi_loadLL();
     }
 

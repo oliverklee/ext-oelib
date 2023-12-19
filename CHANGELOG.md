@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Stop extending the deprecated `AbstractPlugin` (#1487)
 - Avoid using the deprecated `GeneralUtility::_GP` (#1482)
 - Fix type errors in the testing framework (#1480)
 
