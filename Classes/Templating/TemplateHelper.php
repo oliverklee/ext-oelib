@@ -7,16 +7,22 @@ namespace OliverKlee\Oelib\Templating;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Localization\Locales;
+use TYPO3\CMS\Core\Localization\LocalizationFactory;
+use TYPO3\CMS\Core\Service\MarkerBasedTemplateService;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\HttpUtility;
+use TYPO3\CMS\Core\Utility\MathUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
-use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * This utility class provides some commonly-used functions for handling
  * templates (in addition to all functionality provided by the base classes).
  */
-class TemplateHelper extends AbstractPlugin
+class TemplateHelper
 {
     /**
      * @var non-empty-string the regular expression used to find subparts
@@ -27,6 +33,171 @@ class TemplateHelper extends AbstractPlugin
      * @var list<false|''|0|'0'|null>
      */
     private const FALSEY_VALUES = [null, false, '', 0, '0'];
+
+    /**
+     * The back-reference to the mother cObj object set at call time
+     *
+     * @var ContentObjectRenderer|null
+     * @todo: Signature in v12: protected ?ContentObjectRenderer $cObj = null;
+     */
+    public $cObj;
+
+    /**
+     * This is the incoming array by name $this->prefixId merged between POST and GET, POST taking precedence.
+     * Eg. if the class name is 'tx_myext'
+     * then the content of this array will be whatever comes into &tx_myext[...]=...
+     *
+     * @var array
+     */
+    public $piVars = [
+        'pointer' => '',
+        // Used as a pointer for lists
+        'mode' => '',
+        // List mode
+        'sword' => '',
+        // Search word
+        'sort' => '',
+    ];
+
+    /**
+     * Local pointer variable array.
+     * Holds pointer information for the MVC like approach Kasper
+     * initially proposed.
+     *
+     * @var array
+     */
+    public $internal = [
+        'res_count' => 0,
+        'results_at_a_time' => 20,
+        'maxPages' => 10,
+        'currentRow' => [],
+        'currentTable' => '',
+    ];
+
+    /**
+     * Local Language content
+     *
+     * @var array
+     */
+    public $LOCAL_LANG = [];
+
+    /**
+     * Contains those LL keys, which have been set to (empty) in TypoScript.
+     * This is necessary, as we cannot distinguish between a nonexisting
+     * translation and a label that has been cleared by TS.
+     * In both cases ['key'][0]['target'] is "".
+     *
+     * @var array
+     */
+    protected $LOCAL_LANG_UNSET = [];
+
+    /**
+     * Flag that tells if the locallang file has been fetch (or tried to
+     * be fetched) already.
+     *
+     * @var bool
+     */
+    public $LOCAL_LANG_loaded = false;
+
+    /**
+     * Pointer to the language to use.
+     *
+     * @var string
+     */
+    public $LLkey = 'default';
+
+    /**
+     * Pointer to alternative fall-back language to use.
+     *
+     * @var string
+     */
+    public $altLLkey = '';
+
+    /**
+     * You can set this during development to some value that makes it
+     * easy for you to spot all labels that ARe delivered by the getLL function.
+     *
+     * @var string
+     */
+    public $LLtestPrefix = '';
+
+    /**
+     * Save as LLtestPrefix, but additional prefix for the alternative value
+     * in getLL() function calls
+     *
+     * @var string
+     */
+    public $LLtestPrefixAlt = '';
+
+    /**
+     * @var string
+     */
+    public $pi_isOnlyFields = 'mode,pointer';
+
+    /**
+     * @var int
+     */
+    public $pi_alwaysPrev = 0;
+
+    /**
+     * @var int
+     */
+    public $pi_lowerThan = 5;
+
+    /**
+     * @var string
+     */
+    public $pi_moreParams = '';
+
+    /**
+     * @var string
+     */
+    public $pi_listFields = '*';
+
+    /**
+     * @var array
+     */
+    public $pi_autoCacheFields = [];
+
+    /**
+     * @var bool
+     */
+    public $pi_autoCacheEn = false;
+
+    /**
+     * Should normally be set in the main function with the TypoScript content passed to the method.
+     *
+     * $conf[LOCAL_LANG][_key_] is reserved for Local Language overrides.
+     * $conf[userFunc] reserved for setting up the USER / USER_INT object. See TSref
+     *
+     * @var array
+     */
+    public $conf = [];
+
+    /**
+     * internal, don't mess with...
+     *
+     * @var ContentObjectRenderer
+     * @deprecated since v11, will be removed with 12. Drop together with EDITPANEL cObj removal.
+     */
+    public $pi_EPtemp_cObj;
+
+    /**
+     * @var int
+     */
+    public $pi_tmpPageId = 0;
+
+    /**
+     * Property for accessing TypoScriptFrontendController centrally
+     *
+     * @var TypoScriptFrontendController
+     */
+    protected $frontendController;
+
+    /**
+     * @var MarkerBasedTemplateService
+     */
+    protected $templateService;
 
     /**
      * @var string the prefix used for CSS classes
@@ -81,6 +252,33 @@ class TemplateHelper extends AbstractPlugin
     protected $translationCache = [];
 
     /**
+     * Class Constructor (true constructor)
+     * Initializes $this->piVars if $this->prefixId is set to any value
+     * Will also set $this->LLkey based on the config.language setting.
+     *
+     * @param null $_ unused,
+     * @param TypoScriptFrontendController $frontendController
+     */
+    public function __construct($_ = null, TypoScriptFrontendController $frontendController = null)
+    {
+        $this->frontendController = $frontendController ?: $GLOBALS['TSFE'];
+        $this->templateService = GeneralUtility::makeInstance(MarkerBasedTemplateService::class);
+        // Setting piVars:
+        if ($this->prefixId !== '') {
+            $this->piVars = GeneralUtility::_GPmerged($this->prefixId);
+        }
+        $this->LLkey = $this->frontendController->getLanguage()->getTypo3Language();
+
+        $locales = GeneralUtility::makeInstance(Locales::class);
+        if (in_array($this->LLkey, $locales->getLocales(), true)) {
+            foreach ($locales->getLocaleDependencies($this->LLkey) as $language) {
+                $this->altLLkey .= $language . ',';
+            }
+            $this->altLLkey = rtrim($this->altLLkey, ',');
+        }
+    }
+
+    /**
      * Initializes the FE plugin stuff and reads the configuration.
      *
      * It is harmless if this function gets called multiple times as it
@@ -103,10 +301,6 @@ class TemplateHelper extends AbstractPlugin
             $this->conf = $configuration;
         }
         $this->ensureContentObject();
-
-        if ($this->extKey !== '' && $this->conf !== []) {
-            $this->pi_setPiVarDefaults();
-        }
 
         $this->isInitialized = true;
     }
@@ -1068,5 +1262,693 @@ class TemplateHelper extends AbstractPlugin
     protected function getLanguageService(): ?LanguageService
     {
         return $GLOBALS['LANG'] ?? null;
+    }
+
+    /**
+     * Returns the localized label of the LOCAL_LANG key, $key
+     * Notice that for debugging purposes prefixes for the output values can be set with the internal vars
+     * ->LLtestPrefixAlt and ->LLtestPrefix
+     *
+     * @param string $key The key from the LOCAL_LANG array for which to return the value.
+     * @param string $alternativeLabel Alternative string to return IF no value is found set for the key,
+     *        neither for the local language nor the default.
+     * @return string|null The value from LOCAL_LANG.
+     */
+    // phpcs:disable
+    public function pi_getLL(string $key, string $alternativeLabel = ''): ?string
+    {
+        $word = null;
+        if (
+            !empty($this->LOCAL_LANG[$this->LLkey][$key][0]['target'])
+            || isset($this->LOCAL_LANG_UNSET[$this->LLkey][$key])
+        ) {
+            $word = $this->LOCAL_LANG[$this->LLkey][$key][0]['target'];
+        } elseif ($this->altLLkey) {
+            $alternativeLanguageKeys = GeneralUtility::trimExplode(',', $this->altLLkey, true);
+            $alternativeLanguageKeys = array_reverse($alternativeLanguageKeys);
+            foreach ($alternativeLanguageKeys as $languageKey) {
+                if (
+                    !empty($this->LOCAL_LANG[$languageKey][$key][0]['target'])
+                    || isset($this->LOCAL_LANG_UNSET[$languageKey][$key])
+                ) {
+                    // Alternative language translation for key exists
+                    $word = $this->LOCAL_LANG[$languageKey][$key][0]['target'];
+                    break;
+                }
+            }
+        }
+        if ($word === null) {
+            if (
+                !empty($this->LOCAL_LANG['default'][$key][0]['target'])
+                || isset($this->LOCAL_LANG_UNSET['default'][$key])
+            ) {
+                // Get default translation (without charset conversion, english)
+                $word = $this->LOCAL_LANG['default'][$key][0]['target'];
+            } else {
+                // Return alternative string or empty
+                $word = isset($this->LLtestPrefixAlt) ? $this->LLtestPrefixAlt . $alternativeLabel : $alternativeLabel;
+            }
+        }
+        return isset($this->LLtestPrefix) ? $this->LLtestPrefix . $word : $word;
+    }
+
+    /**
+     * Loads local-language values from the file passed as a parameter or
+     * by looking for a "locallang" file in the
+     * plugin class directory ($this->scriptRelPath).
+     * Also locallang values set in the TypoScript property "_LOCAL_LANG" are
+     * merged onto the values found in the "locallang" file.
+     * Supported file extensions xlf
+     */
+    // phpcs:disable
+    public function pi_loadLL(): void
+    {
+        if ($this->LOCAL_LANG_loaded) {
+            return;
+        }
+
+        if ($this->scriptRelPath !== '') {
+            $languageFilePath = 'EXT:' . $this->extKey . '/'
+                . PathUtility::dirname($this->scriptRelPath) . '/locallang.xlf';
+        } else {
+            $languageFilePath = '';
+        }
+        if ($languageFilePath !== '') {
+            $languageFactory = GeneralUtility::makeInstance(LocalizationFactory::class);
+            $this->LOCAL_LANG = $languageFactory->getParsedData($languageFilePath, $this->LLkey);
+            $alternativeLanguageKeys = GeneralUtility::trimExplode(',', $this->altLLkey, true);
+            foreach ($alternativeLanguageKeys as $languageKey) {
+                $tempLL = $languageFactory->getParsedData($languageFilePath, $languageKey);
+                if ($this->LLkey !== 'default' && isset($tempLL[$languageKey])) {
+                    $this->LOCAL_LANG[$languageKey] = $tempLL[$languageKey];
+                }
+            }
+            // Overlaying labels from TypoScript (including fictitious language keys for non-system languages!):
+            if (isset($this->conf['_LOCAL_LANG.'])) {
+                // Clear the "unset memory"
+                $this->LOCAL_LANG_UNSET = [];
+                foreach ($this->conf['_LOCAL_LANG.'] as $languageKey => $languageArray) {
+                    // Remove the dot after the language key
+                    $languageKey = substr($languageKey, 0, -1);
+                    // Don't process label if the language is not loaded
+                    if (is_array($languageArray) && isset($this->LOCAL_LANG[$languageKey])) {
+                        foreach ($languageArray as $labelKey => $labelValue) {
+                            if (!is_array($labelValue)) {
+                                $this->LOCAL_LANG[$languageKey][$labelKey][0]['target'] = $labelValue;
+                                if ($labelValue === '') {
+                                    $this->LOCAL_LANG_UNSET[$languageKey][$labelKey] = '';
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        $this->LOCAL_LANG_loaded = true;
+    }
+
+    /**
+     * Return value from somewhere inside a FlexForm structure
+     *
+     * @param array $T3FlexForm_array FlexForm data
+     * @param string $fieldName Field name to extract. Can be given like "test/el/2/test/el/field_templateObject" where each part will dig a level deeper in the FlexForm data.
+     * @param string $sheet Sheet pointer, eg. "sDEF
+     * @param string $lang Language pointer, eg. "lDEF
+     * @param string $value Value pointer, eg. "vDEF
+     * @return string|null The content.
+     */
+    // phpcs:disable
+    public function pi_getFFvalue(
+        array $T3FlexForm_array,
+        string $fieldName,
+        string $sheet = 'sDEF',
+        string $lang = 'lDEF',
+        string $value = 'vDEF'
+    ): ?string {
+        $sheetArray = $T3FlexForm_array['data'][$sheet][$lang] ?? '';
+        if (is_array($sheetArray)) {
+            return $this->pi_getFFvalueFromSheetArray($sheetArray, explode('/', $fieldName), $value);
+        }
+        return null;
+    }
+
+    /**
+     * Returns part of $sheetArray pointed to by the keys in $fieldNameArray
+     *
+     * @param array $sheetArray Multidimensional array, typically FlexForm contents
+     * @param array $fieldNameArr Array where each value points to a key in the FlexForms content - the input array will have the value returned pointed to by these keys. All integer keys will not take their integer counterparts, but rather traverse the current position in the array and return element number X (whether this is right behavior is not settled yet...)
+     * @param string $value Value for outermost key, typ. "vDEF" depending on language.
+     * @internal
+     * @see pi_getFFvalue()
+     */
+    // phpcs:disable
+    public function pi_getFFvalueFromSheetArray(array $sheetArray, array $fieldNameArr, string $value): string
+    {
+        $tempArr = $sheetArray;
+        foreach ($fieldNameArr as $v) {
+            if (MathUtility::canBeInterpretedAsInteger($v)) {
+                $integerValue = (int)$v;
+                if (is_array($tempArr)) {
+                    $c = 0;
+                    foreach ($tempArr as $values) {
+                        if ($c === $integerValue) {
+                            $tempArr = $values;
+                            break;
+                        }
+                        $c++;
+                    }
+                }
+            } elseif (isset($tempArr[$v])) {
+                $tempArr = $tempArr[$v];
+            }
+        }
+        return $tempArr[$value] ?? '';
+    }
+
+    /**
+     * Converts $this->cObj->data['pi_flexform'] from XML string to flexForm array.
+     *
+     * @param string $field Field name to convert
+     */
+    // phpcs:disable
+    public function pi_initPIflexForm(string $field = 'pi_flexform'): void
+    {
+        if (!$this->cObj instanceof ContentObjectRenderer) {
+            throw new \RuntimeException('No cObj.', 1703017462);
+        }
+
+        // Converting flexform data into array
+        $fieldData = $this->cObj->data[$field] ?? null;
+        if (!is_array($fieldData) && $fieldData) {
+            $this->cObj->data[$field] = GeneralUtility::xml2array((string)$fieldData);
+            if (!is_array($this->cObj->data[$field])) {
+                $this->cObj->data[$field] = [];
+            }
+        }
+    }
+
+    /**
+     * Returns a class-name prefixed with $this->prefixId and with all underscores substituted to dashes (-)
+     *
+     * @param string $class The class name (or the END of it since it will be prefixed by $this->prefixId.'-')
+     * @return string The combined class name (with the correct prefix)
+     */
+    // phpcs:disable
+    public function pi_getClassName(string $class): string
+    {
+        return str_replace('_', '-', $this->prefixId) . ($this->prefixId ? '-' : '') . $class;
+    }
+
+    /**
+     * Will process the input string with the parseFunc function from ContentObjectRenderer based on configuration
+     * set in "lib.parseFunc_RTE" in the current TypoScript template.
+     *
+     * @param string $str The input text string to process
+     * @return string The processed string
+     * @see ContentObjectRenderer::parseFunc()
+     */
+    // phpcs:disable
+    public function pi_RTEcssText(string $str): string
+    {
+        if (!$this->cObj instanceof ContentObjectRenderer) {
+            throw new \RuntimeException('No cObj.', 1703017453);
+        }
+
+        return $this->cObj->parseFunc($str, [], '< lib.parseFunc_RTE');
+    }
+
+    /**
+     * Link string to the current page.
+     * Returns the $str wrapped in <a>-tags with a link to the CURRENT page, but with $urlParameters set as extra parameters for the page.
+     *
+     * @param string $str The content string to wrap in <a> tags
+     * @param array $urlParameters Array with URL parameters as key/value pairs. They will be "imploded" and added to the list of parameters defined in the plugins TypoScript property "parent.addParams" plus $this->pi_moreParams.
+     * @param bool $cache If $cache is set (0/1), the page is asked to be cached by a &cHash value (unless the current plugin using this class is a USER_INT). Otherwise the no_cache-parameter will be a part of the link.
+     * @param int $altPageId Alternative page ID for the link. (By default this function links to the SAME page!)
+     * @return string The input string wrapped in <a> tags
+     * @see pi_linkTP_keepPIvars()
+     * @see ContentObjectRenderer::typoLink()
+     */
+    // phpcs:disable
+    public function pi_linkTP(string $str, array $urlParameters = [], bool $cache = false, int $altPageId = 0): string
+    {
+        if (!$this->cObj instanceof ContentObjectRenderer) {
+            throw new \RuntimeException('No cObj.', 1703017453);
+        }
+
+        $conf = [];
+        if (!$cache) {
+            $conf['no_cache'] = true;
+        }
+        $conf['parameter'] = $altPageId ?: ($this->pi_tmpPageId ?: 'current');
+        $conf['additionalParams'] = ($this->conf['parent.']['addParams'] ?? '')
+            . HttpUtility::buildQueryString($urlParameters, '&', true) . $this->pi_moreParams;
+        return $this->cObj->typoLink($str, $conf);
+    }
+
+    /**
+     * Returns a results browser. This means a bar of page numbers plus a "previous" and "next" link. For each entry in the bar the piVars "pointer" will be pointing to the "result page" to show.
+     * Using $this->piVars['pointer'] as pointer to the page to display. Can be overwritten with another string ($pointerName) to make it possible to have more than one pagebrowser on a page)
+     * Using $this->internal['res_count'], $this->internal['results_at_a_time'] and $this->internal['maxPages'] for count number, how many results to show and the max number of pages to include in the browse bar.
+     * Using $this->internal['dontLinkActivePage'] as switch if the active (current) page should be displayed as pure text or as a link to itself
+     * Using $this->internal['showFirstLast'] as switch if the two links named "<< First" and "LAST >>" will be shown and point to the first or last page.
+     * Using $this->internal['pagefloat']: this defines were the current page is shown in the list of pages in the Pagebrowser. If this var is an integer it will be interpreted as position in the list of pages. If its value is the keyword "center" the current page will be shown in the middle of the pagelist.
+     * Using $this->internal['showRange']: this var switches the display of the pagelinks from pagenumbers to ranges f.e.: 1-5 6-10 11-15... instead of 1 2 3...
+     * Using $this->pi_isOnlyFields: this holds a comma-separated list of fieldnames which - if they are among the GETvars - will not disable caching for the page with pagebrowser.
+     *
+     * The third parameter is an array with several wraps for the parts of the pagebrowser. The following elements will be recognized:
+     * disabledLinkWrap, inactiveLinkWrap, activeLinkWrap, browseLinksWrap, showResultsWrap, showResultsNumbersWrap, browseBoxWrap.
+     *
+     * If $wrapArr['showResultsNumbersWrap'] is set, the formatting string is expected to hold template markers (###FROM###, ###TO###, ###OUT_OF###, ###FROM_TO###, ###CURRENT_PAGE###, ###TOTAL_PAGES###)
+     * otherwise the formatting string is expected to hold sprintf-markers (%s) for from, to, outof (in that sequence)
+     *
+     * @param int $showResultCount Determines how the results of the page browser will be shown. See description below
+     * @param string $tableParams Attributes for the table tag which is wrapped around the table cells containing the browse links
+     * @param array $wrapArr Array with elements to overwrite the default $wrapper-array.
+     * @param string $pointerName varname for the pointer.
+     * @param bool $hscText Enable htmlspecialchars() on language labels
+     * @param bool $forceOutput Forces the output of the page browser if you set this option to "TRUE" (otherwise it's only drawn if enough entries are available)
+     * @return string Output HTML-Table, wrapped in <div>-tags with a class attribute (if $wrapArr is not passed,
+     */
+    // phpcs:disable
+    public function pi_list_browseresults(
+        int $showResultCount = 1,
+        string $tableParams = '',
+        array $wrapArr = [],
+        string $pointerName = 'pointer',
+        bool $hscText = true,
+        bool $forceOutput = false
+    ): string {
+        if (!$this->cObj instanceof ContentObjectRenderer) {
+            throw new \RuntimeException('No cObj.', 1703017658);
+        }
+
+        $wrapper = [];
+        $markerArray = [];
+        // example $wrapArr-array how it could be traversed from an extension
+        /* $wrapArr = array(
+        'browseBoxWrap' => '<div class="browseBoxWrap">|</div>',
+        'showResultsWrap' => '<div class="showResultsWrap">|</div>',
+        'browseLinksWrap' => '<div class="browseLinksWrap">|</div>',
+        'showResultsNumbersWrap' => '<span class="showResultsNumbersWrap">|</span>',
+        'disabledLinkWrap' => '<span class="disabledLinkWrap">|</span>',
+        'inactiveLinkWrap' => '<span class="inactiveLinkWrap">|</span>',
+        'activeLinkWrap' => '<span class="activeLinkWrap">|</span>'
+        );*/
+        // Initializing variables:
+        $pointer = (int)($this->piVars[$pointerName] ?? 0);
+        $count = (int)($this->internal['res_count'] ?? 0);
+        $results_at_a_time = MathUtility::forceIntegerInRange(($this->internal['results_at_a_time'] ?? 1), 1, 1000);
+        $totalPages = (int)ceil($count / $results_at_a_time);
+        $maxPages = MathUtility::forceIntegerInRange($this->internal['maxPages'], 1, 100);
+        $pi_isOnlyFields = (bool)$this->pi_isOnlyFields($this->pi_isOnlyFields);
+        if (!$forceOutput && $count <= $results_at_a_time) {
+            return '';
+        }
+        // $showResultCount determines how the results of the pagerowser will be shown.
+        // If set to 0: only the result-browser will be shown
+        //	 		 1: (default) the text "Displaying results..." and the result-browser will be shown.
+        //	 		 2: only the text "Displaying results..." will be shown
+        $showResultCount = (int)$showResultCount;
+        // If this is set, two links named "<< First" and "LAST >>" will be shown and point to the very first or last page.
+        $showFirstLast = !empty($this->internal['showFirstLast']);
+        // If this has a value the "previous" button is always visible (will be forced if "showFirstLast" is set)
+        $alwaysPrev = $showFirstLast ? 1 : $this->pi_alwaysPrev;
+        if (isset($this->internal['pagefloat'])) {
+            if (strtoupper($this->internal['pagefloat']) === 'CENTER') {
+                $pagefloat = ceil(($maxPages - 1) / 2);
+            } else {
+                // pagefloat set as integer. 0 = left, value >= $this->internal['maxPages'] = right
+                $pagefloat = MathUtility::forceIntegerInRange($this->internal['pagefloat'], -1, $maxPages - 1);
+            }
+        } else {
+            // pagefloat disabled
+            $pagefloat = -1;
+        }
+        // Default values for "traditional" wrapping with a table. Can be overwritten by vars from $wrapArr
+        $wrapper['disabledLinkWrap'] = '<td class="nowrap"><p>|</p></td>';
+        $wrapper['inactiveLinkWrap'] = '<td class="nowrap"><p>|</p></td>';
+        $wrapper['activeLinkWrap'] = '<td' . $this->pi_classParam('browsebox-SCell') . ' class="nowrap"><p>|</p></td>';
+        $wrapper['browseLinksWrap'] = rtrim('<table ' . $tableParams) . '><tr>|</tr></table>';
+        $wrapper['showResultsWrap'] = '<p>|</p>';
+        $wrapper['browseBoxWrap'] = '
+		<!--
+			List browsing box:
+		-->
+		<div ' . $this->pi_classParam('browsebox') . '>
+			|
+		</div>';
+        // Now overwrite all entries in $wrapper which are also in $wrapArr
+        $wrapper = array_merge($wrapper, $wrapArr);
+        // Show pagebrowser
+        if ($showResultCount != 2) {
+            if ($pagefloat > -1) {
+                $lastPage = min($totalPages, max($pointer + 1 + $pagefloat, $maxPages));
+                $firstPage = max(0, $lastPage - $maxPages);
+            } else {
+                $firstPage = 0;
+                $lastPage = MathUtility::forceIntegerInRange($totalPages, 1, $maxPages);
+            }
+            $links = [];
+            // Make browse-table/links:
+            // Link to first page
+            if ($showFirstLast) {
+                if ($pointer > 0) {
+                    $label = $this->pi_getLL('pi_list_browseresults_first', '<< First');
+                    $links[] = $this->cObj->wrap(
+                        $this->pi_linkTP_keepPIvars(
+                            $hscText ? htmlspecialchars(
+                                $label
+                            ) : $label,
+                            [$pointerName => null],
+                            $pi_isOnlyFields
+                        ),
+                        $wrapper['inactiveLinkWrap']
+                    );
+                } else {
+                    $label = $this->pi_getLL('pi_list_browseresults_first', '<< First');
+                    $links[] = $this->cObj->wrap(
+                        $hscText ? htmlspecialchars($label) : $label,
+                        $wrapper['disabledLinkWrap']
+                    );
+                }
+            }
+            // Link to previous page
+            if ($alwaysPrev >= 0) {
+                if ($pointer > 0) {
+                    $label = $this->pi_getLL('pi_list_browseresults_prev', '< Previous');
+                    $links[] = $this->cObj->wrap(
+                        $this->pi_linkTP_keepPIvars(
+                            $hscText ? htmlspecialchars(
+                                $label
+                            ) : $label,
+                            [$pointerName => ($pointer - 1) ?: ''],
+                            $pi_isOnlyFields
+                        ),
+                        $wrapper['inactiveLinkWrap']
+                    );
+                } elseif ($alwaysPrev) {
+                    $label = $this->pi_getLL('pi_list_browseresults_prev', '< Previous');
+                    $links[] = $this->cObj->wrap(
+                        $hscText ? htmlspecialchars($label) : $label,
+                        $wrapper['disabledLinkWrap']
+                    );
+                }
+            }
+            // Links to pages
+            for ($a = $firstPage; $a < $lastPage; $a++) {
+                if ($this->internal['showRange'] ?? false) {
+                    $pageText = ($a * $results_at_a_time + 1) . '-' . min($count, ($a + 1) * $results_at_a_time);
+                } else {
+                    $label = $this->pi_getLL('pi_list_browseresults_page', 'Page');
+                    $pageText = trim(($hscText ? htmlspecialchars($label) : $label) . ' ' . ($a + 1));
+                }
+                // Current page
+                if ($pointer == $a) {
+                    if ($this->internal['dontLinkActivePage'] ?? false) {
+                        $links[] = $this->cObj->wrap($pageText, $wrapper['activeLinkWrap']);
+                    } else {
+                        $links[] = $this->cObj->wrap(
+                            $this->pi_linkTP_keepPIvars(
+                                $pageText,
+                                [$pointerName => $a ?: ''],
+                                $pi_isOnlyFields
+                            ),
+                            $wrapper['activeLinkWrap']
+                        );
+                    }
+                } else {
+                    $links[] = $this->cObj->wrap(
+                        $this->pi_linkTP_keepPIvars(
+                            $pageText,
+                            [$pointerName => $a ?: ''],
+                            $pi_isOnlyFields
+                        ),
+                        $wrapper['inactiveLinkWrap']
+                    );
+                }
+            }
+            if ($pointer < $totalPages - 1 || $showFirstLast) {
+                // Link to next page
+                if ($pointer >= $totalPages - 1) {
+                    $label = $this->pi_getLL('pi_list_browseresults_next', 'Next >');
+                    $links[] = $this->cObj->wrap(
+                        $hscText ? htmlspecialchars($label) : $label,
+                        $wrapper['disabledLinkWrap']
+                    );
+                } else {
+                    $label = $this->pi_getLL('pi_list_browseresults_next', 'Next >');
+                    $links[] = $this->cObj->wrap(
+                        $this->pi_linkTP_keepPIvars(
+                            $hscText ? htmlspecialchars(
+                                $label
+                            ) : $label,
+                            [$pointerName => $pointer + 1],
+                            $pi_isOnlyFields
+                        ),
+                        $wrapper['inactiveLinkWrap']
+                    );
+                }
+            }
+            // Link to last page
+            if ($showFirstLast) {
+                if ($pointer < $totalPages - 1) {
+                    $label = $this->pi_getLL('pi_list_browseresults_last', 'Last >>');
+                    $links[] = $this->cObj->wrap(
+                        $this->pi_linkTP_keepPIvars(
+                            $hscText ? htmlspecialchars(
+                                $label
+                            ) : $label,
+                            [$pointerName => $totalPages - 1],
+                            $pi_isOnlyFields
+                        ),
+                        $wrapper['inactiveLinkWrap']
+                    );
+                } else {
+                    $label = $this->pi_getLL('pi_list_browseresults_last', 'Last >>');
+                    $links[] = $this->cObj->wrap(
+                        $hscText ? htmlspecialchars($label) : $label,
+                        $wrapper['disabledLinkWrap']
+                    );
+                }
+            }
+            $theLinks = $this->cObj->wrap(implode(LF, $links), $wrapper['browseLinksWrap']);
+        } else {
+            $theLinks = '';
+        }
+        $pR1 = $pointer * $results_at_a_time + 1;
+        $pR2 = $pointer * $results_at_a_time + $results_at_a_time;
+        if ($showResultCount) {
+            if ($wrapper['showResultsNumbersWrap'] ?? false) {
+                // This will render the resultcount in a more flexible way using markers (new in TYPO3 3.8.0).
+                // The formatting string is expected to hold template markers (see function header). Example: 'Displaying results ###FROM### to ###TO### out of ###OUT_OF###'
+                $markerArray['###FROM###'] = $this->cObj->wrap(
+                    ($this->internal['res_count'] ?? 0) > 0 ? $pR1 : 0,
+                    $wrapper['showResultsNumbersWrap']
+                );
+                $markerArray['###TO###'] = $this->cObj->wrap(
+                    min(($this->internal['res_count'] ?? 0), $pR2),
+                    $wrapper['showResultsNumbersWrap']
+                );
+                $markerArray['###OUT_OF###'] = $this->cObj->wrap(
+                    ($this->internal['res_count'] ?? 0),
+                    $wrapper['showResultsNumbersWrap']
+                );
+                $markerArray['###FROM_TO###'] = $this->cObj->wrap(
+                    (($this->internal['res_count'] ?? 0) > 0 ? $pR1 : 0) . ' ' . $this->pi_getLL(
+                        'pi_list_browseresults_to',
+                        'to'
+                    ) . ' ' . min($this->internal['res_count'] ?? 0, $pR2),
+                    $wrapper['showResultsNumbersWrap']
+                );
+                $markerArray['###CURRENT_PAGE###'] = $this->cObj->wrap(
+                    $pointer + 1,
+                    $wrapper['showResultsNumbersWrap']
+                );
+                $markerArray['###TOTAL_PAGES###'] = $this->cObj->wrap($totalPages, $wrapper['showResultsNumbersWrap']);
+                // Substitute markers
+                $resultCountMsg = $this->templateService->substituteMarkerArray(
+                    $this->pi_getLL(
+                        'pi_list_browseresults_displays',
+                        'Displaying results ###FROM### to ###TO### out of ###OUT_OF###'
+                    ),
+                    $markerArray
+                );
+            } else {
+                // Render the resultcount in the "traditional" way using sprintf
+                $resultCountMsg = sprintf(
+                    str_replace(
+                        '###SPAN_BEGIN###',
+                        '<span' . $this->pi_classParam('browsebox-strong') . '>',
+                        $this->pi_getLL(
+                            'pi_list_browseresults_displays',
+                            'Displaying results ###SPAN_BEGIN###%s to %s</span> out of ###SPAN_BEGIN###%s</span>'
+                        )
+                    ),
+                    $count > 0 ? $pR1 : 0,
+                    min($count, $pR2),
+                    $count
+                );
+            }
+            $resultCountMsg = $this->cObj->wrap($resultCountMsg, $wrapper['showResultsWrap']);
+        } else {
+            $resultCountMsg = '';
+        }
+        $sTables = $this->cObj->wrap($resultCountMsg . $theLinks, $wrapper['browseBoxWrap']);
+        return $sTables;
+    }
+
+    /**
+     * Wraps the input string in a <div> tag with the class attribute set to the prefixId.
+     * All content returned from your plugins should be returned through this function so all content from your plugin is encapsulated in a <div>-tag nicely identifying the content of your plugin.
+     *
+     * @param string $str HTML content to wrap in the div-tags with the "main class" of the plugin
+     * @return string HTML content wrapped, ready to return to the parent object.
+     */
+    // phpcs:disable
+    public function pi_wrapInBaseClass(string $str): string
+    {
+        $content = '<div class="' . str_replace('_', '-', $this->prefixId) . '">
+		' . $str . '
+	</div>
+	';
+        if (!($this->frontendController->config['config']['disablePrefixComment'] ?? false)) {
+            $content = '
+
+
+	<!--
+
+		BEGIN: Content of extension "' . $this->extKey . '", plugin "' . $this->prefixId . '"
+
+	-->
+	' . $content . '
+	<!-- END: Content of extension "' . $this->extKey . '", plugin "' . $this->prefixId . '" -->
+
+	';
+        }
+        return $content;
+    }
+
+    /**
+     * Returns TRUE if the piVars array has ONLY those fields entered that is set in the $fList (commalist) AND if none of those fields value is greater than $lowerThan field if they are integers.
+     * Notice that this function will only work as long as values are integers.
+     *
+     * @param string $fList List of fields (keys from piVars) to evaluate on
+     * @param int $lowerThan Limit for the values.
+     * @return int|null Returns TRUE (1) if conditions are met.
+     */
+    // phpcs:disable
+    public function pi_isOnlyFields(string $fList, int $lowerThan = -1)
+    {
+        $lowerThan = $lowerThan == -1 ? $this->pi_lowerThan : $lowerThan;
+        $fList = GeneralUtility::trimExplode(',', $fList, true);
+        $tempPiVars = $this->piVars;
+        foreach ($fList as $k) {
+            if (isset($tempPiVars[$k]) && (!MathUtility::canBeInterpretedAsInteger(
+                $tempPiVars[$k]
+            ) || $tempPiVars[$k] < $lowerThan)) {
+                unset($tempPiVars[$k]);
+            }
+        }
+        if (empty($tempPiVars)) {
+            // @TODO: How do we deal with this? return TRUE would be the right thing to do here but that might be breaking
+            return 1;
+        }
+        return null;
+    }
+
+    /**
+     * Returns the class-attribute with the correctly prefixed classname
+     * Using pi_getClassName()
+     *
+     * @param string $class The class name(s) (suffix) - separate multiple classes with commas
+     * @param string $addClasses Additional class names which should not be prefixed - separate multiple classes with commas
+     * @return string A "class" attribute with value and a single space char before it.
+     * @see pi_getClassName()
+     */
+    // phpcs:disable
+    public function pi_classParam(string $class, string $addClasses = ''): string
+    {
+        $output = '';
+        $classNames = GeneralUtility::trimExplode(',', $class);
+        foreach ($classNames as $className) {
+            $output .= ' ' . $this->pi_getClassName($className);
+        }
+        $additionalClassNames = GeneralUtility::trimExplode(',', $addClasses);
+        foreach ($additionalClassNames as $additionalClassName) {
+            $output .= ' ' . $additionalClassName;
+        }
+        return ' class="' . trim($output) . '"';
+    }
+
+    /**
+     * Link a string to the current page while keeping currently set values in piVars.
+     * Like pi_linkTP, but $urlParameters is by default set to $this->piVars with $overrulePIvars overlaid.
+     * This means any current entries from this->piVars are passed on (except the key "DATA" which will be unset before!) and entries in $overrulePIvars will OVERRULE the current in the link.
+     *
+     * @param string $str The content string to wrap in <a> tags
+     * @param array $overrulePIvars Array of values to override in the current piVars. Contrary to pi_linkTP the keys in this array must correspond to the real piVars array and therefore NOT be prefixed with the $this->prefixId string. Further, if a value is a blank string it means the piVar key will not be a part of the link (unset)
+     * @param bool $cache If $cache is set, the page is asked to be cached by a &cHash value (unless the current plugin using this class is a USER_INT). Otherwise the no_cache-parameter will be a part of the link.
+     * @param bool $clearAnyway If set, then the current values of piVars will NOT be preserved anyways... Practical if you want an easy way to set piVars without having to worry about the prefix, "tx_xxxxx[]
+     * @param int $altPageId Alternative page ID for the link. (By default this function links to the SAME page!)
+     * @return string The input string wrapped in <a> tags
+     * @see pi_linkTP()
+     */
+    // phpcs:disable
+    public function pi_linkTP_keepPIvars(
+        string $str,
+        array $overrulePIvars = [],
+        bool $cache = false,
+        bool $clearAnyway = false,
+        int $altPageId = 0
+    ): string {
+        if (is_array($this->piVars) && is_array($overrulePIvars) && !$clearAnyway) {
+            $piVars = $this->piVars;
+            unset($piVars['DATA']);
+            ArrayUtility::mergeRecursiveWithOverrule($piVars, $overrulePIvars);
+            $overrulePIvars = $piVars;
+            if ($this->pi_autoCacheEn) {
+                $cache = (bool)$this->pi_autoCache($overrulePIvars);
+            }
+        }
+        return $this->pi_linkTP($str, [$this->prefixId => $overrulePIvars], $cache, $altPageId);
+    }
+
+    /**
+     * Returns TRUE if the array $inArray contains only values allowed to be cached based on the configuration in $this->pi_autoCacheFields
+     * Used by ->pi_linkTP_keepPIvars
+     * This is an advanced form of evaluation of whether a URL should be cached or not.
+     *
+     * @param array $inArray An array with piVars values to evaluate
+     * @return int|null Returns TRUE (1) if conditions are met.
+     * @see pi_linkTP_keepPIvars()
+     */
+    // phpcs:disable
+    public function pi_autoCache(array $inArray)
+    {
+        if (is_array($inArray)) {
+            foreach ($inArray as $fN => $fV) {
+                if (!strcmp($inArray[$fN], '')) {
+                    unset($inArray[$fN]);
+                } elseif (is_array($this->pi_autoCacheFields[$fN])) {
+                    if (is_array(
+                        $this->pi_autoCacheFields[$fN]['range']
+                    ) && (int)$inArray[$fN] >= (int)$this->pi_autoCacheFields[$fN]['range'][0] && (int)$inArray[$fN] <= (int)$this->pi_autoCacheFields[$fN]['range'][1]) {
+                        unset($inArray[$fN]);
+                    }
+                    if (is_array($this->pi_autoCacheFields[$fN]['list']) && in_array(
+                        $inArray[$fN],
+                        $this->pi_autoCacheFields[$fN]['list']
+                    )) {
+                        unset($inArray[$fN]);
+                    }
+                }
+            }
+        }
+        if (empty($inArray)) {
+            // @TODO: How do we deal with this? return TRUE would be the right thing to do here but that might be breaking
+            return 1;
+        }
+        return null;
     }
 }
