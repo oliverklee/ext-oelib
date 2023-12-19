@@ -59,10 +59,10 @@ final class PageFinderTest extends FunctionalTestCase
      */
     public function getPageUidWithoutFrontEndAndWithBackendPageUidReturnsBackEndPageUid(): void
     {
-        $_POST['id'] = 42;
+        $_GET['id'] = 42;
 
         $pageUid = $this->subject->getPageUid();
-        unset($_POST['id']);
+        unset($_GET['id']);
 
         self::assertSame(
             42,
@@ -77,11 +77,11 @@ final class PageFinderTest extends FunctionalTestCase
     {
         $frontEndPageUid = $this->testingFramework->createFrontEndPage();
         $this->testingFramework->createFakeFrontEnd($frontEndPageUid);
-        $_POST['id'] = $frontEndPageUid + 1;
+        $_GET['id'] = $frontEndPageUid + 1;
 
         $pageUid = $this->subject->getPageUid();
 
-        unset($_POST['id']);
+        unset($_GET['id']);
 
         self::assertSame(
             $frontEndPageUid,
@@ -134,9 +134,9 @@ final class PageFinderTest extends FunctionalTestCase
         $frontEndPageUid = $this->testingFramework->createFrontEndPage();
         $this->testingFramework->createFakeFrontEnd($frontEndPageUid);
 
-        $_POST['id'] = $frontEndPageUid + 1;
+        $_GET['id'] = $frontEndPageUid + 1;
         $pageUid = $this->subject->getPageUid();
-        unset($_POST['id']);
+        unset($_GET['id']);
 
         self::assertSame($frontEndPageUid + 1, $pageUid);
     }
@@ -229,9 +229,9 @@ final class PageFinderTest extends FunctionalTestCase
      */
     public function getCurrentSourceForSetBackEndPageUidReturnsSourceBackEnd(): void
     {
-        $_POST['id'] = 42;
+        $_GET['id'] = 42;
         $pageSource = $this->subject->getCurrentSource();
-        unset($_POST['id']);
+        unset($_GET['id']);
 
         self::assertSame(
             PageFinder::SOURCE_BACK_END,

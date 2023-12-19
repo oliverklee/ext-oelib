@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Oelib\Configuration;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -103,7 +102,7 @@ class PageFinder
                 $pageUid = $controller instanceof TypoScriptFrontendController ? (int)$controller->id : 0;
                 break;
             case self::SOURCE_BACK_END:
-                $pageUid = (int)GeneralUtility::_GP('id');
+                $pageUid = (int)($_GET['id'] ?? 0);
                 break;
             default:
                 $pageUid = 0;
@@ -182,7 +181,7 @@ class PageFinder
      */
     private function hasBackEnd(): bool
     {
-        return (int)GeneralUtility::_GP('id') > 0;
+        return (int)($_GET['id'] ?? 0) > 0;
     }
 
     /**
