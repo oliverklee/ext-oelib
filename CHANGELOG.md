@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Decouple `TemplateHelper` from `SalutationSwitcher` (#1486)
 - Mark some classes as `@internal` (#1478)
 
 ### Deprecated
