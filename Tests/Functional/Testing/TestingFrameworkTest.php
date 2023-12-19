@@ -10,6 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\TypoScript\TemplateService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -2337,6 +2338,10 @@ final class TestingFrameworkTest extends FunctionalTestCase
      */
     public function createFakeFrontEndCreatesTemplate(): void
     {
+        if ((new Typo3Version())->getMajorVersion() >= 12) {
+            self::markTestSkipped('This test is not compatible with TYPO3 V12.');
+        }
+
         $pageUid = $this->subject->createFrontEndPage();
         $this->subject->createFakeFrontEnd($pageUid);
 
@@ -2348,6 +2353,10 @@ final class TestingFrameworkTest extends FunctionalTestCase
      */
     public function createFakeFrontEndReadsTypoScriptSetupFromPage(): void
     {
+        if ((new Typo3Version())->getMajorVersion() >= 12) {
+            self::markTestSkipped('This test is not compatible with TYPO3 V12.');
+        }
+
         $pageUid = $this->subject->createFrontEndPage();
         $this->subject->createTemplate(
             $pageUid,
@@ -2367,6 +2376,10 @@ final class TestingFrameworkTest extends FunctionalTestCase
      */
     public function createFakeFrontEndWithTemplateRecordMarksTemplateAsLoaded(): void
     {
+        if ((new Typo3Version())->getMajorVersion() >= 12) {
+            self::markTestSkipped('This test is not compatible with TYPO3 V12.');
+        }
+
         $pageUid = $this->subject->createFrontEndPage();
         $this->subject->createTemplate(
             $pageUid,

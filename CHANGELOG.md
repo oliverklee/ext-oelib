@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Skip the legacy template loading in the TF in TYPO3 V12 (#1490)
 - Stop extending the deprecated `AbstractPlugin` (#1487, #1488)
 - Avoid using the deprecated `GeneralUtility::_GP` (#1482)
 - Fix type errors in the testing framework (#1480)
