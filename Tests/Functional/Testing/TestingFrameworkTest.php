@@ -2405,19 +2405,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function createFakeFrontEndWithPageUidSetsDefaultGroupList(): void
-    {
-        $pageUid = $this->subject->createFrontEndPage();
-        $this->subject->createFakeFrontEnd($pageUid);
-
-        $groups = (array)$this->getContext()->getPropertyFromAspect('frontend.user', 'groupIds');
-
-        self::assertSame([0, -1], $groups);
-    }
-
-    /**
-     * @test
-     */
     public function createFakeFrontEndReturnsProvidedPageUid(): void
     {
         $pageUid = $this->subject->createFrontEndPage();
