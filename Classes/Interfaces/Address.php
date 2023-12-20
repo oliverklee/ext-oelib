@@ -35,6 +35,8 @@ interface Address
      * Returns the homepage of the current address.
      *
      * @return string the homepage of the current address, will be empty if no homepage was set
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function getHomepage(): string;
 

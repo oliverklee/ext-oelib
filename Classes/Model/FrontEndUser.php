@@ -23,26 +23,36 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
 
     /**
      * @var 0 represents the male gender for this user
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public const GENDER_MALE = 0;
 
     /**
      * @var positive-int represents the female gender for this user
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public const GENDER_FEMALE = 1;
 
     /**
      * @var positive-int represents the diverse gender for this user
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public const GENDER_DIVERSE = 2;
 
     /**
      * @var positive-int represents an unknown gender for this user
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public const GENDER_UNKNOWN = 99;
 
     /**
      * @var list<self::GENDER_*>
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     private const GENDERS = [self::GENDER_MALE, self::GENDER_FEMALE, self::GENDER_DIVERSE, self::GENDER_UNKNOWN];
 
@@ -50,6 +60,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Gets this user's username (login name).
      *
      * @return string this user's username, will not be empty for valid users
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function getUserName(): string
     {
@@ -60,6 +72,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Sets this user's username (login name).
      *
      * @param non-empty-string $username
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      *
      * @throws \InvalidArgumentException
      */
@@ -77,6 +91,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Gets the password.
      *
      * @return string the password, might be empty
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function getPassword(): string
     {
@@ -87,6 +103,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Sets the password.
      *
      * @param non-empty-string $password
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      *
      * @throws \InvalidArgumentException
      */
@@ -266,8 +284,9 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
     /**
      * Gets this user's ZIP code and city, separated by a space.
      *
-     * @return string this user's ZIP code city, will be empty if the user has
-     *                no city set
+     * @return string this user's ZIP code city, will be empty if the user has no city set
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function getZipAndCity(): string
     {
@@ -343,6 +362,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Gets this user's homepage URL (not linked yet).
      *
      * @return string this user's homepage URL, may be empty
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function getHomepage(): string
     {
@@ -353,6 +374,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Checks whether this user has a non-empty homepage set.
      *
      * @return bool TRUE if this user has a homepage set, FALSE otherwise
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function hasHomepage(): bool
     {
@@ -363,6 +386,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Gets this user's image path (relative to the global upload directory).
      *
      * @return string this user's image path, may be empty
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function getImage(): string
     {
@@ -373,6 +398,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Checks whether this user has an image set.
      *
      * @return bool TRUE if this user has an image set, FALSE otherwise
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function hasImage(): bool
     {
@@ -382,7 +409,7 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
     /**
      * Checks whether this user has agreed to receive HTML e-mails.
      *
-     * @deprecated will be removed in oelib 6.0
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function wantsHtmlEmail(): bool
     {
@@ -414,6 +441,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
 
     /**
      * Adds the provided group to this user's direct groups.
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function addUserGroup(FrontEndUserGroup $group): void
     {
@@ -452,6 +481,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
 
     /**
      * @return self::GENDER_* the gender, will return `self::GENDER_UNKNOWN` if there is no gender field
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function getGender(): int
     {
@@ -468,6 +499,9 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
         return $gender;
     }
 
+    /**
+     * @deprecated #1409 will be removed in oelib 6.0
+     */
     public static function hasGenderField(): bool
     {
         return isset($GLOBALS['TCA']['fe_users']['columns']['gender']);
@@ -477,6 +511,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * @param self::GENDER_* $genderKey
      *
      * @throws \InvalidArgumentException
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function setGender(int $genderKey): void
     {
@@ -490,6 +526,9 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
         $this->setAsInteger('gender', $genderKey);
     }
 
+    /**
+     * @deprecated #1409 will be removed in oelib 6.0
+     */
     private function isValidGender(int $gender): bool
     {
         return \in_array($gender, self::GENDERS, true);
@@ -575,7 +614,7 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      *
      * @return string the last name of this user if it exists, will return the user's full name otherwise
      *
-     * @deprecated will be removed in oelib 6.0
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function getLastOrFullName(): string
     {
@@ -586,6 +625,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Gets this user's date of birth as a UNIX timestamp.
      *
      * @return int<0, max> the user's date of birth, will be zero if no date has been set
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function getDateOfBirth(): int
     {
@@ -598,6 +639,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Checks whether this user has a date of birth set.
      *
      * @return bool TRUE if this user has a non-zero date of birth, FALSE otherwise
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function hasDateOfBirth(): bool
     {
@@ -613,6 +656,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * @deprecated #1407 will be removed in oelib 6.0
      *
      * @return int<0, max> this user's age in years, will be 0 if this user has no birthdate set
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function getAge(): int
     {
@@ -647,6 +692,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Gets this user's last login date and time as a UNIX timestamp.
      *
      * @return int<0, max> the user's last login date and time, will be zero if the user has never logged in
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function getLastLoginAsUnixTimestamp(): int
     {
@@ -659,6 +706,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Checks whether this user has a last login date set.
      *
      * @return bool TRUE if this user has a non-zero last login date, FALSE
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function hasLastLogin(): bool
     {
@@ -669,6 +718,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Returns the country of this user.
      *
      * Note: This function uses the "country code" field, not the free-text country field.
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function getCountry(): ?Country
     {
@@ -690,6 +741,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Sets the country of this user.
      *
      * @param ?Country $country the country to set for this place, can be NULL for "no country"
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function setCountry(?Country $country = null): void
     {
@@ -702,6 +755,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Returns whether this user has a country.
      *
      * @return bool TRUE if this user has a country, FALSE otherwise
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function hasCountry(): bool
     {
@@ -712,6 +767,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Gets this user's job title.
      *
      * @return string this user's job title, may be empty
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function getJobTitle(): string
     {
@@ -722,6 +779,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Checks whether this user has a non-empty job title set.
      *
      * @return bool TRUE if this user has a job title set, FALSE otherwise
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function hasJobTitle(): bool
     {
@@ -732,6 +791,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      * Sets this user's job title.
      *
      * @param string $jobTitle the job title to set, may be empty
+     *
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function setJobTitle(string $jobTitle): void
     {
