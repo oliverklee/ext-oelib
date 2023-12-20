@@ -7,7 +7,6 @@ namespace OliverKlee\Oelib\Testing;
 use Doctrine\DBAL\Driver\ResultStatement;
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\FrontEnd\UserWithoutCookies;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUserGroup;
@@ -1077,9 +1076,6 @@ routes: {  }";
 
         $GLOBALS['_POST']['FE_SESSION_KEY'] = '';
         $GLOBALS['_GET']['FE_SESSION_KEY'] = '';
-
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][FrontendUserAuthentication::class]
-            = ['className' => UserWithoutCookies::class];
     }
 
     // FE user activities

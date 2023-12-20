@@ -312,7 +312,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'Objects' on mixed\\.$#"
-			count: 2
+			count: 1
 			path: Classes/Testing/TestingFramework.php
 
 		-
@@ -372,12 +372,12 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'SYS' on mixed\\.$#"
-			count: 2
+			count: 1
 			path: Classes/Testing/TestingFramework.php
 
 		-
 			message: "#^Cannot access offset 'TYPO3\\\\\\\\CMS\\\\\\\\Frontend\\\\\\\\Authentication\\\\\\\\FrontendUserAuthentication' on mixed\\.$#"
-			count: 2
+			count: 1
 			path: Classes/Testing/TestingFramework.php
 
 		-
