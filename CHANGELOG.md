@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 - Decouple `TemplateHelper` from `SalutationSwitcher` (#1486)
-- Mark some classes as `@internal` (#1478)
+- Mark some classes and methods as `@internal` (#1478, #1522)
 
 ### Deprecated
 - Deprecate some properties from `FrontEndUser` (#1514)
