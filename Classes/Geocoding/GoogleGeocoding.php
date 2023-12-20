@@ -13,6 +13,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * This class represents a service to look up geo coordinates via Google Maps.
  *
  * @see https://developers.google.com/maps/documentation/javascript/geocoding?#GeocodingStatusCodes
+ *
+ * @deprecated #1358 will be removed in oelib 6.0.0, use b13/geocoding instead
  */
 class GoogleGeocoding implements GeocodingLookup
 {

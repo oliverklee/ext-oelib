@@ -9,6 +9,8 @@ use OliverKlee\Oelib\Interfaces\GeocodingLookup;
 
 /**
  * This class represents a faked service to look up geo coordinates.
+ *
+ * @deprecated #1358 will be removed in oelib 6.0.0, use b13/geocoding instead
  */
 class DummyGeocodingLookup implements GeocodingLookup
 {

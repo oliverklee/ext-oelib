@@ -10,6 +10,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * @covers \OliverKlee\Oelib\Geocoding\DummyGeocodingLookup
+ *
+ * @deprecated #1358 will be removed in oelib 6.0.0, use b13/geocoding instead
  */
 final class DummyGeocodingLookupTest extends UnitTestCase
 {
