@@ -876,9 +876,6 @@ final class TestingFramework
      *
      * This function creates `$GLOBALS['TSFE']`.
      *
-     * Note: This function does not set TYPO3_MODE to "FE" (because the value of
-     * a constant cannot be changed after it has once been set).
-     *
      * @param positive-int $pageUid UID of a page record to use
      *
      * @return positive-int the UID of the used front-end page

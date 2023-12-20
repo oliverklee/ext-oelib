@@ -523,15 +523,6 @@ class TemplateHelper
      */
     public function getTemplateCode(bool $ignoreFlexform = false): void
     {
-        // Trying to fetch the template code via `$this->cObj` in BE mode leads to
-        // a non-catchable error in the `ContentObjectRenderer` class because the `cObj`
-        // configuration array is not initialized properly.
-        // As flexforms can be used in FE mode only, `$ignoreFlexform` is set true if we are in the BE mode.
-        // By this, `$this->cObj->fileResource` can be sheltered from being called.
-        if (TYPO3_MODE === 'BE') {
-            $ignoreFlexform = true;
-        }
-
         $templateFileName = $this->getConfValueString(
             'templateFile',
             's_template_special',
