@@ -117,6 +117,8 @@ class Collection extends \SplObjectStorage
      * Returns a comma-separated list of unique UIDs of the current items, ordered by first insertion.
      *
      * @return string comma-separated list of UIDs, will be empty if the list is empty or no item has a UID
+     *
+     * @internal
      */
     public function getUids(): string
     {
