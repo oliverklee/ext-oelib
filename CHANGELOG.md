@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Mark some classes and methods as `@internal` (#1478, #1522)
 
 ### Deprecated
+- Deprecate some `Collection` methods (#1523)
 - Deprecate some properties from `FrontEndUser` (#1514)
 - Deprecate the geocoding classes (#1513)
 

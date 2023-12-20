@@ -327,6 +327,8 @@ class Collection extends \SplObjectStorage
      * @param int<0, max> $length the number of elements to return
      *
      * @return Collection<M> the selected elements starting at $start
+     *
+     * @deprecated #1413 will be removed in oelib 6.0.0
      */
     public function inRange(int $start, int $length): Collection
     {
@@ -364,6 +366,8 @@ class Collection extends \SplObjectStorage
      * @param int<0, max> $position the zero-based position of the model to retrieve, must be >= 0
      *
      * @return M|null
+     *
+     * @deprecated #1413 will be removed in oelib 6.0.0
      */
     public function at(int $position): ?AbstractModel
     {
@@ -374,6 +378,8 @@ class Collection extends \SplObjectStorage
      * Returns the elements of this list in an array.
      *
      * @return list<M> the elements of this list, might be empty
+     *
+     * @internal
      */
     public function toArray(): array
     {
