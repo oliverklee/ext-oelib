@@ -50,6 +50,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Exception;
  * </output>
  *
  * @see https://github.com/rmm5t/jquery-timeago
+ *
+ * @deprecated #1524 will be removed in oelib 6.0.0
  */
 class DynamicDateViewHelper extends AbstractViewHelper
 {
