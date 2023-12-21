@@ -943,6 +943,7 @@ final class TestingFramework
             $frontEnd->id = $pageUid;
         }
         $frontEnd->determineId($request);
+        // @deprecated #1528 will be removed in oelib 6.0
         $frontEnd->tmpl = GeneralUtility::makeInstance(TemplateService::class);
         $frontEnd->config = [
             'config' => ['MP_disableTypolinkClosestMPvalue' => true, 'typolinkLinkAccessRestrictedPages' => true],
@@ -955,9 +956,11 @@ final class TestingFramework
                 $rootLine = [];
             }
 
+            // @deprecated #1528 will be removed in oelib 6.0
             $frontEnd->tmpl->runThroughTemplates($rootLine);
             $frontEnd->tmpl->generateConfig();
             $frontEnd->tmpl->loaded = true;
+
             Locales::setSystemLocaleFromSiteLanguage($frontEnd->getLanguage());
         }
 
