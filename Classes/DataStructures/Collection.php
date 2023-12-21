@@ -320,65 +320,6 @@ class Collection extends \SplObjectStorage
     }
 
     /**
-     * Returns $length elements from this list starting at position $start.
-     *
-     * If $start after this list's end, this function will return an empty list.
-     *
-     * If this list's end lies within the requested range, all elements up to
-     * the list's end will be returned.
-     *
-     * @param int<0, max> $start the zero-based start position
-     * @param int<0, max> $length the number of elements to return
-     *
-     * @return Collection<M> the selected elements starting at $start
-     *
-     * @deprecated #1413 will be removed in oelib 6.0.0
-     */
-    public function inRange(int $start, int $length): Collection
-    {
-        // @phpstan-ignore-next-line We're explicitly checking for a contract violation here.
-        if ($start < 0) {
-            throw new \InvalidArgumentException('$start must be >= 0.');
-        }
-        // @phpstan-ignore-next-line We're explicitly checking for a contract violation here.
-        if ($length < 0) {
-            throw new \InvalidArgumentException('$length must be >= 0.');
-        }
-
-        /** @var Collection<M> $result */
-        $result = new self();
-
-        $lastPosition = $start + $length - 1;
-        $currentIndex = 0;
-        /** @var M $item */
-        foreach ($this as $item) {
-            if ($currentIndex > $lastPosition) {
-                break;
-            }
-            if ($currentIndex >= $start) {
-                $result->add($item);
-            }
-            $currentIndex++;
-        }
-
-        return $result;
-    }
-
-    /**
-     * Returns the model at position $position.
-     *
-     * @param int<0, max> $position the zero-based position of the model to retrieve, must be >= 0
-     *
-     * @return M|null
-     *
-     * @deprecated #1413 will be removed in oelib 6.0.0
-     */
-    public function at(int $position): ?AbstractModel
-    {
-        return $this->inRange($position, 1)->first();
-    }
-
-    /**
      * Returns the elements of this list in an array.
      *
      * @return list<M> the elements of this list, might be empty
