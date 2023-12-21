@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Oelib\Tests\Unit\Domain\Fixtures;
 
-use OliverKlee\Oelib\Domain\Model\Traits\CachedAssociationCount;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -13,8 +12,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 final class ParentModel extends AbstractEntity
 {
-    use CachedAssociationCount;
-
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Oelib\Tests\Unit\Domain\Fixtures\ParentModel>
      * @Extbase\ORM\Lazy
@@ -42,13 +39,5 @@ final class ParentModel extends AbstractEntity
     public function setChildren(ObjectStorage $children): void
     {
         $this->children = $children;
-    }
-
-    /**
-     * @return int<0, max>
-     */
-    public function getChildrenCount(): int
-    {
-        return $this->getCachedRelationCount('children');
     }
 }
