@@ -61,6 +61,8 @@ abstract class AbstractDataMapper
 
     /**
      * @var array<non-empty-string> the column names of additional string keys
+     *
+     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     protected $additionalKeys = [];
 
@@ -69,12 +71,16 @@ abstract class AbstractDataMapper
      * There can only be one compound key per data mapper.
      *
      * @var non-empty-string[]
+     *
+     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     protected $compoundKeyParts = [];
 
     /**
      * @var array<string, array<string, M>> two-dimensional cache for the objects by key:
      *            [key name][key value] => model
+     *
+     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     private $cacheByKey = [];
 
@@ -84,6 +90,8 @@ abstract class AbstractDataMapper
      * The column values are concatenated via a dot as compound key value.
      *
      * @var array<string, M>
+     *
+     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     protected $cacheByCompoundKey = [];
 
@@ -307,6 +315,8 @@ abstract class AbstractDataMapper
      * @param M $model the model to fill, must already have a UID
      *
      * @throws \InvalidArgumentException if $model has no UID or has been created via getNewGhost
+     *
+     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     public function reload(AbstractModel $model): void
     {
@@ -359,6 +369,8 @@ abstract class AbstractDataMapper
      *
      * @param M $model the model to fill, needs to have a UID
      * @param DatabaseRow $data the model data to process as it comes from the DB
+     *
+     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     private function refillModel(AbstractModel $model, array $data): void
     {
@@ -1161,6 +1173,8 @@ abstract class AbstractDataMapper
      *        optionally followed by "ASC" or "DESC" or may be empty
      *
      * @return Collection<M> all models from the DB, already loaded
+     *
+     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     public function findAll(string $sorting = ''): Collection
     {
@@ -1180,6 +1194,8 @@ abstract class AbstractDataMapper
 
     /**
      * @return array<string, string>
+     *
+     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     protected function sortingToOrderArray(string $sorting): array
     {
@@ -1240,6 +1256,8 @@ abstract class AbstractDataMapper
      *
      * @return Collection<M> all records with the matching page UIDs, will be
      *                       empty if no records have been found
+     *
+     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     public function findByPageUid($pageUids, string $sorting = ''): Collection
     {
@@ -1305,6 +1323,8 @@ abstract class AbstractDataMapper
      *
      * @throws NotFoundException if there is no match in the cache yet
      * @throws \InvalidArgumentException
+     *
+     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     protected function findOneByKeyFromCache(string $key, string $value): AbstractModel
     {
@@ -1339,6 +1359,8 @@ abstract class AbstractDataMapper
      *
      * @throws NotFoundException if there is no match in the cache yet
      * @throws \InvalidArgumentException
+     *
+     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     public function findOneByCompoundKeyFromCache(string $value): AbstractModel
     {
@@ -1388,6 +1410,8 @@ abstract class AbstractDataMapper
      * @param DatabaseRow $data the data of the model as it is in the DB, may be empty
      *
      * @see cacheModelByCompoundKey
+     *
+     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     protected function cacheModelByCombinedKeys(AbstractModel $model, array $data): void
     {
@@ -1404,6 +1428,8 @@ abstract class AbstractDataMapper
      * @param DatabaseRow $data the data of the model as it is in the DB, may be empty
      *
      * @throws \BadMethodCallException
+     *
+     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     protected function cacheModelByCompoundKey(AbstractModel $model, array $data): void
     {
@@ -1440,6 +1466,8 @@ abstract class AbstractDataMapper
      * @return M the cached model
      *
      * @throws NotFoundException if there is no match (neither in the cache nor in the database)
+     *
+     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     public function findOneByKey(string $key, string $value): AbstractModel
     {
@@ -1467,6 +1495,8 @@ abstract class AbstractDataMapper
      *
      * @throws NotFoundException if there is no match (neither in the cache nor in the database)
      * @throws \InvalidArgumentException if parameter array $keyValue is empty
+     *
+     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     public function findOneByCompoundKey(array $compoundKeyValues): AbstractModel
     {
