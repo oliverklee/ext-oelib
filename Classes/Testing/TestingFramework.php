@@ -1222,6 +1222,8 @@ routes: {  }";
      * @return bool TRUE if a FE user is logged in, FALSE otherwise
      *
      * @throws \BadMethodCallException if no front end has been created
+     *
+     * @deprecated #1535 will be removed in oelib 6.0
      */
     public function isLoggedIn(): bool
     {
