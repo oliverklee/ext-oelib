@@ -14,7 +14,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 /**
  * This class provides functions for localization.
  *
- * @deprecated will be removed in oelib 6.0
+ * @deprecated #1539 will be removed in oelib 6.0
  */
 abstract class SalutationSwitcher
 {
