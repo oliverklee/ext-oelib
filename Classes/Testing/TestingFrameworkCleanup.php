@@ -9,7 +9,6 @@ use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\PageFinder;
-use OliverKlee\Oelib\Geocoding\GoogleGeocoding;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Session\Session;
@@ -30,7 +29,6 @@ class TestingFrameworkCleanup
         ConfigurationProxy::purgeInstances();
         ConfigurationRegistry::purgeInstance();
         FrontEndLoginManager::purgeInstance();
-        GoogleGeocoding::purgeInstance();
         HeaderProxyFactory::purgeInstance();
         MapperRegistry::purgeInstance();
         PageFinder::purgeInstance();
