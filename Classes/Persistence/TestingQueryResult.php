@@ -17,6 +17,8 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
  *
  * @template Model
  * @implements QueryResultInterface<Model>
+ *
+ * @deprecated #1510 will be removed in oelib 6.0
  */
 final class TestingQueryResult implements QueryResultInterface
 {

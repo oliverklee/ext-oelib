@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Mark some classes and methods as `@internal` (#1478, #1522)
 
  ### Deprecated
+- Deprecate `TestingQueryResult` (#1548)
 - Deprecate `FrontEndUserGroup::title` and `::description` (#1547)
 - Deprecate `BackEndUser::getGroups` and the `BackEndUserGroup` model/mapper (#1546)
 - Deprecate `BackEndUserMapper::findByUserName` (#1545)
