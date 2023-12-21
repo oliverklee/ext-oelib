@@ -21,6 +21,8 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 /**
  * This utility class provides some commonly-used functions for handling
  * templates (in addition to all functionality provided by the base classes).
+ *
+ * @deprecated #1468 will be removed in oelib 6.0.0
  */
 class TemplateHelper
 {
