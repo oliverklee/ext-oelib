@@ -38,11 +38,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 final class TestingFramework
 {
     /**
-     * @var positive-int
-     */
-    private const AUTO_INCREMENT_THRESHOLD_WITHOUT_ROOTLINE_CACHE = 100;
-
-    /**
      * all system table names to which this instance of the testing framework
      * has access
      *
@@ -136,23 +131,6 @@ final class TestingFramework
     private $relationSorting = [];
 
     /**
-     * The number of unusable UIDs after the maximum UID in a table before the auto increment value will be reset by
-     * resetAutoIncrementLazily.
-     *
-     * This value needs to be high enough so that no two page UIDs will be the same within on request as the local
-     * root-line cache of TYPO3 CMS otherwise might create false cache hits, causing failures for unit tests relying on
-     * the root line.
-     *
-     * @see https://bugs.oliverklee.com/show_bug.cgi?id=5011
-     * @deprecated will be removed in oelib 6.0
-     *
-     * @var int
-     *
-     * @deprecated #1529 will be removed in oelib 6.0
-     */
-    private $resetAutoIncrementThreshold = 0;
-
-    /**
      * whether a fake front end has been created
      *
      * @var bool
@@ -210,19 +188,8 @@ final class TestingFramework
         }
 
         $this->createListOfOwnAllowedTables();
-        $this->determineAndSetAutoIncrementThreshold();
 
         $this->databaseInitialized = true;
-    }
-
-    /**
-     * Determines a good value for the auto increment threshold and sets it.
-     *
-     * @deprecated #1529 will be removed in oelib 6.0
-     */
-    private function determineAndSetAutoIncrementThreshold(): void
-    {
-        $this->setResetAutoIncrementThreshold(self::AUTO_INCREMENT_THRESHOLD_WITHOUT_ROOTLINE_CACHE);
     }
 
     /**
@@ -798,22 +765,9 @@ final class TestingFramework
             // Runs a DELETE query for each allowed table. A "one-query-deletes-them-all" approach was tested,
             // but we didn't find a working solution for that.
             $this->getConnectionForTable($currentTable)->delete($currentTable, [$dummyColumnName => 1]);
-            $this->resetAutoIncrementLazily($currentTable);
         }
 
         $this->dirtyTables = [];
-    }
-
-    /**
-     * Checks whether a table has a column "uid".
-     *
-     * @param non-empty-string $table
-     *
-     * @deprecated will be removed in oelib 6.0
-     */
-    private function tableHasColumnUid(string $table): bool
-    {
-        return $this->tableHasColumn($table, 'uid');
     }
 
     /**
@@ -1454,154 +1408,6 @@ routes: {  }";
         }
 
         return $data !== [];
-    }
-
-    /**
-     * Eagerly resets the auto increment value for a given table to the highest existing UID + 1.
-     *
-     * @param non-empty-string $table the name of the table on which we're going to reset the auto increment entry
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @deprecated #1529 will be removed in oelib 6.0
-     * @see resetAutoIncrementLazily
-     */
-    public function resetAutoIncrement(string $table): void
-    {
-        $this->initializeDatabase();
-        $this->assertTableNameIsAllowed($table);
-
-        // Checks whether the current table qualifies for this method. If there
-        // is no column "uid" that has the "auto_increment" flag set, we should
-        // not try to reset this inexistent auto increment index to avoid DB
-        // errors.
-        if (!$this->tableHasColumnUid($table)) {
-            return;
-        }
-
-        $newAutoIncrementValue = $this->getMaximumUidFromTable($table) + 1;
-
-        // Updates the auto increment index for this table. The index will be
-        // set to one UID above the highest existing UID.
-        $connection = $this->getConnectionPool()->getConnectionByName('Default');
-        $query = 'ALTER TABLE `' . $table . '` AUTO_INCREMENT=' . $newAutoIncrementValue . ';';
-        $connection->executeQuery($query);
-    }
-
-    /**
-     * Resets the auto increment value for a given table to the highest existing
-     * UID + 1 if the current auto increment value is higher than a certain
-     * threshold over the current maximum UID.
-     *
-     * The threshold is 100 by default and can be set using
-     * `setResetAutoIncrementThreshold`.
-     *
-     * @param non-empty-string $table the name of the table on which we're going to reset the auto increment entry
-     *
-     * @deprecated #1529 will be removed in oelib 6.0
-     * @see resetAutoIncrement
-     */
-    private function resetAutoIncrementLazily(string $table): void
-    {
-        $this->initializeDatabase();
-        $this->assertTableNameIsAllowed($table);
-
-        // Checks whether the current table qualifies for this method. If there
-        // is no column "uid" that has the "auto_increment" flag set, we should
-        // not try to reset this inexistent auto increment index to avoid
-        // database errors.
-        if (!$this->tableHasColumnUid($table)) {
-            return;
-        }
-        $currentAutoIncrement = $this->getAutoIncrement($table);
-        if (!\is_int($currentAutoIncrement)) {
-            return;
-        }
-
-        if ($currentAutoIncrement > ($this->getMaximumUidFromTable($table) + $this->resetAutoIncrementThreshold)) {
-            $this->resetAutoIncrement($table);
-        }
-    }
-
-    /**
-     * Sets the threshold for resetAutoIncrementLazily.
-     *
-     * @param positive-int $threshold
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @see resetAutoIncrementLazily
-     *
-     * @deprecated #1529 will be removed in oelib 6.0
-     */
-    public function setResetAutoIncrementThreshold(int $threshold): void
-    {
-        // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
-        if ($threshold <= 0) {
-            throw new \InvalidArgumentException('$threshold must be > 0.', 1331490913);
-        }
-
-        $this->resetAutoIncrementThreshold = $threshold;
-    }
-
-    /**
-     * Reads the highest UID for a database table.
-     *
-     * This function may only be called after that the provided table name
-     * has been checked to be non-empty, valid and pointing to an existing
-     * database table that has the "uid" column.
-     *
-     * @param non-empty-string $table the name of an existing table that has the "uid" column
-     *
-     * @return int<0, max> the highest UID from this table, will be >= 0
-     *
-     * @deprecated will be removed in oelib 6.0
-     */
-    private function getMaximumUidFromTable(string $table): int
-    {
-        $connection = $this->getConnectionForTable($table);
-        $query = 'SELECT MAX(uid) AS uid FROM `' . $table . '`';
-        $queryResult = $connection->executeQuery($query);
-        if (\method_exists($queryResult, 'fetchAllAssociative')) {
-            $data = $queryResult->fetchAllAssociative();
-        } else {
-            $data = $queryResult->fetchAll();
-        }
-
-        $maximumUid = (int)($data['uid'] ?? 0);
-
-        return $maximumUid >= 0 ? $maximumUid : 0;
-    }
-
-    /**
-     * Reads the current auto increment value for a given table.
-     *
-     * This function is only valid for tables that actually have an auto
-     * increment value.
-     *
-     * @param non-empty-string $table the name of the table for which the auto increment value should be retrieved
-     *
-     * @return positive-int|null the auto_increment value of table $table, will be > 0, or null if the table has none
-     *
-     * @deprecated #1529 will be removed in oelib 6.0
-     */
-    public function getAutoIncrement(string $table): ?int
-    {
-        $this->initializeDatabase();
-        $this->assertTableNameIsAllowed($table);
-
-        $connection = $this->getConnectionForTable($table);
-        $query = 'SHOW TABLE STATUS WHERE Name = \'' . $table . '\';';
-        $queryResult = $connection->executeQuery($query);
-        if (\method_exists($queryResult, 'fetchAssociative')) {
-            $row = $queryResult->fetchAssociative();
-        } else {
-            $row = $queryResult->fetch();
-        }
-
-        $autoIncrement = \is_array($row) && \is_numeric($row['Auto_increment']) ? (int)$row['Auto_increment'] : null;
-
-        return (\is_int($autoIncrement) && $autoIncrement > 0) ? $autoIncrement : null;
     }
 
     /**
