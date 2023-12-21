@@ -1040,44 +1040,6 @@ final class FrontEndUserTest extends UnitTestCase
         );
     }
 
-    // Tests concerning wantsHtmlEmail
-
-    /**
-     * @test
-     */
-    public function wantsHtmlEmailForMissingModuleSysDmailHtmlFieldReturnsFalse(): void
-    {
-        $this->subject->setData([]);
-
-        self::assertFalse(
-            $this->subject->wantsHtmlEmail()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function wantsHtmlEmailForModuleSysDmailHtmlOneReturnsTrue(): void
-    {
-        $this->subject->setData(['module_sys_dmail_html' => 1]);
-
-        self::assertTrue(
-            $this->subject->wantsHtmlEmail()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function wantsHtmlEmailForModuleSysDmailHtmlZeroReturnsFalse(): void
-    {
-        $this->subject->setData(['module_sys_dmail_html' => 0]);
-
-        self::assertFalse(
-            $this->subject->wantsHtmlEmail()
-        );
-    }
-
     // Tests concerning the user groups
 
     /**
