@@ -16,11 +16,6 @@ class BackEndUserMapper extends AbstractDataMapper
 
     protected $modelClassName = BackEndUser::class;
 
-    protected $relations = [
-        // @deprecated #1153 will be removed in oelib 6.0
-        'usergroup' => BackEndUserGroupMapper::class,
-    ];
-
     /**
      * @deprecated #1505 will be removed in oelib 6.0.0
      */

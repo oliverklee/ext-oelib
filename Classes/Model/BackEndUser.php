@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Oelib\Model;
 
-use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Email\ConvertableToMimeAddressTrait;
 use OliverKlee\Oelib\Interfaces\ConvertableToMimeAddress;
 use OliverKlee\Oelib\Interfaces\MailRole;
@@ -91,55 +90,6 @@ class BackEndUser extends AbstractModel implements MailRole, ConvertableToMimeAd
     public function hasLanguage(): bool
     {
         return $this->getLanguage() !== 'default';
-    }
-
-    /**
-     * Returns the direct user groups of this user.
-     *
-     * @return Collection<BackEndUserGroup> the user's direct groups, will be empty if this user has no groups
-     *
-     * @deprecated #1153 will be removed in oelib 6.0
-     */
-    public function getGroups(): Collection
-    {
-        /** @var Collection<BackEndUserGroup> $groups */
-        $groups = $this->getAsCollection('usergroup');
-
-        return $groups;
-    }
-
-    /**
-     * Recursively gets all groups and subgroups of this user.
-     *
-     * @return Collection<BackEndUserGroup> all groups and subgroups of this user,
-     *         will be empty if this user has no groups
-     *
-     * @deprecated #1153 will be removed in oelib 6.0
-     */
-    public function getAllGroups(): Collection
-    {
-        /** @var Collection<BackEndUserGroup> $result */
-        $result = new Collection();
-        $groupsToProcess = $this->getGroups();
-
-        do {
-            /** @var Collection<BackEndUserGroup> $groupsForNextStep */
-            $groupsForNextStep = new Collection();
-            $result->append($groupsToProcess);
-            /** @var BackEndUserGroup $group */
-            foreach ($groupsToProcess as $group) {
-                /** @var BackEndUserGroup $subgroup */
-                foreach ($group->getSubgroups() as $subgroup) {
-                    $subgroupUid = $subgroup->getUid();
-                    if ($subgroupUid > 0 && !$result->hasUid($subgroupUid)) {
-                        $groupsForNextStep->add($subgroup);
-                    }
-                }
-            }
-            $groupsToProcess = $groupsForNextStep;
-        } while (!$groupsToProcess->isEmpty());
-
-        return $result;
     }
 
     /**

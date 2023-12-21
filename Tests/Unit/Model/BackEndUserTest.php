@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Oelib\Tests\Unit\Model;
 
-use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\ConvertableToMimeAddress;
 use OliverKlee\Oelib\Interfaces\MailRole;
 use OliverKlee\Oelib\Model\BackEndUser;
-use OliverKlee\Oelib\Model\BackEndUserGroup;
 use Symfony\Component\Mime\Address;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -320,22 +318,5 @@ final class BackEndUserTest extends UnitTestCase
 
         $address = $this->subject->toMimeAddress();
         self::assertSame($name, $address->getName());
-    }
-
-    // Tests concerning getGroups
-
-    /**
-     * @test
-     */
-    public function getGroupsReturnsListFromUserGroupField(): void
-    {
-        /** @var Collection<BackEndUserGroup> $expectedGroups */
-        $expectedGroups = new Collection();
-
-        $this->subject->setData(['usergroup' => $expectedGroups]);
-
-        /** @var Collection<BackEndUserGroup> $actualGroups */
-        $actualGroups = $this->subject->getGroups();
-        self::assertSame($expectedGroups, $actualGroups);
     }
 }
