@@ -406,11 +406,6 @@ parameters:
 			path: Classes/ViewHelpers/AbstractConfigurationCheckViewHelper.php
 
 		-
-			message: "#^Parameter \\#1 \\$format of method DateTimeInterface\\:\\:format\\(\\) expects string, mixed given\\.$#"
-			count: 1
-			path: Classes/ViewHelpers/DynamicDateViewHelper.php
-
-		-
 			message: "#^Parameter \\#1 \\$treeStructure of method OliverKlee\\\\Oelib\\\\Visibility\\\\Tree\\:\\:buildTreeFromArray\\(\\) expects array\\<non\\-empty\\-string, array\\<non\\-empty\\-string, mixed\\>\\|bool\\>, array\\<non\\-empty\\-string, mixed\\> given\\.$#"
 			count: 1
 			path: Classes/Visibility/Tree.php
