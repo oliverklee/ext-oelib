@@ -1062,14 +1062,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAutoIncrementForSysCategoryRecordMmReturnsNull(): void
-    {
-        self::assertNull($this->subject->getAutoIncrement('sys_category_record_mm'));
-    }
-
-    /**
-     * @test
-     */
     public function getAutoIncrementWithEmptyTableNameFails(): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -1105,7 +1097,13 @@ final class TestingFrameworkTest extends FunctionalTestCase
      */
     public function getAutoIncrementWithTableWithoutUidReturnsNull(): void
     {
-        self::assertNull($this->subject->getAutoIncrement('tx_oelib_test_article_mm'));
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage(
+            'Could not retrieve the auto increment value for table tx_oelib_test_article_mm.'
+        );
+        $this->expectExceptionCode(1703181887);
+
+        $this->subject->getAutoIncrement('tx_oelib_test_article_mm');
     }
 
     // Tests regarding count()

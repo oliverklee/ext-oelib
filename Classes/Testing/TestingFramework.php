@@ -1489,10 +1489,6 @@ routes: {  }";
             return;
         }
         $currentAutoIncrement = $this->getAutoIncrement($table);
-        if (!\is_int($currentAutoIncrement)) {
-            return;
-        }
-
         if ($currentAutoIncrement > ($this->getMaximumUidFromTable($table) + $this->resetAutoIncrementThreshold)) {
             $this->resetAutoIncrement($table);
         }
@@ -1556,11 +1552,11 @@ routes: {  }";
      *
      * @param non-empty-string $table the name of the table for which the auto increment value should be retrieved
      *
-     * @return positive-int|null the auto_increment value of table $table, will be > 0, or null if the table has none
+     * @return positive-int the auto_increment value of table $table, will be > 0
      *
      * @deprecated #1529 will be removed in oelib 6.0
      */
-    public function getAutoIncrement(string $table): ?int
+    public function getAutoIncrement(string $table): int
     {
         $this->initializeDatabase();
         $this->assertTableNameIsAllowed($table);
@@ -1576,7 +1572,20 @@ routes: {  }";
 
         $autoIncrement = \is_array($row) && \is_numeric($row['Auto_increment']) ? (int)$row['Auto_increment'] : null;
 
-        return (\is_int($autoIncrement) && $autoIncrement > 0) ? $autoIncrement : null;
+        if (!\is_int($autoIncrement)) {
+            throw new \RuntimeException(
+                'Could not retrieve the auto increment value for table ' . $table . '.',
+                1703181887
+            );
+        }
+        if ($autoIncrement <= 0) {
+            throw new \RuntimeException(
+                'The auto increment value for table ' . $table . ' is not > 0.',
+                1703181911
+            );
+        }
+
+        return $autoIncrement;
     }
 
     /**
