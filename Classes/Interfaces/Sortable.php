@@ -6,6 +6,8 @@ namespace OliverKlee\Oelib\Interfaces;
 
 /**
  * This interface represents an object that can be sorted.
+ *
+ * @deprecated #1501 will be removed on oelib 6.0.0
  */
 interface Sortable
 {

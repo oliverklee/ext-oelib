@@ -292,6 +292,8 @@ class Collection extends \SplObjectStorage
      * SortableInterface interface.
      *
      * @internal
+     *
+     * @deprecated #1501 will be removed on oelib 6.0.0
      */
     public function sortBySorting(): void
     {
@@ -309,6 +311,8 @@ class Collection extends \SplObjectStorage
      * @return int a negative number if $model1 should be before $model2,
      *                 a positive number if $model1 should be after $model2,
      *                 zero if both are equal for sorting
+     *
+     * @deprecated #1501 will be removed on oelib 6.0.0
      */
     public function compareSortings(Sortable $object1, Sortable $object2): int
     {
