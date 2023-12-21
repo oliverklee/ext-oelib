@@ -12,8 +12,9 @@ This project adheres to [Semantic Versioning](https://semver.org/).
  ### Deprecated
 
 ### Removed
-- Drop the geocoding classes (#1607)
-- Drop `FrontEndUser.wantsHtmlEmail()` (#1606)
+- Remove `FrontEndUser::getAge` (#1609)
+- Drop the geocoding classes (#1608)
+- Drop `FrontEndUser.wantsHtmlEmail()` (#1607)
 - Drop the auto increment handling from the testing framework (#1605)
 - Drop `BackEndUser::getGroups` and `BackEndUserGroup` (#1604)
 - Drop the `FederalState` model & mapper (#1600)
