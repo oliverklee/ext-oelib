@@ -24,7 +24,6 @@ use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\Locales;
 use TYPO3\CMS\Core\Routing\PageArguments;
 use TYPO3\CMS\Core\Site\Entity\Site;
-use TYPO3\CMS\Core\TypoScript\TemplateService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -898,8 +897,6 @@ final class TestingFramework
             $frontEnd->id = $pageUid;
         }
         $frontEnd->determineId($request);
-        // @deprecated #1528 will be removed in oelib 6.0
-        $frontEnd->tmpl = GeneralUtility::makeInstance(TemplateService::class);
         $frontEnd->config = [
             'config' => ['MP_disableTypolinkClosestMPvalue' => true, 'typolinkLinkAccessRestrictedPages' => true],
         ];
@@ -911,11 +908,6 @@ final class TestingFramework
             } catch (PageNotFoundException $e) {
                 $rootLine = [];
             }
-
-            // @deprecated #1528 will be removed in oelib 6.0
-            $frontEnd->tmpl->runThroughTemplates($rootLine);
-            $frontEnd->tmpl->generateConfig();
-            $frontEnd->tmpl->loaded = true;
 
             Locales::setSystemLocaleFromSiteLanguage($frontEnd->getLanguage());
         }
