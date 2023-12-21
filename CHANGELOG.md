@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
  ### Deprecated
 
 ### Removed
+- Drop the auto increment handling from the testing framework (#1605)
 - Drop `BackEndUser::getGroups` and `BackEndUserGroup` (#1604)
 - Drop the `FederalState` model & mapper (#1600)
 - Remove `TemplateHelper` (#1599)
