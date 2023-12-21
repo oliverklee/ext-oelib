@@ -71,6 +71,7 @@ CREATE TABLE tx_oelib_test_article_mm (
 # Table structure for table 'be_users'
 #
 # @deprecated #1532 will be removed in oelib 6.0
+# @deprecated #1537 will be removed in oelib 6.0
 #
 CREATE TABLE be_users (
     tx_oelib_is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,

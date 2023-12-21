@@ -49,6 +49,7 @@ final class TestingFramework
      * @var list<non-empty-string>
      */
     private const ALLOWED_SYSTEM_TABLES = [
+        // @deprecated #1537 will be removed in oelib 6.0
         'be_users',
         'fe_groups',
         'fe_users',
@@ -518,7 +519,7 @@ final class TestingFramework
      *
      * @return positive-int the UID of the new BE user
      *
-     * @deprecated will be removed in oelib 6.0
+     * @deprecated #1537 will be removed in oelib 6.0
      */
     public function createBackEndUser(array $recordData = []): int
     {
