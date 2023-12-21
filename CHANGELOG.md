@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Mark some classes and methods as `@internal` (#1478, #1522)
 
  ### Deprecated
+- Deprecate `TestingFramework::createBackEndUser()` (#1555)
 - Deprecate `TestingFramework::isLoggedIn()` (#1554)
 - Deprecate the template parsing in the testing framework (#1552)
 - Deprecate the record change tracking in the testing framework (#1551, #1553)
