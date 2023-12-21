@@ -73,9 +73,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      *
      * @param non-empty-string $username
      *
-     * @deprecated #1409 will be removed in oelib 6.0
-     *
      * @throws \InvalidArgumentException
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function setUserName(string $username): void
     {
@@ -104,9 +103,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
      *
      * @param non-empty-string $password
      *
-     * @deprecated #1409 will be removed in oelib 6.0
-     *
      * @throws \InvalidArgumentException
+     * @deprecated #1409 will be removed in oelib 6.0
      */
     public function setPassword(string $password): void
     {
@@ -635,47 +633,6 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
     public function hasDateOfBirth(): bool
     {
         return $this->hasInteger('date_of_birth');
-    }
-
-    /**
-     * Returns this user's age in years.
-     *
-     * Note: This function only works correctly for users that were born after
-     * 1970-01-01 and that were not born in the future.
-     *
-     * @deprecated #1407 will be removed in oelib 6.0
-     *
-     * @return int<0, max> this user's age in years, will be 0 if this user has no birthdate set
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function getAge(): int
-    {
-        if (!$this->hasDateOfBirth()) {
-            return 0;
-        }
-
-        $currentTimestamp = $GLOBALS['EXEC_TIME'];
-        \assert(\is_int($currentTimestamp) && $currentTimestamp >= 0);
-        $birthTimestamp = $this->getDateOfBirth();
-
-        $currentYear = (int)\date('Y', $currentTimestamp);
-        $currentMonth = (int)\date('m', $currentTimestamp);
-        $currentDay = (int)\date('d', $currentTimestamp);
-        $birthYear = (int)\date('Y', $birthTimestamp);
-        $birthMonth = (int)\date('m', $birthTimestamp);
-        $birthDay = (int)\date('d', $birthTimestamp);
-
-        $age = $currentYear - $birthYear;
-        if ($currentMonth < $birthMonth) {
-            $age--;
-        } elseif ($currentMonth === $birthMonth) {
-            if ($currentDay < $birthDay) {
-                $age--;
-            }
-        }
-
-        return \max($age, 0);
     }
 
     /**
