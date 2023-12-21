@@ -11,7 +11,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Decouple `TemplateHelper` from `SalutationSwitcher` (#1486)
 - Mark some classes and methods as `@internal` (#1478, #1522)
 
-### Deprecated
+ ### Deprecated
+- Deprecate `SalutationSwitcher` (#1541)
 - Deprecate `TemplateHelper` (#1540)
 - Deprecate the HTTP classes (#1527)
 - Deprecate the `DynamicDateViewHelper` (#1525)
