@@ -9,6 +9,7 @@ CREATE TABLE tx_oelib_domain_model_germanzipcode (
 # Table structure for table 'tx_oelib_test'
 #
 CREATE TABLE tx_oelib_test (
+    # @deprecated #1532 will be removed in oelib 6.0
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     object_type int(11) unsigned DEFAULT '0' NOT NULL,
     title varchar(255) DEFAULT '' NOT NULL,
@@ -28,6 +29,7 @@ CREATE TABLE tx_oelib_test (
     bool_data2 tinyint(1) unsigned DEFAULT '0' NOT NULL,
     int_data tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
+    # @deprecated #1532 will be removed in oelib 6.0
     KEY dummy (is_dummy_record),
     KEY object_type (object_type)
 );
@@ -37,12 +39,14 @@ CREATE TABLE tx_oelib_test (
 # Table structure for table 'tx_oelib_testchild'
 #
 CREATE TABLE tx_oelib_testchild (
+    # @deprecated #1532 will be removed in oelib 6.0
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title varchar(255) DEFAULT '' NOT NULL,
     parent int(11) unsigned DEFAULT '0' NOT NULL,
     tx_oelib_parent2 int(11) unsigned DEFAULT '0' NOT NULL,
     tx_oelib_parent3 int(11) unsigned DEFAULT '0' NOT NULL,
 
+    # @deprecated #1532 will be removed in oelib 6.0
     KEY dummy (is_dummy_record)
 );
 
@@ -54,6 +58,7 @@ CREATE TABLE tx_oelib_test_article_mm (
     uid_local int(11) unsigned DEFAULT '0' NOT NULL,
     uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
     sorting int(11) unsigned DEFAULT '0' NOT NULL,
+    # @deprecated #1532 will be removed in oelib 6.0
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
 
     KEY uid_local (uid_local),
@@ -65,7 +70,7 @@ CREATE TABLE tx_oelib_test_article_mm (
 #
 # Table structure for table 'be_users'
 #
-# @deprecated will be removed in oelib 6.0
+# @deprecated #1532 will be removed in oelib 6.0
 #
 CREATE TABLE be_users (
     tx_oelib_is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
@@ -76,7 +81,7 @@ CREATE TABLE be_users (
 #
 # Table structure for table 'be_groups'
 #
-# @deprecated will be removed in oelib 6.0
+# @deprecated #1532 will be removed in oelib 6.0
 #
 CREATE TABLE be_groups (
     tx_oelib_is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
@@ -85,7 +90,7 @@ CREATE TABLE be_groups (
 
 
 #
-# Table structure for table 'fe_groups'
+# @deprecated #1532 will be removed in oelib 6.0
 #
 CREATE TABLE fe_groups (
     tx_oelib_is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,

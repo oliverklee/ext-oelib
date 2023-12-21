@@ -271,6 +271,7 @@ final class TestingFramework
     {
         $this->initializeDatabase();
         $dataToInsert = $this->normalizeDatabaseRow($rawData);
+        // @deprecated #1532 will be removed in oelib 6.0
         $dummyColumnName = $this->getDummyColumnName($table);
         $dataToInsert[$dummyColumnName] = 1;
 
@@ -542,6 +543,7 @@ final class TestingFramework
     {
         $this->initializeDatabase();
         $this->assertTableNameIsAllowed($table);
+        // @deprecated #1532 will be removed in oelib 6.0
         $dummyColumnName = $this->getDummyColumnName($table);
         // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($uid === 0) {
@@ -557,6 +559,7 @@ final class TestingFramework
                 1331490017
             );
         }
+        // @deprecated #1532 will be removed in oelib 6.0
         if (isset($rawData[$dummyColumnName])) {
             throw new \InvalidArgumentException(
                 'The parameter $recordData must not contain changes to the field "' . $dummyColumnName .
@@ -609,6 +612,7 @@ final class TestingFramework
             'uid_local' => $uidLocal,
             'uid_foreign' => $uidForeign,
             'sorting' => $this->getRelationSorting($table, $uidLocal),
+            // @deprecated #1532 will be removed in oelib 6.0
             $this->getDummyColumnName($table) => 1,
         ];
 
@@ -709,6 +713,8 @@ final class TestingFramework
      * issue.
      *
      * @param bool $performDeepCleanUp whether a deep clean up should be performed, may be empty
+     *
+     * @deprecated #1532 will be removed in oelib 6.0
      */
     public function cleanUp(bool $performDeepCleanUp = false): void
     {
@@ -716,6 +722,9 @@ final class TestingFramework
         $this->cleanUpWithoutDatabase();
     }
 
+    /**
+     * @deprecated #1532 will be removed in oelib 6.0
+     */
     private function cleanUpDatabase(bool $performDeepCleanUp = false): void
     {
         $this->initializeDatabase();
@@ -724,9 +733,7 @@ final class TestingFramework
     }
 
     /**
-     * Cleanup without deleting dummy records. Use this method instead of `cleanUp()` for better performance when
-     * another testing framework (e.g., `typo3/testing-framework` or `nimut/testing-framework`) already takes care
-     * of cleaning up old database records.
+     * Cleans up..
      */
     public function cleanUpWithoutDatabase(): void
     {
@@ -763,6 +770,8 @@ final class TestingFramework
      *
      * @param bool $useSystemTables whether to clean up the system tables (TRUE) or the non-system test tables (FALSE)
      * @param bool $performDeepCleanUp whether a deep clean up should be performed, may be empty
+     *
+     * @deprecated #1532 will be removed in oelib 6.0
      */
     private function cleanUpTableSet(bool $useSystemTables, bool $performDeepCleanUp): void
     {
@@ -1344,6 +1353,8 @@ routes: {  }";
      * @param non-empty-string $table the table name to look up
      *
      * @return non-empty-string the name of the column that marks a record as dummy record
+     *
+     * @deprecated #1532 will be removed in oelib 6.0
      */
     public function getDummyColumnName(string $table): string
     {

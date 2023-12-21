@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Mark some classes and methods as `@internal` (#1478, #1522)
 
  ### Deprecated
+- Deprecate the record change tracking in the testing framework (#1551)
 - Deprecate the auto-increment handling in the testing framework (#1549)
 - Deprecate `TestingQueryResult` (#1548)
 - Deprecate `FrontEndUserGroup::title` and `::description` (#1547)
