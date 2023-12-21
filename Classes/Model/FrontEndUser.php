@@ -407,16 +407,6 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
     }
 
     /**
-     * Checks whether this user has agreed to receive HTML e-mails.
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function wantsHtmlEmail(): bool
-    {
-        return $this->getAsBoolean('module_sys_dmail_html');
-    }
-
-    /**
      * Gets this user's user groups.
      *
      * @return Collection<FrontEndUserGroup> this user's FE user groups, will not be empty if the user data is valid
