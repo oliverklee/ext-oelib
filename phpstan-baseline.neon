@@ -116,51 +116,6 @@ parameters:
 			path: Classes/Email/SystemEmailFromBuilder.php
 
 		-
-			message: "#^Cannot access offset 'error_message' on mixed\\.$#"
-			count: 2
-			path: Classes/Geocoding/GoogleGeocoding.php
-
-		-
-			message: "#^Cannot access offset 'geometry' on mixed\\.$#"
-			count: 1
-			path: Classes/Geocoding/GoogleGeocoding.php
-
-		-
-			message: "#^Cannot access offset 'lat' on mixed\\.$#"
-			count: 1
-			path: Classes/Geocoding/GoogleGeocoding.php
-
-		-
-			message: "#^Cannot access offset 'lng' on mixed\\.$#"
-			count: 1
-			path: Classes/Geocoding/GoogleGeocoding.php
-
-		-
-			message: "#^Cannot access offset 'location' on mixed\\.$#"
-			count: 1
-			path: Classes/Geocoding/GoogleGeocoding.php
-
-		-
-			message: "#^Cannot access offset 'results' on mixed\\.$#"
-			count: 1
-			path: Classes/Geocoding/GoogleGeocoding.php
-
-		-
-			message: "#^Cannot access offset 'status' on mixed\\.$#"
-			count: 1
-			path: Classes/Geocoding/GoogleGeocoding.php
-
-		-
-			message: "#^Cannot access offset 0 on mixed\\.$#"
-			count: 1
-			path: Classes/Geocoding/GoogleGeocoding.php
-
-		-
-			message: "#^Cannot cast mixed to float\\.$#"
-			count: 2
-			path: Classes/Geocoding/GoogleGeocoding.php
-
-		-
 			message: "#^Cannot call method getLanguage\\(\\) on mixed\\.$#"
 			count: 1
 			path: Classes/Language/SalutationSwitcher.php
