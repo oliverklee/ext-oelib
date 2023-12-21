@@ -142,6 +142,8 @@ final class TestingFramework
      * @deprecated will be removed in oelib 6.0
      *
      * @var int
+     *
+     * @deprecated #1529 will be removed in oelib 6.0
      */
     private $resetAutoIncrementThreshold = 0;
 
@@ -211,7 +213,7 @@ final class TestingFramework
     /**
      * Determines a good value for the auto increment threshold and sets it.
      *
-     * @deprecated will be removed in oelib 6.0
+     * @deprecated #1529 will be removed in oelib 6.0
      */
     private function determineAndSetAutoIncrementThreshold(): void
     {
@@ -1436,7 +1438,7 @@ routes: {  }";
      *
      * @throws \InvalidArgumentException
      *
-     * @deprecated will be removed in oelib 6.0
+     * @deprecated #1529 will be removed in oelib 6.0
      * @see resetAutoIncrementLazily
      */
     public function resetAutoIncrement(string $table): void
@@ -1471,7 +1473,7 @@ routes: {  }";
      *
      * @param non-empty-string $table the name of the table on which we're going to reset the auto increment entry
      *
-     * @deprecated will be removed in oelib 6.0
+     * @deprecated #1529 will be removed in oelib 6.0
      * @see resetAutoIncrement
      */
     private function resetAutoIncrementLazily(string $table): void
@@ -1504,6 +1506,8 @@ routes: {  }";
      * @throws \InvalidArgumentException
      *
      * @see resetAutoIncrementLazily
+     *
+     * @deprecated #1529 will be removed in oelib 6.0
      */
     public function setResetAutoIncrementThreshold(int $threshold): void
     {
@@ -1554,7 +1558,7 @@ routes: {  }";
      *
      * @return positive-int|null the auto_increment value of table $table, will be > 0, or null if the table has none
      *
-     * @deprecated will be removed in oelib 6.0
+     * @deprecated #1529 will be removed in oelib 6.0
      */
     public function getAutoIncrement(string $table): ?int
     {
