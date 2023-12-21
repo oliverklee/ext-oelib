@@ -19,6 +19,8 @@ use TYPO3\CMS\Extbase\Persistence\Generic\LazyObjectStorage;
  * </code>
  *
  * @mixin AbstractEntity
+ *
+ * @deprecated #1499 will be removed in oelib 6.0.0
  */
 trait CachedAssociationCount
 {
