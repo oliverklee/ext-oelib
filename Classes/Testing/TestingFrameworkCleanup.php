@@ -7,7 +7,6 @@ namespace OliverKlee\Oelib\Testing;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\PageFinder;
-use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 
 /**
@@ -24,7 +23,6 @@ class TestingFrameworkCleanup
     {
         ConfigurationProxy::purgeInstances();
         ConfigurationRegistry::purgeInstance();
-        HeaderProxyFactory::purgeInstance();
         MapperRegistry::purgeInstance();
         PageFinder::purgeInstance();
     }
