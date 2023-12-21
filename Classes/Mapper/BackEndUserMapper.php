@@ -21,6 +21,9 @@ class BackEndUserMapper extends AbstractDataMapper
         'usergroup' => BackEndUserGroupMapper::class,
     ];
 
+    /**
+     * @deprecated #1505 will be removed in oelib 6.0.0
+     */
     protected $additionalKeys = ['username'];
 
     /**
@@ -32,6 +35,8 @@ class BackEndUserMapper extends AbstractDataMapper
      * @return BackEndUser model of the back-end user with the provided username
      *
      * @throws NotFoundException if there is no back-end user with the provided username in the be_user table
+     *
+     * @deprecated #1505 will be removed in oelib 6.0.0
      */
     public function findByUserName(string $username): BackEndUser
     {

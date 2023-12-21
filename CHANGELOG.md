@@ -12,8 +12,9 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Mark some classes and methods as `@internal` (#1478, #1522)
 
  ### Deprecated
-- Deprecate some methods from `AbstractDataMapper` (#1454)
-- Deprecate `Sortable` (#1453)
+- Deprecate `BackEndUserMapper::findByUserName` (#1545)
+- Deprecate some methods from `AbstractDataMapper` (#1544)
+- Deprecate `Sortable` (#1543)
 - Deprecate `CachedAssociationCount` (#1542)
 - Deprecate `SalutationSwitcher` (#1541)
 - Deprecate `TemplateHelper` (#1540)
