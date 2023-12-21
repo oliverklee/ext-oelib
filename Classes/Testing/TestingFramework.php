@@ -932,23 +932,23 @@ final class TestingFramework
             $frontEnd->id = $pageUid;
         }
         $frontEnd->determineId($request);
-        $frontEnd->tmpl = GeneralUtility::makeInstance(TemplateService::class);
+//        $frontEnd->tmpl = GeneralUtility::makeInstance(TemplateService::class);
         $frontEnd->config = [
             'config' => ['MP_disableTypolinkClosestMPvalue' => true, 'typolinkLinkAccessRestrictedPages' => true],
         ];
 
-        if (\in_array('sys_template', $this->dirtySystemTables, true)) {
-            try {
-                $rootLine = GeneralUtility::makeInstance(RootlineUtility::class, $pageUid)->get();
-            } catch (PageNotFoundException $e) {
-                $rootLine = [];
-            }
-
-            $frontEnd->tmpl->runThroughTemplates($rootLine);
-            $frontEnd->tmpl->generateConfig();
-            $frontEnd->tmpl->loaded = true;
-            Locales::setSystemLocaleFromSiteLanguage($frontEnd->getLanguage());
-        }
+//        if (\in_array('sys_template', $this->dirtySystemTables, true)) {
+//            try {
+//                $rootLine = GeneralUtility::makeInstance(RootlineUtility::class, $pageUid)->get();
+//            } catch (PageNotFoundException $e) {
+//                $rootLine = [];
+//            }
+//
+//            $frontEnd->tmpl->runThroughTemplates($rootLine);
+//            $frontEnd->tmpl->generateConfig();
+//            $frontEnd->tmpl->loaded = true;
+//        }
+        Locales::setSystemLocaleFromSiteLanguage($frontEnd->getLanguage());
 
         $frontEnd->newCObj();
         /** @var ContentObjectRenderer $contentObject */
