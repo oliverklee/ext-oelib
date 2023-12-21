@@ -98,7 +98,7 @@ class BackEndUser extends AbstractModel implements MailRole, ConvertableToMimeAd
      *
      * @return Collection<BackEndUserGroup> the user's direct groups, will be empty if this user has no groups
      *
-     * @deprecated will be removed in oelib 6.0
+     * @deprecated #1153 will be removed in oelib 6.0
      */
     public function getGroups(): Collection
     {
@@ -114,7 +114,7 @@ class BackEndUser extends AbstractModel implements MailRole, ConvertableToMimeAd
      * @return Collection<BackEndUserGroup> all groups and subgroups of this user,
      *         will be empty if this user has no groups
      *
-     * @deprecated will be removed in oelib 6.0
+     * @deprecated #1153 will be removed in oelib 6.0
      */
     public function getAllGroups(): Collection
     {

@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Mark some classes and methods as `@internal` (#1478, #1522)
 
  ### Deprecated
+- Deprecate `BackEndUser::getGroups` and the `BackEndUserGroup` model/mapper (#1546)
 - Deprecate `BackEndUserMapper::findByUserName` (#1545)
 - Deprecate some methods from `AbstractDataMapper` (#1544)
 - Deprecate `Sortable` (#1543)
