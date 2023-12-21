@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace OliverKlee\Oelib\Tests\Unit\Model\Fixtures;
 
-use OliverKlee\Oelib\Interfaces\Sortable;
 use OliverKlee\Oelib\Model\AbstractModel;
 
 /**
  * This class represents a domain model for testing purposes.
  */
-final class TestingChildModel extends AbstractModel implements Sortable
+final class TestingChildModel extends AbstractModel
 {
     /**
      * @return string
@@ -63,23 +62,5 @@ final class TestingChildModel extends AbstractModel implements Sortable
     public function markAsDummyModel(): void
     {
         $this->set('is_dummy_record', true);
-    }
-
-    /**
-     * @return int<0, max>
-     */
-    public function getSorting(): int
-    {
-        $sorting = $this->getAsInteger('sorting');
-
-        return $sorting >= 0 ? $sorting : 0;
-    }
-
-    /**
-     * @param int<0, max> $sorting
-     */
-    public function setSorting(int $sorting): void
-    {
-        $this->setAsInteger('sorting', $sorting);
     }
 }
