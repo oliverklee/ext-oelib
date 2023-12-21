@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Mark some classes and methods as `@internal` (#1478, #1522)
 
 ### Deprecated
+- Deprecate the HTTP classes (#1527)
 - Deprecate the `DynamicDateViewHelper` (#1525)
 - Deprecate some `Collection` methods (#1523)
 - Deprecate some properties from `FrontEndUser` (#1514)

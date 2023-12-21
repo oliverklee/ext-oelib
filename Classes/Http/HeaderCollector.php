@@ -11,6 +11,8 @@ use OliverKlee\Oelib\Http\Interfaces\HeaderProxy;
  * sending them and provides various functions to get them for testing purposes.
  *
  * Regarding the Strategy pattern, `addHeader()` represents one concrete behavior.
+ *
+ * @deprecated #1526 will be removed in oelib 6.0.0
  */
 class HeaderCollector implements HeaderProxy
 {
