@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Mark some classes and methods as `@internal` (#1478, #1522)
 
  ### Deprecated
+- Deprecate `Sortable` (#1453)
 - Deprecate `CachedAssociationCount` (#1542)
 - Deprecate `SalutationSwitcher` (#1541)
 - Deprecate `TemplateHelper` (#1540)
