@@ -112,6 +112,8 @@ final class TestingFramework
      * and need to be cleaned up)
      *
      * @var array<string, non-empty-string>
+     *
+     * @deprecated #1532 will be removed in oelib 6.0
      */
     private $dirtyTables = [];
 
@@ -120,6 +122,8 @@ final class TestingFramework
      * need to be cleaned up)
      *
      * @var array<string, non-empty-string>
+     *
+     * @deprecated #1532 will be removed in oelib 6.0
      */
     private $dirtySystemTables = [];
 
@@ -277,6 +281,8 @@ final class TestingFramework
 
         $connection = $this->getConnectionForTable($table);
         $connection->insert($table, $dataToInsert);
+
+        // @deprecated #1532 will be removed in oelib 6.0
         $this->markTableAsDirty($table);
 
         $uid = (int)$connection->lastInsertId($table);
@@ -606,6 +612,7 @@ final class TestingFramework
             throw new \InvalidArgumentException('$uidForeign must be > 0, but is: ' . $uidForeign, 1331490378);
         }
 
+        // @deprecated #1532 will be removed in oelib 6.0
         $this->markTableAsDirty($table);
 
         $recordData = [
@@ -949,6 +956,7 @@ final class TestingFramework
             'config' => ['MP_disableTypolinkClosestMPvalue' => true, 'typolinkLinkAccessRestrictedPages' => true],
         ];
 
+        // @deprecated #1532 will be removed in oelib 6.0
         if (\in_array('sys_template', $this->dirtySystemTables, true)) {
             try {
                 $rootLine = GeneralUtility::makeInstance(RootlineUtility::class, $pageUid)->get();
@@ -1602,6 +1610,8 @@ routes: {  }";
      *        to put on the list of dirty tables
      *
      * @throws \InvalidArgumentException
+     *
+     * @deprecated #1532 will be removed in oelib 6.0
      */
     public function markTableAsDirty(string $tableNames): void
     {
@@ -1679,6 +1689,7 @@ routes: {  }";
             );
         }
 
+        // @deprecated #1532 will be removed in oelib 6.0
         $this->markTableAsDirty($tableName);
     }
 
