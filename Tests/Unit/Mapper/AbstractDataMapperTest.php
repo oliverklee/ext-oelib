@@ -460,39 +460,6 @@ final class AbstractDataMapperTest extends UnitTestCase
         $this->subject->findOneByKey('title', '');
     }
 
-    // Tests concerning compound key
-
-    /**
-     * @test
-     */
-    public function findOneByCompoundKeyFromCacheForEmptyCompoundKeyThrowsException(): void
-    {
-        $this->expectException(NotFoundException::class);
-
-        $this->subject->findOneByCompoundKeyFromCache('bar');
-    }
-
-    /**
-     * @test
-     */
-    public function findOneByCompoundKeyFromCacheForEmptyValueThrowsException(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
-        $this->subject->findOneByCompoundKeyFromCache('');
-    }
-
-    /**
-     * @test
-     */
-    public function findOneByCompoundKeyFromCacheForModelNotInCacheThrowsException(): void
-    {
-        $this->expectException(NotFoundException::class);
-
-        $this->subject->findOneByCompoundKeyFromCache('foo.bar');
-    }
-
     ///////////////////////////////////////
     // Tests concerning findAllByRelation
     ///////////////////////////////////////

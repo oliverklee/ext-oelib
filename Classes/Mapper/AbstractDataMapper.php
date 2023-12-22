@@ -64,31 +64,10 @@ abstract class AbstractDataMapper
     protected $additionalKeys = [];
 
     /**
-     * The column names of an additional compound key.
-     * There can only be one compound key per data mapper.
-     *
-     * @var non-empty-string[]
-     *
-     * @deprecated #1503 will be removed in oelib 6.0.0
-     */
-    protected $compoundKeyParts = [];
-
-    /**
      * @var array<string, array<string, M>> two-dimensional cache for the objects by key:
      *            `[key name][key value] => model`
      */
     private $cacheByKey = [];
-
-    /**
-     * Cache for the objects by compound key:
-     * [compound key value] => model
-     * The column values are concatenated via a dot as compound key value.
-     *
-     * @var array<string, M>
-     *
-     * @deprecated #1503 will be removed in oelib 6.0.0
-     */
-    protected $cacheByCompoundKey = [];
 
     /**
      * @var bool whether database access is denied for this mapper
@@ -1206,35 +1185,6 @@ abstract class AbstractDataMapper
     }
 
     /**
-     * Looks up a model in the compound cache.
-     *
-     * When this function reports "no match", the model could still exist in the
-     * database, though.
-     *
-     * @param non-empty-string $value the value for the compound key of the model to find
-     *
-     * @return M the cached model
-     *
-     * @throws NotFoundException if there is no match in the cache yet
-     * @throws \InvalidArgumentException
-     *
-     * @deprecated #1503 will be removed in oelib 6.0.0
-     */
-    public function findOneByCompoundKeyFromCache(string $value): AbstractModel
-    {
-        // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
-        if ($value === '') {
-            throw new \InvalidArgumentException('$value must not be empty.', 1331319992);
-        }
-
-        if (!isset($this->cacheByCompoundKey[$value])) {
-            throw new NotFoundException('Not found.', 1573836491);
-        }
-
-        return $this->cacheByCompoundKey[$value];
-    }
-
-    /**
      * Puts a model in the cache-by-keys (if the model has any non-empty additional keys).
      *
      * @param M $model the model to cache
@@ -1253,9 +1203,6 @@ abstract class AbstractDataMapper
         }
 
         $this->cacheModelByCombinedKeys($model, $data);
-        if ($this->compoundKeyParts !== []) {
-            $this->cacheModelByCompoundKey($model, $data);
-        }
     }
 
     /**
@@ -1266,48 +1213,9 @@ abstract class AbstractDataMapper
      *
      * @param M $model the model to cache
      * @param DatabaseRow $data the data of the model as it is in the DB, may be empty
-     *
-     * @see cacheModelByCompoundKey
      */
     protected function cacheModelByCombinedKeys(AbstractModel $model, array $data): void
     {
-    }
-
-    /**
-     * Automatically caches a model by an additional compound key.
-     *
-     * It is cached only if all parts of the compound key have values.
-     *
-     * This method works automatically; it is not necessary to overwrite it.
-     *
-     * @param M $model the model to cache
-     * @param DatabaseRow $data the data of the model as it is in the DB, may be empty
-     *
-     * @throws \BadMethodCallException
-     *
-     * @deprecated #1503 will be removed in oelib 6.0.0
-     */
-    protected function cacheModelByCompoundKey(AbstractModel $model, array $data): void
-    {
-        if ($this->compoundKeyParts === []) {
-            throw new \BadMethodCallException(
-                'The compound key parts are not defined.',
-                1363806895
-            );
-        }
-        $values = [];
-        foreach ($this->compoundKeyParts as $key) {
-            $dataItem = $data[$key] ?? null;
-            if ($dataItem !== null) {
-                $values[] = $data[$key];
-            }
-        }
-        if (count($this->compoundKeyParts) === count($values)) {
-            $value = implode('.', $values);
-            if ($value !== '') {
-                $this->cacheByCompoundKey[$value] = $model;
-            }
-        }
     }
 
     /**
