@@ -2555,6 +2555,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model->setTitle('bar');
 
         $component = new TestingChildModel();
+        $component->setTitle('foo');
         $component->markAsDummyModel();
         $model->getComposition()->add($component);
 
@@ -2585,10 +2586,12 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model->setTitle('bar');
 
         $newComponent1 = new TestingChildModel();
+        $newComponent1->setTitle('foo');
         $newComponent1->markAsDummyModel();
         $model->getComposition()->add($newComponent1);
 
         $newComponent2 = new TestingChildModel();
+        $newComponent2->setTitle('baz');
         $newComponent2->markAsDummyModel();
         $model->getComposition()->add($newComponent2);
 
@@ -2619,6 +2622,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model->setTitle('bar');
 
         $component = new TestingChildModel();
+        $component->setTitle('foo');
         $component->markAsDummyModel();
         $model->getComposition2()->add($component);
 
