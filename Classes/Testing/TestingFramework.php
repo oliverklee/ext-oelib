@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Oelib\Testing;
 
-use Doctrine\DBAL\Driver\ResultStatement;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
@@ -16,7 +15,6 @@ use TYPO3\CMS\Core\Context\UserAspect;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\Locales;
@@ -251,16 +249,6 @@ final class TestingFramework
     private function getConnectionForTable(string $tableName): Connection
     {
         return $this->getConnectionPool()->getConnectionForTable($tableName);
-    }
-
-    /**
-     * @param non-empty-string $tableName
-     *
-     * @return QueryBuilder
-     */
-    private function getQueryBuilderForTable(string $tableName): QueryBuilder
-    {
-        return $this->getConnectionPool()->getQueryBuilderForTable($tableName);
     }
 
     /**
@@ -1144,81 +1132,6 @@ routes: {  }";
             $errorMessage = \sprintf('The table "%1$s" is not allowed. Allowed tables: %2$s', $table, $allowedTables);
             throw new \InvalidArgumentException($errorMessage, 1569784847);
         }
-    }
-
-    /**
-     * Counts the dummy records in the table given by the first parameter $table
-     * that match a given WHERE clause.
-     *
-     * @param non-empty-string $table the name of the table to query
-     * @param array<string, string|int|bool> $criteria key-value pairs to match
-     *
-     * @return int<0, max> the number of records that have been found, will be >= 0
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @deprecated will be removed in oelib 6.0
-     */
-    public function count(string $table, array $criteria = []): int
-    {
-        $this->initializeDatabase();
-        $this->assertTableNameIsAllowed($table);
-
-        $query = $this->getQueryBuilderForTable($table)->count('*')->from($table);
-        $query->getRestrictions()->removeAll();
-        foreach ($criteria as $identifier => $value) {
-            $query->andWhere($query->expr()->eq($identifier, $query->createNamedParameter($value)));
-        }
-        if (\method_exists($query, 'executeQuery')) {
-            $result = $query->executeQuery();
-        } else {
-            $result = $query->execute();
-            if (!$result instanceof ResultStatement) {
-                throw new \UnexpectedValueException('Expected ResultStatement, got int instead.', 1646321756);
-            }
-        }
-
-        if (\method_exists($result, 'fetchOne')) {
-            $count = (int)$result->fetchOne();
-        } else {
-            $count = (int)$result->fetchColumn();
-        }
-
-        return $count >= 0 ? $count : 0;
-    }
-
-    /**
-     * Checks whether there is a dummy record in the table given by the first
-     * parameter $table that has the given UID.
-     *
-     * @param non-empty-string $table the name of the table to query
-     * @param positive-int $uid the UID of the record to look up
-     *
-     * @deprecated will be removed in oelib 6.0
-     */
-    public function existsRecordWithUid(string $table, int $uid): bool
-    {
-        // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
-        if ($table === '') {
-            throw new \InvalidArgumentException('$table must not be empty.', 1569785503);
-        }
-        // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
-        if ($uid <= 0) {
-            throw new \InvalidArgumentException('$uid must be > 0.', 1331490872);
-        }
-
-        $this->initializeDatabase();
-        $this->assertTableNameIsAllowed($table);
-
-        $queryResult = $this->getConnectionForTable($table)
-            ->select(['*'], $table, ['uid' => $uid]);
-        if (\method_exists($queryResult, 'fetchAllAssociative')) {
-            $data = $queryResult->fetchAllAssociative();
-        } else {
-            $data = $queryResult->fetchAll();
-        }
-
-        return $data !== [];
     }
 
     /**
