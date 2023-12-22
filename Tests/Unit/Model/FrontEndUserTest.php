@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace OliverKlee\Oelib\Tests\Unit\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\Interfaces\ConvertableToMimeAddress;
 use OliverKlee\Oelib\Interfaces\MailRole;
 use OliverKlee\Oelib\Mapper\FrontEndUserGroupMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Model\FrontEndUserGroup;
-use Symfony\Component\Mime\Address;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -703,51 +701,6 @@ final class FrontEndUserTest extends UnitTestCase
             'john@example.com',
             $this->subject->getEmailAddress()
         );
-    }
-
-    // Tests concerning the MIME email address
-
-    /**
-     * @test
-     */
-    public function implementsConvertableToMimeAddress(): void
-    {
-        self::assertInstanceOf(ConvertableToMimeAddress::class, $this->subject);
-    }
-
-    /**
-     * @test
-     */
-    public function canBuildMimeAddress(): void
-    {
-        $this->subject->setData(['email' => 'tina@example.com']);
-
-        $address = $this->subject->toMimeAddress();
-        self::assertInstanceOf(Address::class, $address);
-    }
-
-    /**
-     * @test
-     */
-    public function mimeAddressHasEmailAddress(): void
-    {
-        $emailAddress = 'jade@example.com';
-        $this->subject->setData(['email' => $emailAddress]);
-
-        $address = $this->subject->toMimeAddress();
-        self::assertSame($emailAddress, $address->getAddress());
-    }
-
-    /**
-     * @test
-     */
-    public function mimeAddressHasName(): void
-    {
-        $name = 'Max';
-        $this->subject->setData(['name' => $name, 'email' => 'tina@example.com']);
-
-        $address = $this->subject->toMimeAddress();
-        self::assertSame($name, $address->getName());
     }
 
     // Tests concerning the user groups

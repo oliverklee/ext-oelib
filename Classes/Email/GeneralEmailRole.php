@@ -4,16 +4,13 @@ declare(strict_types=1);
 
 namespace OliverKlee\Oelib\Email;
 
-use OliverKlee\Oelib\Interfaces\ConvertableToMimeAddress;
 use OliverKlee\Oelib\Interfaces\MailRole;
 
 /**
  * A general email subject.
  */
-class GeneralEmailRole implements MailRole, ConvertableToMimeAddress
+class GeneralEmailRole implements MailRole
 {
-    use ConvertableToMimeAddressTrait;
-
     /**
      * @var string
      */
