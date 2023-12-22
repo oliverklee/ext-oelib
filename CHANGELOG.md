@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
  ### Deprecated
 
 ### Removed
+- Drop `TestingFramework::createBackEndUser` (#1623)
 - Drop the TypoScript template parsing from the testing framework (#1621)
 - Drop `DynamicDateViewHelper` (#1620)
 - Remove `SalutationSwitcher` (#1618)
