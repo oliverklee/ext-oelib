@@ -156,16 +156,6 @@ parameters:
 			path: Classes/Model/BackEndUser.php
 
 		-
-			message: "#^Instanceof between TYPO3\\\\CMS\\\\Frontend\\\\Authentication\\\\FrontendUserAuthentication and TYPO3\\\\CMS\\\\Frontend\\\\Authentication\\\\FrontendUserAuthentication will always evaluate to true\\.$#"
-			count: 1
-			path: Classes/Session/Session.php
-
-		-
-			message: "#^Method OliverKlee\\\\Oelib\\\\Session\\\\Session\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\|null but returns mixed\\.$#"
-			count: 1
-			path: Classes/Session/Session.php
-
-		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 2
 			path: Classes/Templating/Template.php
