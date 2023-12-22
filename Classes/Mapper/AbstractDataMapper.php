@@ -1112,9 +1112,9 @@ abstract class AbstractDataMapper
     /**
      * Marks `$model` as deleted and saves it to the DB (if it has a UID).
      *
-     * @internal
-     *
      * @param M $model the model to delete, must not be a memory-only dummy, must not be read-only
+     *
+     * @internal
      */
     public function delete(AbstractModel $model): void
     {
