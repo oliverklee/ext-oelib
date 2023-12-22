@@ -7,7 +7,6 @@ namespace OliverKlee\Oelib\Tests\Unit\Mapper\Fixtures;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
-use OliverKlee\Oelib\Mapper\IdentityMap;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Tests\Unit\Model\Fixtures\TestingModel;
 
@@ -50,14 +49,6 @@ final class TestingMapper extends AbstractDataMapper
     public function getCachedModels(): array
     {
         return $this->cachedModels;
-    }
-
-    /**
-     * Sets the map for this mapper.
-     */
-    public function setMap(IdentityMap $map): void
-    {
-        $this->map = $map;
     }
 
     /**

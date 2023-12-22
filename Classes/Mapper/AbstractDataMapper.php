@@ -8,7 +8,6 @@ use Doctrine\DBAL\Driver\ResultStatement;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Model\AbstractModel;
-use OliverKlee\Oelib\Testing\TestingFramework;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
@@ -41,16 +40,15 @@ abstract class AbstractDataMapper
     protected $columns = '*';
 
     /**
-     * @var IdentityMap a map that holds the models that already
-     *                           have been retrieved
+     * @var IdentityMap a map that holds the models that already have been retrieved
      */
-    protected $map;
+    private $map;
 
     /**
      * @var array<positive-int, true> UIDs of models that are memory-only models that must not be saved,
      *      using the UIDs as keys and TRUE as value
      */
-    protected $uidsOfMemoryOnlyDummyModels = [];
+    private $uidsOfMemoryOnlyDummyModels = [];
 
     /**
      * @var array<non-empty-string, class-string<AbstractDataMapper>>
@@ -77,11 +75,6 @@ abstract class AbstractDataMapper
     private $denyDatabaseAccess = false;
 
     /**
-     * @var TestingFramework|null
-     */
-    protected $testingFramework;
-
-    /**
      * The constructor.
      */
     public function __construct()
@@ -103,15 +96,6 @@ abstract class AbstractDataMapper
         foreach ($this->additionalKeys as $key) {
             $this->cacheByKey[$key] = [];
         }
-    }
-
-    /**
-     * Sets the testing framework. During functional tests, this makes sure that records created with this mapper
-     * will be deleted during cleanUp again.
-     */
-    public function setTestingFramework(TestingFramework $testingFramework): void
-    {
-        $this->testingFramework = $testingFramework;
     }
 
     /**
