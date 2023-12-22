@@ -1139,56 +1139,6 @@ abstract class AbstractDataMapper
     }
 
     /**
-     * Retrieves all non-deleted, non-hidden models from the DB.
-     *
-     * If no sorting is provided, the records are sorted like in the BE.
-     *
-     * @param string $sorting the sorting for the found records, must be a valid DB field
-     *        optionally followed by "ASC" or "DESC" or may be empty
-     *
-     * @return Collection<M> all models from the DB, already loaded
-     *
-     * @deprecated #1503 will be removed in oelib 6.0.0
-     */
-    public function findAll(string $sorting = ''): Collection
-    {
-        $queryResult = $this->getConnection()
-            ->select(['*'], $this->getTableName(), [], [], $this->sortingToOrderArray($sorting));
-
-        if (\method_exists($queryResult, 'fetchAllAssociative')) {
-            /** @var DatabaseRow[] $modelData */
-            $modelData = $queryResult->fetchAllAssociative();
-        } else {
-            /** @var DatabaseRow[] $modelData */
-            $modelData = $queryResult->fetchAll();
-        }
-
-        return $this->getListOfModels($modelData);
-    }
-
-    /**
-     * @return array<string, string>
-     *
-     * @deprecated #1503 will be removed in oelib 6.0.0
-     */
-    protected function sortingToOrderArray(string $sorting): array
-    {
-        $trimmedSorting = \trim($sorting);
-        if ($trimmedSorting === '') {
-            return [];
-        }
-
-        if (\strpos($trimmedSorting, ' ') !== false) {
-            [$orderColumn, $orderDirection] = GeneralUtility::trimExplode(' ', $trimmedSorting, true);
-            $orderBy = [$orderColumn => $orderDirection];
-        } else {
-            $orderBy = [$trimmedSorting => 'ASC'];
-        }
-
-        return $orderBy;
-    }
-
-    /**
      * Registers a model as a memory-only dummy that must not be saved.
      *
      * @param M $model the model to register
