@@ -156,16 +156,6 @@ parameters:
 			path: Classes/Templating/Template.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetchAll\\(\\)\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetchColumn\\(\\)\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
 			message: "#^Cannot access offset 'DOCUMENT_ROOT' on mixed\\.$#"
 			count: 1
 			path: Classes/Testing/TestingFramework.php
@@ -327,11 +317,6 @@ parameters:
 
 		-
 			message: "#^Cannot access offset non\\-empty\\-string on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot cast mixed to int\\.$#"
 			count: 1
 			path: Classes/Testing/TestingFramework.php
 
