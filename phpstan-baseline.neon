@@ -1,21 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
-			path: Classes/Authentication/BackEndLoginManager.php
-
-		-
-			message: "#^Method OliverKlee\\\\Oelib\\\\Authentication\\\\BackEndLoginManager\\:\\:getLoggedInUserUid\\(\\) should return int\\<0, max\\> but returns int\\.$#"
-			count: 1
-			path: Classes/Authentication/BackEndLoginManager.php
-
-		-
-			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
-			path: Classes/Authentication/FrontEndLoginManager.php
-
-		-
 			message: "#^Cannot access offset 'Field' on mixed\\.$#"
 			count: 1
 			path: Classes/Configuration/AbstractConfigurationCheck.php
@@ -394,16 +379,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$data of class OliverKlee\\\\Oelib\\\\Configuration\\\\ExtbaseConfiguration constructor expects array\\<string, mixed\\>, array given\\.$#"
 			count: 1
 			path: Classes/ViewHelpers/AbstractConfigurationCheckViewHelper.php
-
-		-
-			message: "#^Instanceof between TYPO3\\\\CMS\\\\Frontend\\\\Authentication\\\\FrontendUserAuthentication and TYPO3\\\\CMS\\\\Frontend\\\\Authentication\\\\FrontendUserAuthentication will always evaluate to true\\.$#"
-			count: 1
-			path: Tests/Functional/Authentication/FrontEndLoginManagerTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Oelib\\\\Tests\\\\Functional\\\\Authentication\\\\FrontEndLoginManagerTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
-			count: 1
-			path: Tests/Functional/Authentication/FrontEndLoginManagerTest.php
 
 		-
 			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetch\\(\\)\\.$#"
