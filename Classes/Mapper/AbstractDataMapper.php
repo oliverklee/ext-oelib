@@ -1325,8 +1325,6 @@ abstract class AbstractDataMapper
      *
      * @throws NotFoundException if there is no match in the cache yet
      * @throws \InvalidArgumentException
-     *
-     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     protected function findOneByKeyFromCache(string $key, string $value): AbstractModel
     {
@@ -1468,8 +1466,6 @@ abstract class AbstractDataMapper
      * @return M the cached model
      *
      * @throws NotFoundException if there is no match (neither in the cache nor in the database)
-     *
-     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     public function findOneByKey(string $key, string $value): AbstractModel
     {
