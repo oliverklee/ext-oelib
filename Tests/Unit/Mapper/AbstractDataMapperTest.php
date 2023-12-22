@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Oelib\Tests\Unit\Mapper;
 
 use OliverKlee\Oelib\Exception\NotFoundException;
-use OliverKlee\Oelib\Mapper\IdentityMap;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Tests\Unit\Mapper\Fixtures\ColumnLessTestingMapper;
@@ -196,24 +195,6 @@ final class AbstractDataMapperTest extends UnitTestCase
 
         // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->find(-1);
-    }
-
-    /**
-     * @test
-     */
-    public function findWithUidOfCachedModelReturnsThatModel(): void
-    {
-        $model = new TestingModel();
-        $model->setUid(1);
-
-        $map = new IdentityMap();
-        $map->add($model);
-        $this->subject->setMap($map);
-
-        self::assertSame(
-            $model,
-            $this->subject->find(1)
-        );
     }
 
     /**

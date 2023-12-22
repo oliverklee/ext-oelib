@@ -16,7 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 - Drop deprecated methods from `AbstractDataMapper`
-  (#1640, #1641, #1642, #1643, #1644)
+  (#1640, #1641, #1642, #1643, #1644, #1645)
 - Drop `TestingFramework::count()` and `::existsRecordWithUid` (#1639)
 - Drop the tracking of changed records from the testing framework (#1638)
 - Drop the logging-related interfaces/traits (#1637)
