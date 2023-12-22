@@ -277,49 +277,6 @@ abstract class AbstractDataMapper
     }
 
     /**
-     * Reloads a model's data from the database (retrieved by using the
-     * model's UID) and fills the model with it.
-     *
-     * If the model already has been loaded, any data in it will be overwritten
-     * (even it the data has not been persisted yet).
-     *
-     * If a model's data cannot be retrieved from the DB, the model will be set
-     * to the "dead" state.
-     *
-     * This method may be called more than once per model instance.
-     *
-     * @param M $model the model to fill, must already have a UID
-     *
-     * @throws \InvalidArgumentException if $model has no UID or has been created via getNewGhost
-     *
-     * @deprecated #1503 will be removed in oelib 6.0.0
-     */
-    public function reload(AbstractModel $model): void
-    {
-        if ($this->isModelAMemoryOnlyDummy($model)) {
-            throw new \InvalidArgumentException(
-                'This ghost was created via getNewGhost and must not be loaded.',
-                1498659785232
-            );
-        }
-        if (!$model->hasUid()) {
-            throw new \InvalidArgumentException(
-                'load must only be called with models that already have a UID.',
-                1498659789105
-            );
-        }
-
-        $uid = $model->getUid();
-        \assert($uid > 0);
-        try {
-            $data = $this->retrieveRecordByUid($uid);
-            $this->refillModel($model, $data);
-        } catch (NotFoundException $exception) {
-            $model->markAsDead();
-        }
-    }
-
-    /**
      * Fills a model with data, including the relations.
      *
      * This function also updates the cache-by-key.
@@ -334,25 +291,6 @@ abstract class AbstractDataMapper
         $this->cacheModelByKeys($model, $data);
         $this->createRelations($data, $model);
         $model->setData($data);
-    }
-
-    /**
-     * Fills a model with data, including the relations.
-     *
-     * This function also updates the cache-by-key.
-     *
-     * This method may be called more than once per model instance.
-     *
-     * @param M $model the model to fill, needs to have a UID
-     * @param DatabaseRow $data the model data to process as it comes from the DB
-     *
-     * @deprecated #1503 will be removed in oelib 6.0.0
-     */
-    private function refillModel(AbstractModel $model, array $data): void
-    {
-        $this->cacheModelByKeys($model, $data);
-        $this->createRelations($data, $model);
-        $model->resetData($data);
     }
 
     /**
