@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Oelib\Mapper;
 
-use Doctrine\DBAL\Connection as DbalConnection;
 use Doctrine\DBAL\Driver\ResultStatement;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Exception\NotFoundException;
@@ -1219,70 +1218,6 @@ abstract class AbstractDataMapper
         }
 
         return isset($this->uidsOfMemoryOnlyDummyModels[$model->getUid()]);
-    }
-
-    /**
-     * Finds all records which are located on the given pages.
-     *
-     * @param string|int $pageUids comma-separated UIDs of the pages on which the records should be
-     *        found, may be empty
-     * @param string $sorting the sorting for the found records, must be a valid DB field
-     *        optionally followed by "ASC" or "DESC", may be empty
-     *
-     * @return Collection<M> all records with the matching page UIDs, will be
-     *                       empty if no records have been found
-     *
-     * @deprecated #1503 will be removed in oelib 6.0.0
-     */
-    public function findByPageUid($pageUids, string $sorting = ''): Collection
-    {
-        $query = $this->getQueryBuilder()->select('*')->from($this->getTableName());
-        $this->addPageUidRestriction($query, (string)$pageUids);
-        $this->addOrdering($query, $sorting);
-
-        if (\method_exists($query, 'executeQuery')) {
-            $result = $query->executeQuery();
-        } else {
-            $result = $query->execute();
-            if (!$result instanceof ResultStatement) {
-                throw new \UnexpectedValueException('Expected ResultStatement, got int instead.', 1646321575);
-            }
-        }
-
-        if (\method_exists($result, 'fetchAllAssociative')) {
-            $modelData = $result->fetchAllAssociative();
-        } else {
-            $modelData = $result->fetchAll();
-        }
-
-        return $this->getListOfModels($modelData);
-    }
-
-    /**
-     * @param QueryBuilder $queryBuilder
-     * @param string $pageUids comma-separated list of page UIDs
-     */
-    protected function addPageUidRestriction(QueryBuilder $queryBuilder, string $pageUids): void
-    {
-        if (\in_array($pageUids, ['', '0', 0], true)) {
-            return;
-        }
-
-        $intUids = GeneralUtility::intExplode(',', $pageUids, true);
-        $pagesParameter = $queryBuilder->createNamedParameter($intUids, DbalConnection::PARAM_INT_ARRAY);
-        $queryBuilder->andWhere($queryBuilder->expr()->in('pid', $pagesParameter));
-    }
-
-    /**
-     * @param QueryBuilder $query
-     * @param string $sorting the sorting for the found records, must be a valid DB field
-     *        optionally followed by "ASC" or "DESC"
-     */
-    protected function addOrdering(QueryBuilder $query, string $sorting): void
-    {
-        foreach ($this->sortingToOrderArray($sorting) as $fieldName => $order) {
-            $query->addOrderBy($fieldName, $order);
-        }
     }
 
     /**
