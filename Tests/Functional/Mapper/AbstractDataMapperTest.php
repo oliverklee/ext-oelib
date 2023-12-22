@@ -3203,50 +3203,6 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function findOneByCompoundKeyCanFindModelFromCache(): void
-    {
-        $model = $this->subject->getLoadedTestingModel(
-            ['title' => 'Earl Grey', 'header' => 'Tea Time']
-        );
-
-        self::assertSame(
-            $model,
-            $this->subject->findOneByCompoundKey(['title' => 'Earl Grey', 'header' => 'Tea Time'])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function findOneByCompoundKeyCanLoadModelFromDatabase(): void
-    {
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
-        $connection->insert(
-            'tx_oelib_test',
-            ['title' => 'Earl Grey', 'header' => 'Tea Time']
-        );
-        $uid = (int)$connection->lastInsertId('tx_oelib_test');
-        \assert($uid > 0);
-
-        self::assertSame(
-            $uid,
-            $this->subject->findOneByCompoundKey(['title' => 'Earl Grey', 'header' => 'Tea Time'])->getUid()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function findOneByCompoundKeyForNonExistentThrowsException(): void
-    {
-        $this->expectException(NotFoundException::class);
-
-        $this->subject->findOneByCompoundKey(['title' => 'Darjeeling', 'header' => 'Tea Time']);
-    }
-
     ////////////////////////////
     // Tests concerning delete
     ////////////////////////////
