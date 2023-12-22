@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Mark some classes and methods as `@internal` (#1478, #1522, #1561)
 
  ### Deprecated
+- De-deprecate the `Country` and `Language` models and mappers (#1562)
 - Deprecate `TestingFramework::createBackEndUser()` (#1555)
 - Deprecate `TestingFramework::isLoggedIn()` (#1554)
 - Deprecate the template parsing in the testing framework (#1552)
