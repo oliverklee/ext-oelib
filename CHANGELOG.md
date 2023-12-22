@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 - Decouple `TemplateHelper` from `SalutationSwitcher` (#1486)
-- Mark some classes and methods as `@internal` (#1478, #1522)
+- Mark some classes and methods as `@internal` (#1478, #1522, #1561)
 
  ### Deprecated
 - Deprecate `TestingFramework::createBackEndUser()` (#1555)
