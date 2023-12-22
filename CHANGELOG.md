@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop `CacheNullifyer::flushMakeInstanceCache` (#1632)
 - Drop `Typo3Version` (#1631)
 - Drop the login manager classes (#1630)
 - Drop the `ConvertableToMimeAddressTrait` interface/trait (#1629)
