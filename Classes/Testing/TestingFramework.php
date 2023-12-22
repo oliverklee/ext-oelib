@@ -1224,7 +1224,7 @@ routes: {  }";
      *
      * @throws \BadMethodCallException if no front end has been created
      *
-     * @deprecated #1535 will be removed in oelib 6.0
+     * @internal
      */
     public function isLoggedIn(): bool
     {
