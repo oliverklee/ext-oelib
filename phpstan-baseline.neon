@@ -402,12 +402,12 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'HTTP_HOST' on mixed\\.$#"
-			count: 6
+			count: 4
 			path: Tests/Functional/Testing/TestingFrameworkTest.php
 
 		-
 			message: "#^Cannot access offset 'QUERY_STRING' on mixed\\.$#"
-			count: 3
+			count: 2
 			path: Tests/Functional/Testing/TestingFrameworkTest.php
 
 		-

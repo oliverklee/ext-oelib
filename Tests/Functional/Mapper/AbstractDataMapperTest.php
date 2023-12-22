@@ -9,7 +9,6 @@ use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Model\FrontEndUser;
-use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\Oelib\Tests\Unit\Mapper\Fixtures\TestingChildMapper;
 use OliverKlee\Oelib\Tests\Unit\Mapper\Fixtures\TestingMapper;
 use OliverKlee\Oelib\Tests\Unit\Model\Fixtures\ReadOnlyModel;
@@ -46,54 +45,6 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     {
         MapperRegistry::purgeInstance();
         parent::tearDown();
-    }
-
-    // Tests concerning usage with the testing framework
-
-    /**
-     * @test
-     */
-    public function cleanUpAfterSaveRemovesCreatedRecord(): void
-    {
-        $testingFramework = new TestingFramework('tx_oelib');
-        $this->subject->setTestingFramework($testingFramework);
-
-        $model = new TestingModel();
-        $model->setTitle('New and fresh');
-        $this->subject->save($model);
-        $testingFramework->cleanUp();
-
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
-        self::assertSame(0, $connection->count('*', 'tx_oelib_test', ['uid' => $model->getUid()]));
-    }
-
-    /**
-     * @test
-     */
-    public function cleanUpAfterSaveRemovesAssociationTableEntriesRecord(): void
-    {
-        $testingFramework = new TestingFramework('tx_oelib');
-        $this->subject->setTestingFramework($testingFramework);
-
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
-        $connection->insert('tx_oelib_test', []);
-        $leftUid = (int)$connection->lastInsertId('tx_oelib_test');
-        \assert($leftUid > 0);
-
-        $rightModel = new TestingModel();
-        $rightModel->setData([]);
-        $rightModel->setTitle('right model');
-
-        $leftModel = $this->subject->find($leftUid);
-        $leftModel->addRelatedRecord($rightModel);
-        $this->subject->save($leftModel);
-        $testingFramework->cleanUp();
-
-        $relationConnection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test_article_mm');
-        self::assertSame(
-            0,
-            $relationConnection->count('*', 'tx_oelib_test_article_mm', ['uid_local' => $leftUid])
-        );
     }
 
     // Tests concerning load
@@ -2556,7 +2507,6 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         $component = new TestingChildModel();
         $component->setTitle('foo');
-        $component->markAsDummyModel();
         $model->getComposition()->add($component);
 
         $this->subject->save($model);
@@ -2587,12 +2537,10 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         $newComponent1 = new TestingChildModel();
         $newComponent1->setTitle('foo');
-        $newComponent1->markAsDummyModel();
         $model->getComposition()->add($newComponent1);
 
         $newComponent2 = new TestingChildModel();
         $newComponent2->setTitle('baz');
-        $newComponent2->markAsDummyModel();
         $model->getComposition()->add($newComponent2);
 
         $this->subject->save($model);
@@ -2623,7 +2571,6 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         $component = new TestingChildModel();
         $component->setTitle('foo');
-        $component->markAsDummyModel();
         $model->getComposition2()->add($component);
 
         $this->subject->save($model);
@@ -2712,7 +2659,6 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     public function saveForModelWithN1RelationSavesNewRelatedRecord(): void
     {
         $friend = new TestingModel();
-        $friend->markAsDummyModel();
         $friend->setTitle('foo');
 
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');

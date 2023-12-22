@@ -835,7 +835,6 @@ abstract class AbstractDataMapper
             $this->getConnection()->update($this->getTableName(), $data, ['uid' => $model->getUid()]);
             $this->deleteManyToManyRelationIntermediateRecords($model);
         } else {
-            $this->prepareDataForNewRecord($data);
             $tableName = $this->getTableName();
             $this->getConnection()->insert($tableName, $data);
             $lastInsertId = (int)$this->getConnection()->lastInsertId($tableName);
@@ -910,22 +909,6 @@ abstract class AbstractDataMapper
         }
 
         return $data;
-    }
-
-    /**
-     * Prepares the data for models that get newly inserted into the DB.
-     *
-     * @param array<string, mixed> $data the data of the record, will be modified
-     */
-    protected function prepareDataForNewRecord(array &$data): void
-    {
-        if (!$this->testingFramework instanceof TestingFramework) {
-            return;
-        }
-
-        $tableName = $this->getTableName();
-        $this->testingFramework->markTableAsDirty($tableName);
-        $data[$this->testingFramework->getDummyColumnName($tableName)] = 1;
     }
 
     /**
@@ -1009,8 +992,7 @@ abstract class AbstractDataMapper
                     $uidForeign = $relatedModel->getUid();
                 }
 
-                $newData
-                    = $this->getManyToManyRelationIntermediateRecordData($mnTable, $uidLocal, $uidForeign, $sorting);
+                $newData = $this->getManyToManyRelationIntermediateRecordData($uidLocal, $uidForeign, $sorting);
                 $this->getConnectionForTable($mnTable)->insert($mnTable, $newData);
                 $sorting++;
             }
@@ -1089,28 +1071,15 @@ abstract class AbstractDataMapper
     /**
      * Returns the record data for an intermediate m:n-relation record.
      *
-     * @param non-empty-string $mnTable the name of the intermediate m:n-relation table
      * @param int $uidLocal the UID of the local record
      * @param int $uidForeign the UID of the foreign record
      * @param int $sorting the sorting of the intermediate m:n-relation record
      *
      * @return array<string, int> the record data for an intermediate m:n-relation record
      */
-    protected function getManyToManyRelationIntermediateRecordData(
-        string $mnTable,
-        int $uidLocal,
-        int $uidForeign,
-        int $sorting
-    ): array {
-        $recordData = ['uid_local' => $uidLocal, 'uid_foreign' => $uidForeign, 'sorting' => $sorting];
-
-        if ($this->testingFramework instanceof TestingFramework) {
-            $this->testingFramework->markTableAsDirty($mnTable);
-            $dummyColumnName = $this->testingFramework->getDummyColumnName($mnTable);
-            $recordData[$dummyColumnName] = 1;
-        }
-
-        return $recordData;
+    protected function getManyToManyRelationIntermediateRecordData(int $uidLocal, int $uidForeign, int $sorting): array
+    {
+        return ['uid_local' => $uidLocal, 'uid_foreign' => $uidForeign, 'sorting' => $sorting];
     }
 
     /**

@@ -39,14 +39,6 @@ class TestingModel extends AbstractModel
     }
 
     /**
-     * Sets the dummy column to TRUE.
-     */
-    public function markAsDummyModel(): void
-    {
-        $this->set('is_dummy_record', true);
-    }
-
-    /**
      * Marks this model as read-only.
      */
     public function markAsReadOnly(): void

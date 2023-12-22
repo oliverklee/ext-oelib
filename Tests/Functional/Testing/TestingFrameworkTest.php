@@ -85,74 +85,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
         return (int)$data['sorting'];
     }
 
-    // Tests regarding markTableAsDirty()
-
-    /**
-     * @test
-     */
-    public function markTableAsDirtyWillCleanUpNonSystemTable(): void
-    {
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
-        $connection->insert('tx_oelib_test', ['is_dummy_record' => 1]);
-        $uid = (int)$connection->lastInsertId('tx_oelib_test');
-
-        $this->subject->markTableAsDirty('tx_oelib_test');
-        $this->subject->cleanUp();
-
-        self::assertSame(
-            0,
-            $connection->count('*', 'tx_oelib_test', ['uid' => $uid])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function markTableAsDirtyWillCleanUpSystemTable(): void
-    {
-        $connection = $this->getConnectionPool()->getConnectionForTable('pages');
-        $connection->insert('pages', ['tx_oelib_is_dummy_record' => 1]);
-        $uid = (int)$connection->lastInsertId('pages');
-
-        $this->subject->markTableAsDirty('pages');
-        $this->subject->cleanUp();
-
-        self::assertSame(
-            0,
-            $connection->count('*', 'pages', ['uid' => $uid])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function markTableAsDirtyFailsOnInexistentTable(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('The table "tx_oelib_DOESNOTEXIST" is not allowed.');
-        $this->subject->markTableAsDirty('tx_oelib_DOESNOTEXIST');
-    }
-
-    /**
-     * @test
-     */
-    public function markTableAsDirtyFailsOnNotAllowedSystemTable(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('The table "sys_domain" is not allowed.');
-        $this->subject->markTableAsDirty('sys_domain');
-    }
-
-    /**
-     * @test
-     */
-    public function markTableAsDirtyFailsOnForeignTable(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('The table "tx_seminars_seminars" is not allowed.');
-        $this->subject->markTableAsDirty('tx_seminars_seminars');
-    }
-
     // Tests regarding createRecord()
 
     /**
@@ -432,25 +364,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
             'tx_oelib_test',
             $uid,
             ['uid' => '55742']
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function changeRecordFailsWithDummyRecordFieldInRecordData(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(
-            'The parameter $recordData must not contain changes to the field ' .
-            '"is_dummy_record". It is impossible to convert a dummy record into a regular record.'
-        );
-        $uid = $this->subject->createRecord('tx_oelib_test', []);
-
-        $this->subject->changeRecord(
-            'tx_oelib_test',
-            $uid,
-            ['is_dummy_record' => 0]
         );
     }
 
@@ -776,172 +689,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         self::assertSame(1, $count);
     }
 
-    // Tests regarding cleanUp()
-
-    /**
-     * @test
-     */
-    public function cleanUpWithRegularCleanUpDeletesTestsRecords(): void
-    {
-        // Creates a dummy record (and marks that table as dirty).
-        $this->subject->createRecord('tx_oelib_test');
-
-        // Creates a dummy record directly in the database, without putting this
-        // table name to the list of dirty tables.
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
-        $connection->insert('tx_oelib_test_article_mm', ['is_dummy_record' => 1]);
-
-        // Runs a regular clean up. This should now delete only the first record
-        // which was created through the testing framework and thus that table
-        // is on the list of dirty tables. The second record was directly put
-        // into the database and it's table is not on this list and will not be
-        // removed by a regular clean up run.
-        $this->subject->cleanUp();
-
-        // Checks whether the first dummy record is deleted.
-        self::assertSame(
-            0,
-            $connection->count('*', 'tx_oelib_test', []),
-            'Some test records were not deleted from table "tx_oelib_test"'
-        );
-
-        // Checks whether the second dummy record still exists.
-        $relationConnection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test_article_mm');
-        self::assertSame(1, $relationConnection->count('*', 'tx_oelib_test_article_mm', []));
-
-        // Runs a deep cleanup to delete all dummy records.
-        $this->subject->cleanUp(true);
-    }
-
-    /**
-     * @test
-     */
-    public function cleanUpWillCleanUpHiddenRecords(): void
-    {
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
-        $connection->insert('tx_oelib_test', ['hidden' => 1, 'is_dummy_record' => 1]);
-        $this->subject->markTableAsDirty('tx_oelib_test');
-
-        $this->subject->cleanUp();
-
-        // We cannot use `$connection->count()` here because it automatically ignores hidden or deleted records.
-        $query = 'SELECT COUNT(*) as count from tx_oelib_test WHERE hidden = :hidden';
-        $queryResult = $connection->executeQuery($query, ['hidden' => 1]);
-        if (\method_exists($queryResult, 'fetchAssociative')) {
-            $row = $queryResult->fetchAssociative();
-        } else {
-            $row = $queryResult->fetch();
-        }
-        self::assertIsArray($row);
-        self::assertSame(0, $row['count']);
-    }
-
-    /**
-     * @test
-     */
-    public function cleanUpWillCleanUpDeletedRecords(): void
-    {
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
-        $connection->insert('tx_oelib_test', ['deleted' => 1, 'is_dummy_record' => 1]);
-        $this->subject->markTableAsDirty('tx_oelib_test');
-
-        $this->subject->cleanUp();
-
-        // We cannot use `$connection->count()` here because it automatically ignores hidden or deleted records.
-        $query = 'SELECT COUNT(*) as count from tx_oelib_test WHERE deleted = :deleted';
-        $queryResult = $connection->executeQuery($query, ['deleted' => 1]);
-        if (\method_exists($queryResult, 'fetchAssociative')) {
-            $row = $queryResult->fetchAssociative();
-        } else {
-            $row = $queryResult->fetch();
-        }
-        self::assertIsArray($row);
-        self::assertSame(0, $row['count']);
-    }
-
-    /**
-     * @test
-     */
-    public function cleanUpRestoresCurrentScriptAfterCreateFakeFrontEnd(): void
-    {
-        $previous = Environment::getCurrentScript();
-        $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());
-
-        $this->subject->cleanUp();
-
-        self::assertSame($previous, Environment::getCurrentScript());
-    }
-
-    /**
-     * @test
-     */
-    public function cleanUpRestoresHttpHostAfterCreateFakeFrontEnd(): void
-    {
-        $previous = $GLOBALS['_SERVER']['HTTP_HOST'] ?? null;
-        $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());
-
-        $this->subject->cleanUp();
-
-        self::assertSame($previous, $GLOBALS['_SERVER']['HTTP_HOST'] ?? null);
-    }
-
-    /**
-     * @test
-     */
-    public function cleanUpUnsetsGlobalRequest(): void
-    {
-        $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());
-        $GLOBALS['TYPO3_REQUEST'] = $this->createMock(ServerRequestInterface::class);
-
-        $this->subject->cleanUp();
-
-        self::assertNull($GLOBALS['TYPO3_REQUEST'] ?? null);
-    }
-
-    /**
-     * @test
-     */
-    public function cleanUpReplacesExistingSystemEnvironmentVariables(): void
-    {
-        $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());
-        $GLOBALS['_SERVER']['QUERY_STRING'] = 'hello.php';
-        $previous = GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST');
-
-        $this->subject->cleanUp();
-
-        self::assertNotSame($previous, GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST'));
-    }
-
     // Tests regarding cleanUpWithoutDatabase()
-
-    /**
-     * @test
-     */
-    public function cleanUpWithoutDatabaseWithRegularCleanUpNotDeletesTestsRecords(): void
-    {
-        // Creates a dummy record (and marks that table as dirty).
-        $this->subject->createRecord('tx_oelib_test');
-
-        // Creates a dummy record directly in the database, without putting this
-        // table name to the list of dirty tables.
-        $relationConnection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test_article_mm');
-        $relationConnection->insert('tx_oelib_test_article_mm', ['is_dummy_record' => 1]);
-
-        // Runs a regular clean up. This should now delete only the first record
-        // which was created through the testing framework and thus that table
-        // is on the list of dirty tables. The second record was directly put
-        // into the database and it's table is not on this list and will not be
-        // removed by a regular clean up run.
-        $this->subject->cleanUpWithoutDatabase();
-
-        // Checks whether the first dummy record is deleted.
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
-        self::assertSame(
-            1,
-            $connection->count('*', 'tx_oelib_test', []),
-            'Some test records were not deleted from table "tx_oelib_test"'
-        );
-    }
 
     /**
      * @test
@@ -1128,26 +876,10 @@ final class TestingFrameworkTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function countIgnoresNonDummyRecords(): void
-    {
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
-        $connection->insert('tx_oelib_test', ['title' => 'foo']);
-
-        $testResult = $this->subject->count('tx_oelib_test', ['title' => 'foo']);
-
-        self::assertSame(
-            0,
-            $testResult
-        );
-    }
-
-    /**
-     * @test
-     */
     public function countCanFindHiddenRecord(): void
     {
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
-        $connection->insert('tx_oelib_test', ['hidden' => 1, 'is_dummy_record' => 1]);
+        $connection->insert('tx_oelib_test', ['hidden' => 1]);
 
         self::assertSame(1, $this->subject->count('tx_oelib_test'));
     }
@@ -1158,7 +890,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
     public function countCanFindDeletedRecord(): void
     {
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
-        $connection->insert('tx_oelib_test', ['deleted' => 1, 'is_dummy_record' => 1]);
+        $connection->insert('tx_oelib_test', ['deleted' => 1]);
 
         self::assertSame(1, $this->subject->count('tx_oelib_test'));
     }
@@ -1173,7 +905,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
     public function countCanFindWithBooleanValues(bool $value): void
     {
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
-        $connection->insert('tx_oelib_test', ['bool_data1' => (int)$value, 'is_dummy_record' => 1]);
+        $connection->insert('tx_oelib_test', ['bool_data1' => (int)$value]);
 
         $result = $this->subject->count('tx_oelib_test', ['bool_data1' => $value]);
 
@@ -1251,21 +983,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
         self::assertTrue(
             $this->subject->existsRecordWithUid('tx_oelib_test', $uid)
         );
-    }
-
-    /**
-     * @test
-     */
-    public function existsRecordWithUidIgnoresNonDummyRecords(): void
-    {
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
-        $connection->insert('tx_oelib_test', ['title' => 'foo']);
-        $uid = (int)$connection->lastInsertId('tx_oelib_test');
-        \assert($uid > 0);
-
-        $testResult = $this->subject->existsRecordWithUid('tx_oelib_test', $uid);
-
-        self::assertFalse($testResult);
     }
 
     // Tests regarding createFrontEndPage()
@@ -1419,20 +1136,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function frontEndPageWillBeCleanedUp(): void
-    {
-        $uid = $this->subject->createFrontEndPage();
-        self::assertNotSame(0, $uid);
-
-        $this->subject->cleanUp();
-
-        $connection = $this->getConnectionPool()->getConnectionForTable('pages');
-        self::assertSame(0, $connection->count('*', 'pages', ['uid' => $uid]));
-    }
-
-    /**
-     * @test
-     */
     public function frontEndPageHasNoTitleByDefault(): void
     {
         $uid = $this->subject->createFrontEndPage();
@@ -1537,20 +1240,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function systemFolderWillBeCleanedUp(): void
-    {
-        $uid = $this->subject->createSystemFolder();
-        self::assertNotSame(0, $uid);
-
-        $this->subject->cleanUp();
-
-        $connection = $this->getConnectionPool()->getConnectionForTable('pages');
-        self::assertSame(0, $connection->count('*', 'pages', ['uid' => $uid]));
-    }
-
-    /**
-     * @test
-     */
     public function systemFolderHasNoTitleByDefault(): void
     {
         $uid = $this->subject->createSystemFolder();
@@ -1606,21 +1295,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         // @phpstan-ignore-next-line We're testing for a contract violation here.
         $this->subject->createTemplate(-1);
-    }
-
-    /**
-     * @test
-     */
-    public function templateWillBeCleanedUp(): void
-    {
-        $pageId = $this->subject->createFrontEndPage();
-        $uid = $this->subject->createTemplate($pageId);
-        self::assertNotSame(0, $uid);
-
-        $this->subject->cleanUp();
-
-        $connection = $this->getConnectionPool()->getConnectionForTable('sys_template');
-        self::assertSame(0, $connection->count('*', 'sys_template', ['uid' => $uid]));
     }
 
     /**
@@ -1737,19 +1411,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function frontEndUserGroupTableWillBeCleanedUp(): void
-    {
-        $uid = $this->subject->createFrontEndUserGroup();
-        self::assertNotSame(0, $uid);
-
-        $this->subject->cleanUp();
-        $connection = $this->getConnectionPool()->getConnectionForTable('fe_groups');
-        self::assertSame(0, $connection->count('*', 'fe_groups', ['uid' => $uid]));
-    }
-
-    /**
-     * @test
-     */
     public function frontEndUserGroupHasNoTitleByDefault(): void
     {
         $uid = $this->subject->createFrontEndUserGroup();
@@ -1801,20 +1462,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = $this->getConnectionPool()->getConnectionForTable('fe_users');
         self::assertSame(1, $connection->count('*', 'fe_users', ['uid' => $uid]));
-    }
-
-    /**
-     * @test
-     */
-    public function frontEndUserTableWillBeCleanedUp(): void
-    {
-        $uid = $this->subject->createFrontEndUser();
-        self::assertNotSame(0, $uid);
-
-        $this->subject->cleanUp();
-
-        $connection = $this->getConnectionPool()->getConnectionForTable('fe_users');
-        self::assertSame(0, $connection->count('*', 'fe_users', ['uid' => $uid]));
     }
 
     /**
@@ -2385,27 +2032,5 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $isLoggedIn = (bool)$this->getContext()->getPropertyFromAspect('frontend.user', 'isLoggedIn');
         self::assertTrue($isLoggedIn);
-    }
-
-    /**
-     * @test
-     */
-    public function getDummyColumnNameForExtensionTableReturnsDummyColumnName(): void
-    {
-        self::assertSame(
-            'is_dummy_record',
-            $this->subject->getDummyColumnName('tx_oelib_test')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getDummyColumnNameForSystemTableReturnsOelibPrefixedColumnName(): void
-    {
-        self::assertSame(
-            'tx_oelib_is_dummy_record',
-            $this->subject->getDummyColumnName('fe_users')
-        );
     }
 }

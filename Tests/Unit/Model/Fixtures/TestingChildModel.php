@@ -55,12 +55,4 @@ final class TestingChildModel extends AbstractModel
     {
         $this->set('tx_oelib_parent2', $parent);
     }
-
-    /**
-     * Sets the dummy column to true.
-     */
-    public function markAsDummyModel(): void
-    {
-        $this->set('is_dummy_record', true);
-    }
 }
