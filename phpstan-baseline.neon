@@ -406,11 +406,6 @@ parameters:
 			path: Classes/ViewHelpers/AbstractConfigurationCheckViewHelper.php
 
 		-
-			message: "#^Parameter \\#1 \\$treeStructure of method OliverKlee\\\\Oelib\\\\Visibility\\\\Tree\\:\\:buildTreeFromArray\\(\\) expects array\\<non\\-empty\\-string, array\\<non\\-empty\\-string, mixed\\>\\|bool\\>, array\\<non\\-empty\\-string, mixed\\> given\\.$#"
-			count: 1
-			path: Classes/Visibility/Tree.php
-
-		-
 			message: "#^Instanceof between TYPO3\\\\CMS\\\\Frontend\\\\Authentication\\\\FrontendUserAuthentication and TYPO3\\\\CMS\\\\Frontend\\\\Authentication\\\\FrontendUserAuthentication will always evaluate to true\\.$#"
 			count: 1
 			path: Tests/Functional/Authentication/FrontEndLoginManagerTest.php

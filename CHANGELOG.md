@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
  ### Deprecated
 
 ### Removed
+- Drop the visibility classes (#1626)
 - Drop the `LazyLoadingProperties` trait (#1625)
 - Drop the `ChangeDate` and `CreationDate` interfaces/traits (#1624)
 - Drop `TestingFramework::createBackEndUser` (#1623)
