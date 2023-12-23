@@ -679,8 +679,6 @@ final class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function getLoadedTestingModelReturnsModel(): void
     {
-        $this->subject->disableDatabaseAccess();
-
         self::assertInstanceOf(
             AbstractModel::class,
             $this->subject->getLoadedTestingModel([])
@@ -692,8 +690,6 @@ final class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function getLoadedTestingModelReturnsLoadedModel(): void
     {
-        $this->subject->disableDatabaseAccess();
-
         self::assertTrue(
             $this->subject->getLoadedTestingModel([])->isLoaded()
         );
@@ -704,8 +700,6 @@ final class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function getLoadedTestingModelReturnsModelWithUid(): void
     {
-        $this->subject->disableDatabaseAccess();
-
         self::assertTrue(
             $this->subject->getLoadedTestingModel([])->hasUid()
         );
@@ -716,7 +710,6 @@ final class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function getLoadedTestingModelCreatesRegisteredModel(): void
     {
-        $this->subject->disableDatabaseAccess();
         $model = $this->subject->getLoadedTestingModel([]);
         $uid = $model->getUid();
         \assert($uid > 0);
@@ -732,8 +725,6 @@ final class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function getLoadedTestingModelSetsTheProvidedData(): void
     {
-        $this->subject->disableDatabaseAccess();
-
         /** @var TestingModel $model */
         $model = $this->subject->getLoadedTestingModel(
             ['title' => 'foo']
@@ -750,8 +741,6 @@ final class AbstractDataMapperTest extends FunctionalTestCase
      */
     public function getLoadedTestingModelCreatesRelations(): void
     {
-        $this->subject->disableDatabaseAccess();
-
         $relatedModel = $this->subject->getNewGhost();
         $model = $this->subject->getLoadedTestingModel(
             ['friend' => $relatedModel->getUid()]
@@ -1707,39 +1696,6 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     // Tests concerning disabled database access
     //////////////////////////////////////////////
 
-    /**
-     * @test
-     */
-    public function loadWithUidOfRecordInDatabaseAndDatabaseAccessDisabledMarksModelAsDead(): void
-    {
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
-        $connection->insert('tx_oelib_test', ['title' => 'foo']);
-        $uid = (int)$connection->lastInsertId('tx_oelib_test');
-        \assert($uid > 0);
-
-        $this->subject->disableDatabaseAccess();
-        $this->subject->load($this->subject->find($uid));
-
-        self::assertTrue(
-            $this->subject->find($uid)->isDead()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function loadWithUidOfRecordNotInDatabaseAndDatabaseAccessDisabledMarksModelAsDead(): void
-    {
-        $uid = 1;
-
-        $this->subject->disableDatabaseAccess();
-        $this->subject->load($this->subject->find($uid));
-
-        self::assertTrue(
-            $this->subject->find($uid)->isDead()
-        );
-    }
-
     ////////////////////////////
     // Tests concerning save()
     ////////////////////////////
@@ -1760,29 +1716,6 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         self::assertSame(
             0,
             $connection->count('*', 'tx_oelib_test', ['title' => 'foo', 'tstamp' => $GLOBALS['SIM_EXEC_TIME']])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function saveForDatabaseAccessDeniedDoesNotCommitDirtyLoadedModelToDatabase(): void
-    {
-        $this->subject->disableDatabaseAccess();
-
-        $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
-        $connection->insert('tx_oelib_test', ['title' => 'foo']);
-        $uid = (int)$connection->lastInsertId('tx_oelib_test');
-        \assert($uid > 0);
-
-        /** @var TestingModel $model */
-        $model = $this->subject->find($uid);
-        $model->setTitle('bar');
-        $this->subject->save($model);
-
-        self::assertSame(
-            0,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'bar'])
         );
     }
 

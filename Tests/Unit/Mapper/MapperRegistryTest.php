@@ -110,49 +110,6 @@ final class MapperRegistryTest extends UnitTestCase
         );
     }
 
-    ////////////////////////////////////////////
-    // Tests concerning denied database access
-    ////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getAfterDenyDatabaseAccessReturnsNewMapperInstanceWithDatabaseAccessDisabled(): void
-    {
-        MapperRegistry::denyDatabaseAccess();
-
-        self::assertFalse(
-            MapperRegistry::get(TestingMapper::class)->hasDatabaseAccess()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getAfterDenyDatabaseAccessReturnsExistingMapperInstanceWithDatabaseAccessDisabled(): void
-    {
-        MapperRegistry::get(TestingMapper::class);
-        MapperRegistry::denyDatabaseAccess();
-
-        self::assertFalse(
-            MapperRegistry::get(TestingMapper::class)->hasDatabaseAccess()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getAfterInstanceWithDeniedDatabaseAccessWasPurgedReturnsMapperWithDatabaseAccessGranted(): void
-    {
-        MapperRegistry::getInstance();
-        MapperRegistry::denyDatabaseAccess();
-        MapperRegistry::purgeInstance();
-
-        self::assertTrue(
-            MapperRegistry::get(TestingMapper::class)->hasDatabaseAccess()
-        );
-    }
-
     /////////////////////////
     // Tests concerning set
     /////////////////////////
