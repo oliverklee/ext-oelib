@@ -378,7 +378,7 @@ final class FrontEndUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getNameForEmptyFirstAndLastNameAndNonEmptyUserNameReturnsUserName(): void
+    public function getNameForEmptyFirstAndLastNameAndNonEmptyUserNameReturnsEmptyString(): void
     {
         $this->subject->setData(
             [
@@ -388,10 +388,7 @@ final class FrontEndUserTest extends UnitTestCase
             ]
         );
 
-        self::assertSame(
-            'johndoe',
-            $this->subject->getName()
-        );
+        self::assertSame('', $this->subject->getName());
     }
 
     /**

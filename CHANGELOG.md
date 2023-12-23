@@ -38,6 +38,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Return an empty string in `FrontEndUser::getName()` for no name set (#1592)
 - Avoid additional query in `TestingFramework::changeRecord` (#1588)
 - Mark the `Configuration` classes and the interface as non-injectable (#1512)
 - Stop accessing the `TYPO3_MODE` constant (#1495)

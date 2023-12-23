@@ -134,7 +134,7 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
         } elseif ($this->hasFirstName() || $this->hasLastName()) {
             $result = trim($this->getFirstName() . ' ' . $this->getLastName());
         } else {
-            $result = $this->getUserName();
+            $result = '';
         }
 
         return $result;
