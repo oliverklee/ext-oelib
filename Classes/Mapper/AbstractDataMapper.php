@@ -93,6 +93,8 @@ abstract class AbstractDataMapper
 
     /**
      * @var bool whether database access is denied for this mapper
+     *
+     * @deprecated #1594 will be removed in oelib 6.0
      */
     private $denyDatabaseAccess = false;
 
@@ -649,6 +651,7 @@ abstract class AbstractDataMapper
      */
     protected function retrieveRecord(array $whereClauseParts): array
     {
+        // @deprecated #1594 will be removed in oelib 6.0
         if (!$this->hasDatabaseAccess()) {
             throw new NotFoundException(
                 'No record can be retrieved from the database because database' .
@@ -779,6 +782,8 @@ abstract class AbstractDataMapper
      * Disables all database querying, so model data can only be fetched from memory.
      *
      * This function is for testing purposes only. For testing, it should be used whenever possible.
+     *
+     * @deprecated #1594 will be removed in oelib 6.0
      */
     public function disableDatabaseAccess(): void
     {
@@ -789,6 +794,8 @@ abstract class AbstractDataMapper
      * Checks whether the database may be accessed.
      *
      * @return bool TRUE is database access is granted, FALSE otherwise
+     *
+     * @deprecated #1594 will be removed in oelib 6.0
      */
     public function hasDatabaseAccess(): bool
     {
@@ -812,6 +819,7 @@ abstract class AbstractDataMapper
         }
 
         if (
+            // @deprecated #1594 will be removed in oelib 6.0
             !$this->hasDatabaseAccess()
             || !$model->isDirty()
             || !$model->isLoaded()
