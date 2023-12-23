@@ -22,7 +22,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Deprecate `FrontEndUserGroup::title` and `::description` (#1547)
 - Deprecate `BackEndUser::getGroups` and the `BackEndUserGroup` model/mapper (#1546)
 - Deprecate `BackEndUserMapper::findByUserName` (#1545)
-- Deprecate some methods from `AbstractDataMapper` (#1544, #1563)
+- Deprecate some methods from `AbstractDataMapper` (#1544, #1563, #1587)
 - Deprecate `Sortable` (#1543)
 - Deprecate `CachedAssociationCount` (#1542)
 - Deprecate `SalutationSwitcher` (#1541)
