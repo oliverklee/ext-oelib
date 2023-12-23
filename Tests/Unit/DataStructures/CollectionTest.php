@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Oelib\Tests\Unit\DataStructures;
 
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\Tests\Unit\Model\Fixtures\TestingChildModel;
 use OliverKlee\Oelib\Tests\Unit\Model\Fixtures\TestingModel;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -1011,27 +1010,6 @@ final class CollectionTest extends UnitTestCase
             '',
             $this->subject->getUids()
         );
-    }
-
-    /**
-     * @test
-     */
-    public function sortBySortingMovesItemWithHigherSortingValueAfterItemWithLowerSortingValue(): void
-    {
-        /** @var Collection<TestingChildModel> $subject */
-        $subject = new Collection();
-
-        $model1 = new TestingChildModel();
-        $model1->setSorting(2);
-        $subject->add($model1);
-
-        $model2 = new TestingChildModel();
-        $model2->setSorting(1);
-        $subject->add($model2);
-
-        $subject->sortBySorting();
-
-        self::assertSame($model2, $subject->first());
     }
 
     /**

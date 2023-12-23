@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Oelib\DataStructures;
 
-use OliverKlee\Oelib\Interfaces\Sortable;
 use OliverKlee\Oelib\Model\AbstractModel;
 
 /**
@@ -283,40 +282,6 @@ class Collection extends \SplObjectStorage
         if ($this->parentModel instanceof AbstractModel) {
             $this->parentModel->markAsDirty();
         }
-    }
-
-    /**
-     * Sorts this list item in ascending order by their sorting.
-     *
-     * This function may only be used if all items in this list implement the
-     * SortableInterface interface.
-     *
-     * @internal
-     *
-     * @deprecated #1501 will be removed on oelib 6.0.0
-     */
-    public function sortBySorting(): void
-    {
-        $this->sort([$this, 'compareSortings']);
-    }
-
-    /**
-     * Internal callback function for sorting two sortable objects.
-     *
-     * This function is not intended to be used from the outside.
-     *
-     * @param Sortable $object1 the first object
-     * @param Sortable $object2 the second object
-     *
-     * @return int a negative number if $model1 should be before $model2,
-     *                 a positive number if $model1 should be after $model2,
-     *                 zero if both are equal for sorting
-     *
-     * @deprecated #1501 will be removed on oelib 6.0.0
-     */
-    public function compareSortings(Sortable $object1, Sortable $object2): int
-    {
-        return $object1->getSorting() - $object2->getSorting();
     }
 
     /**
