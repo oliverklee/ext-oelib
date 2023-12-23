@@ -574,12 +574,6 @@ final class TestingFramework
                 1331490024
             );
         }
-        if (!$this->existsRecordWithUid($table, $uid)) {
-            throw new \BadMethodCallException(
-                'There is no record with UID ' . $uid . ' on table "' . $table . '".',
-                1331490033
-            );
-        }
 
         $dataToSave = $this->normalizeDatabaseRow($rawData);
         $this->getConnectionForTable($table)->update($table, $dataToSave, ['uid' => $uid, $dummyColumnName => 1]);

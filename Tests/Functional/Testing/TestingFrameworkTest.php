@@ -458,24 +458,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
     /**
      * @test
-     */
-    public function changeRecordFailsOnInexistentRecord(): void
-    {
-        $uid = $this->subject->createRecord('tx_oelib_test', []);
-        $this->expectException(
-            \BadMethodCallException::class
-        );
-        $this->expectExceptionMessage('There is no record with UID ' . ($uid + 1) . ' on table "tx_oelib_test".');
-
-        $this->subject->changeRecord(
-            'tx_oelib_test',
-            $uid + 1,
-            ['title' => 'foo']
-        );
-    }
-
-    /**
-     * @test
      *
      * @param bool $value
      *

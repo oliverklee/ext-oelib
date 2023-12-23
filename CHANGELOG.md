@@ -36,6 +36,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Avoid additional query in `TestingFramework::changeRecord` (#1588)
 - Mark the `Configuration` classes and the interface as non-injectable (#1512)
 - Stop accessing the `TYPO3_MODE` constant (#1495)
 - Stop extending the deprecated `AbstractPlugin` (#1487, #1488)
