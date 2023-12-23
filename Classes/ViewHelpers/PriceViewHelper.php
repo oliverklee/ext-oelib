@@ -17,8 +17,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  * should be set before calling `render()`. You can use the same instance of this
  * view helper to render different values in the same currency by changing the
  * value via `setValue()`.
- *
- * @deprecated will be removed in oelib 6.0; use the `format.currency` view helper instead
  */
 class PriceViewHelper extends AbstractViewHelper
 {

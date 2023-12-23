@@ -12,6 +12,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Mark some classes and methods as `@internal` (#1478, #1522, #1561, #1565)
 
  ### Deprecated
+- De-deprecate the `PriceViewHelper` (#1591)
+- De-deprecate the `Currency` model and mapper (#1591)
 - De-deprecate the `Country` and `Language` models and mappers (#1562)
 - Deprecate `TestingFramework::createBackEndUser()` (#1555)
 - Deprecate `TestingFramework::isLoggedIn()` (#1554)
