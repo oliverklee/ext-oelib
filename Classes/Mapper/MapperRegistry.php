@@ -24,13 +24,6 @@ class MapperRegistry
     private $mappers = [];
 
     /**
-     * @var bool whether database access should be denied for mappers
-     *
-     * @deprecated #1594 will be removed in oelib 6.0
-     */
-    private $denyDatabaseAccess = false;
-
-    /**
      * The constructor. Use getInstance() instead.
      */
     private function __construct()
@@ -107,22 +100,7 @@ class MapperRegistry
             $this->mappers[$className] = $mapper;
         }
 
-        // @deprecated #1594 will be removed in oelib 6.0
-        if ($this->denyDatabaseAccess) {
-            $mapper->disableDatabaseAccess();
-        }
-
         return $mapper;
-    }
-
-    /**
-     * Disables database access for all mappers received with `get()`.
-     *
-     * @deprecated #1594 will be removed in oelib 6.0
-     */
-    public static function denyDatabaseAccess(): void
-    {
-        self::getInstance()->denyDatabaseAccess = true;
     }
 
     /**
