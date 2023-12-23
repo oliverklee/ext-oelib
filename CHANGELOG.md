@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
  ### Deprecated
 
 ### Removed
+- Remove some properties from `FrontEndUser` (#1610)
 - Remove `FrontEndUser::getAge` (#1609)
 - Drop the geocoding classes (#1608)
 - Drop `FrontEndUser.wantsHtmlEmail()` (#1607)

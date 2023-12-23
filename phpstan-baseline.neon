@@ -211,21 +211,6 @@ parameters:
 			path: Classes/Model/BackEndUser.php
 
 		-
-			message: "#^Cannot access offset 'columns' on mixed\\.$#"
-			count: 1
-			path: Classes/Model/FrontEndUser.php
-
-		-
-			message: "#^Cannot access offset 'fe_users' on mixed\\.$#"
-			count: 1
-			path: Classes/Model/FrontEndUser.php
-
-		-
-			message: "#^Cannot access offset 'gender' on mixed\\.$#"
-			count: 1
-			path: Classes/Model/FrontEndUser.php
-
-		-
 			message: "#^Instanceof between TYPO3\\\\CMS\\\\Frontend\\\\Authentication\\\\FrontendUserAuthentication and TYPO3\\\\CMS\\\\Frontend\\\\Authentication\\\\FrontendUserAuthentication will always evaluate to true\\.$#"
 			count: 1
 			path: Classes/Session/Session.php
@@ -586,17 +571,7 @@ parameters:
 			path: Tests/Unit/Email/SystemEmailFromBuilderTest.php
 
 		-
-			message: "#^Cannot access offset 'columns' on mixed\\.$#"
-			count: 2
-			path: Tests/Unit/Model/FrontEndUserTest.php
-
-		-
 			message: "#^Cannot access offset 'fe_users' on mixed\\.$#"
-			count: 4
-			path: Tests/Unit/Model/FrontEndUserTest.php
-
-		-
-			message: "#^Cannot access offset 'gender' on mixed\\.$#"
 			count: 2
 			path: Tests/Unit/Model/FrontEndUserTest.php
 

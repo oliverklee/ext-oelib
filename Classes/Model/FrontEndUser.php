@@ -6,12 +6,9 @@ namespace OliverKlee\Oelib\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Email\ConvertableToMimeAddressTrait;
-use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Interfaces\Address;
 use OliverKlee\Oelib\Interfaces\ConvertableToMimeAddress;
 use OliverKlee\Oelib\Interfaces\MailRole;
-use OliverKlee\Oelib\Mapper\CountryMapper;
-use OliverKlee\Oelib\Mapper\MapperRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -20,101 +17,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class FrontEndUser extends AbstractModel implements MailRole, Address, ConvertableToMimeAddress
 {
     use ConvertableToMimeAddressTrait;
-
-    /**
-     * @var 0 represents the male gender for this user
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public const GENDER_MALE = 0;
-
-    /**
-     * @var positive-int represents the female gender for this user
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public const GENDER_FEMALE = 1;
-
-    /**
-     * @var positive-int represents the diverse gender for this user
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public const GENDER_DIVERSE = 2;
-
-    /**
-     * @var positive-int represents an unknown gender for this user
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public const GENDER_UNKNOWN = 99;
-
-    /**
-     * @var list<self::GENDER_*>
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    private const GENDERS = [self::GENDER_MALE, self::GENDER_FEMALE, self::GENDER_DIVERSE, self::GENDER_UNKNOWN];
-
-    /**
-     * Gets this user's username (login name).
-     *
-     * @return string this user's username, will not be empty for valid users
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function getUserName(): string
-    {
-        return $this->getAsString('username');
-    }
-
-    /**
-     * Sets this user's username (login name).
-     *
-     * @param non-empty-string $username
-     *
-     * @throws \InvalidArgumentException
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function setUserName(string $username): void
-    {
-        // @phpstan-ignore-next-line We're checking for a contract violation here.
-        if ($username === '') {
-            throw new \InvalidArgumentException('$username must not be empty.');
-        }
-
-        $this->setAsString('username', $username);
-    }
-
-    /**
-     * Gets the password.
-     *
-     * @return string the password, might be empty
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function getPassword(): string
-    {
-        return $this->getAsString('password');
-    }
-
-    /**
-     * Sets the password.
-     *
-     * @param non-empty-string $password
-     *
-     * @throws \InvalidArgumentException
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function setPassword(string $password): void
-    {
-        // @phpstan-ignore-next-line We're checking for a contract violation here.
-        if ($password === '') {
-            throw new \InvalidArgumentException('$password must not be empty.');
-        }
-
-        $this->setAsString('password', $password);
-    }
 
     /**
      * Gets this user's real name.
@@ -280,22 +182,6 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
     }
 
     /**
-     * Gets this user's ZIP code and city, separated by a space.
-     *
-     * @return string this user's ZIP code city, will be empty if the user has no city set
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function getZipAndCity(): string
-    {
-        if (!$this->hasCity()) {
-            return '';
-        }
-
-        return trim($this->getZip() . ' ' . $this->getCity());
-    }
-
-    /**
      * Gets this user's phone number.
      *
      * @return string this user's phone number, may be empty
@@ -357,54 +243,6 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
     }
 
     /**
-     * Gets this user's homepage URL (not linked yet).
-     *
-     * @return string this user's homepage URL, may be empty
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function getHomepage(): string
-    {
-        return $this->getAsString('www');
-    }
-
-    /**
-     * Checks whether this user has a non-empty homepage set.
-     *
-     * @return bool TRUE if this user has a homepage set, FALSE otherwise
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function hasHomepage(): bool
-    {
-        return $this->hasString('www');
-    }
-
-    /**
-     * Gets this user's image path (relative to the global upload directory).
-     *
-     * @return string this user's image path, may be empty
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function getImage(): string
-    {
-        return $this->getAsString('image');
-    }
-
-    /**
-     * Checks whether this user has an image set.
-     *
-     * @return bool TRUE if this user has an image set, FALSE otherwise
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function hasImage(): bool
-    {
-        return $this->hasString('image');
-    }
-
-    /**
      * Gets this user's user groups.
      *
      * @return Collection<FrontEndUserGroup> this user's FE user groups, will not be empty if the user data is valid
@@ -425,16 +263,6 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
     public function setUserGroups(Collection $userGroups): void
     {
         $this->set('usergroup', $userGroups);
-    }
-
-    /**
-     * Adds the provided group to this user's direct groups.
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function addUserGroup(FrontEndUserGroup $group): void
-    {
-        $this->getUserGroups()->add($group);
     }
 
     /**
@@ -465,61 +293,6 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
         }
 
         return $isMember;
-    }
-
-    /**
-     * @return self::GENDER_* the gender, will return `self::GENDER_UNKNOWN` if there is no gender field
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function getGender(): int
-    {
-        if (!self::hasGenderField()) {
-            return self::GENDER_UNKNOWN;
-        }
-
-        $gender = $this->getAsInteger('gender');
-        if (!$this->isValidGender($gender)) {
-            $gender = self::GENDER_UNKNOWN;
-        }
-
-        /** @var self::GENDER_* $gender */
-        return $gender;
-    }
-
-    /**
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public static function hasGenderField(): bool
-    {
-        return isset($GLOBALS['TCA']['fe_users']['columns']['gender']);
-    }
-
-    /**
-     * @param self::GENDER_* $genderKey
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function setGender(int $genderKey): void
-    {
-        if (!$this->isValidGender($genderKey)) {
-            throw new \InvalidArgumentException(
-                '$genderKey must be one of the predefined constants, but actually is: ' . $genderKey,
-                1393329321
-            );
-        }
-
-        $this->setAsInteger('gender', $genderKey);
-    }
-
-    /**
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    private function isValidGender(int $gender): bool
-    {
-        return \in_array($gender, self::GENDERS, true);
     }
 
     /**
@@ -594,155 +367,5 @@ class FrontEndUser extends AbstractModel implements MailRole, Address, Convertab
     public function getFirstOrFullName(): string
     {
         return $this->hasFirstName() ? $this->getFirstName() : $this->getName();
-    }
-
-    /**
-     * Gets this user's last name; if the user does not have a last name the
-     * full name is returned instead.
-     *
-     * @return string the last name of this user if it exists, will return the user's full name otherwise
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function getLastOrFullName(): string
-    {
-        return $this->hasLastName() ? $this->getLastName() : $this->getName();
-    }
-
-    /**
-     * Gets this user's date of birth as a UNIX timestamp.
-     *
-     * @return int<0, max> the user's date of birth, will be zero if no date has been set
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function getDateOfBirth(): int
-    {
-        $timestamp = $this->getAsInteger('date_of_birth');
-
-        return $timestamp > 0 ? $timestamp : 0;
-    }
-
-    /**
-     * Checks whether this user has a date of birth set.
-     *
-     * @return bool TRUE if this user has a non-zero date of birth, FALSE otherwise
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function hasDateOfBirth(): bool
-    {
-        return $this->hasInteger('date_of_birth');
-    }
-
-    /**
-     * Gets this user's last login date and time as a UNIX timestamp.
-     *
-     * @return int<0, max> the user's last login date and time, will be zero if the user has never logged in
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function getLastLoginAsUnixTimestamp(): int
-    {
-        $timestamp = $this->getAsInteger('lastlogin');
-
-        return $timestamp > 0 ? $timestamp : 0;
-    }
-
-    /**
-     * Checks whether this user has a last login date set.
-     *
-     * @return bool TRUE if this user has a non-zero last login date, FALSE
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function hasLastLogin(): bool
-    {
-        return $this->hasInteger('lastlogin');
-    }
-
-    /**
-     * Returns the country of this user.
-     *
-     * Note: This function uses the "country code" field, not the free-text country field.
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function getCountry(): ?Country
-    {
-        $countryCode = $this->getAsString('static_info_country');
-        if ($countryCode === '') {
-            return null;
-        }
-
-        try {
-            $country = MapperRegistry::get(CountryMapper::class)->findByIsoAlpha3Code($countryCode);
-        } catch (NotFoundException $exception) {
-            $country = null;
-        }
-
-        return $country;
-    }
-
-    /**
-     * Sets the country of this user.
-     *
-     * @param ?Country $country the country to set for this place, can be NULL for "no country"
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function setCountry(?Country $country = null): void
-    {
-        $countryCode = $country instanceof Country ? $country->getIsoAlpha3Code() : '';
-
-        $this->setAsString('static_info_country', $countryCode);
-    }
-
-    /**
-     * Returns whether this user has a country.
-     *
-     * @return bool TRUE if this user has a country, FALSE otherwise
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function hasCountry(): bool
-    {
-        return $this->getCountry() instanceof Country;
-    }
-
-    /**
-     * Gets this user's job title.
-     *
-     * @return string this user's job title, may be empty
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function getJobTitle(): string
-    {
-        return $this->getAsString('title');
-    }
-
-    /**
-     * Checks whether this user has a non-empty job title set.
-     *
-     * @return bool TRUE if this user has a job title set, FALSE otherwise
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function hasJobTitle(): bool
-    {
-        return $this->hasString('title');
-    }
-
-    /**
-     * Sets this user's job title.
-     *
-     * @param string $jobTitle the job title to set, may be empty
-     *
-     * @deprecated #1409 will be removed in oelib 6.0
-     */
-    public function setJobTitle(string $jobTitle): void
-    {
-        $this->setAsString('title', $jobTitle);
     }
 }
