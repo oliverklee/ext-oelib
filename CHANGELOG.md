@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
  ### Deprecated
 
 ### Removed
+- Drop `BackEndUserMapper::findByUserName` (#1614)
 - Drop `Sortable` (#1613)
 - Drop `CachedAssociationCount` (#1612)
 - Remove some `Collection` methods (#1611)

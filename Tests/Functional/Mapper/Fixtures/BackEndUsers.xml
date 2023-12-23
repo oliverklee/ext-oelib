@@ -4,8 +4,4 @@
         <uid>1</uid>
         <username>max</username>
     </be_users>
-    <be_users>
-        <uid>2</uid>
-        <username>MOE</username>
-    </be_users>
 </dataset>

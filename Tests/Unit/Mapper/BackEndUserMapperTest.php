@@ -43,19 +43,4 @@ final class BackEndUserMapperTest extends UnitTestCase
 
         self::assertInstanceOf(BackEndUser::class, $model);
     }
-
-    // Tests concerning findByUserName
-
-    /**
-     * @test
-     */
-    public function findByUserNameForEmptyUserNameThrowsException(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('$value must not be empty.');
-        $this->expectExceptionCode(1331319892);
-
-        // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
-        $this->subject->findByUserName('');
-    }
 }
