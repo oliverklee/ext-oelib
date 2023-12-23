@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
  ### Deprecated
 
 ### Removed
+- Drop `CachedAssociationCount` (#1612)
 - Remove some `Collection` methods (#1611)
 - Remove some properties from `FrontEndUser` (#1610)
 - Remove `FrontEndUser::getAge` (#1609)
