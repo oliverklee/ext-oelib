@@ -61,8 +61,6 @@ abstract class AbstractDataMapper
 
     /**
      * @var array<non-empty-string> the column names of additional string keys
-     *
-     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     protected $additionalKeys = [];
 
@@ -78,9 +76,7 @@ abstract class AbstractDataMapper
 
     /**
      * @var array<string, array<string, M>> two-dimensional cache for the objects by key:
-     *            [key name][key value] => model
-     *
-     * @deprecated #1503 will be removed in oelib 6.0.0
+     *            `[key name][key value] => model`
      */
     private $cacheByKey = [];
 
@@ -1410,8 +1406,6 @@ abstract class AbstractDataMapper
      * @param DatabaseRow $data the data of the model as it is in the DB, may be empty
      *
      * @see cacheModelByCompoundKey
-     *
-     * @deprecated #1503 will be removed in oelib 6.0.0
      */
     protected function cacheModelByCombinedKeys(AbstractModel $model, array $data): void
     {
