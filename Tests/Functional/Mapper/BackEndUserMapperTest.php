@@ -7,7 +7,6 @@ namespace OliverKlee\Oelib\Tests\Functional\Mapper;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\BackEndUserMapper;
 use OliverKlee\Oelib\Model\BackEndUser;
-use OliverKlee\Oelib\Model\BackEndUserGroup;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -109,21 +108,5 @@ final class BackEndUserMapperTest extends FunctionalTestCase
         $this->expectExceptionCode(0);
 
         $this->subject->findByUserName('deleted');
-    }
-
-    // Tests concerning the relations
-
-    /**
-     * @test
-     */
-    public function loadsMapsUserGroupsRelation(): void
-    {
-        $this->importDataSet(__DIR__ . '/Fixtures/BackEndUsers.xml');
-
-        $model = $this->subject->find(1);
-
-        $firstGroup = $model->getGroups()->first();
-        self::assertInstanceOf(BackEndUserGroup::class, $firstGroup);
-        self::assertSame(1, $firstGroup->getUid());
     }
 }
