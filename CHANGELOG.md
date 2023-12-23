@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
  ### Deprecated
 
 ### Removed
+- Drop the `FederalState` model & mapper (#1600)
 - Remove `TemplateHelper` (#1599)
 - Drop support for TYPO3 10LTS (#1598)
 - Drop support for PHP < 7.4 (#1597)
