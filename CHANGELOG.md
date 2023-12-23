@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
  ### Deprecated
 
 ### Removed
+- Drop the geocoding classes (#1607)
 - Drop `FrontEndUser.wantsHtmlEmail()` (#1606)
 - Drop the auto increment handling from the testing framework (#1605)
 - Drop `BackEndUser::getGroups` and `BackEndUserGroup` (#1604)
