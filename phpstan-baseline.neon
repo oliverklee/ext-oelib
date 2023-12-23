@@ -472,7 +472,7 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 2
+			count: 1
 			path: Classes/Testing/TestingFramework.php
 
 		-
