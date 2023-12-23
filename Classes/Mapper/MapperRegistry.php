@@ -26,6 +26,8 @@ class MapperRegistry
 
     /**
      * @var bool whether database access should be denied for mappers
+     *
+     * @deprecated #1594 will be removed in oelib 6.0
      */
     private $denyDatabaseAccess = false;
 
@@ -119,6 +121,7 @@ class MapperRegistry
         if ($this->testingMode) {
             $mapper->setTestingFramework($this->testingFramework);
         }
+        // @deprecated #1594 will be removed in oelib 6.0
         if ($this->denyDatabaseAccess) {
             $mapper->disableDatabaseAccess();
         }
@@ -128,6 +131,8 @@ class MapperRegistry
 
     /**
      * Disables database access for all mappers received with `get()`.
+     *
+     * @deprecated #1594 will be removed in oelib 6.0
      */
     public static function denyDatabaseAccess(): void
     {
