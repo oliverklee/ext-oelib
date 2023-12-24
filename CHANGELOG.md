@@ -11,7 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Make `TestingFramework::isLoggedIn()` private (#1622)
 - Raise the required TYPO3 bugfix version (#1619)
 
- ### Deprecated
+### Deprecated
 
 ### Removed
 - Drop the visibility classes (#1626)
