@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop `Typo3Version` (#1631)
 - Drop the login manager classes (#1630)
 - Drop the `ConvertableToMimeAddressTrait` interface/trait (#1629)
 - Drop the session classes (#1628)
