@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Oelib\Mapper;
 
-use OliverKlee\Oelib\Testing\TestingFramework;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -30,16 +29,6 @@ class MapperRegistry
      * @deprecated #1594 will be removed in oelib 6.0
      */
     private $denyDatabaseAccess = false;
-
-    /**
-     * @var bool whether this MapperRegistry is used in testing mode
-     */
-    private $testingMode = false;
-
-    /**
-     * @var TestingFramework the testingFramework to use in testing mode
-     */
-    private $testingFramework;
 
     /**
      * The constructor. Use getInstance() instead.
@@ -118,9 +107,6 @@ class MapperRegistry
             $this->mappers[$className] = $mapper;
         }
 
-        if ($this->testingMode) {
-            $mapper->setTestingFramework($this->testingFramework);
-        }
         // @deprecated #1594 will be removed in oelib 6.0
         if ($this->denyDatabaseAccess) {
             $mapper->disableDatabaseAccess();
@@ -137,15 +123,6 @@ class MapperRegistry
     public static function denyDatabaseAccess(): void
     {
         self::getInstance()->denyDatabaseAccess = true;
-    }
-
-    /**
-     * Activates the testing mode. This automatically will activate the testing mode for all future mappers.
-     */
-    public function activateTestingMode(TestingFramework $testingFramework): void
-    {
-        $this->testingMode = true;
-        $this->testingFramework = $testingFramework;
     }
 
     /**
