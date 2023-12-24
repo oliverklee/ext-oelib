@@ -68,13 +68,6 @@ abstract class AbstractDataMapper
     private $cacheByKey = [];
 
     /**
-     * @var bool whether database access is denied for this mapper
-     *
-     * @deprecated #1594 will be removed in oelib 6.0
-     */
-    private $denyDatabaseAccess = false;
-
-    /**
      * The constructor.
      */
     public function __construct()
@@ -551,14 +544,6 @@ abstract class AbstractDataMapper
      */
     protected function retrieveRecord(array $whereClauseParts): array
     {
-        // @deprecated #1594 will be removed in oelib 6.0
-        if (!$this->hasDatabaseAccess()) {
-            throw new NotFoundException(
-                'No record can be retrieved from the database because database' .
-                ' access is disabled for this mapper instance.'
-            );
-        }
-
         $tableName = $this->getTableName();
         $query = $this->getQueryBuilderForTable($tableName);
         $query->getRestrictions()->removeByType(HiddenRestriction::class);
@@ -679,30 +664,6 @@ abstract class AbstractDataMapper
     }
 
     /**
-     * Disables all database querying, so model data can only be fetched from memory.
-     *
-     * This function is for testing purposes only. For testing, it should be used whenever possible.
-     *
-     * @deprecated #1594 will be removed in oelib 6.0
-     */
-    public function disableDatabaseAccess(): void
-    {
-        $this->denyDatabaseAccess = true;
-    }
-
-    /**
-     * Checks whether the database may be accessed.
-     *
-     * @return bool TRUE is database access is granted, FALSE otherwise
-     *
-     * @deprecated #1594 will be removed in oelib 6.0
-     */
-    public function hasDatabaseAccess(): bool
-    {
-        return !$this->denyDatabaseAccess;
-    }
-
-    /**
      * Writes a model to the database. Does nothing if database access is
      * denied, if the model is clean, if the model has status dead, virgin or
      * ghost, if the model is read-only or if there is no data to set.
@@ -718,13 +679,7 @@ abstract class AbstractDataMapper
             );
         }
 
-        if (
-            // @deprecated #1594 will be removed in oelib 6.0
-            !$this->hasDatabaseAccess()
-            || !$model->isDirty()
-            || !$model->isLoaded()
-            || $model->isReadOnly()
-        ) {
+        if (!$model->isDirty() || !$model->isLoaded() || $model->isReadOnly()) {
             return;
         }
 

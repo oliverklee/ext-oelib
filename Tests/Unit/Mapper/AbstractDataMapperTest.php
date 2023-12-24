@@ -296,47 +296,6 @@ final class AbstractDataMapperTest extends UnitTestCase
         $this->subject->load($ghost);
     }
 
-    //////////////////////////////////////////////
-    // Tests concerning disabled database access
-    //////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function hasDatabaseAccessInitiallyReturnsTrue(): void
-    {
-        self::assertTrue(
-            $this->subject->hasDatabaseAccess()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasDatabaseAccessAfterDisableDatabaseAccessReturnsFalse(): void
-    {
-        $this->subject->disableDatabaseAccess();
-
-        self::assertFalse(
-            $this->subject->hasDatabaseAccess()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function findSingleByWhereClauseAndDatabaseAccessDisabledThrowsException(): void
-    {
-        $this->expectException(NotFoundException::class);
-        $this->expectExceptionMessage(
-            'No record can be retrieved from the database because database ' .
-            'access is disabled for this mapper instance.'
-        );
-
-        $this->subject->disableDatabaseAccess();
-        $this->subject->findSingleByWhereClause(['title' => 'foo']);
-    }
-
     ////////////////////////////////////////////////
     // Tests concerning findSingleByWhereClause().
     ////////////////////////////////////////////////
