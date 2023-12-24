@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
  ### Deprecated
 
 ### Removed
+- Drop `DynamicDateViewHelper` (#1620)
 - Remove `SalutationSwitcher` (#1618)
 - Drop `TestingQueryResult` (#1617)
 - Remove `FrontEndUserGroup::title` and `::description` (#1616)
