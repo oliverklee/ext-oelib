@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Oelib\Testing;
 
 use Doctrine\DBAL\Driver\ResultStatement;
-use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
@@ -1129,7 +1128,6 @@ routes: {  }";
             $frontEndUser->logoff();
         }
 
-        FrontEndLoginManager::getInstance()->logInUser();
         GeneralUtility::makeInstance(Context::class)->setAspect('frontend.user', new UserAspect());
     }
 

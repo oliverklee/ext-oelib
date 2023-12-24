@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Oelib\Tests\Functional\Testing;
 
-use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Context\Context;
@@ -2248,20 +2247,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
     }
 
     // Tests regarding user login and logout
-
-    /**
-     * @test
-     */
-    public function logoutFrontEndUserAfterLoginSwitchesLoginManagerToNotLoggedIn(): void
-    {
-        $pageUid = $this->subject->createFrontEndPage();
-        $this->subject->createFakeFrontEnd($pageUid);
-
-        $this->subject->createAndLoginFrontEndUser();
-        $this->subject->logoutFrontEndUser();
-
-        self::assertFalse(FrontEndLoginManager::getInstance()->isLoggedIn());
-    }
 
     /**
      * @test
