@@ -2332,17 +2332,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function isLoggedInInitiallyIsFalse(): void
-    {
-        $pageUid = $this->subject->createFrontEndPage();
-        $this->subject->createFakeFrontEnd($pageUid);
-
-        self::assertFalse($this->subject->isLoggedIn());
-    }
-
-    /**
-     * @test
-     */
     public function logoutFrontEndUserAfterLoginSwitchesLoginManagerToNotLoggedIn(): void
     {
         $pageUid = $this->subject->createFrontEndPage();
@@ -2420,7 +2409,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->subject->createFakeFrontEnd($pageUid);
         $this->subject->createAndLoginFrontEndUser();
 
-        self::assertTrue($this->subject->isLoggedIn());
+        $isLoggedIn = (bool)$this->getContext()->getPropertyFromAspect('frontend.user', 'isLoggedIn');
+        self::assertTrue($isLoggedIn);
     }
 
     /**
@@ -2488,7 +2478,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $frontEndUserGroupUid = $this->subject->createFrontEndUserGroup();
         $this->subject->createAndLoginFrontEndUser($frontEndUserGroupUid);
 
-        self::assertTrue($this->subject->isLoggedIn());
+        $isLoggedIn = (bool)$this->getContext()->getPropertyFromAspect('frontend.user', 'isLoggedIn');
+        self::assertTrue($isLoggedIn);
     }
 
     /**

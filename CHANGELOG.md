@@ -8,11 +8,13 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Make `TestingFramework::isLoggedIn()` private (#1622)
 - Raise the required TYPO3 bugfix version (#1619)
 
  ### Deprecated
 
 ### Removed
+- Drop the TypoScript template parsing from the testing framework (#1621)
 - Drop `DynamicDateViewHelper` (#1620)
 - Remove `SalutationSwitcher` (#1618)
 - Drop `TestingQueryResult` (#1617)

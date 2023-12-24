@@ -1162,7 +1162,7 @@ routes: {  }";
      *
      * @internal
      */
-    public function isLoggedIn(): bool
+    private function isLoggedIn(): bool
     {
         if (!$this->hasFakeFrontEnd()) {
             throw new \BadMethodCallException('Please create a front end before calling isLoggedIn.', 1331490846);

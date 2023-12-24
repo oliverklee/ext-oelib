@@ -208,21 +208,6 @@ final class TestingFrameworkTest extends UnitTestCase
     /**
      * @test
      */
-    public function isLoggedThrowsExceptionWithoutFrontEnd(): void
-    {
-        $this->expectException(
-            \BadMethodCallException::class
-        );
-        $this->expectExceptionMessage(
-            'Please create a front end before calling isLoggedIn.'
-        );
-
-        $this->subject->isLoggedIn();
-    }
-
-    /**
-     * @test
-     */
     public function logoutFrontEndUserWithoutFrontEndThrowsException(): void
     {
         $this->expectException(
