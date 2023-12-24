@@ -11,7 +11,6 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\PageFinder;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Session\Session;
 
 /**
  * This class takes care of cleaning up oelib after the testing framework.
@@ -32,6 +31,5 @@ class TestingFrameworkCleanup
         HeaderProxyFactory::purgeInstance();
         MapperRegistry::purgeInstance();
         PageFinder::purgeInstance();
-        Session::purgeInstances();
     }
 }
