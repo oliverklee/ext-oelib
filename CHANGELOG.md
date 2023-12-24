@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the tracking of changed records from the testing framework (#1638)
 - Drop the logging-related interfaces/traits (#1637)
 - Drop `ExtendedGeneralUtility` (#1635)
 - Drop `EmptyQueryResultException` (#1633)

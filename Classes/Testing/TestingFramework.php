@@ -17,7 +17,6 @@ use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
-use TYPO3\CMS\Core\Exception\Page\PageNotFoundException;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Localization\Locales;
@@ -99,26 +98,6 @@ final class TestingFramework
     private $ownAllowedTables = [];
 
     /**
-     * all "dirty" non-system tables (i.e., all tables that were used for testing
-     * and need to be cleaned up)
-     *
-     * @var array<string, non-empty-string>
-     *
-     * @deprecated #1532 will be removed in oelib 6.0
-     */
-    private $dirtyTables = [];
-
-    /**
-     * all "dirty" system tables (i.e. all tables that were used for testing and
-     * need to be cleaned up)
-     *
-     * @var array<string, non-empty-string>
-     *
-     * @deprecated #1532 will be removed in oelib 6.0
-     */
-    private $dirtySystemTables = [];
-
-    /**
      * sorting values of all relation tables
      *
      * @var array<non-empty-string, array<positive-int, int<0, max>>>
@@ -191,8 +170,7 @@ final class TestingFramework
      * Creates a new dummy record for unit tests.
      *
      * If no record data for the new array is given, an empty record will be
-     * created. It will only contain a valid UID and the "is_dummy_record" flag
-     * will be set to 1.
+     * created. It will only contain a valid UID.
      *
      * Should there be any problem creating the record (wrong table name or a
      * problem with the database), 0 instead of a valid UID will be returned.
@@ -224,7 +202,7 @@ final class TestingFramework
      * Creates a new dummy record for unit tests without checks for the table name.
      *
      * If no record data for the new array is given, an empty record will be created.
-     * It will only contain a valid UID and the "is_dummy_record" flag will be set to 1.
+     * It will only contain a valid UID.
      *
      * Should there be any problem creating the record (wrong table name or a
      * problem with the database), 0 instead of a valid UID will be returned.
@@ -238,15 +216,9 @@ final class TestingFramework
     {
         $this->initializeDatabase();
         $dataToInsert = $this->normalizeDatabaseRow($rawData);
-        // @deprecated #1532 will be removed in oelib 6.0
-        $dummyColumnName = $this->getDummyColumnName($table);
-        $dataToInsert[$dummyColumnName] = 1;
 
         $connection = $this->getConnectionForTable($table);
         $connection->insert($table, $dataToInsert);
-
-        // @deprecated #1532 will be removed in oelib 6.0
-        $this->markTableAsDirty($table);
 
         $uid = (int)$connection->lastInsertId($table);
         \assert($uid > 0);
@@ -494,8 +466,6 @@ final class TestingFramework
     {
         $this->initializeDatabase();
         $this->assertTableNameIsAllowed($table);
-        // @deprecated #1532 will be removed in oelib 6.0
-        $dummyColumnName = $this->getDummyColumnName($table);
         // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($uid === 0) {
             throw new \InvalidArgumentException('The parameter $uid must not be zero.', 1331490003);
@@ -510,17 +480,9 @@ final class TestingFramework
                 1331490017
             );
         }
-        // @deprecated #1532 will be removed in oelib 6.0
-        if (isset($rawData[$dummyColumnName])) {
-            throw new \InvalidArgumentException(
-                'The parameter $recordData must not contain changes to the field "' . $dummyColumnName .
-                '". It is impossible to convert a dummy record into a regular record.',
-                1331490024
-            );
-        }
 
         $dataToSave = $this->normalizeDatabaseRow($rawData);
-        $this->getConnectionForTable($table)->update($table, $dataToSave, ['uid' => $uid, $dummyColumnName => 1]);
+        $this->getConnectionForTable($table)->update($table, $dataToSave, ['uid' => $uid]);
     }
 
     /**
@@ -551,15 +513,10 @@ final class TestingFramework
             throw new \InvalidArgumentException('$uidForeign must be > 0, but is: ' . $uidForeign, 1331490378);
         }
 
-        // @deprecated #1532 will be removed in oelib 6.0
-        $this->markTableAsDirty($table);
-
         $recordData = [
             'uid_local' => $uidLocal,
             'uid_foreign' => $uidForeign,
             'sorting' => $this->getRelationSorting($table, $uidLocal),
-            // @deprecated #1532 will be removed in oelib 6.0
-            $this->getDummyColumnName($table) => 1,
         ];
 
         $this->getConnectionForTable($table)->insert($table, $recordData);
@@ -648,38 +605,7 @@ final class TestingFramework
     }
 
     /**
-     * Deletes all dummy records that have been added through this framework.
-     * For this, all records with the "is_dummy_record" flag set to 1 will be
-     * deleted from all tables that have been used within this instance of the
-     * testing framework.
-     *
-     * If you set $performDeepCleanUp to TRUE, it will go through ALL tables to
-     * which the current instance of the testing framework has access. Please
-     * consider well, whether you want to do this as it's a huge performance
-     * issue.
-     *
-     * @param bool $performDeepCleanUp whether a deep clean up should be performed, may be empty
-     *
-     * @deprecated #1532 will be removed in oelib 6.0
-     */
-    public function cleanUp(bool $performDeepCleanUp = false): void
-    {
-        $this->cleanUpDatabase($performDeepCleanUp);
-        $this->cleanUpWithoutDatabase();
-    }
-
-    /**
-     * @deprecated #1532 will be removed in oelib 6.0
-     */
-    private function cleanUpDatabase(bool $performDeepCleanUp = false): void
-    {
-        $this->initializeDatabase();
-        $this->cleanUpTableSet(false, $performDeepCleanUp);
-        $this->cleanUpTableSet(true, $performDeepCleanUp);
-    }
-
-    /**
-     * Cleans up..
+     * Cleans up.
      */
     public function cleanUpWithoutDatabase(): void
     {
@@ -700,45 +626,6 @@ final class TestingFramework
         if ((new Typo3Version())->getMajorVersion() <= 11) {
             RootlineUtility::purgeCaches();
         }
-    }
-
-    /**
-     * Deletes a set of records that have been added through this framework for
-     * a set of tables (either the test tables or the allowed system tables).
-     * For this, all records with the "is_dummy_record" flag set to 1 will be
-     * deleted from all tables that have been used within this instance of the
-     * testing framework.
-     *
-     * If you set $performDeepCleanUp to TRUE, it will go through ALL tables to
-     * which the current instance of the testing framework has access. Please
-     * consider well, whether you want to do this as it's a huge performance
-     * issue.
-     *
-     * @param bool $useSystemTables whether to clean up the system tables (TRUE) or the non-system test tables (FALSE)
-     * @param bool $performDeepCleanUp whether a deep clean up should be performed, may be empty
-     *
-     * @deprecated #1532 will be removed in oelib 6.0
-     */
-    private function cleanUpTableSet(bool $useSystemTables, bool $performDeepCleanUp): void
-    {
-        if ($useSystemTables) {
-            $tablesToCleanUp = $performDeepCleanUp ? self::ALLOWED_SYSTEM_TABLES : $this->dirtySystemTables;
-        } else {
-            $tablesToCleanUp = $performDeepCleanUp ? $this->ownAllowedTables : $this->dirtyTables;
-        }
-
-        foreach ($tablesToCleanUp as $currentTable) {
-            $dummyColumnName = $this->getDummyColumnName($currentTable);
-            if (!$this->tableHasColumn($currentTable, $dummyColumnName)) {
-                continue;
-            }
-
-            // Runs a DELETE query for each allowed table. A "one-query-deletes-them-all" approach was tested,
-            // but we didn't find a working solution for that.
-            $this->getConnectionForTable($currentTable)->delete($currentTable, [$dummyColumnName => 1]);
-        }
-
-        $this->dirtyTables = [];
     }
 
     /**
@@ -880,16 +767,7 @@ final class TestingFramework
             'config' => ['MP_disableTypolinkClosestMPvalue' => true, 'typolinkLinkAccessRestrictedPages' => true],
         ];
 
-        // @deprecated #1532 will be removed in oelib 6.0
-        if (\in_array('sys_template', $this->dirtySystemTables, true)) {
-            try {
-                $rootLine = GeneralUtility::makeInstance(RootlineUtility::class, $pageUid)->get();
-            } catch (PageNotFoundException $e) {
-                $rootLine = [];
-            }
-
-            Locales::setSystemLocaleFromSiteLanguage($frontEnd->getLanguage());
-        }
+        Locales::setSystemLocaleFromSiteLanguage($frontEnd->getLanguage());
 
         $frontEnd->newCObj();
         /** @var ContentObjectRenderer $contentObject */
@@ -1269,29 +1147,6 @@ routes: {  }";
     }
 
     /**
-     * Returns the name of the column that marks a record as a dummy record.
-     *
-     * On most tables this is "is_dummy_record", but on system tables like
-     * "pages" or "fe_users", the column is called "tx_oelib_dummy_record".
-     *
-     * On additional tables, the column is built using $this->tablePrefix as
-     * prefix e.g. "tx_seminars_is_dummy_record" if $this->tablePrefix =
-     * "tx_seminars".
-     *
-     * @param non-empty-string $table the table name to look up
-     *
-     * @return non-empty-string the name of the column that marks a record as dummy record
-     *
-     * @deprecated #1532 will be removed in oelib 6.0
-     */
-    public function getDummyColumnName(string $table): string
-    {
-        $this->initializeDatabase();
-
-        return $this->isSystemTableNameAllowed($table) ? 'tx_oelib_is_dummy_record' : 'is_dummy_record';
-    }
-
-    /**
      * Counts the dummy records in the table given by the first parameter $table
      * that match a given WHERE clause.
      *
@@ -1309,12 +1164,9 @@ routes: {  }";
         $this->initializeDatabase();
         $this->assertTableNameIsAllowed($table);
 
-        $allCriteria = $criteria;
-        $dummyColumn = $this->getDummyColumnName($table);
-        $allCriteria[$dummyColumn] = 1;
         $query = $this->getQueryBuilderForTable($table)->count('*')->from($table);
         $query->getRestrictions()->removeAll();
-        foreach ($allCriteria as $identifier => $value) {
+        foreach ($criteria as $identifier => $value) {
             $query->andWhere($query->expr()->eq($identifier, $query->createNamedParameter($value)));
         }
         if (\method_exists($query, 'executeQuery')) {
@@ -1358,9 +1210,8 @@ routes: {  }";
         $this->initializeDatabase();
         $this->assertTableNameIsAllowed($table);
 
-        $dummyColumn = $this->getDummyColumnName($table);
         $queryResult = $this->getConnectionForTable($table)
-            ->select(['*'], $table, ['uid' => $uid, $dummyColumn => 1]);
+            ->select(['*'], $table, ['uid' => $uid]);
         if (\method_exists($queryResult, 'fetchAllAssociative')) {
             $data = $queryResult->fetchAllAssociative();
         } else {
@@ -1368,33 +1219,6 @@ routes: {  }";
         }
 
         return $data !== [];
-    }
-
-    /**
-     * Puts one or multiple table names on the list of dirty tables (which
-     * represents a list of tables that were used for testing and contain dummy
-     * records and thus are called "dirty" until the next cleanup).
-     *
-     * @param non-empty-string $tableNames the table name or a comma-separated list of table names
-     *        to put on the list of dirty tables
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @deprecated #1532 will be removed in oelib 6.0
-     */
-    public function markTableAsDirty(string $tableNames): void
-    {
-        $this->initializeDatabase();
-        $this->assertTableNameIsAllowed($tableNames);
-
-        /** @var non-empty-string $currentTable */
-        foreach (GeneralUtility::trimExplode(',', $tableNames, true) as $currentTable) {
-            if ($this->isNoneSystemTableNameAllowed($currentTable)) {
-                $this->dirtyTables[$currentTable] = $currentTable;
-            } elseif ($this->isSystemTableNameAllowed($currentTable)) {
-                $this->dirtySystemTables[$currentTable] = $currentTable;
-            }
-        }
     }
 
     /**
@@ -1457,9 +1281,6 @@ routes: {  }";
                 1331491003
             );
         }
-
-        // @deprecated #1532 will be removed in oelib 6.0
-        $this->markTableAsDirty($tableName);
     }
 
     /**
