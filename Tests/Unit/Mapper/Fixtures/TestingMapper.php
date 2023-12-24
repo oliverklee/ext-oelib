@@ -35,8 +35,6 @@ final class TestingMapper extends AbstractDataMapper
 
     protected $additionalKeys = ['title'];
 
-    protected $compoundKeyParts = ['title', 'header'];
-
     /**
      * @var list<AbstractModel>
      */
@@ -127,8 +125,6 @@ final class TestingMapper extends AbstractDataMapper
      *
      * @param AbstractModel $model the model to cache
      * @param DatabaseRow $data the data of the model as it is in the DB, may be empty
-     *
-     * @see cacheModelByCompoundKey
      */
     protected function cacheModelByCombinedKeys(AbstractModel $model, array $data): void
     {
