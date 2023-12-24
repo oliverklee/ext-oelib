@@ -10,7 +10,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\TypoScript\TemplateService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -2099,52 +2098,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->subject->createFakeFrontEnd($pageUid);
 
         self::assertInstanceOf(ContentObjectRenderer::class, $this->getFrontEndController()->cObj);
-    }
-
-    /**
-     * @test
-     */
-    public function createFakeFrontEndCreatesTemplate(): void
-    {
-        $pageUid = $this->subject->createFrontEndPage();
-        $this->subject->createFakeFrontEnd($pageUid);
-
-        self::assertInstanceOf(TemplateService::class, $this->getFrontEndController()->tmpl);
-    }
-
-    /**
-     * @test
-     */
-    public function createFakeFrontEndReadsTypoScriptSetupFromPage(): void
-    {
-        $pageUid = $this->subject->createFrontEndPage();
-        $this->subject->createTemplate(
-            $pageUid,
-            ['config' => 'foo = bar']
-        );
-
-        $this->subject->createFakeFrontEnd($pageUid);
-
-        self::assertSame(
-            'bar',
-            $this->getFrontEndController()->tmpl->setup['foo']
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function createFakeFrontEndWithTemplateRecordMarksTemplateAsLoaded(): void
-    {
-        $pageUid = $this->subject->createFrontEndPage();
-        $this->subject->createTemplate(
-            $pageUid,
-            ['config' => 'foo = 42']
-        );
-
-        $this->subject->createFakeFrontEnd($pageUid);
-
-        self::assertTrue($this->getFrontEndController()->tmpl->loaded);
     }
 
     /**

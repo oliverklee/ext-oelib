@@ -9,7 +9,6 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Configuration\PageFinder;
 use OliverKlee\Oelib\Configuration\TypoScriptConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -122,29 +121,6 @@ final class ConfigurationRegistryTest extends FunctionalTestCase
 
         $this->testingFramework->createFakeFrontEnd($pageUid);
         PageFinder::getInstance()->forceSource(PageFinder::SOURCE_FRONT_END);
-
-        self::assertSame(
-            42,
-            ConfigurationRegistry::get('plugin.tx_oelib')->getAsInteger('test')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function readsDataFromTypoScriptSetupEvenForFrontEndWithoutLoadedTemplate(): void
-    {
-        $pageUid = $this->testingFramework->createFrontEndPage();
-        $this->testingFramework->createTemplate($pageUid, ['config' => 'plugin.tx_oelib.test = 42']);
-
-        $this->testingFramework->createFakeFrontEnd($pageUid);
-        PageFinder::getInstance()->forceSource(PageFinder::SOURCE_FRONT_END);
-        /** @var TypoScriptFrontendController $frontEndController */
-        $frontEndController = $GLOBALS['TSFE'];
-        // @phpstan-ignore-next-line null still is the default value.
-        $frontEndController->tmpl->rootLine = null;
-        $frontEndController->tmpl->setup = [];
-        $frontEndController->tmpl->loaded = false;
 
         self::assertSame(
             42,
