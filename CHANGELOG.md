@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Upgrade to PHPUnit 9 (#1634)
 - Make `TestingFramework::isLoggedIn()` private (#1622)
 - Raise the required TYPO3 bugfix version (#1619)
 

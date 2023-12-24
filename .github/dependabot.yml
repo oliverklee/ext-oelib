@@ -21,7 +21,7 @@ updates:
       - dependency-name: "friendsofphp/php-cs-fixer"
         versions: [ ">= 3.4.0" ]
       - dependency-name: "phpunit/phpunit"
-        versions: [ ">= 9" ]
+        versions: [ ">= 10" ]
       - dependency-name: "sjbr/static-info-tables"
       - dependency-name: "typo3/cms-*"
       - dependency-name: "typo3/coding-standards"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/8.5/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.6/phpunit.xsd"
          backupGlobals="true"
          backupStaticAttributes="false"
          beStrictAboutTestsThatDoNotTestAnything="false"
@@ -20,7 +20,7 @@
          stopOnSkipped="false"
          verbose="false"
 >
-
+    <coverage cacheDirectory="../.Build/cache/coverage"/>
     <php>
         <!-- @deprecated: will be removed with next major version, constant TYPO3_MODE is deprecated -->
         <const name="TYPO3_MODE" value="BE"/>
