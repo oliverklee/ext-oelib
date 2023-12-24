@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
  ### Deprecated
 
 ### Removed
+- Remove `SalutationSwitcher` (#1618)
 - Drop `TestingQueryResult` (#1617)
 - Remove `FrontEndUserGroup::title` and `::description` (#1616)
 - Drop `BackEndUserMapper::findByUserName` (#1614)
