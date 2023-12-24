@@ -145,38 +145,6 @@ final class TestingFrameworkTest extends UnitTestCase
         $this->subject->createFrontEndUserGroup(['uid' => 99999]);
     }
 
-    // Tests regarding createBackEndUser()
-
-    /**
-     * @test
-     */
-    public function createBackEndUserWithZeroUidProvidedInRecordDataThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The column "uid" must not be set in $recordData.'
-        );
-
-        $this->subject->createBackEndUser(['uid' => 0]);
-    }
-
-    /**
-     * @test
-     */
-    public function createBackEndUserWithNonZeroUidProvidedInRecordDataThrowsException(): void
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The column "uid" must not be set in $recordData.'
-        );
-
-        $this->subject->createBackEndUser(['uid' => 999999]);
-    }
-
     // Tests concerning fakeFrontend
 
     /**

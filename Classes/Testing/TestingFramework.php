@@ -42,8 +42,6 @@ final class TestingFramework
      * @var list<non-empty-string>
      */
     private const ALLOWED_SYSTEM_TABLES = [
-        // @deprecated #1537 will be removed in oelib 6.0
-        'be_users',
         'fe_groups',
         'fe_users',
         'pages',
@@ -475,24 +473,6 @@ final class TestingFramework
         $this->loginFrontEndUser($frontEndUserUid);
 
         return $frontEndUserUid;
-    }
-
-    /**
-     * Creates a BE user record.
-     *
-     * @param array<string, string|int|bool> $recordData data to save, may be empty, but must not contain the key "uid"
-     *
-     * @return positive-int the UID of the new BE user
-     *
-     * @deprecated #1537 will be removed in oelib 6.0
-     */
-    public function createBackEndUser(array $recordData = []): int
-    {
-        if (isset($recordData['uid'])) {
-            throw new \InvalidArgumentException('The column "uid" must not be set in $recordData.', 1331489905);
-        }
-
-        return $this->createRecordWithoutTableNameChecks('be_users', $recordData);
     }
 
     /**
