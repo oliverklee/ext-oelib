@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the `ConvertableToMimeAddressTrait` interface/trait (#1629)
 - Drop the session classes (#1628)
 - Drop the visibility classes (#1626)
 - Drop the `LazyLoadingProperties` trait (#1625)

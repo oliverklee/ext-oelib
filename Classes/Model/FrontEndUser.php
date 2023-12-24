@@ -5,19 +5,15 @@ declare(strict_types=1);
 namespace OliverKlee\Oelib\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\Email\ConvertableToMimeAddressTrait;
 use OliverKlee\Oelib\Interfaces\Address;
-use OliverKlee\Oelib\Interfaces\ConvertableToMimeAddress;
 use OliverKlee\Oelib\Interfaces\MailRole;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class represents a front-end user.
  */
-class FrontEndUser extends AbstractModel implements MailRole, Address, ConvertableToMimeAddress
+class FrontEndUser extends AbstractModel implements MailRole, Address
 {
-    use ConvertableToMimeAddressTrait;
-
     /**
      * Gets this user's real name.
      *
