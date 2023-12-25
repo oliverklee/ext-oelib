@@ -86,8 +86,6 @@ final class GermanZipCodeRepositoryTest extends FunctionalTestCase
     /**
      * @test
      *
-     * @param string $zipCode
-     *
      * @dataProvider nonMatchedZipCodesDataProvider
      */
     public function findOneByZipCodeWithoutMatchReturnsNull(string $zipCode): void

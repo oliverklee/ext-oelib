@@ -1818,7 +1818,6 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     /**
      * @test
      *
-     * @param string $propertyName
      * @param mixed $expectedValue
      *
      * @dataProvider dataTypeDataProvider

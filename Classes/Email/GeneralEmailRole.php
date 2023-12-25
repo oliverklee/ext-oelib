@@ -15,10 +15,6 @@ class GeneralEmailRole implements MailRole
 
     protected string $name;
 
-    /**
-     * @param string $emailAddress
-     * @param string $name
-     */
     public function __construct(string $emailAddress, string $name = '')
     {
         $this->emailAddress = $emailAddress;

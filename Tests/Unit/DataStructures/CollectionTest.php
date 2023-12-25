@@ -28,9 +28,6 @@ final class CollectionTest extends UnitTestCase
     }
 
     /**
-     * @param TestingModel $firstModel
-     * @param TestingModel $secondModel
-     *
      * @return -1|0|1
      */
     public function sortByTitleAscending(TestingModel $firstModel, TestingModel $secondModel): int
@@ -39,9 +36,6 @@ final class CollectionTest extends UnitTestCase
     }
 
     /**
-     * @param TestingModel $firstModel
-     * @param TestingModel $secondModel
-     *
      * @return -1|0|1
      */
     public function sortByTitleDescending(TestingModel $firstModel, TestingModel $secondModel): int

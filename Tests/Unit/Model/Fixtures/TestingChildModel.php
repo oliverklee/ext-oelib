@@ -11,9 +11,6 @@ use OliverKlee\Oelib\Model\AbstractModel;
  */
 final class TestingChildModel extends AbstractModel
 {
-    /**
-     * @return string
-     */
     public function getTitle(): string
     {
         return $this->getAsString('title');

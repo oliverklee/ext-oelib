@@ -67,8 +67,6 @@ class TestingModel extends AbstractModel
 
     /**
      * Gets the "owner" data item. This is an n:1 relation.
-     *
-     * @return FrontEndUser
      */
     public function getOwner(): FrontEndUser
     {

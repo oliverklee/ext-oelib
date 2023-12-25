@@ -46,8 +46,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
     /**
      * Returns the current front-end instance.
-     *
-     * @return TypoScriptFrontendController
      */
     private function getFrontEndController(): TypoScriptFrontendController
     {
@@ -197,8 +195,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
     /**
      * @test
      *
-     * @param bool $value
-     *
      * @dataProvider booleanDataProvider
      */
     public function createRecordPersistsBooleansAsIntegers(bool $value): void
@@ -343,8 +339,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
     /**
      * @test
-     *
-     * @param bool $value
      *
      * @dataProvider booleanDataProvider
      */

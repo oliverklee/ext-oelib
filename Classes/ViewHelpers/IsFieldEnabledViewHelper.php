@@ -112,8 +112,6 @@ class IsFieldEnabledViewHelper extends AbstractConditionViewHelper
     }
 
     /**
-     * @param RenderingContextInterface $renderingContext
-     *
      * @return list<non-empty-string>
      *
      * @throws \UnexpectedValueException
