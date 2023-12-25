@@ -189,7 +189,7 @@ abstract class AbstractDataMapper
     protected function findSingleByWhereClause(array $whereClauseParts): AbstractModel
     {
         // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
-        if (empty($whereClauseParts)) {
+        if ($whereClauseParts === []) {
             throw new \InvalidArgumentException('The parameter $whereClauseParts must not be empty.', 1_331_319_506);
         }
 
@@ -719,7 +719,7 @@ abstract class AbstractDataMapper
 
         $data = $model->getData();
 
-        foreach ($this->relations as $key => $relation) {
+        foreach (array_keys($this->relations) as $key) {
             $dataItem = $data[$key] ?? null;
             $relatedMapper = $this->getRelationMapperByKey($key);
             if ($this->isOneToManyRelationConfigured($key)) {
@@ -731,11 +731,7 @@ abstract class AbstractDataMapper
                     $this->saveManyToOneRelatedModels($dataItem, $relatedMapper);
                 }
             } else {
-                if ($this->isManyToManyRelationConfigured($key)) {
-                    $methodName = 'count';
-                } else {
-                    $methodName = 'getUids';
-                }
+                $methodName = $this->isManyToManyRelationConfigured($key) ? 'count' : 'getUids';
 
                 if ($dataItem instanceof Collection) {
                     $this->saveManyToManyAndCommaSeparatedRelatedModels($dataItem, $relatedMapper);
@@ -852,7 +848,7 @@ abstract class AbstractDataMapper
     {
         $data = $model->getData();
 
-        foreach ($this->relations as $key => $relation) {
+        foreach (array_keys($this->relations) as $key) {
             if (!$this->isOneToManyRelationConfigured($key)) {
                 continue;
             }
@@ -977,7 +973,7 @@ abstract class AbstractDataMapper
     {
         $data = $model->getData();
 
-        foreach ($this->relations as $key => $mapperName) {
+        foreach (array_keys($this->relations) as $key) {
             if ($this->isOneToManyRelationConfigured($key)) {
                 $relatedModels = $data[$key] ?? null;
                 if (!$relatedModels instanceof Collection) {
