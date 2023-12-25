@@ -17,7 +17,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 final class FrontEndUserMapperTest extends FunctionalTestCase
 {
-    protected $testExtensionsToLoad = ['typo3conf/ext/oelib'];
+    protected array $testExtensionsToLoad = ['typo3conf/ext/oelib'];
 
     /**
      * @var FrontEndUserMapper

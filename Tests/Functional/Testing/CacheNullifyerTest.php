@@ -17,9 +17,9 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 final class CacheNullifyerTest extends FunctionalTestCase
 {
-    protected $testExtensionsToLoad = ['typo3conf/ext/oelib'];
+    protected array $testExtensionsToLoad = ['typo3conf/ext/oelib'];
 
-    protected $initializeDatabase = false;
+    protected bool $initializeDatabase = false;
 
     /**
      * @var CacheNullifyer
