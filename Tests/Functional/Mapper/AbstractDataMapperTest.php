@@ -1847,13 +1847,8 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         $result = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test')
             ->select(['*'], 'tx_oelib_test', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $data */
-            $data = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $data */
-            $data = $result->fetch();
-        }
+        /** @var DatabaseRow|false $data */
+        $data = $result->fetchAssociative();
 
         self::assertIsArray($data);
         self::assertSame($expectedValue, $data[$propertyName]);
@@ -2467,11 +2462,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         // We cannot use `$connection->count()` here because it automatically ignores hidden or deleted records.
         $query = 'SELECT COUNT(*) as count from tx_oelib_testchild WHERE uid = :uid AND deleted = :deleted';
         $queryResult = $relationConnection->executeQuery($query, ['uid' => $component2->getUid(), 'deleted' => 1]);
-        if (\method_exists($queryResult, 'fetchAssociative')) {
-            $row = $queryResult->fetchAssociative();
-        } else {
-            $row = $queryResult->fetch();
-        }
+        $row = $queryResult->fetchAssociative();
         self::assertIsArray($row);
         self::assertSame(1, $row['count']);
     }
@@ -2831,13 +2822,8 @@ final class AbstractDataMapperTest extends FunctionalTestCase
             ->getConnectionForTable('tx_oelib_test');
         $columns = ['float_data', 'decimal_data', 'string_data'];
         $result = $connection->select($columns, 'tx_oelib_test', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $data */
-            $data = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $data */
-            $data = $result->fetch();
-        }
+        /** @var DatabaseRow|false $data */
+        $data = $result->fetchAssociative();
         self::assertIsArray($data);
 
         return $data;
@@ -3062,11 +3048,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         // We cannot use `$connection->count()` here because it automatically ignores hidden or deleted records.
         $query = 'SELECT COUNT(*) as count from tx_oelib_test WHERE uid = :uid AND deleted = :deleted';
         $queryResult = $connection->executeQuery($query, ['uid' => $uid, 'deleted' => 1]);
-        if (\method_exists($queryResult, 'fetchAssociative')) {
-            $row = $queryResult->fetchAssociative();
-        } else {
-            $row = $queryResult->fetch();
-        }
+        $row = $queryResult->fetchAssociative();
         self::assertIsArray($row);
         self::assertSame(1, $row['count']);
     }
@@ -3109,11 +3091,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         // We cannot use `$connection->count()` here because it automatically ignores hidden or deleted records.
         $query = 'SELECT COUNT(*) as count from tx_oelib_testchild WHERE uid = :uid AND deleted = :deleted';
         $queryResult = $relationConnection->executeQuery($query, ['uid' => $relatedUid, 'deleted' => 1]);
-        if (\method_exists($queryResult, 'fetchAssociative')) {
-            $row = $queryResult->fetchAssociative();
-        } else {
-            $row = $queryResult->fetch();
-        }
+        $row = $queryResult->fetchAssociative();
         self::assertIsArray($row);
         self::assertSame(1, $row['count']);
     }
