@@ -57,7 +57,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for PHP < 7.4 (#1597)
 
 ### Fixed
-- Switch to the new DBAL methods (#1656, #1657, #1658)
+- Switch to the new DBAL methods (#1656, #1657, #1658, #1674)
 
 ## 5.2.2
 
