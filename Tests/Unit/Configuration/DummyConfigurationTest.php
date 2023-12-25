@@ -15,7 +15,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 final class DummyConfigurationTest extends UnitTestCase
 {
     /**
-     * @var \OliverKlee\Oelib\Configuration\DummyConfiguration
+     * @var DummyConfiguration
      */
     private $subject;
 
