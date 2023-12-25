@@ -716,13 +716,8 @@ final class TestingFramework
 
         $frontEndUser = GeneralUtility::makeInstance(FrontendUserAuthentication::class);
         $request = new ServerRequest();
-        if ((new Typo3Version())->getMajorVersion() <= 10) {
-            $frontEndUser->start();
-            $frontEndUser->fetchGroupData();
-        } else {
-            $frontEndUser->start($request);
-            $frontEndUser->fetchGroupData($request);
-        }
+        $frontEndUser->start($request);
+        $frontEndUser->fetchGroupData($request);
         if ((new Typo3Version())->getMajorVersion() <= 11) {
             $frontEndUser->unpack_uc();
         }
@@ -745,11 +740,7 @@ final class TestingFramework
         $GLOBALS['TSFE'] = $frontEnd;
 
         $frontEnd->fe_user = $frontEndUser;
-        if ((new Typo3Version())->getMajorVersion() <= 10) {
-            $frontEnd->id = (string)$pageUid;
-        } else {
-            $frontEnd->id = $pageUid;
-        }
+        $frontEnd->id = $pageUid;
         $frontEnd->determineId($request);
         $frontEnd->config = [
             'config' => ['MP_disableTypolinkClosestMPvalue' => true, 'typolinkLinkAccessRestrictedPages' => true],
@@ -761,9 +752,7 @@ final class TestingFramework
         /** @var ContentObjectRenderer $contentObject */
         $contentObject = $frontEnd->cObj;
         $contentObject->setLogger(new NullLogger());
-        if ((new Typo3Version())->getMajorVersion() >= 11) {
-            $contentObject->setRequest($request);
-        }
+        $contentObject->setRequest($request);
 
         $this->hasFakeFrontEnd = true;
         $this->logoutFrontEndUser();
@@ -959,11 +948,7 @@ routes: {  }";
         if ($frontEndUser instanceof FrontendUserAuthentication) {
             $frontEndUser->createUserSession(['uid' => $userId, 'disableIPlock' => true]);
             $frontEndUser->user = $dataToSet;
-            if ((new Typo3Version())->getMajorVersion() <= 10) {
-                $frontEndUser->fetchGroupData();
-            } else {
-                $frontEndUser->fetchGroupData(new ServerRequest());
-            }
+            $frontEndUser->fetchGroupData(new ServerRequest());
         }
 
         GeneralUtility::makeInstance(Context::class)->setAspect('frontend.user', new UserAspect($frontEndUser));

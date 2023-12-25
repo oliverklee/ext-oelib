@@ -50,7 +50,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop `BackEndUser::getGroups` and `BackEndUserGroup` (#1604)
 - Drop the `FederalState` model & mapper (#1600)
 - Remove `TemplateHelper` (#1599)
-- Drop support for TYPO3 10LTS (#1598, #1601, #1602)
+- Drop support for TYPO3 10LTS (#1598, #1601, #1602, #1655)
 - Drop support for PHP < 7.4 (#1597)
 
 ### Fixed
