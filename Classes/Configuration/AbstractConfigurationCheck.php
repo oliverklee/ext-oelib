@@ -205,23 +205,9 @@ abstract class AbstractConfigurationCheck
     {
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($tableName);
         $query = 'SHOW FULL COLUMNS FROM `' . $tableName . '`';
-        if (\method_exists($connection, 'executeQuery')) {
-            $statement = $connection->executeQuery($query);
-        } else {
-            $statement = $connection->query($query);
-        }
-
         $columns = [];
-        if (\method_exists($statement, 'fetchAllAssociative')) {
-            foreach ($statement->fetchAllAssociative() as $row) {
-                $columns[] = $row['Field'];
-            }
-        } else {
-            foreach ($statement->fetchAll() as $row) {
-                /** @var non-empty-string $column */
-                $column = $row['Field'];
-                $columns[] = $column;
-            }
+        foreach ($connection->executeQuery($query)->fetchAllAssociative() as $row) {
+            $columns[] = $row['Field'];
         }
 
         return $columns;
