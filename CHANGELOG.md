@@ -16,7 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 - Drop Composer suggestion for static_info_tables (#1650)
-- `MapperRegistry::denyDatabaseAccess` (#1646)
+- Drop `MapperRegistry::denyDatabaseAccess` (#1646)
 - Drop deprecated methods from `AbstractDataMapper`
   (#1640, #1641, #1642, #1643, #1644, #1645)
 - Drop `TestingFramework::count()` and `::existsRecordWithUid` (#1639)
