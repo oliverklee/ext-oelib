@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Add support for TYPO3 12LTS (#1669)
+- Add support for TYPO3 12LTS (#1669, #1671)
 - Add Rector to our toolchain (#1659, #1662)
 
 ### Changed
