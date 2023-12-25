@@ -81,13 +81,8 @@ parameters:
 			path: Classes/DataStructures/Collection.php
 
 		-
-			message: "#^Cannot access offset 'uid' on mixed\\.$#"
-			count: 1
-			path: Classes/Domain/Repository/PageRepository.php
-
-		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 3
+			count: 1
 			path: Classes/Domain/Repository/PageRepository.php
 
 		-
