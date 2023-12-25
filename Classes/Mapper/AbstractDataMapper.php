@@ -417,13 +417,8 @@ abstract class AbstractDataMapper
             $orderBy = $sortingField !== '' ? [$sortingField => 'ASC'] : [];
             $queryResult = $this->getConnectionForTable($foreignTable)
                 ->select(['*'], $foreignTable, [$foreignField => (int)($data['uid'] ?? 0)], [], $orderBy);
-            if (\method_exists($queryResult, 'fetchAllAssociative')) {
-                /** @var DatabaseRow[] $modelData */
-                $modelData = $queryResult->fetchAllAssociative();
-            } else {
-                /** @var DatabaseRow[] $modelData */
-                $modelData = $queryResult->fetchAll();
-            }
+            /** @var DatabaseRow[] $modelData */
+            $modelData = $queryResult->fetchAllAssociative();
         }
 
         /** @var Collection<AbstractModel> $models */
@@ -510,13 +505,7 @@ abstract class AbstractDataMapper
             }
             $queryResult = $this->getConnectionForTable($mnTable)
                 ->select([$leftColumn], $mnTable, [$rightColumn => $rightUid], [], [$orderBy => 'ASC']);
-            if (\method_exists($queryResult, 'fetchAllAssociative')) {
-                $resultRows = $queryResult->fetchAllAssociative();
-            } else {
-                $resultRows = $queryResult->fetchAll();
-            }
-
-            foreach (\array_column($resultRows, $leftColumn) as $relationUid) {
+            foreach (\array_column($queryResult->fetchAllAssociative(), $leftColumn) as $relationUid) {
                 // Some relations might have a junk 0 in it. We ignore it to avoid crashing.
                 if ((int)$relationUid <= 0) {
                     continue;
@@ -1135,13 +1124,7 @@ abstract class AbstractDataMapper
             );
         }
 
-        $result = $query->executeQuery();
-
-        if (\method_exists($result, 'fetchAllAssociative')) {
-            $modelData = $result->fetchAllAssociative();
-        } else {
-            $modelData = $result->fetchAll();
-        }
+        $modelData = $query->executeQuery()->fetchAllAssociative();
 
         return $this->getListOfModels($modelData);
     }
