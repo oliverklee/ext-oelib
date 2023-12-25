@@ -126,7 +126,7 @@ abstract class AbstractConfigurationCheck
 
     public function hasWarnings(): bool
     {
-        return \count($this->warnings) > 0;
+        return $this->warnings !== [];
     }
 
     /**
@@ -210,6 +210,7 @@ abstract class AbstractConfigurationCheck
         } else {
             $statement = $connection->query($query);
         }
+
         $columns = [];
         if (\method_exists($statement, 'fetchAllAssociative')) {
             foreach ($statement->fetchAllAssociative() as $row) {
@@ -375,6 +376,7 @@ abstract class AbstractConfigurationCheck
         if ($minimum > $maximum) {
             throw new \InvalidArgumentException('$minimum must be <= $maximum.', 1_616_069_185);
         }
+
         if (!$this->checkIfNonNegativeIntegerOrEmpty($key, $explanation)) {
             return false;
         }
@@ -414,6 +416,7 @@ abstract class AbstractConfigurationCheck
         if (!$this->configuration->hasString($key)) {
             return true;
         }
+
         if (!$this->checkIfNonNegativeIntegerOrEmpty($key, $explanation)) {
             return false;
         }

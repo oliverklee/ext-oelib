@@ -76,7 +76,12 @@ class FlexformsConfiguration extends AbstractReadOnlyObjectWithPublicAccessors i
             throw new \BadMethodCallException('$this->xPath is not initialized.', 1_645_719_281);
         }
 
-        $matchingNodes = $this->xPath->query("/T3FlexForms/data/sheet/language/field[@index='$key']/value");
+        $matchingNodes = $this->xPath->query(
+            sprintf(
+                '/T3FlexForms/data/sheet/language/field[@index=\'%s\']/value',
+                $key
+            )
+        );
         $firstMatchingNode = $matchingNodes instanceof \DOMNodeList ? $matchingNodes->item(0) : null;
 
         return $firstMatchingNode instanceof \DOMNode ? $firstMatchingNode->textContent : null;

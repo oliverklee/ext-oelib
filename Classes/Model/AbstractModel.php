@@ -81,12 +81,15 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
         if ($this->isReadOnly()) {
             throw new \BadMethodCallException('Read-only models cannot be cloned.', 1_436_453_245);
         }
+
         if ($this->isDead()) {
             throw new \BadMethodCallException('Deleted models cannot be cloned.', 1_436_453_107);
         }
+
         if ($this->isLoading()) {
             throw new \BadMethodCallException('Models cannot be cloned while they are loading.', 1_436_453_245);
         }
+
         if ($this->isGhost()) {
             $this->load();
         }
@@ -107,6 +110,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
                 } else {
                     $newDataItem = clone $dataItem;
                 }
+
                 $newDataItem->setParentModel($this);
                 $this->set($key, $newDataItem);
             }
@@ -159,6 +163,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
                     $this->setUid($uid);
                 }
             }
+
             unset($this->data['uid']);
         }
 
@@ -222,6 +227,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
         if ($this->hasUid()) {
             throw new \BadMethodCallException('The UID of a model cannot be set a second time.', 1_331_489_260);
         }
+
         if ($this->isVirgin()) {
             $this->setLoadStatus(self::STATUS_GHOST);
         }
@@ -251,6 +257,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
                 1_331_489_276
             );
         }
+
         if ($this->isReadOnly()) {
             throw new \BadMethodCallException('set() must not be called on a read-only model.', 1_331_489_292);
         }
@@ -258,6 +265,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
         if ($this->isGhost()) {
             $this->load();
         }
+
         $this->data[$key] = $value;
 
         $this->markAsLoaded();
@@ -390,6 +398,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
             if (!\is_callable($callback)) {
                 throw new \RuntimeException('Model load callback is not callable.', 1_646_325_797);
             }
+
             $callback($this);
         }
     }

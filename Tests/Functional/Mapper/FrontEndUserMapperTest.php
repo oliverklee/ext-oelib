@@ -45,6 +45,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
 
         $connection = $this->getConnectionPool()->getConnectionForTable('fe_users');
         $connection->insert('fe_users', ['usergroup' => $groupUids]);
+
         $uid = (int)$connection->lastInsertId('fe_users');
         if ($uid <= 0) {
             throw new \RuntimeException('Could not create test record.', 1_699_653_406);
@@ -95,6 +96,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
         $username = 'max.doe';
         $connection = $this->getConnectionPool()->getConnectionForTable('fe_users');
         $connection->insert('fe_users', ['username' => $username]);
+
         $uid = (int)$connection->lastInsertId('fe_users');
 
         self::assertSame(
@@ -111,6 +113,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
         $username = 'max.doe';
         $connection = $this->getConnectionPool()->getConnectionForTable('fe_users');
         $connection->insert('fe_users', ['username' => $username]);
+
         $uid = (int)$connection->lastInsertId('fe_users');
 
         self::assertSame(
@@ -127,6 +130,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
         $username = 'MAX.DOE';
         $connection = $this->getConnectionPool()->getConnectionForTable('fe_users');
         $connection->insert('fe_users', ['username' => $username]);
+
         $uid = (int)$connection->lastInsertId('fe_users');
 
         self::assertSame(
@@ -143,6 +147,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
         $username = 'max.doe';
         $connection = $this->getConnectionPool()->getConnectionForTable('fe_users');
         $connection->insert('fe_users', ['username' => \strtoupper($username)]);
+
         $uid = (int)$connection->lastInsertId('fe_users');
 
         self::assertSame(

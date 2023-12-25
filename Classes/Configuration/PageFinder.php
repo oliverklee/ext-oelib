@@ -122,6 +122,7 @@ class PageFinder
                 1_331_489_010
             );
         }
+
         $this->storedPageUid = $uidToStore;
     }
 

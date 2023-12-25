@@ -26,6 +26,7 @@ class GermanZipCodeRepository extends Repository
         if (!\is_int($zipCodeCheckResult) || $zipCodeCheckResult === 0) {
             return null;
         }
+
         if (\array_key_exists($zipCode, $this->cachedResults)) {
             return $this->cachedResults[$zipCode];
         }

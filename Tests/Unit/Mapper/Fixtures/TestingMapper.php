@@ -37,7 +37,7 @@ final class TestingMapper extends AbstractDataMapper
     /**
      * @var list<AbstractModel>
      */
-    protected $cachedModels = [];
+    private array $cachedModels = [];
 
     /**
      * Gets the cached models.

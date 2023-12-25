@@ -341,7 +341,10 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
 
         self::assertTrue($subject->hasWarnings());
         $warning = $subject->getWarningsAsHtml()[0];
-        self::assertStringContainsString(\htmlspecialchars("$namespace.$key", ENT_QUOTES | ENT_HTML5), $warning);
+        self::assertStringContainsString(
+            \htmlspecialchars(sprintf('%s.%s', $namespace, $key), ENT_QUOTES | ENT_HTML5),
+            $warning
+        );
     }
 
     /**

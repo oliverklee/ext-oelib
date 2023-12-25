@@ -50,6 +50,7 @@ final class GeoCalculatorTest extends UnitTestCase
 
         $noCoordinates = new TestingGeo();
         $noCoordinates->clearGeoCoordinates();
+
         $bonn = new TestingGeo();
         $bonn->setGeoCoordinates(['latitude' => 50.72254683, 'longitude' => 7.07519531]);
 
@@ -65,6 +66,7 @@ final class GeoCalculatorTest extends UnitTestCase
 
         $bonn = new TestingGeo();
         $bonn->setGeoCoordinates(['latitude' => 50.72254683, 'longitude' => 7.07519531]);
+
         $noCoordinates = new TestingGeo();
         $noCoordinates->clearGeoCoordinates();
 
@@ -81,6 +83,7 @@ final class GeoCalculatorTest extends UnitTestCase
         $brokenBonn = new TestingGeo();
         $brokenBonn->setGeoCoordinates(['latitude' => 50.72254683, 'longitude' => 7.07519531]);
         $brokenBonn->setGeoError();
+
         $bonn = new TestingGeo();
         $bonn->setGeoCoordinates(['latitude' => 50.72254683, 'longitude' => 7.07519531]);
 
@@ -96,6 +99,7 @@ final class GeoCalculatorTest extends UnitTestCase
 
         $bonn = new TestingGeo();
         $bonn->setGeoCoordinates(['latitude' => 50.72254683, 'longitude' => 7.07519531]);
+
         $brokenBonn = new TestingGeo();
         $brokenBonn->setGeoCoordinates(['latitude' => 50.72254683, 'longitude' => 7.07519531]);
         $brokenBonn->setGeoError();
@@ -140,6 +144,7 @@ final class GeoCalculatorTest extends UnitTestCase
     {
         $bonn = new TestingGeo();
         $bonn->setGeoCoordinates(['latitude' => 50.72254683, 'longitude' => 7.07519531]);
+
         $cologne = new TestingGeo();
         $cologne->setGeoCoordinates(['latitude' => 50.94458443, 'longitude' => 6.9543457]);
 
@@ -158,6 +163,7 @@ final class GeoCalculatorTest extends UnitTestCase
     {
         $bonn = new TestingGeo();
         $bonn->setGeoCoordinates(['latitude' => 50.72254683, 'longitude' => 7.07519531]);
+
         $cologne = new TestingGeo();
         $cologne->setGeoCoordinates(['latitude' => 50.94458443, 'longitude' => 6.9543457]);
 
@@ -178,6 +184,7 @@ final class GeoCalculatorTest extends UnitTestCase
     {
         $bonn = new TestingGeo();
         $bonn->setGeoCoordinates(['latitude' => 50.72254683, 'longitude' => 7.07519531]);
+
         $cologne = new TestingGeo();
         $cologne->setGeoCoordinates(['latitude' => 50.94458443, 'longitude' => 6.9543457]);
 
@@ -197,6 +204,7 @@ final class GeoCalculatorTest extends UnitTestCase
     {
         $bonn = new TestingGeo();
         $bonn->setGeoCoordinates(['latitude' => 50.72254683, 'longitude' => 7.07519531]);
+
         $nowhere = new TestingGeo();
 
         /** @var Collection<Geo&AbstractModel> $list */
@@ -215,6 +223,7 @@ final class GeoCalculatorTest extends UnitTestCase
     {
         $bonn = new TestingGeo();
         $bonn->setGeoCoordinates(['latitude' => 50.72254683, 'longitude' => 7.07519531]);
+
         $nowhere = new TestingGeo();
 
         /** @var Collection<Geo&AbstractModel> $list */
@@ -233,6 +242,7 @@ final class GeoCalculatorTest extends UnitTestCase
     {
         $bonn = new TestingGeo();
         $bonn->setGeoCoordinates(['latitude' => 50.72254683, 'longitude' => 7.07519531]);
+
         $cologne = new TestingGeo();
         $cologne->setGeoCoordinates(['latitude' => 50.94458443, 'longitude' => 6.9543457]);
 
@@ -449,7 +459,7 @@ final class GeoCalculatorTest extends UnitTestCase
     {
         $maximumDistance = 100.0;
 
-        for ($i = 0; $i < 1000; $i++) {
+        for ($i = 0; $i < 1000; ++$i) {
             $otherGeoObject = clone $this->geoObject;
             $this->subject->moveByRandomDistance($otherGeoObject, $direction, $maximumDistance);
 
@@ -571,7 +581,7 @@ final class GeoCalculatorTest extends UnitTestCase
     {
         $maximumDistance = 100.0;
 
-        for ($i = 0; $i < 1000; $i++) {
+        for ($i = 0; $i < 1000; ++$i) {
             $otherGeoObject = clone $this->geoObject;
             $this->subject->moveInRandomDirectionAndDistance($otherGeoObject, $maximumDistance);
 

@@ -136,6 +136,7 @@ class ConfigurationProxy extends AbstractReadOnlyObjectWithPublicAccessors imple
         } else {
             $this->configuration = [];
         }
+
         $this->isConfigurationLoaded = true;
     }
 

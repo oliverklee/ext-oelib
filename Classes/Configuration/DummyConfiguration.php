@@ -15,7 +15,7 @@ final class DummyConfiguration extends AbstractObjectWithPublicAccessors impleme
     /**
      * @var array<string, mixed>
      */
-    private array $data;
+    private array $data = [];
 
     /**
      * @var non-empty-string

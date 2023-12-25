@@ -75,10 +75,12 @@ abstract class AbstractDataMapper
         if ($this->getTableName() === '') {
             throw new \InvalidArgumentException(static::class . '::tableName must not be empty.', 1_331_319_361);
         }
+
         // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
         if ($this->columns === '') {
             throw new \InvalidArgumentException(static::class . '::columns must not be empty.', 1_331_319_374);
         }
+
         if (!\is_string($this->modelClassName)) {
             throw new \InvalidArgumentException(static::class . '::modelClassName must not be empty.', 1_331_319_378);
         }
@@ -109,7 +111,7 @@ abstract class AbstractDataMapper
         try {
             /** @var M $model */
             $model = $this->map->get($uid);
-        } catch (NotFoundException $exception) {
+        } catch (NotFoundException $notFoundException) {
             $model = $this->createGhost($uid);
         }
 
@@ -136,6 +138,7 @@ abstract class AbstractDataMapper
         if ($uid <= 0) {
             throw new \InvalidArgumentException('$data["uid"] must be a positive integer.', 1_699_655_040);
         }
+
         $model = $this->find($uid);
 
         if ($model->isGhost()) {
@@ -235,6 +238,7 @@ abstract class AbstractDataMapper
                 1_331_319_529
             );
         }
+
         if (!$model->hasUid()) {
             throw new \InvalidArgumentException(
                 'load must only be called with models that already have a UID.',
@@ -247,7 +251,7 @@ abstract class AbstractDataMapper
         try {
             $data = $this->retrieveRecordByUid($uid);
             $this->fillModel($model, $data);
-        } catch (NotFoundException $exception) {
+        } catch (NotFoundException $notFoundException) {
             $model->markAsDead();
         }
     }
@@ -406,6 +410,7 @@ abstract class AbstractDataMapper
             if ($foreignTable === '') {
                 throw new \UnexpectedValueException('"foreign_table" is missing in the TCA.', 1_646_234_422);
             }
+
             $foreignField = $relationConfiguration['foreign_field'] ?? '';
             if (($relationConfiguration['foreign_sortby'] ?? '') !== '') {
                 $sortingField = $relationConfiguration['foreign_sortby'];
@@ -414,6 +419,7 @@ abstract class AbstractDataMapper
             } else {
                 $sortingField = '';
             }
+
             $orderBy = $sortingField !== '' ? [$sortingField => 'ASC'] : [];
             $queryResult = $this->getConnectionForTable($foreignTable)
                 ->select(['*'], $foreignTable, [$foreignField => (int)($data['uid'] ?? 0)], [], $orderBy);
@@ -503,6 +509,7 @@ abstract class AbstractDataMapper
                 $rightColumn = 'uid_local';
                 $orderBy = 'sorting';
             }
+
             $queryResult = $this->getConnectionForTable($mnTable)
                 ->select([$leftColumn], $mnTable, [$rightColumn => $rightUid], [], [$orderBy => 'ASC']);
             foreach (\array_column($queryResult->fetchAllAssociative(), $leftColumn) as $relationUid) {
@@ -510,6 +517,7 @@ abstract class AbstractDataMapper
                 if ((int)$relationUid <= 0) {
                     continue;
                 }
+
                 $list->add($mapper->find((int)$relationUid));
             }
         }
@@ -539,6 +547,7 @@ abstract class AbstractDataMapper
         foreach ($whereClauseParts as $identifier => $value) {
             $query->andWhere($query->expr()->eq($identifier, $query->createNamedParameter($value)));
         }
+
         /** @var DatabaseRow|false $data */
         $data = $query->executeQuery()->fetchAssociative();
         if (!\is_array($data)) {
@@ -579,6 +588,7 @@ abstract class AbstractDataMapper
     {
         $model = GeneralUtility::makeInstance($this->modelClassName);
         $model->setUid($uid);
+
         $callback = function (AbstractModel $model): void {
             /** @var M $model */
             $this->load($model);
@@ -673,6 +683,7 @@ abstract class AbstractDataMapper
             if ($lastInsertId <= 0) {
                 throw new \UnexpectedValueException('No last insert ID available.', 1_699_640_499);
             }
+
             $model->setUid($lastInsertId);
             $this->map->add($model);
         }
@@ -703,6 +714,7 @@ abstract class AbstractDataMapper
         if (!$model->hasUid()) {
             $model->setCreationDate();
         }
+
         $model->setTimestamp();
 
         $data = $model->getData();
@@ -826,7 +838,7 @@ abstract class AbstractDataMapper
 
                 $newData = $this->getManyToManyRelationIntermediateRecordData($uidLocal, $uidForeign, $sorting);
                 $this->getConnectionForTable($mnTable)->insert($mnTable, $newData);
-                $sorting++;
+                ++$sorting;
             }
         }
     }
@@ -844,6 +856,7 @@ abstract class AbstractDataMapper
             if (!$this->isOneToManyRelationConfigured($key)) {
                 continue;
             }
+
             $relatedModels = $data[$key] ?? null;
             if (!$relatedModels instanceof Collection) {
                 continue;
@@ -864,6 +877,7 @@ abstract class AbstractDataMapper
             } else {
                 $foreignKey = \ucfirst($foreignField);
             }
+
             $getter = 'get' . $foreignKey;
             $setter = 'set' . $foreignKey;
 
@@ -876,6 +890,7 @@ abstract class AbstractDataMapper
                         1_331_319_751
                     );
                 }
+
                 if (!method_exists($relatedModel, $setter)) {
                     throw new \BadMethodCallException(
                         'The class ' . \get_class($relatedModel) . ' is missing the function ' . $setter .
@@ -883,12 +898,14 @@ abstract class AbstractDataMapper
                         1_331_319_803
                     );
                 }
+
                 // @phpstan-ignore-next-line This variable method access is okay.
                 if ($relatedModel->$getter() !== $model) {
                     // Only sets the model if this would change anything. This avoids marking unchanged models as dirty.
                     // @phpstan-ignore-next-line This variable method access is okay.
                     $relatedModel->$setter($model);
                 }
+
                 $relatedMapper->save($relatedModel);
 
                 $unconnectedModels = $relatedMapper->findAllByRelation($model, $foreignField, $relatedModels);
@@ -929,9 +946,11 @@ abstract class AbstractDataMapper
                 1_331_319_817
             );
         }
+
         if ($model->isReadOnly()) {
             throw new \InvalidArgumentException('This model is read-only and must not be deleted.', 1_331_319_836);
         }
+
         if ($model->isDead()) {
             return;
         }
@@ -940,10 +959,12 @@ abstract class AbstractDataMapper
             if (!$model->isLoaded()) {
                 $this->load($model);
             }
+
             $model->setToDeleted();
             $this->save($model);
             $this->deleteOneToManyRelations($model);
         }
+
         $model->markAsDead();
     }
 
@@ -962,6 +983,7 @@ abstract class AbstractDataMapper
                 if (!$relatedModels instanceof Collection) {
                     continue;
                 }
+
                 $relatedMapper = $this->getRelationMapperByKey($key);
                 foreach ($relatedModels as $relatedModel) {
                     $relatedMapper->delete($relatedModel);
@@ -1022,9 +1044,11 @@ abstract class AbstractDataMapper
         if ($key === '') {
             throw new \InvalidArgumentException('$key must not be empty.', 1_416_847_364);
         }
+
         if (!isset($this->cacheByKey[$key])) {
             throw new \InvalidArgumentException('"' . $key . '" is not a valid key for this mapper.', 1_331_319_882);
         }
+
         // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
         if ($value === '') {
             throw new \InvalidArgumentException('$value must not be empty.', 1_331_319_892);
@@ -1088,7 +1112,7 @@ abstract class AbstractDataMapper
     {
         try {
             $model = $this->findOneByKeyFromCache($key, $value);
-        } catch (NotFoundException $exception) {
+        } catch (NotFoundException $notFoundException) {
             $model = $this->findSingleByWhereClause([$key => $value]);
         }
 
@@ -1112,6 +1136,7 @@ abstract class AbstractDataMapper
         if (!$model->hasUid()) {
             throw new \InvalidArgumentException('$model must have a UID.', 1_331_319_915);
         }
+
         // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
         if ($relationKey === '') {
             throw new \InvalidArgumentException('$relationKey must not be empty.', 1_331_319_921);
