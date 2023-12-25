@@ -969,7 +969,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
-        self::assertFalse(isset($row['config']));
+        self::assertNull($row['config']);
     }
 
     /**
@@ -1009,7 +1009,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
-        self::assertFalse(isset($row['constants']));
+        self::assertNull($row['constants']);
     }
 
     /**

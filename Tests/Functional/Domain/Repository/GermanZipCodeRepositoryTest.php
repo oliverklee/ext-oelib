@@ -39,8 +39,8 @@ final class GermanZipCodeRepositoryTest extends FunctionalTestCase
         self::assertInstanceOf(GermanZipCode::class, $result);
         self::assertSame('01067', $result->getZipCode());
         self::assertSame('Dresden', $result->getCityName());
-        self::assertEquals(13.721068, $result->getLongitude());
-        self::assertEquals(51.060036, $result->getLatitude());
+        self::assertSame(13.721068, $result->getLongitude());
+        self::assertSame(51.060036, $result->getLatitude());
     }
 
     /**
