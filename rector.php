@@ -22,10 +22,11 @@ return static function (RectorConfig $rectorConfig): void {
     // $parameters->set(Typo3Option::TYPOSCRIPT_INDENT_SIZE, 2);
 
     $rectorConfig->sets([
-        Typo3LevelSetList::UP_TO_TYPO3_11,
+        Typo3SetList::TYPO3_104,
+        // Typo3LevelSetList::UP_TO_TYPO3_11,
 
         // LevelSetList::UP_TO_PHP_73,
-        LevelSetList::UP_TO_PHP_74,
+        // LevelSetList::UP_TO_PHP_74,
         // LevelSetList::UP_TO_PHP_80,
         // LevelSetList::UP_TO_PHP_81,
         // LevelSetList::UP_TO_PHP_82,
@@ -37,7 +38,7 @@ return static function (RectorConfig $rectorConfig): void {
         // SetList::CODING_STYLE,
         // SetList::DEAD_CODE,
         // SetList::PSR_4,
-        SetList::TYPE_DECLARATION,
+        // SetList::TYPE_DECLARATION,
         // SetList::EARLY_RETURN,
 
         // PHPUnitSetList::PHPUNIT80_DMS,
@@ -47,7 +48,7 @@ return static function (RectorConfig $rectorConfig): void {
         // PHPUnitSetList::PHPUNIT_70,
         // PHPUnitSetList::PHPUNIT_80,
         // PHPUnitSetList::PHPUNIT_90,
-        PHPUnitSetList::PHPUNIT_91,
+        // PHPUnitSetList::PHPUNIT_91,
         // PHPUnitSetList::PHPUNIT_CODE_QUALITY,
         // PHPUnitSetList::PHPUNIT_EXCEPTION,
         // PHPUnitSetList::REMOVE_MOCKS,
@@ -110,10 +111,10 @@ return static function (RectorConfig $rectorConfig): void {
         \Ssch\TYPO3Rector\FileProcessor\TypoScript\Rector\v10\v0\ExtbasePersistenceTypoScriptRector::FILENAME => __DIR__ . '/packages/acme_demo/Configuration/Extbase/Persistence/Classes.php',
     ]); */
     // Add some general TYPO3 rules
-    $rectorConfig->rule(ConvertImplicitVariablesToExplicitGlobalsRector::class);
-    $rectorConfig->ruleWithConfiguration(ExtEmConfRector::class, [
-        ExtEmConfRector::ADDITIONAL_VALUES_TO_BE_REMOVED => [],
-    ]);
+    //    $rectorConfig->rule(ConvertImplicitVariablesToExplicitGlobalsRector::class);
+    //    $rectorConfig->ruleWithConfiguration(ExtEmConfRector::class, [
+    //        ExtEmConfRector::ADDITIONAL_VALUES_TO_BE_REMOVED => [],
+    //    ]);
 
     // Modernize your TypoScript include statements for files and move from <INCLUDE /> to @import use the FileIncludeToImportStatementVisitor (introduced with TYPO3 9.0)
     // $rectorConfig->rule(\Ssch\TYPO3Rector\FileProcessor\TypoScript\Rector\v9\v0\FileIncludeToImportStatementTypoScriptRector::class);
