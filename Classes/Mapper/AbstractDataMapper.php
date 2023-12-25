@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Oelib\Mapper;
 
-use Doctrine\DBAL\Driver\ResultStatement;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Model\AbstractModel;
@@ -551,17 +550,8 @@ abstract class AbstractDataMapper
         foreach ($whereClauseParts as $identifier => $value) {
             $query->andWhere($query->expr()->eq($identifier, $query->createNamedParameter($value)));
         }
-        if (\method_exists($query, 'executeQuery')) {
-            $result = $query->executeQuery();
-        } else {
-            $result = $query->execute();
-            if (!$result instanceof ResultStatement) {
-                throw new \UnexpectedValueException('Expected ResultStatement, got int instead.', 1646321598);
-            }
-        }
-
         /** @var DatabaseRow|false $data */
-        $data = $result->fetchAssociative();
+        $data = $query->executeQuery()->fetchAssociative();
         if (!\is_array($data)) {
             throw new NotFoundException(
                 'No records found in the table "' . $tableName . '" matching: ' . \json_encode($whereClauseParts)
@@ -1145,14 +1135,7 @@ abstract class AbstractDataMapper
             );
         }
 
-        if (\method_exists($query, 'executeQuery')) {
-            $result = $query->executeQuery();
-        } else {
-            $result = $query->execute();
-            if (!$result instanceof ResultStatement) {
-                throw new \UnexpectedValueException('Expected ResultStatement, got int instead.', 1646321551);
-            }
-        }
+        $result = $query->executeQuery();
 
         if (\method_exists($result, 'fetchAllAssociative')) {
             $modelData = $result->fetchAllAssociative();

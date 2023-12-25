@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Oelib\Domain\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\ResultStatement;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -82,30 +81,10 @@ class PageRepository implements SingletonInterface
         );
 
         $subpageUids = [];
-        if (\method_exists($query, 'executeQuery')) {
-            $queryResult = $query->executeQuery();
-            foreach ($queryResult->fetchAllAssociative() as $row) {
-                /** @var positive-int $uid */
-                $uid = (int)$row['uid'];
-                $subpageUids[] = $uid;
-            }
-        } else {
-            $queryResult = $query->execute();
-            if ($queryResult instanceof ResultStatement) {
-                if (\method_exists($queryResult, 'fetchAllAssociative')) {
-                    foreach ($queryResult->fetchAllAssociative() as $row) {
-                        /** @var positive-int $uid */
-                        $uid = (int)$row['uid'];
-                        $subpageUids[] = $uid;
-                    }
-                } else {
-                    foreach ($queryResult->fetchAll() as $row) {
-                        /** @var positive-int $uid */
-                        $uid = (int)$row['uid'];
-                        $subpageUids[] = $uid;
-                    }
-                }
-            }
+        foreach ($query->executeQuery()->fetchAllAssociative() as $row) {
+            /** @var positive-int $uid */
+            $uid = (int)$row['uid'];
+            $subpageUids[] = $uid;
         }
 
         return $subpageUids;
