@@ -9,8 +9,5 @@ namespace OliverKlee\Oelib\Tests\Unit\Model\Fixtures;
  */
 final class ReadOnlyModel extends TestingModel
 {
-    /**
-     * @var bool whether this model is read-only
-     */
-    protected $readOnly = true;
+    protected bool $readOnly = true;
 }

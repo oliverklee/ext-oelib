@@ -17,30 +17,24 @@ class Collection extends \SplObjectStorage
     /**
      * @var array<positive-int, positive-int> the UIDs in the list using the UIDs as both the keys and values
      */
-    private $uids = [];
+    private array $uids = [];
 
     /**
      * The model this List belongs to.
      *
      * This is used for modeling relations and will remain null in any other context.
-     *
-     * @var AbstractModel|null
      */
-    private $parentModel;
+    private ?AbstractModel $parentModel = null;
 
     /**
      * whether the parent model is the owner (which is the case for IRRE relations).
-     *
-     * @var bool
      */
-    private $parentIsOwner = false;
+    private bool $parentIsOwner = false;
 
     /**
      * whether there is at least one item without a UID
-     *
-     * @var bool
      */
-    private $hasItemWithoutUid = false;
+    private bool $hasItemWithoutUid = false;
 
     /**
      * Adds a model to this list (as last element) if it is not already in the
@@ -65,7 +59,7 @@ class Collection extends \SplObjectStorage
             if (!\is_array($this->uids)) {
                 throw new \UnexpectedValueException(
                     '$this->uids was expected to be an array, but actually is: ' . \gettype($this->uids),
-                    1440104082
+                    1_440_104_082
                 );
             }
 

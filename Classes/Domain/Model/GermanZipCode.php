@@ -14,25 +14,13 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class GermanZipCode extends AbstractEntity implements Geo
 {
-    /**
-     * @var string
-     */
-    protected $zipCode = '';
+    protected string $zipCode = '';
 
-    /**
-     * @var string
-     */
-    protected $cityName = '';
+    protected string $cityName = '';
 
-    /**
-     * @var float
-     */
-    protected $longitude = 0.0;
+    protected float $longitude = 0.0;
 
-    /**
-     * @var float
-     */
-    protected $latitude = 0.0;
+    protected float $latitude = 0.0;
 
     public function getZipCode(): string
     {
@@ -115,7 +103,7 @@ class GermanZipCode extends AbstractEntity implements Geo
      */
     public function setGeoCoordinates(array $coordinates): void
     {
-        throw new \BadMethodCallException('This method must not be called.', 1542211338);
+        throw new \BadMethodCallException('This method must not be called.', 1_542_211_338);
     }
 
     public function hasGeoCoordinates(): bool
@@ -130,7 +118,7 @@ class GermanZipCode extends AbstractEntity implements Geo
      */
     public function clearGeoCoordinates(): void
     {
-        throw new \BadMethodCallException('This method must not be called.', 1542211386);
+        throw new \BadMethodCallException('This method must not be called.', 1_542_211_386);
     }
 
     public function hasGeoError(): bool
@@ -145,7 +133,7 @@ class GermanZipCode extends AbstractEntity implements Geo
      */
     public function setGeoError(string $reason = ''): void
     {
-        throw new \BadMethodCallException('This method must not be called.', 1542211438);
+        throw new \BadMethodCallException('This method must not be called.', 1_542_211_438);
     }
 
     /**
@@ -155,6 +143,6 @@ class GermanZipCode extends AbstractEntity implements Geo
      */
     public function clearGeoError(): void
     {
-        throw new \BadMethodCallException('This method must not be called.', 1542211447);
+        throw new \BadMethodCallException('This method must not be called.', 1_542_211_447);
     }
 }

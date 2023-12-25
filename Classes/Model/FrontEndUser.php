@@ -276,7 +276,7 @@ class FrontEndUser extends AbstractModel implements MailRole, Address
     {
         // @phpstan-ignore-next-line We're checking for a contract violation here.
         if ($uidList === '') {
-            throw new \InvalidArgumentException('$uidList must not be empty.', 1331488635);
+            throw new \InvalidArgumentException('$uidList must not be empty.', 1_331_488_635);
         }
 
         $isMember = false;

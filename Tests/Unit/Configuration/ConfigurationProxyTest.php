@@ -15,15 +15,12 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class ConfigurationProxyTest extends UnitTestCase
 {
-    /**
-     * @var ConfigurationProxy
-     */
-    private $subject;
+    private ConfigurationProxy $subject;
 
     /**
      * @var array<string, string|int>
      */
-    private $testConfiguration = [
+    private array $testConfiguration = [
         'testValueString' => 'foo',
         'testValueEmptyString' => '',
         'testValuePositiveInteger' => 2,
@@ -94,7 +91,7 @@ final class ConfigurationProxyTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The extension key was not set.');
-        $this->expectExceptionCode(1331318826);
+        $this->expectExceptionCode(1_331_318_826);
 
         // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         ConfigurationProxy::getInstance('');
@@ -148,7 +145,7 @@ final class ConfigurationProxyTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The extension key must not be empty.');
-        $this->expectExceptionCode(1612091700);
+        $this->expectExceptionCode(1_612_091_700);
 
         ConfigurationProxy::setInstance('', new DummyConfiguration());
     }

@@ -41,7 +41,7 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Please provide a non-empty extension key.');
-        $this->expectExceptionCode(1634575363);
+        $this->expectExceptionCode(1_634_575_363);
 
         // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         TestingConfigurationCheck::shouldCheck('');
@@ -247,7 +247,7 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
     public function checkWithUnknownCheckMethodThrowsException(): void
     {
         $this->expectException(\BadMethodCallException::class);
-        $this->expectExceptionCode(1616068312);
+        $this->expectExceptionCode(1_616_068_312);
         $this->expectExceptionMessage('Unknown value for the check method: "unknown"');
 
         $subject = new TestingConfigurationCheck(new DummyConfiguration(), 'plugin.tx_oelib');
@@ -262,7 +262,7 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
     public function checkWithoutCheckMethodThrowsException(): void
     {
         $this->expectException(\BadMethodCallException::class);
-        $this->expectExceptionCode(1616068312);
+        $this->expectExceptionCode(1_616_068_312);
         $this->expectExceptionMessage('Unknown value for the check method: ""');
 
         $subject = new TestingConfigurationCheck(new DummyConfiguration(), 'plugin.tx_oelib');
@@ -647,7 +647,7 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
     public function checkIfIntegerInRangeForMinimumGreaterThaneMaximumThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionCode(1616069185);
+        $this->expectExceptionCode(1_616_069_185);
         $this->expectExceptionMessage('$minimum must be <= $maximum.');
 
         $subject = new TestingConfigurationCheck(new DummyConfiguration(['limit' => 2]), 'plugin.tx_oelib');

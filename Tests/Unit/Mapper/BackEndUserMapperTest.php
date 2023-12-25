@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class BackEndUserMapperTest extends UnitTestCase
 {
-    /**
-     * @var BackEndUserMapper
-     */
-    private $subject;
+    private BackEndUserMapper $subject;
 
     protected function setUp(): void
     {

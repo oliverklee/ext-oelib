@@ -21,7 +21,7 @@ class HeaderCollector implements HeaderProxy
      *
      * @var list<string>
      */
-    private $headers = [];
+    private array $headers = [];
 
     /**
      * Stores an HTTP header which was meant to be sent.

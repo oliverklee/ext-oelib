@@ -21,7 +21,7 @@ class Template
     /**
      * @var string the complete HTML template
      */
-    private $templateCode = '';
+    private string $templateCode = '';
 
     /**
      * associative array of all HTML template subparts, using the uppercase marker names without `###` as keys,
@@ -29,7 +29,7 @@ class Template
      *
      * @var array<string, string>
      */
-    private $subparts = [];
+    private array $subparts = [];
 
     /**
      * all lowercased label marker names in the current template without the hashes,
@@ -37,7 +37,7 @@ class Template
      *
      * @var list<non-empty-string>
      */
-    private $labelMarkerNames = [];
+    private array $labelMarkerNames = [];
 
     /**
      * associative array of *populated* markers and their contents
@@ -45,7 +45,7 @@ class Template
      *
      * @var array<string, string>
      */
-    private $markers = [];
+    private array $markers = [];
 
     /**
      * Subpart names that shouldn't be displayed. Set a subpart key like "FIELD_DATE"
@@ -53,7 +53,7 @@ class Template
      *
      * @var array<string, bool>
      */
-    private $subpartsToHide = [];
+    private array $subpartsToHide = [];
 
     /**
      * Gets the HTML template in the file specified in the parameter $filename,
@@ -214,7 +214,7 @@ class Template
         $subpartName = $this->createMarkerNameWithoutHashes($subpartName, $prefix);
 
         if (!$this->isMarkerNameValidWithoutHashes($subpartName)) {
-            throw new \InvalidArgumentException('The value of the parameter $subpartName is not valid.', 1331489182);
+            throw new \InvalidArgumentException('The value of the parameter $subpartName is not valid.', 1_331_489_182);
         }
 
         $this->subparts[$subpartName] = $content;
@@ -597,14 +597,14 @@ class Template
             return $this->render();
         }
         if (!$this->isMarkerNameValidWithoutHashes($subpartKey)) {
-            throw new \InvalidArgumentException('The value of the parameter $key is not valid.', 1331489215);
+            throw new \InvalidArgumentException('The value of the parameter $key is not valid.', 1_331_489_215);
         }
         if (!isset($this->subparts[$subpartKey])) {
             throw new NotFoundException(
                 '$key contained the subpart name "' . $subpartKey
                 . '", but only the following subparts are available: (' .
                 implode(', ', array_keys($this->subparts)) . ')',
-                1632760625
+                1_632_760_625
             );
         }
         if (!$this->isSubpartVisible($subpartKey)) {
@@ -638,9 +638,7 @@ class Template
         $template = $this;
         return (string)\preg_replace_callback(
             self::SUBPART_PATTERN,
-            static function (array $matches) use ($template): string {
-                return $template->getSubpart($matches[1]);
-            },
+            static fn (array $matches): string => $template->getSubpart($matches[1]),
             $templateCode
         );
     }

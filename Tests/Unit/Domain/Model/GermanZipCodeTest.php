@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class GermanZipCodeTest extends UnitTestCase
 {
-    /**
-     * @var GermanZipCode
-     */
-    private $subject;
+    private GermanZipCode $subject;
 
     protected function setUp(): void
     {

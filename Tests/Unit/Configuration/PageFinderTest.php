@@ -12,10 +12,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class PageFinderTest extends UnitTestCase
 {
-    /**
-     * @var PageFinder
-     */
-    private $subject;
+    private PageFinder $subject;
 
     protected function setUp(): void
     {

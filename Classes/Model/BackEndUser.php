@@ -14,7 +14,7 @@ class BackEndUser extends AbstractModel implements MailRole
     /**
      * @var array<string, string> the user's configuration (unserialized)
      */
-    private $configuration = [];
+    private array $configuration = [];
 
     /**
      * Gets this user's username.
@@ -71,7 +71,7 @@ class BackEndUser extends AbstractModel implements MailRole
     {
         // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         if ($language === '') {
-            throw new \InvalidArgumentException('$language must not be empty.', 1331488621);
+            throw new \InvalidArgumentException('$language must not be empty.', 1_331_488_621);
         }
 
         $this->setAsString(

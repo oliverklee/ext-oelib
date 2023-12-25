@@ -16,10 +16,7 @@ final class CountryMapperTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/static_info_tables'];
 
-    /**
-     * @var CountryMapper
-     */
-    private $subject;
+    private CountryMapper $subject;
 
     protected function setUp(): void
     {

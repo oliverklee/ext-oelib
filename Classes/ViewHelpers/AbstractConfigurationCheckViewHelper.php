@@ -55,7 +55,7 @@ abstract class AbstractConfigurationCheckViewHelper extends AbstractViewHelper
 
         $settings = $renderingContext->getVariableProvider()->get('settings');
         if (!\is_array($settings)) {
-            throw new \UnexpectedValueException('No settings in the variable container found.', 1651153736);
+            throw new \UnexpectedValueException('No settings in the variable container found.', 1_651_153_736);
         }
         $configuration = new ExtbaseConfiguration($settings);
         $configurationCheckClassName = static::getConfigurationCheckClassName();

@@ -98,11 +98,11 @@ class IsFieldEnabledViewHelper extends AbstractConditionViewHelper
         if (!\is_string($fieldsNamesArgument)) {
             throw new \InvalidArgumentException(
                 'The argument "fieldName" must be a string, but was ' . \gettype($fieldsNamesArgument),
-                1651496544
+                1_651_496_544
             );
         }
         if ($fieldsNamesArgument === '') {
-            throw new \InvalidArgumentException('The argument "fieldName" must not be empty.', 1651155957);
+            throw new \InvalidArgumentException('The argument "fieldName" must not be empty.', 1_651_155_957);
         }
 
         /** @var list<non-empty-string> $result */
@@ -122,20 +122,20 @@ class IsFieldEnabledViewHelper extends AbstractConditionViewHelper
     {
         $settings = $renderingContext->getVariableProvider()->get('settings');
         if (!\is_array($settings)) {
-            throw new \UnexpectedValueException('No settings in the variable container found.', 1651153736);
+            throw new \UnexpectedValueException('No settings in the variable container found.', 1_651_153_736);
         }
         $enabledFieldsVariable = self::SETTING_FOR_ENABLED_FIELDS;
         if (!isset($settings[$enabledFieldsVariable])) {
             throw new \UnexpectedValueException(
                 'No field "' . $enabledFieldsVariable . '" in settings found.',
-                1651154598
+                1_651_154_598
             );
         }
         $enabledFieldsConfiguration = $settings[$enabledFieldsVariable];
         if (!\is_string($enabledFieldsConfiguration)) {
             throw new \UnexpectedValueException(
                 'The setting "' . $enabledFieldsVariable . '" needs to be a string.',
-                1651155151
+                1_651_155_151
             );
         }
 

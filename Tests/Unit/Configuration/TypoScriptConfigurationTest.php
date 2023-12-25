@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class TypoScriptConfigurationTest extends UnitTestCase
 {
-    /**
-     * @var TypoScriptConfiguration
-     */
-    private $subject;
+    private TypoScriptConfiguration $subject;
 
     protected function setUp(): void
     {

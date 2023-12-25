@@ -23,17 +23,17 @@ class ConfigurationProxy extends AbstractReadOnlyObjectWithPublicAccessors imple
     /**
      * @var array<string, mixed> configuration data for each extension which currently uses the configuration proxy
      */
-    private $configuration = [];
+    private array $configuration = [];
 
     /**
      * @var non-empty-string key of the extension for which the EM configuration is stored
      */
-    private $extensionKey;
+    private string $extensionKey;
 
     /**
      * @var bool whether the configuration is already loaded
      */
-    private $isConfigurationLoaded = false;
+    private bool $isConfigurationLoaded = false;
 
     /**
      * Don't call this constructor; use getInstance instead.
@@ -74,7 +74,7 @@ class ConfigurationProxy extends AbstractReadOnlyObjectWithPublicAccessors imple
     {
         // @phpstan-ignore-next-line We're checking for a contract violation here.
         if ($extensionKey === '') {
-            throw new \InvalidArgumentException('The extension key was not set.', 1331318826);
+            throw new \InvalidArgumentException('The extension key was not set.', 1_331_318_826);
         }
 
         if (!isset(self::$instances[$extensionKey])) {
@@ -94,7 +94,7 @@ class ConfigurationProxy extends AbstractReadOnlyObjectWithPublicAccessors imple
     public static function setInstance(string $extensionKey, ConfigurationInterface $configuration): void
     {
         if ($extensionKey === '') {
-            throw new \InvalidArgumentException('The extension key must not be empty.', 1612091700);
+            throw new \InvalidArgumentException('The extension key must not be empty.', 1_612_091_700);
         }
 
         self::$instances[$extensionKey] = $configuration;

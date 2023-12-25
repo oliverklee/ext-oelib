@@ -51,7 +51,7 @@ abstract class AbstractConfigurationDependentValidator extends AbstractValidator
     /**
      * @var list<non-empty-string>
      */
-    private $requiredFields = [];
+    private array $requiredFields = [];
 
     /**
      * @param array<string, string> $settings
@@ -77,7 +77,7 @@ abstract class AbstractConfigurationDependentValidator extends AbstractValidator
         foreach ($this->requiredFields as $field) {
             if (!$this->isFieldFilledIn($field, $value)) {
                 $errorMessage = $this->translateErrorMessage('validationError.fillInField', 'oelib') ?? '';
-                $error = new ValidationError($errorMessage, 1651765504);
+                $error = new ValidationError($errorMessage, 1_651_765_504);
                 $this->result->forProperty($field)->addError($error);
             }
         }

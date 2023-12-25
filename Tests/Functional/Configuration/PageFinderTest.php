@@ -15,15 +15,9 @@ final class PageFinderTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = ['typo3conf/ext/oelib'];
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
-    /**
-     * @var PageFinder
-     */
-    private $subject;
+    private PageFinder $subject;
 
     protected function setUp(): void
     {

@@ -41,13 +41,13 @@ abstract class AbstractDataMapper
     /**
      * @var IdentityMap a map that holds the models that already have been retrieved
      */
-    private $map;
+    private IdentityMap $map;
 
     /**
      * @var array<positive-int, true> UIDs of models that are memory-only models that must not be saved,
      *      using the UIDs as keys and TRUE as value
      */
-    private $uidsOfMemoryOnlyDummyModels = [];
+    private array $uidsOfMemoryOnlyDummyModels = [];
 
     /**
      * @var array<non-empty-string, class-string<AbstractDataMapper>>
@@ -64,7 +64,7 @@ abstract class AbstractDataMapper
      * @var array<string, array<string, M>> two-dimensional cache for the objects by key:
      *            `[key name][key value] => model`
      */
-    private $cacheByKey = [];
+    private array $cacheByKey = [];
 
     /**
      * The constructor.
@@ -73,14 +73,14 @@ abstract class AbstractDataMapper
     {
         // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
         if ($this->getTableName() === '') {
-            throw new \InvalidArgumentException(static::class . '::tableName must not be empty.', 1331319361);
+            throw new \InvalidArgumentException(static::class . '::tableName must not be empty.', 1_331_319_361);
         }
         // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
         if ($this->columns === '') {
-            throw new \InvalidArgumentException(static::class . '::columns must not be empty.', 1331319374);
+            throw new \InvalidArgumentException(static::class . '::columns must not be empty.', 1_331_319_374);
         }
         if (!\is_string($this->modelClassName)) {
-            throw new \InvalidArgumentException(static::class . '::modelClassName must not be empty.', 1331319378);
+            throw new \InvalidArgumentException(static::class . '::modelClassName must not be empty.', 1_331_319_378);
         }
 
         $this->map = new IdentityMap();
@@ -129,12 +129,12 @@ abstract class AbstractDataMapper
     public function getModel(array $data): AbstractModel
     {
         if (!isset($data['uid'])) {
-            throw new \InvalidArgumentException('$data must contain an element "uid".', 1331319491);
+            throw new \InvalidArgumentException('$data must contain an element "uid".', 1_331_319_491);
         }
 
         $uid = (int)$data['uid'];
         if ($uid <= 0) {
-            throw new \InvalidArgumentException('$data["uid"] must be a positive integer.', 1699655040);
+            throw new \InvalidArgumentException('$data["uid"] must be a positive integer.', 1_699_655_040);
         }
         $model = $this->find($uid);
 
@@ -187,7 +187,7 @@ abstract class AbstractDataMapper
     {
         // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
         if (empty($whereClauseParts)) {
-            throw new \InvalidArgumentException('The parameter $whereClauseParts must not be empty.', 1331319506);
+            throw new \InvalidArgumentException('The parameter $whereClauseParts must not be empty.', 1_331_319_506);
         }
 
         return $this->getModel($this->retrieveRecord($whereClauseParts));
@@ -232,13 +232,13 @@ abstract class AbstractDataMapper
         if ($this->isModelAMemoryOnlyDummy($model)) {
             throw new \InvalidArgumentException(
                 'This ghost was created via getNewGhost and must not be loaded.',
-                1331319529
+                1_331_319_529
             );
         }
         if (!$model->hasUid()) {
             throw new \InvalidArgumentException(
                 'load must only be called with models that already have a UID.',
-                1331319554
+                1_331_319_554
             );
         }
 
@@ -307,7 +307,7 @@ abstract class AbstractDataMapper
         if (!isset($tca['columns'][$key])) {
             throw new \BadMethodCallException(
                 'In the table ' . $this->getTableName() . ', the column ' . $key . ' does not have a TCA entry.',
-                1331319627
+                1_331_319_627
             );
         }
 
@@ -397,14 +397,14 @@ abstract class AbstractDataMapper
             if ($this->isModelAMemoryOnlyDummy($model)) {
                 throw new \InvalidArgumentException(
                     'This is a memory-only dummy which must not load any one-to-many relations from the database.',
-                    1331319658
+                    1_331_319_658
                 );
             }
 
             $relationConfiguration = $this->getRelationConfigurationFromTca($key);
             $foreignTable = $relationConfiguration['foreign_table'] ?? '';
             if ($foreignTable === '') {
-                throw new \UnexpectedValueException('"foreign_table" is missing in the TCA.', 1646234422);
+                throw new \UnexpectedValueException('"foreign_table" is missing in the TCA.', 1_646_234_422);
             }
             $foreignField = $relationConfiguration['foreign_field'] ?? '';
             if (($relationConfiguration['foreign_sortby'] ?? '') !== '') {
@@ -490,7 +490,7 @@ abstract class AbstractDataMapper
             $relationConfiguration = $this->getRelationConfigurationFromTca($key);
             $mnTable = $relationConfiguration['MM'] ?? '';
             if ($mnTable === '') {
-                throw new \UnexpectedValueException('MM relation information missing.', 1646236363);
+                throw new \UnexpectedValueException('MM relation information missing.', 1_646_236_363);
             }
 
             $rightUid = (int)($data['uid'] ?? 0);
@@ -543,7 +543,10 @@ abstract class AbstractDataMapper
         $data = $query->executeQuery()->fetchAssociative();
         if (!\is_array($data)) {
             throw new NotFoundException(
-                'No records found in the table "' . $tableName . '" matching: ' . \json_encode($whereClauseParts)
+                'No records found in the table "' . $tableName . '" matching: ' . \json_encode(
+                    $whereClauseParts,
+                    JSON_THROW_ON_ERROR
+                )
             );
         }
 
@@ -649,7 +652,7 @@ abstract class AbstractDataMapper
         if ($this->isModelAMemoryOnlyDummy($model)) {
             throw new \InvalidArgumentException(
                 'This model is a memory-only dummy that must not be saved.',
-                1331319682
+                1_331_319_682
             );
         }
 
@@ -668,7 +671,7 @@ abstract class AbstractDataMapper
             $this->getConnection()->insert($tableName, $data);
             $lastInsertId = (int)$this->getConnection()->lastInsertId($tableName);
             if ($lastInsertId <= 0) {
-                throw new \UnexpectedValueException('No last insert ID available.', 1699640499);
+                throw new \UnexpectedValueException('No last insert ID available.', 1_699_640_499);
             }
             $model->setUid($lastInsertId);
             $this->map->add($model);
@@ -781,7 +784,7 @@ abstract class AbstractDataMapper
             $relationConfiguration = $this->getRelationConfigurationFromTca($key);
             $mnTable = $relationConfiguration['MM'] ?? '';
             if ($mnTable === '') {
-                throw new \UnexpectedValueException('MM relation information missing.', 1646236349);
+                throw new \UnexpectedValueException('MM relation information missing.', 1_646_236_349);
             }
 
             $columnName = isset($relationConfiguration['MM_opposite_field']) ? 'uid_foreign' : 'uid_local';
@@ -808,7 +811,7 @@ abstract class AbstractDataMapper
             $relationConfiguration = $this->getRelationConfigurationFromTca($key);
             $mnTable = $relationConfiguration['MM'] ?? '';
             if ($mnTable === '') {
-                throw new \UnexpectedValueException('MM relation information missing.', 1646236298);
+                throw new \UnexpectedValueException('MM relation information missing.', 1_646_236_298);
             }
 
             /** @var AbstractModel $relatedModel */
@@ -852,7 +855,7 @@ abstract class AbstractDataMapper
             if ($foreignField === '') {
                 throw new \BadMethodCallException(
                     'The relation ' . $this->getTableName() . ':' . $key . ' is missing the "foreign_field" setting.',
-                    1331319719
+                    1_331_319_719
                 );
             }
 
@@ -870,14 +873,14 @@ abstract class AbstractDataMapper
                     throw new \BadMethodCallException(
                         'The class ' . \get_class($relatedModel) . ' is missing the function ' . $getter .
                         ' which is needed for saving a 1:n relation.',
-                        1331319751
+                        1_331_319_751
                     );
                 }
                 if (!method_exists($relatedModel, $setter)) {
                     throw new \BadMethodCallException(
                         'The class ' . \get_class($relatedModel) . ' is missing the function ' . $setter .
                         ' which is needed for saving a 1:n relation.',
-                        1331319803
+                        1_331_319_803
                     );
                 }
                 // @phpstan-ignore-next-line This variable method access is okay.
@@ -904,7 +907,7 @@ abstract class AbstractDataMapper
      * @param int $uidForeign the UID of the foreign record
      * @param int $sorting the sorting of the intermediate m:n-relation record
      *
-     * @return array<string, int> the record data for an intermediate m:n-relation record
+     * @return array{uid_local: int, uid_foreign: int, sorting: int} record data for an intermediate m:n-relation record
      */
     protected function getManyToManyRelationIntermediateRecordData(int $uidLocal, int $uidForeign, int $sorting): array
     {
@@ -923,11 +926,11 @@ abstract class AbstractDataMapper
         if ($this->isModelAMemoryOnlyDummy($model)) {
             throw new \InvalidArgumentException(
                 'This model is a memory-only dummy that must not be deleted.',
-                1331319817
+                1_331_319_817
             );
         }
         if ($model->isReadOnly()) {
-            throw new \InvalidArgumentException('This model is read-only and must not be deleted.', 1331319836);
+            throw new \InvalidArgumentException('This model is read-only and must not be deleted.', 1_331_319_836);
         }
         if ($model->isDead()) {
             return;
@@ -1018,18 +1021,18 @@ abstract class AbstractDataMapper
     {
         // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
         if ($key === '') {
-            throw new \InvalidArgumentException('$key must not be empty.', 1416847364);
+            throw new \InvalidArgumentException('$key must not be empty.', 1_416_847_364);
         }
         if (!isset($this->cacheByKey[$key])) {
-            throw new \InvalidArgumentException('"' . $key . '" is not a valid key for this mapper.', 1331319882);
+            throw new \InvalidArgumentException('"' . $key . '" is not a valid key for this mapper.', 1_331_319_882);
         }
         // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
         if ($value === '') {
-            throw new \InvalidArgumentException('$value must not be empty.', 1331319892);
+            throw new \InvalidArgumentException('$value must not be empty.', 1_331_319_892);
         }
 
         if (!isset($this->cacheByKey[$key][$value])) {
-            throw new NotFoundException('Not found', 1573836483);
+            throw new NotFoundException('Not found', 1_573_836_483);
         }
 
         return $this->cacheByKey[$key][$value];
@@ -1108,11 +1111,11 @@ abstract class AbstractDataMapper
         Collection $ignoreList = null
     ): Collection {
         if (!$model->hasUid()) {
-            throw new \InvalidArgumentException('$model must have a UID.', 1331319915);
+            throw new \InvalidArgumentException('$model must have a UID.', 1_331_319_915);
         }
         // @phpstan-ignore-next-line We are explicitly testing for a contract violation here.
         if ($relationKey === '') {
-            throw new \InvalidArgumentException('$relationKey must not be empty.', 1331319921);
+            throw new \InvalidArgumentException('$relationKey must not be empty.', 1_331_319_921);
         }
 
         $query = $this->getQueryBuilder();
@@ -1149,7 +1152,7 @@ abstract class AbstractDataMapper
     protected function getTcaForTable(string $tableName): array
     {
         if (!isset($GLOBALS['TCA'][$tableName])) {
-            throw new \BadMethodCallException('The table "' . $tableName . '" has no TCA.', 1565462958);
+            throw new \BadMethodCallException('The table "' . $tableName . '" has no TCA.', 1_565_462_958);
         }
 
         return $GLOBALS['TCA'][$tableName];

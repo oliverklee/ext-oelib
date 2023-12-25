@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class ExtbaseConfigurationTest extends UnitTestCase
 {
-    /**
-     * @var ExtbaseConfiguration
-     */
-    private $subject;
+    private ExtbaseConfiguration $subject;
 
     protected function setUp(): void
     {

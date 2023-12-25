@@ -16,7 +16,7 @@ final class CollectionTest extends UnitTestCase
     /**
      * @var Collection<TestingModel>
      */
-    private $subject;
+    private Collection $subject;
 
     protected function setUp(): void
     {

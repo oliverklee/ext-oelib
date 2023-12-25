@@ -18,10 +18,7 @@ final class ConfigurationRegistryTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = ['typo3conf/ext/oelib'];
 
-    /**
-     * @var TestingFramework
-     */
-    private $testingFramework;
+    private TestingFramework $testingFramework;
 
     protected function setUp(): void
     {

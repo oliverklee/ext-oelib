@@ -12,10 +12,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class CurrencyTest extends UnitTestCase
 {
-    /**
-     * @var Currency
-     */
-    private $subject;
+    private Currency $subject;
 
     protected function setUp(): void
     {

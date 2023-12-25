@@ -36,20 +36,17 @@ class PageFinder
      */
     public const NO_SOURCE_FOUND = 4;
 
-    /**
-     * @var PageFinder|null the Singleton instance
-     */
-    private static $instance;
+    private static ?PageFinder $instance = null;
 
     /**
      * @var int the manually set page UID
      */
-    private $storedPageUid = 0;
+    private int $storedPageUid = 0;
 
     /**
      * @var self::SOURCE_* the source the page is retrieved from
      */
-    private $manualPageUidSource = self::SOURCE_AUTO;
+    private int $manualPageUidSource = self::SOURCE_AUTO;
 
     /**
      * Don't call this constructor; use getInstance instead.
@@ -122,7 +119,7 @@ class PageFinder
         if ($uidToStore <= 0) {
             throw new \InvalidArgumentException(
                 'The given page UID was "' . $uidToStore . '". Only integer values greater than zero are allowed.',
-                1331489010
+                1_331_489_010
             );
         }
         $this->storedPageUid = $uidToStore;

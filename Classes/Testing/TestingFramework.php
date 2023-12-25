@@ -67,18 +67,15 @@ final class TestingFramework
      *
      * @var array<string, array<string, array<string, string>>>
      */
-    private static $tableColumnCache = [];
+    private static array $tableColumnCache = [];
 
     /**
      * @var array<non-empty-string, array<string, string|int|null>> cache for the results of existsTable with the
      *      table names as keys and the table SHOW STATUS information (in an array) as values
      */
-    private static $tableNameCache = [];
+    private static array $tableNameCache = [];
 
-    /**
-     * @var bool
-     */
-    private $databaseInitialized = false;
+    private bool $databaseInitialized = false;
 
     /**
      * prefix of the extension for which this instance of the testing framework
@@ -86,28 +83,26 @@ final class TestingFramework
      *
      * @var non-empty-string
      */
-    private $tablePrefix;
+    private string $tablePrefix;
 
     /**
      * all own DB table names to which this instance of the testing framework has access
      *
      * @var list<non-empty-string>
      */
-    private $ownAllowedTables = [];
+    private array $ownAllowedTables = [];
 
     /**
      * sorting values of all relation tables
      *
      * @var array<non-empty-string, array<positive-int, int<0, max>>>
      */
-    private $relationSorting = [];
+    private array $relationSorting = [];
 
     /**
      * whether a fake front end has been created
-     *
-     * @var bool
      */
-    private $hasFakeFrontEnd = false;
+    private bool $hasFakeFrontEnd = false;
 
     /**
      * hook objects for this class
@@ -118,15 +113,13 @@ final class TestingFramework
 
     /**
      * whether the hooks in self::hooks have been retrieved
-     *
-     * @var bool
      */
-    private static $hooksHaveBeenRetrieved = false;
+    private static bool $hooksHaveBeenRetrieved = false;
 
     /**
      * @var array<string, string|bool|null>|null
      */
-    private $serverVariablesBackup;
+    private ?array $serverVariablesBackup = null;
 
     /**
      * This testing framework can be instantiated for one extension at a time.
@@ -187,10 +180,10 @@ final class TestingFramework
         if (!$this->isNoneSystemTableNameAllowed($table)) {
             $allowedTables = \implode(',', $this->ownAllowedTables);
             $errorMessage = \sprintf('The table "%1$s" is not allowed. Allowed tables: %2$s', $table, $allowedTables);
-            throw new \InvalidArgumentException($errorMessage, 1331489666);
+            throw new \InvalidArgumentException($errorMessage, 1_331_489_666);
         }
         if (isset($recordData['uid'])) {
-            throw new \InvalidArgumentException('The column "uid" must not be set in $recordData.', 1331489678);
+            throw new \InvalidArgumentException('The column "uid" must not be set in $recordData.', 1_331_489_678);
         }
 
         return $this->createRecordWithoutTableNameChecks($table, $recordData);
@@ -268,7 +261,7 @@ final class TestingFramework
      */
     public function createFrontEndPage(int $parentPageUid = 0, ?array $data = null): int
     {
-        $data = $data ?? [];
+        $data ??= [];
         $hasSlug = \array_key_exists('slug', $data);
         $uid = $this->createGeneralPageRecord(1, $parentPageUid, $data);
         if (!$hasSlug) {
@@ -311,13 +304,13 @@ final class TestingFramework
     private function createGeneralPageRecord(int $documentType, int $parentId, array $recordData): int
     {
         if (isset($recordData['uid'])) {
-            throw new \InvalidArgumentException('The column "uid" must not be set in $recordData.', 1331489697);
+            throw new \InvalidArgumentException('The column "uid" must not be set in $recordData.', 1_331_489_697);
         }
         if (isset($recordData['pid'])) {
-            throw new \InvalidArgumentException('The column "pid" must not be set in $recordData.', 1331489703);
+            throw new \InvalidArgumentException('The column "pid" must not be set in $recordData.', 1_331_489_703);
         }
         if (isset($recordData['doktype'])) {
-            throw new \InvalidArgumentException('The column "doktype" must not be set in $recordData.', 1331489708);
+            throw new \InvalidArgumentException('The column "doktype" must not be set in $recordData.', 1_331_489_708);
         }
 
         $completeRecordData = $recordData;
@@ -342,13 +335,13 @@ final class TestingFramework
     {
         // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($pageId <= 0) {
-            throw new \InvalidArgumentException('$pageId must be > 0.', 1331489774);
+            throw new \InvalidArgumentException('$pageId must be > 0.', 1_331_489_774);
         }
         if (isset($recordData['uid'])) {
-            throw new \InvalidArgumentException('The column "uid" must not be set in $recordData.', 1331489769);
+            throw new \InvalidArgumentException('The column "uid" must not be set in $recordData.', 1_331_489_769);
         }
         if (isset($recordData['pid'])) {
-            throw new \InvalidArgumentException('The column "pid" must not be set in $recordData.', 1331489764);
+            throw new \InvalidArgumentException('The column "pid" must not be set in $recordData.', 1_331_489_764);
         }
 
         $completeRecordData = $recordData;
@@ -369,7 +362,7 @@ final class TestingFramework
     public function createFrontEndUserGroup(array $recordData = []): int
     {
         if (isset($recordData['uid'])) {
-            throw new \InvalidArgumentException('The column "uid" must not be set in $recordData.', 1331489807);
+            throw new \InvalidArgumentException('The column "uid" must not be set in $recordData.', 1_331_489_807);
         }
 
         return $this->createRecordWithoutTableNameChecks('fe_groups', $recordData);
@@ -399,14 +392,17 @@ final class TestingFramework
         if (!\is_int($groupsCheckResult) || $groupsCheckResult === 0) {
             throw new \InvalidArgumentException(
                 '$frontEndUserGroups must contain a comma-separated list of UIDs. Each UID must be > 0.',
-                1331489824
+                1_331_489_824
             );
         }
         if (isset($recordData['uid'])) {
-            throw new \InvalidArgumentException('The column "uid" must not be set in $recordData.', 1331489842);
+            throw new \InvalidArgumentException('The column "uid" must not be set in $recordData.', 1_331_489_842);
         }
         if (isset($recordData['usergroup'])) {
-            throw new \InvalidArgumentException('The column "usergroup" must not be set in $recordData.', 1331489846);
+            throw new \InvalidArgumentException(
+                'The column "usergroup" must not be set in $recordData.',
+                1_331_489_846
+            );
         }
 
         $completeRecordData = $recordData;
@@ -456,16 +452,16 @@ final class TestingFramework
         $this->assertTableNameIsAllowed($table);
         // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($uid === 0) {
-            throw new \InvalidArgumentException('The parameter $uid must not be zero.', 1331490003);
+            throw new \InvalidArgumentException('The parameter $uid must not be zero.', 1_331_490_003);
         }
         // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($rawData === []) {
-            throw new \InvalidArgumentException('The array with the new record data must not be empty.', 1331490008);
+            throw new \InvalidArgumentException('The array with the new record data must not be empty.', 1_331_490_008);
         }
         if (isset($rawData['uid'])) {
             throw new \InvalidArgumentException(
                 'The parameter $recordData must not contain changes to the UID of a record.',
-                1331490017
+                1_331_490_017
             );
         }
 
@@ -489,16 +485,16 @@ final class TestingFramework
         if (!$this->isNoneSystemTableNameAllowed($table)) {
             $allowedTables = \implode(',', $this->ownAllowedTables);
             $errorMessage = \sprintf('The table "%1$s" is not allowed. Allowed tables: %2$s', $table, $allowedTables);
-            throw new \InvalidArgumentException($errorMessage, 1331490358);
+            throw new \InvalidArgumentException($errorMessage, 1_331_490_358);
         }
 
         // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($uidLocal <= 0) {
-            throw new \InvalidArgumentException('$uidLocal must be > 0, but is: ' . $uidLocal, 1331490370);
+            throw new \InvalidArgumentException('$uidLocal must be > 0, but is: ' . $uidLocal, 1_331_490_370);
         }
         // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($uidForeign <= 0) {
-            throw new \InvalidArgumentException('$uidForeign must be > 0, but is: ' . $uidForeign, 1331490378);
+            throw new \InvalidArgumentException('$uidForeign must be > 0, but is: ' . $uidForeign, 1_331_490_378);
         }
 
         $recordData = [
@@ -534,14 +530,14 @@ final class TestingFramework
         if ($uidLocal <= 0) {
             throw new \InvalidArgumentException(
                 '$uidLocal must be > 0, but actually is "' . $uidLocal . '"',
-                1331490425
+                1_331_490_425
             );
         }
         // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($uidForeign <= 0) {
             throw new \InvalidArgumentException(
                 '$uidForeign must be  > 0, but actually is "' . $uidForeign . '"',
-                1331490429
+                1_331_490_429
             );
         }
 
@@ -552,7 +548,7 @@ final class TestingFramework
             throw new \BadMethodCallException(
                 'The column ' . $columnName . ' in the table ' . $tableName .
                 ' is not configured to contain m:n relations using a m:n table.',
-                1331490434
+                1_331_490_434
             );
         }
 
@@ -586,7 +582,7 @@ final class TestingFramework
     private function getTcaForTable(string $tableName): array
     {
         if (!isset($GLOBALS['TCA'][$tableName])) {
-            throw new \BadMethodCallException('The table "' . $tableName . '" has no TCA.', 1569701919);
+            throw new \BadMethodCallException('The table "' . $tableName . '" has no TCA.', 1_569_701_919);
         }
 
         return $GLOBALS['TCA'][$tableName];
@@ -696,7 +692,7 @@ final class TestingFramework
     {
         /** @phpstan-ignore-next-line We are explicitly checking for contract violations here */
         if ($pageUid <= 0) {
-            throw new \InvalidArgumentException('$pageUid must be > 0.', 1331490786);
+            throw new \InvalidArgumentException('$pageUid must be > 0.', 1_331_490_786);
         }
 
         $this->suppressFrontEndCookies();
@@ -717,7 +713,7 @@ final class TestingFramework
         $allSites = GeneralUtility::makeInstance(SiteConfiguration::class)->getAllExistingSites(false);
         $site = $allSites[self::SITE_IDENTIFIER] ?? null;
         if (!$site instanceof Site) {
-            throw new \RuntimeException('Dummy site not found.', 1635024025);
+            throw new \RuntimeException('Dummy site not found.', 1_635_024_025);
         }
         $language = $site->getLanguageById(0);
         $frontEnd = GeneralUtility::makeInstance(
@@ -787,7 +783,7 @@ routes: {  }";
         $file = $configurationDirectoryForTestingDummySite . '/config.yaml';
         \file_put_contents($file, $contents);
         if (!\is_readable($file)) {
-            throw new \RuntimeException('Site config file "' . $file . '" could not be created.', 1634918114);
+            throw new \RuntimeException('Site config file "' . $file . '" could not be created.', 1_634_918_114);
         }
     }
 
@@ -909,12 +905,12 @@ routes: {  }";
     {
         // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($userId <= 0) {
-            throw new \InvalidArgumentException('The user ID must be > 0.', 1331490798);
+            throw new \InvalidArgumentException('The user ID must be > 0.', 1_331_490_798);
         }
         if (!$this->hasFakeFrontEnd()) {
             throw new \BadMethodCallException(
                 'Please create a front end before calling loginFrontEndUser.',
-                1331490812
+                1_331_490_812
             );
         }
 
@@ -957,7 +953,7 @@ routes: {  }";
         if (!$this->hasFakeFrontEnd()) {
             throw new \BadMethodCallException(
                 'Please create a front end before calling logoutFrontEndUser.',
-                1331490825
+                1_331_490_825
             );
         }
         if (!$this->isLoggedIn()) {
@@ -985,7 +981,7 @@ routes: {  }";
     private function isLoggedIn(): bool
     {
         if (!$this->hasFakeFrontEnd()) {
-            throw new \BadMethodCallException('Please create a front end before calling isLoggedIn.', 1331490846);
+            throw new \BadMethodCallException('Please create a front end before calling isLoggedIn.', 1_331_490_846);
         }
 
         return (bool)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('frontend.user', 'isLoggedIn');
@@ -1094,9 +1090,9 @@ routes: {  }";
     {
         $isAllowed = $this->isNoneSystemTableNameAllowed($table) || $this->isSystemTableNameAllowed($table);
         if (!$isAllowed) {
-            $allowedTables = \implode(',', \array_merge(self::ALLOWED_SYSTEM_TABLES, $this->ownAllowedTables));
+            $allowedTables = \implode(',', [...self::ALLOWED_SYSTEM_TABLES, ...$this->ownAllowedTables]);
             $errorMessage = \sprintf('The table "%1$s" is not allowed. Allowed tables: %2$s', $table, $allowedTables);
-            throw new \InvalidArgumentException($errorMessage, 1569784847);
+            throw new \InvalidArgumentException($errorMessage, 1_569_784_847);
         }
     }
 
@@ -1146,7 +1142,7 @@ routes: {  }";
         if (!$this->tableHasColumn($tableName, $fieldName)) {
             throw new \InvalidArgumentException(
                 'The table ' . $tableName . ' has no column ' . $fieldName . '.',
-                1331490986
+                1_331_490_986
             );
         }
 
@@ -1157,7 +1153,7 @@ routes: {  }";
         if ($numberOfAffectedRows === 0) {
             throw new \BadMethodCallException(
                 'The table ' . $tableName . ' does not contain a record with UID ' . $uid . '.',
-                1331491003
+                1_331_491_003
             );
         }
     }

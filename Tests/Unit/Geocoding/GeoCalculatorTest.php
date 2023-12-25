@@ -17,15 +17,9 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class GeoCalculatorTest extends UnitTestCase
 {
-    /**
-     * @var GeoCalculator
-     */
-    private $subject;
+    private GeoCalculator $subject;
 
-    /**
-     * @var TestingGeo
-     */
-    private $geoObject;
+    private TestingGeo $geoObject;
 
     protected function setUp(): void
     {

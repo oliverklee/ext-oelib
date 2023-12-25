@@ -19,10 +19,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = ['typo3conf/ext/oelib'];
 
-    /**
-     * @var FrontEndUserMapper
-     */
-    private $subject;
+    private FrontEndUserMapper $subject;
 
     protected function setUp(): void
     {
@@ -50,7 +47,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
         $connection->insert('fe_users', ['usergroup' => $groupUids]);
         $uid = (int)$connection->lastInsertId('fe_users');
         if ($uid <= 0) {
-            throw new \RuntimeException('Could not create test record.', 1699653406);
+            throw new \RuntimeException('Could not create test record.', 1_699_653_406);
         }
 
         /** @var FrontEndUser $user */

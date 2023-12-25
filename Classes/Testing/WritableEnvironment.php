@@ -13,10 +13,7 @@ use TYPO3\CMS\Core\Core\Environment;
  */
 final class WritableEnvironment extends Environment
 {
-    /**
-     * @var string|null
-     */
-    private static $currentScriptBackup;
+    private static ?string $currentScriptBackup = null;
 
     /**
      * Sets the fake current PHP script.

@@ -31,7 +31,7 @@ abstract class AbstractReadOnlyObjectWithAccessors
     protected function checkForNonEmptyKey(string $key): void
     {
         if ($key === '') {
-            throw new \InvalidArgumentException('$key must not be empty.', 1331488963);
+            throw new \InvalidArgumentException('$key must not be empty.', 1_331_488_963);
         }
     }
 

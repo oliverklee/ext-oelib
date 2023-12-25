@@ -13,10 +13,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class PageRepositoryTest extends UnitTestCase
 {
-    /**
-     * @var PageRepository
-     */
-    private $subject;
+    private PageRepository $subject;
 
     protected function setUp(): void
     {

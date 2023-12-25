@@ -9,10 +9,7 @@ use OliverKlee\Oelib\Interfaces\Configuration;
 
 final class TestingConfigurationCheck extends AbstractConfigurationCheck
 {
-    /**
-     * @var Configuration|null
-     */
-    private static $checkedConfiguration;
+    private static ?Configuration $checkedConfiguration = null;
 
     public static function getCheckedConfiguration(): ?Configuration
     {

@@ -26,10 +26,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = ['typo3conf/ext/oelib'];
 
-    /**
-     * @var TestingFramework
-     */
-    private $subject;
+    private TestingFramework $subject;
 
     protected function setUp(): void
     {

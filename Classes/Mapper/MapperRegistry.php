@@ -13,15 +13,12 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class MapperRegistry
 {
-    /**
-     * @var MapperRegistry|null the Singleton instance
-     */
-    private static $instance;
+    private static ?MapperRegistry $instance = null;
 
     /**
      * @var array<class-string, AbstractDataMapper> already created mappers (by class name)
      */
-    private $mappers = [];
+    private array $mappers = [];
 
     /**
      * The constructor. Use getInstance() instead.
@@ -85,7 +82,7 @@ class MapperRegistry
     private function getByClassName(string $className): AbstractDataMapper
     {
         if ($className === '') {
-            throw new \InvalidArgumentException('$className must not be empty.', 1331488868);
+            throw new \InvalidArgumentException('$className must not be empty.', 1_331_488_868);
         }
 
         if (isset($this->mappers[$className])) {
@@ -93,7 +90,10 @@ class MapperRegistry
             $mapper = $this->mappers[$className];
         } else {
             if (!\class_exists($className)) {
-                throw new \InvalidArgumentException('No mapper class "' . $className . '" could be found.', 1632844178);
+                throw new \InvalidArgumentException(
+                    'No mapper class "' . $className . '" could be found.',
+                    1_632_844_178
+                );
             }
 
             $mapper = GeneralUtility::makeInstance($className);
@@ -140,14 +140,14 @@ class MapperRegistry
         if (!$mapper instanceof $className) {
             throw new \InvalidArgumentException(
                 'The provided mapper is not an instance of ' . $className . '.',
-                1331488915
+                1_331_488_915
             );
         }
         if (isset($this->mappers[$className])) {
             throw new \BadMethodCallException(
                 'There already is a ' . $className . ' mapper registered. ' .
                 ' Overwriting existing wrappers is not allowed.',
-                1331488928
+                1_331_488_928
             );
         }
 

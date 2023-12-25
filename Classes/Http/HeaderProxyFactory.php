@@ -17,20 +17,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class HeaderProxyFactory
 {
-    /**
-     * @var HeaderProxyFactory|null
-     */
-    private static $instance;
+    private static ?HeaderProxyFactory $instance = null;
 
-    /**
-     * @var bool
-     */
-    private $isTestMode = false;
+    private bool $isTestMode = false;
 
-    /**
-     * @var HeaderProxy|null
-     */
-    private $headerProxy;
+    private ?HeaderProxy $headerProxy = null;
 
     /**
      * Don't call this constructor; use getInstance() instead.
@@ -41,8 +32,6 @@ class HeaderProxyFactory
 
     /**
      * Retrieves the singleton instance of the factory.
-     *
-     * @return self the singleton factory
      */
     public static function getInstance(): self
     {
@@ -80,7 +69,7 @@ class HeaderProxyFactory
     {
         $headerCollector = $this->getHeaderProxy();
         if (!$this->isTestMode || !$headerCollector instanceof HeaderCollector) {
-            throw new \BadMethodCallException('getHeaderCollector() may only be called in test mode.', 1630827563);
+            throw new \BadMethodCallException('getHeaderCollector() may only be called in test mode.', 1_630_827_563);
         }
 
         return $headerCollector;

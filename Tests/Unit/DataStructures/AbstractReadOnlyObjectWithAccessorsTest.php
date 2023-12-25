@@ -13,10 +13,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class AbstractReadOnlyObjectWithAccessorsTest extends UnitTestCase
 {
-    /**
-     * @var TestingReadOnlyObjectWithPublicAccessors
-     */
-    private $subject;
+    private TestingReadOnlyObjectWithPublicAccessors $subject;
 
     protected function setUp(): void
     {
@@ -32,7 +29,7 @@ final class AbstractReadOnlyObjectWithAccessorsTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$key must not be empty.');
-        $this->expectExceptionCode(1331488963);
+        $this->expectExceptionCode(1_331_488_963);
 
         $this->subject->checkForNonEmptyKey('');
     }
@@ -54,7 +51,7 @@ final class AbstractReadOnlyObjectWithAccessorsTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$key must not be empty.');
-        $this->expectExceptionCode(1331488963);
+        $this->expectExceptionCode(1_331_488_963);
 
         // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->getAsString('');
@@ -115,7 +112,7 @@ final class AbstractReadOnlyObjectWithAccessorsTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$key must not be empty.');
-        $this->expectExceptionCode(1331488963);
+        $this->expectExceptionCode(1_331_488_963);
 
         // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->getAsInteger('');
@@ -167,7 +164,7 @@ final class AbstractReadOnlyObjectWithAccessorsTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$key must not be empty.');
-        $this->expectExceptionCode(1331488963);
+        $this->expectExceptionCode(1_331_488_963);
 
         // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->getAsTrimmedArray('');
@@ -180,7 +177,7 @@ final class AbstractReadOnlyObjectWithAccessorsTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$key must not be empty.');
-        $this->expectExceptionCode(1331488963);
+        $this->expectExceptionCode(1_331_488_963);
 
         // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->getAsIntegerArray('');
@@ -279,7 +276,7 @@ final class AbstractReadOnlyObjectWithAccessorsTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$key must not be empty.');
-        $this->expectExceptionCode(1331488963);
+        $this->expectExceptionCode(1_331_488_963);
 
         // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->getAsBoolean('');
@@ -332,7 +329,7 @@ final class AbstractReadOnlyObjectWithAccessorsTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$key must not be empty.');
-        $this->expectExceptionCode(1331488963);
+        $this->expectExceptionCode(1_331_488_963);
 
         // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         $this->subject->getAsFloat('');

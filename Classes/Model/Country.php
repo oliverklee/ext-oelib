@@ -9,10 +9,7 @@ namespace OliverKlee\Oelib\Model;
  */
 class Country extends AbstractModel
 {
-    /**
-     * @var bool whether this model is read-only
-     */
-    protected $readOnly = true;
+    protected bool $readOnly = true;
 
     /**
      * Returns the country's local short name.

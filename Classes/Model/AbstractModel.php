@@ -42,32 +42,29 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
      */
     public const STATUS_DEAD = 4;
 
-    /**
-     * @var bool whether this model is read-only
-     */
-    protected $readOnly = false;
+    protected bool $readOnly = false;
 
     /**
      * @var int<0, max> this model's UID, will be 0 if this model has been created in memory
      */
-    private $uid = 0;
+    private int $uid = 0;
 
     /**
      * data for this object (without the UID)
      *
      * @var array<non-empty-string, string|int|float|bool|object|null> $data
      */
-    private $data = [];
+    private array $data = [];
 
     /**
      * @var self::STATUS_*
      */
-    private $loadStatus = self::STATUS_VIRGIN;
+    private int $loadStatus = self::STATUS_VIRGIN;
 
     /**
      * @var bool whether this model's initial data has changed
      */
-    private $isDirty = false;
+    private bool $isDirty = false;
 
     /**
      * @var \Closure|null the callback function that fills this model with data
@@ -82,13 +79,13 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     public function __clone()
     {
         if ($this->isReadOnly()) {
-            throw new \BadMethodCallException('Read-only models cannot be cloned.', 1436453245);
+            throw new \BadMethodCallException('Read-only models cannot be cloned.', 1_436_453_245);
         }
         if ($this->isDead()) {
-            throw new \BadMethodCallException('Deleted models cannot be cloned.', 1436453107);
+            throw new \BadMethodCallException('Deleted models cannot be cloned.', 1_436_453_107);
         }
         if ($this->isLoading()) {
-            throw new \BadMethodCallException('Models cannot be cloned while they are loading.', 1436453245);
+            throw new \BadMethodCallException('Models cannot be cloned while they are loading.', 1_436_453_245);
         }
         if ($this->isGhost()) {
             $this->load();
@@ -138,7 +135,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     public function setData(array $data): void
     {
         if ($this->isLoaded()) {
-            throw new \BadMethodCallException('setData must only be called once per model instance.', 1331489244);
+            throw new \BadMethodCallException('setData must only be called once per model instance.', 1_331_489_244);
         }
 
         $this->resetData($data);
@@ -223,7 +220,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     public function setUid(int $uid): void
     {
         if ($this->hasUid()) {
-            throw new \BadMethodCallException('The UID of a model cannot be set a second time.', 1331489260);
+            throw new \BadMethodCallException('The UID of a model cannot be set a second time.', 1_331_489_260);
         }
         if ($this->isVirgin()) {
             $this->setLoadStatus(self::STATUS_GHOST);
@@ -251,11 +248,11 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
         if ($key === 'deleted') {
             throw new \InvalidArgumentException(
                 '$key must not be "deleted". Please use setToDeleted() instead.',
-                1331489276
+                1_331_489_276
             );
         }
         if ($this->isReadOnly()) {
-            throw new \BadMethodCallException('set() must not be called on a read-only model.', 1331489292);
+            throw new \BadMethodCallException('set() must not be called on a read-only model.', 1_331_489_292);
         }
 
         if ($this->isGhost()) {
@@ -284,7 +281,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
         if ($key === 'uid') {
             throw new \InvalidArgumentException(
                 'The UID column needs to be accessed using the getUid function.',
-                1331489310
+                1_331_489_310
             );
         }
 
@@ -293,7 +290,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
             throw new NotFoundException(
                 'The ' . static::class . ' with the UID ' . $this->getUid() .
                 ' either has been deleted (or has never existed), but still is accessed.',
-                1332446332
+                1_332_446_332
             );
         }
 
@@ -335,7 +332,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
         if (!$result instanceof self) {
             throw new \UnexpectedValueException(
                 'The data item for the key "' . $key . '" is no model instance.',
-                1331489359
+                1_331_489_359
             );
         }
 
@@ -360,7 +357,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
         if (!$result instanceof Collection) {
             throw new \UnexpectedValueException(
                 'The data item for the key "' . $key . '" is no collection.',
-                1331489379
+                1_331_489_379
             );
         }
 
@@ -376,7 +373,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
             throw new \BadMethodCallException(
                 static::class . '#' . $this->getUid()
                 . ': Please call setData() directly after instantiation first.',
-                1331489395
+                1_331_489_395
             );
         }
 
@@ -384,14 +381,14 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
             if (!$this->loadCallback instanceof \Closure) {
                 throw new \BadMethodCallException(
                     'Ghosts need a load callback function before their data can be accessed.',
-                    1331489414
+                    1_331_489_414
                 );
             }
 
             $this->markAsLoading();
             $callback = $this->loadCallback;
             if (!\is_callable($callback)) {
-                throw new \RuntimeException('Model load callback is not callable.', 1646325797);
+                throw new \RuntimeException('Model load callback is not callable.', 1_646_325_797);
             }
             $callback($this);
         }
@@ -623,7 +620,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     public function setCreationDate(): void
     {
         if ($this->hasUid()) {
-            throw new \BadMethodCallException('Only new objects (without UID) may receive "crdate".', 1331489449);
+            throw new \BadMethodCallException('Only new objects (without UID) may receive "crdate".', 1_331_489_449);
         }
 
         $timestamp = $GLOBALS['SIM_EXEC_TIME'] > 0 ? $GLOBALS['SIM_EXEC_TIME'] : 0;
