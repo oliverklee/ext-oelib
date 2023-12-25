@@ -242,6 +242,7 @@ class Template
         if ($condition) {
             $this->setMarker($markerName, (string)$content, $markerPrefix);
         }
+
         return $condition;
     }
 
@@ -596,9 +597,11 @@ class Template
         if ($subpartKey === '') {
             return $this->render();
         }
+
         if (!$this->isMarkerNameValidWithoutHashes($subpartKey)) {
             throw new \InvalidArgumentException('The value of the parameter $key is not valid.', 1_331_489_215);
         }
+
         if (!isset($this->subparts[$subpartKey])) {
             throw new NotFoundException(
                 '$key contained the subpart name "' . $subpartKey
@@ -607,6 +610,7 @@ class Template
                 1_632_760_625
             );
         }
+
         if (!$this->isSubpartVisible($subpartKey)) {
             return '';
         }

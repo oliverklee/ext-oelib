@@ -172,7 +172,7 @@ class ConfigurationRegistry
 
         try {
             $rootLine = GeneralUtility::makeInstance(RootlineUtility::class, $pageUid)->get();
-        } catch (PageNotFoundException $e) {
+        } catch (PageNotFoundException $pageNotFoundException) {
             $rootLine = [];
         }
 

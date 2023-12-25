@@ -42,14 +42,17 @@ class GeoCalculator implements SingletonInterface
         if ($object1->hasGeoError()) {
             throw new \InvalidArgumentException('$object1 has a geo error.');
         }
+
         if ($object2->hasGeoError()) {
             throw new \InvalidArgumentException('$object2 has a geo error.');
         }
+
         if (!$object1->hasGeoCoordinates()) {
             throw new \InvalidArgumentException(
                 '$object1 needs to have coordinates, but has none.'
             );
         }
+
         if (!$object2->hasGeoCoordinates()) {
             throw new \InvalidArgumentException(
                 '$object2 needs to have coordinates, but has none.'

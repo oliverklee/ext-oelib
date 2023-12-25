@@ -101,6 +101,7 @@ class IsFieldEnabledViewHelper extends AbstractConditionViewHelper
                 1_651_496_544
             );
         }
+
         if ($fieldsNamesArgument === '') {
             throw new \InvalidArgumentException('The argument "fieldName" must not be empty.', 1_651_155_957);
         }
@@ -122,6 +123,7 @@ class IsFieldEnabledViewHelper extends AbstractConditionViewHelper
         if (!\is_array($settings)) {
             throw new \UnexpectedValueException('No settings in the variable container found.', 1_651_153_736);
         }
+
         $enabledFieldsVariable = self::SETTING_FOR_ENABLED_FIELDS;
         if (!isset($settings[$enabledFieldsVariable])) {
             throw new \UnexpectedValueException(
@@ -129,6 +131,7 @@ class IsFieldEnabledViewHelper extends AbstractConditionViewHelper
                 1_651_154_598
             );
         }
+
         $enabledFieldsConfiguration = $settings[$enabledFieldsVariable];
         if (!\is_string($enabledFieldsConfiguration)) {
             throw new \UnexpectedValueException(

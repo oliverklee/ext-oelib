@@ -182,6 +182,7 @@ final class TestingFramework
             $errorMessage = \sprintf('The table "%1$s" is not allowed. Allowed tables: %2$s', $table, $allowedTables);
             throw new \InvalidArgumentException($errorMessage, 1_331_489_666);
         }
+
         if (isset($recordData['uid'])) {
             throw new \InvalidArgumentException('The column "uid" must not be set in $recordData.', 1_331_489_678);
         }
@@ -301,9 +302,11 @@ final class TestingFramework
         if (isset($recordData['uid'])) {
             throw new \InvalidArgumentException('The column "uid" must not be set in $recordData.', 1_331_489_697);
         }
+
         if (isset($recordData['pid'])) {
             throw new \InvalidArgumentException('The column "pid" must not be set in $recordData.', 1_331_489_703);
         }
+
         if (isset($recordData['doktype'])) {
             throw new \InvalidArgumentException('The column "doktype" must not be set in $recordData.', 1_331_489_708);
         }
@@ -332,9 +335,11 @@ final class TestingFramework
         if ($pageId <= 0) {
             throw new \InvalidArgumentException('$pageId must be > 0.', 1_331_489_774);
         }
+
         if (isset($recordData['uid'])) {
             throw new \InvalidArgumentException('The column "uid" must not be set in $recordData.', 1_331_489_769);
         }
+
         if (isset($recordData['pid'])) {
             throw new \InvalidArgumentException('The column "pid" must not be set in $recordData.', 1_331_489_764);
         }
@@ -383,6 +388,7 @@ final class TestingFramework
         if ($frontEndUserGroupsWithoutSpaces === '') {
             $frontEndUserGroupsWithoutSpaces = (string)$this->createFrontEndUserGroup();
         }
+
         $groupsCheckResult = \preg_match('/^(?:[1-9]+\\d*,?)+$/', $frontEndUserGroupsWithoutSpaces);
         if (!\is_int($groupsCheckResult) || $groupsCheckResult === 0) {
             throw new \InvalidArgumentException(
@@ -390,9 +396,11 @@ final class TestingFramework
                 1_331_489_824
             );
         }
+
         if (isset($recordData['uid'])) {
             throw new \InvalidArgumentException('The column "uid" must not be set in $recordData.', 1_331_489_842);
         }
+
         if (isset($recordData['usergroup'])) {
             throw new \InvalidArgumentException(
                 'The column "usergroup" must not be set in $recordData.',
@@ -449,10 +457,12 @@ final class TestingFramework
         if ($uid === 0) {
             throw new \InvalidArgumentException('The parameter $uid must not be zero.', 1_331_490_003);
         }
+
         // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($rawData === []) {
             throw new \InvalidArgumentException('The array with the new record data must not be empty.', 1_331_490_008);
         }
+
         if (isset($rawData['uid'])) {
             throw new \InvalidArgumentException(
                 'The parameter $recordData must not contain changes to the UID of a record.',
@@ -487,6 +497,7 @@ final class TestingFramework
         if ($uidLocal <= 0) {
             throw new \InvalidArgumentException('$uidLocal must be > 0, but is: ' . $uidLocal, 1_331_490_370);
         }
+
         // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($uidForeign <= 0) {
             throw new \InvalidArgumentException('$uidForeign must be > 0, but is: ' . $uidForeign, 1_331_490_378);
@@ -528,6 +539,7 @@ final class TestingFramework
                 1_331_490_425
             );
         }
+
         // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($uidForeign <= 0) {
             throw new \InvalidArgumentException(
@@ -708,6 +720,7 @@ final class TestingFramework
         if (!$site instanceof Site) {
             throw new \RuntimeException('Dummy site not found.', 1_635_024_025);
         }
+
         $language = $site->getLanguageById(0);
         $frontEnd = GeneralUtility::makeInstance(
             TypoScriptFrontendController::class,
@@ -754,8 +767,8 @@ final class TestingFramework
 
         $url = $this->getFakeSiteUrl();
         $contents =
-            "rootPageId: $pageUid
-base: '$url'
+            "rootPageId: {$pageUid}
+base: '{$url}'
 baseVariants: {  }
 languages:
   -
@@ -900,6 +913,7 @@ routes: {  }";
         if ($userId <= 0) {
             throw new \InvalidArgumentException('The user ID must be > 0.', 1_331_490_798);
         }
+
         if (!$this->hasFakeFrontEnd()) {
             throw new \BadMethodCallException(
                 'Please create a front end before calling loginFrontEndUser.',
@@ -914,6 +928,7 @@ routes: {  }";
         $mapper = MapperRegistry::get(FrontEndUserMapper::class);
         // loads the model from database if it is a ghost
         $mapper->existsModel($userId);
+
         $dataToSet = $mapper->find($userId)->getData();
         $dataToSet['uid'] = $userId;
         if (isset($dataToSet['usergroup'])) {
@@ -926,6 +941,7 @@ routes: {  }";
 
         $frontEndUser = $this->getFrontEndController()->fe_user;
         $frontEndUser->createUserSession(['uid' => $userId, 'disableIPlock' => true]);
+
         $frontEndUser->user = $dataToSet;
         $frontEndUser->fetchGroupData(new ServerRequest());
 
@@ -947,6 +963,7 @@ routes: {  }";
                 1_331_490_825
             );
         }
+
         if (!$this->isLoggedIn()) {
             return;
         }
@@ -1107,7 +1124,7 @@ routes: {  }";
             $this->relationSorting[$table][$uidLocal] = 0;
         }
 
-        $this->relationSorting[$table][$uidLocal]++;
+        ++$this->relationSorting[$table][$uidLocal];
 
         return $this->relationSorting[$table][$uidLocal];
     }

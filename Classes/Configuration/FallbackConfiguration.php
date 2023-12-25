@@ -13,6 +13,7 @@ use OliverKlee\Oelib\Interfaces\Configuration as ConfigurationInterface;
 class FallbackConfiguration implements ConfigurationInterface
 {
     private ConfigurationInterface $primary;
+
     private ConfigurationInterface $secondary;
 
     public function __construct(ConfigurationInterface $primary, ConfigurationInterface $secondary)

@@ -65,6 +65,7 @@ final class CollectionTest extends UnitTestCase
     {
         $firstModel = new TestingModel();
         $firstModel->setTitle('alpha');
+
         $secondModel = new TestingModel();
         $secondModel->setTitle('beta');
 
@@ -81,6 +82,7 @@ final class CollectionTest extends UnitTestCase
     {
         $firstModel = new TestingModel();
         $firstModel->setTitle('beta');
+
         $secondModel = new TestingModel();
         $secondModel->setTitle('alpha');
 
@@ -97,6 +99,7 @@ final class CollectionTest extends UnitTestCase
     {
         $firstModel = new TestingModel();
         $firstModel->setTitle('alpha');
+
         $secondModel = new TestingModel();
         $secondModel->setTitle('alpha');
 
@@ -117,6 +120,7 @@ final class CollectionTest extends UnitTestCase
     {
         $firstModel = new TestingModel();
         $firstModel->setTitle('alpha');
+
         $secondModel = new TestingModel();
         $secondModel->setTitle('beta');
 
@@ -133,6 +137,7 @@ final class CollectionTest extends UnitTestCase
     {
         $firstModel = new TestingModel();
         $firstModel->setTitle('beta');
+
         $secondModel = new TestingModel();
         $secondModel->setTitle('alpha');
 
@@ -149,6 +154,7 @@ final class CollectionTest extends UnitTestCase
     {
         $firstModel = new TestingModel();
         $firstModel->setTitle('alpha');
+
         $secondModel = new TestingModel();
         $secondModel->setTitle('alpha');
 
@@ -265,6 +271,7 @@ final class CollectionTest extends UnitTestCase
     {
         $model = new TestingModel();
         $model->setUid(1);
+
         $this->subject->add($model);
 
         self::assertCount(1, $this->subject);
@@ -582,6 +589,7 @@ final class CollectionTest extends UnitTestCase
     {
         $model = new TestingModel();
         $model->setUid(1);
+
         $this->subject->add($model);
 
         self::assertSame(
@@ -597,9 +605,11 @@ final class CollectionTest extends UnitTestCase
     {
         $model1 = new TestingModel();
         $model1->setUid(1);
+
         $this->subject->add($model1);
         $model2 = new TestingModel();
         $model2->setUid(42);
+
         $this->subject->add($model2);
 
         self::assertSame(
@@ -615,9 +625,11 @@ final class CollectionTest extends UnitTestCase
     {
         $model1 = new TestingModel();
         $model1->setUid(42);
+
         $this->subject->add($model1);
         $model2 = new TestingModel();
         $model2->setUid(1);
+
         $this->subject->add($model2);
 
         self::assertSame(
@@ -633,9 +645,11 @@ final class CollectionTest extends UnitTestCase
     {
         $model1 = new TestingModel();
         $model1->setUid(1);
+
         $this->subject->add($model1);
         $model2 = new TestingModel();
         $model2->setUid(2);
+
         $this->subject->add($model2);
 
         $this->subject->add($model1);
@@ -678,6 +692,7 @@ final class CollectionTest extends UnitTestCase
     {
         $model = new TestingModel();
         $model->setUid(42);
+
         $this->subject->add($model);
 
         self::assertTrue(
@@ -810,6 +825,7 @@ final class CollectionTest extends UnitTestCase
     {
         $model = new TestingModel();
         $model->setUid(42);
+
         $this->subject->add($model);
 
         /** @var Collection<TestingModel> $otherList */
@@ -978,7 +994,7 @@ final class CollectionTest extends UnitTestCase
                 $this->subject->purgeCurrent();
             }
 
-            $completedIterations++;
+            ++$completedIterations;
             $this->subject->next();
         }
 
@@ -995,6 +1011,7 @@ final class CollectionTest extends UnitTestCase
     {
         $model = new TestingModel();
         $model->setUid(1);
+
         $this->subject->add($model);
 
         $this->subject->rewind();

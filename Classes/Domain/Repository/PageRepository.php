@@ -35,6 +35,7 @@ class PageRepository implements SingletonInterface
                 1_608_389_744
             );
         }
+
         $result = $this->cleanUids($pageUids);
         if ($result === [] || $recursion === 0) {
             return $result;
@@ -65,6 +66,7 @@ class PageRepository implements SingletonInterface
                 $cleanUids[] = $intUid;
             }
         }
+
         \sort($cleanUids, SORT_NUMERIC);
 
         return $cleanUids;

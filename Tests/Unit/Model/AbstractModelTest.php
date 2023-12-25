@@ -138,6 +138,7 @@ final class AbstractModelTest extends UnitTestCase
     {
         $relatedRecord = new TestingModel();
         $relatedRecord->setData([]);
+
         $this->subject->setFriend($relatedRecord);
 
         $clone = clone $this->subject;
@@ -153,6 +154,7 @@ final class AbstractModelTest extends UnitTestCase
         $this->subject->setData(['related_records' => new Collection()]);
         $relatedRecord = new TestingModel();
         $relatedRecord->setData([]);
+
         $this->subject->addRelatedRecord($relatedRecord);
 
         $clone = clone $this->subject;
@@ -168,6 +170,7 @@ final class AbstractModelTest extends UnitTestCase
         $this->subject->setData(['related_records' => new Collection()]);
         $relatedRecord = new TestingModel();
         $relatedRecord->setData([]);
+
         $this->subject->addRelatedRecord($relatedRecord);
 
         $clone = clone $this->subject;
@@ -183,6 +186,7 @@ final class AbstractModelTest extends UnitTestCase
         $this->subject->setData(['composition' => new Collection()]);
         $childRecord = new TestingChildModel();
         $childRecord->setData([]);
+
         $this->subject->addCompositionRecord($childRecord);
 
         $clone = clone $this->subject;

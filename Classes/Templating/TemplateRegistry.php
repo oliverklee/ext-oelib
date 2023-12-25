@@ -86,6 +86,7 @@ class TemplateRegistry
             if ($fileName !== '') {
                 $template->processTemplateFromFile($fileName);
             }
+
             $this->templates[$fileName] = $template;
         }
 

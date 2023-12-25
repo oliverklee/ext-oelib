@@ -143,6 +143,7 @@ class MapperRegistry
                 1_331_488_915
             );
         }
+
         if (isset($this->mappers[$className])) {
             throw new \BadMethodCallException(
                 'There already is a ' . $className . ' mapper registered. ' .

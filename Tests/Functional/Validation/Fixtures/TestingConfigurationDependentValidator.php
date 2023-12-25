@@ -19,12 +19,10 @@ final class TestingConfigurationDependentValidator extends AbstractConfiguration
 
     protected function isFieldFilledIn(string $field, AbstractEntity $model): bool
     {
-        switch ($field) {
-            case 'title':
-                $result = $model->getTitle() !== '';
-                break;
-            default:
-                $result = true;
+        if ($field === 'title') {
+            $result = $model->getTitle() !== '';
+        } else {
+            $result = true;
         }
 
         return $result;

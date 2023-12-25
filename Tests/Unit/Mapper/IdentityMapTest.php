@@ -84,6 +84,7 @@ final class IdentityMapTest extends UnitTestCase
     {
         $model = new TestingModel();
         $model->setUid(42);
+
         $this->subject->add($model);
 
         self::assertSame(
@@ -99,10 +100,12 @@ final class IdentityMapTest extends UnitTestCase
     {
         $model1 = new TestingModel();
         $model1->setUid(1);
+
         $this->subject->add($model1);
 
         $model2 = new TestingModel();
         $model2->setUid(4);
+
         $this->subject->add($model2);
 
         self::assertSame(
@@ -122,10 +125,12 @@ final class IdentityMapTest extends UnitTestCase
     {
         $model1 = new TestingModel();
         $model1->setUid(1);
+
         $this->subject->add($model1);
 
         $model2 = new TestingModel();
         $model2->setUid(1);
+
         $this->subject->add($model2);
 
         self::assertSame(
@@ -168,6 +173,7 @@ final class IdentityMapTest extends UnitTestCase
 
         $model = new TestingModel();
         $model->setUid(1);
+
         $this->subject->add($model);
 
         $newUid = $this->subject->getNewUid();
@@ -182,6 +188,7 @@ final class IdentityMapTest extends UnitTestCase
     {
         $model = new TestingModel();
         $model->setUid(42);
+
         $this->subject->add($model);
 
         self::assertGreaterThan(42, $this->subject->getNewUid());
@@ -194,10 +201,12 @@ final class IdentityMapTest extends UnitTestCase
     {
         $model2 = new TestingModel();
         $model2->setUid(2);
+
         $this->subject->add($model2);
 
         $model1 = new TestingModel();
         $model1->setUid(1);
+
         $this->subject->add($model1);
 
         self::assertGreaterThan(2, $this->subject->getNewUid());

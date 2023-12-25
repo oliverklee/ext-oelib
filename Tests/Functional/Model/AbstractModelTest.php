@@ -44,6 +44,7 @@ final class AbstractModelTest extends FunctionalTestCase
     {
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
         $connection->insert('tx_oelib_test', ['title' => self::TEST_RECORD_TITLE]);
+
         $uid = (int)$connection->lastInsertId('tx_oelib_test');
 
         if ($uid <= 0) {
@@ -113,6 +114,7 @@ final class AbstractModelTest extends FunctionalTestCase
     {
         $relatedRecord = new TestingModel();
         $relatedRecord->setData([]);
+
         $this->subject->addRelatedRecord($relatedRecord);
         $this->dataMapper->save($this->subject);
         self::assertSame($this->subject, $this->subject->getRelatedRecords()->getParentModel());
@@ -146,6 +148,7 @@ final class AbstractModelTest extends FunctionalTestCase
     {
         $childRecord = new TestingChildModel();
         $childRecord->setData([]);
+
         $this->subject->addCompositionRecord($childRecord);
         $this->dataMapper->save($this->subject);
         self::assertSame($this->subject, $this->subject->getRelatedRecords()->getParentModel());
