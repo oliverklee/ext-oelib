@@ -6,6 +6,11 @@ parameters:
 			path: Classes/Configuration/AbstractConfigurationCheck.php
 
 		-
+			message: "#^Method OliverKlee\\\\Oelib\\\\Configuration\\\\AbstractConfigurationCheck\\:\\:getDbColumnNames\\(\\) should return list\\<non\\-empty\\-string\\> but returns list\\<mixed\\>\\.$#"
+			count: 1
+			path: Classes/Configuration/AbstractConfigurationCheck.php
+
+		-
 			message: "#^Cannot access offset 'EXTENSIONS' on mixed\\.$#"
 			count: 2
 			path: Classes/Configuration/ConfigurationProxy.php
@@ -48,6 +53,11 @@ parameters:
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 2
+			path: Classes/Configuration/PageFinder.php
+
+		-
+			message: "#^Casting to int something that's already int\\.$#"
+			count: 1
 			path: Classes/Configuration/PageFinder.php
 
 		-
@@ -94,6 +104,11 @@ parameters:
 			message: "#^Method OliverKlee\\\\Oelib\\\\Email\\\\SystemEmailFromBuilder\\:\\:getEmailConfiguration\\(\\) should return array\\{defaultMailFromAddress\\?\\: string\\} but returns mixed\\.$#"
 			count: 1
 			path: Classes/Email/SystemEmailFromBuilder.php
+
+		-
+			message: "#^Call to an undefined static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\HttpUtility\\:\\:setResponseCode\\(\\)\\.$#"
+			count: 1
+			path: Classes/Http/RealHeaderProxy.php
 
 		-
 			message: "#^Cannot access offset non\\-empty\\-string on mixed\\.$#"
@@ -144,6 +159,16 @@ parameters:
 			message: "#^Property OliverKlee\\\\Oelib\\\\Templating\\\\Template\\:\\:\\$subparts \\(array\\<string, string\\>\\) does not accept array\\<string, mixed\\>\\.$#"
 			count: 1
 			path: Classes/Templating/Template.php
+
+		-
+			message: "#^Call to an undefined static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\RootlineUtility\\:\\:purgeCaches\\(\\)\\.$#"
+			count: 1
+			path: Classes/Testing/TestingFramework.php
+
+		-
+			message: "#^Call to protected method unpack_uc\\(\\) of class TYPO3\\\\CMS\\\\Core\\\\Authentication\\\\AbstractUserAuthentication\\.$#"
+			count: 1
+			path: Classes/Testing/TestingFramework.php
 
 		-
 			message: "#^Cannot access offset 'DOCUMENT_ROOT' on mixed\\.$#"
@@ -371,6 +396,11 @@ parameters:
 			path: Tests/Functional/Testing/TestingFrameworkTest.php
 
 		-
+			message: "#^Casting to int something that's already int\\.$#"
+			count: 1
+			path: Tests/Functional/Testing/TestingFrameworkTest.php
+
+		-
 			message: "#^Method OliverKlee\\\\Oelib\\\\Tests\\\\Functional\\\\Testing\\\\TestingFrameworkTest\\:\\:getFrontEndController\\(\\) should return TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController but returns mixed\\.$#"
 			count: 1
 			path: Tests/Functional/Testing/TestingFrameworkTest.php
@@ -406,12 +436,12 @@ parameters:
 			path: Tests/Unit/DataStructures/CollectionTest.php
 
 		-
-			message: "#^Class OliverKlee\\\\Oelib\\\\Domain\\\\Repository\\\\GermanZipCodeRepository constructor invoked with 0 parameters, 1 required\\.$#"
+			message: "#^Class OliverKlee\\\\Oelib\\\\Domain\\\\Repository\\\\GermanZipCodeRepository constructor invoked with 1 parameter, 0 required\\.$#"
 			count: 1
 			path: Tests/Unit/Domain/Repository/GermanZipCodeRepositoryTest.php
 
 		-
-			message: "#^Class OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Domain\\\\Repository\\\\Fixtures\\\\DirectPersistRepository constructor invoked with 0 parameters, 1 required\\.$#"
+			message: "#^Class OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Domain\\\\Repository\\\\Fixtures\\\\DirectPersistRepository constructor invoked with 1 parameter, 0 required\\.$#"
 			count: 1
 			path: Tests/Unit/Domain/Repository/Traits/DirectPersistTest.php
 

@@ -8,14 +8,14 @@ $EM_CONF[$_EXTKEY] = [
     'constraints' => [
         'depends' => [
             'php' => '7.4.0-8.3.99',
-            'typo3' => '11.5.17-11.5.99',
-            'extbase' => '11.5.17-11.5.99',
-            'fluid' => '11.5.17-11.5.99',
+            'typo3' => '11.5.17-12.4.99',
+            'extbase' => '11.5.17-12.4.99',
+            'fluid' => '11.5.17-12.4.99',
         ],
         'conflicts' => [
         ],
         'suggests' => [
-            'static_info_tables' => '6.9.0-11.99.99',
+            'static_info_tables' => '6.9.0-12.99.99',
         ],
     ],
     'state' => 'stable',
