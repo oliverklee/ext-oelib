@@ -96,18 +96,13 @@ parameters:
 			path: Classes/Email/SystemEmailFromBuilder.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\DBAL\\\\Result\\:\\:fetchAll\\(\\)\\.$#"
-			count: 3
-			path: Classes/Mapper/AbstractDataMapper.php
-
-		-
 			message: "#^Cannot access offset non\\-empty\\-string on mixed\\.$#"
 			count: 1
 			path: Classes/Mapper/AbstractDataMapper.php
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 5
+			count: 7
 			path: Classes/Mapper/AbstractDataMapper.php
 
 		-
@@ -117,6 +112,11 @@ parameters:
 
 		-
 			message: "#^Method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\:\\:getTcaForTable\\(\\) should return array\\<string, array\\<string, array\\<string, array\\<string, string\\>\\>\\>\\> but returns mixed\\.$#"
+			count: 1
+			path: Classes/Mapper/AbstractDataMapper.php
+
+		-
+			message: "#^Parameter \\#1 \\$dataOfModels of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<M of OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\:\\:getListOfModels\\(\\) expects array\\<array\\<string, bool\\|float\\|int\\|string\\|null\\>\\>, array\\<int, array\\<string, mixed\\>\\> given\\.$#"
 			count: 1
 			path: Classes/Mapper/AbstractDataMapper.php
 

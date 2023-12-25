@@ -651,20 +651,11 @@ final class TestingFramework
 
         $connection = $this->getConnectionForTable($table);
         $query = 'SHOW FULL COLUMNS FROM `' . $table . '`';
-        $queryResult = $connection->executeQuery($query);
         $columns = [];
-        if (\method_exists($queryResult, 'fetchAllAssociative')) {
-            /** @var array<string, string> $fieldRow */
-            foreach ($queryResult->fetchAllAssociative() as $fieldRow) {
-                $field = $fieldRow['Field'];
-                $columns[$field] = $fieldRow;
-            }
-        } else {
-            /** @var array<string, string> $fieldRow */
-            foreach ($queryResult->fetchAll() as $fieldRow) {
-                $field = $fieldRow['Field'];
-                $columns[$field] = $fieldRow;
-            }
+        /** @var array<string, string> $fieldRow */
+        foreach ($connection->executeQuery($query)->fetchAllAssociative() as $fieldRow) {
+            $field = $fieldRow['Field'];
+            $columns[$field] = $fieldRow;
         }
 
         self::$tableColumnCache[$table] = $columns;
@@ -1030,22 +1021,12 @@ routes: {  }";
 
         $connection = $this->getConnectionPool()->getConnectionByName('Default');
         $query = 'SHOW TABLE STATUS FROM `' . $connection->getDatabase() . '`';
-        $queryResult = $connection->executeQuery($query);
         $tableNames = [];
-        if (\method_exists($queryResult, 'fetchAllAssociative')) {
-            /** @var array<string, string|int|null> $tableInformation */
-            foreach ($queryResult->fetchAllAssociative() as $tableInformation) {
-                /** @var non-empty-string $tableName */
-                $tableName = $tableInformation['Name'];
-                $tableNames[$tableName] = $tableInformation;
-            }
-        } else {
-            /** @var array<string, string|int|null> $tableInformation */
-            foreach ($queryResult->fetchAll() as $tableInformation) {
-                /** @var non-empty-string $tableName */
-                $tableName = $tableInformation['Name'];
-                $tableNames[$tableName] = $tableInformation;
-            }
+        /** @var array<string, string|int|null> $tableInformation */
+        foreach ($connection->executeQuery($query)->fetchAllAssociative() as $tableInformation) {
+            /** @var non-empty-string $tableName */
+            $tableName = $tableInformation['Name'];
+            $tableNames[$tableName] = $tableInformation;
         }
 
         self::$tableNameCache = $tableNames;
