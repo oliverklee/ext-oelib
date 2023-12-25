@@ -962,7 +962,6 @@ abstract class AbstractDataMapper
                 if (!$relatedModels instanceof Collection) {
                     continue;
                 }
-                /** @var Collection<AbstractModel> $relatedModels */
                 $relatedMapper = $this->getRelationMapperByKey($key);
                 foreach ($relatedModels as $relatedModel) {
                     $relatedMapper->delete($relatedModel);

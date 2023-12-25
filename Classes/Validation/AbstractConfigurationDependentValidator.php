@@ -59,9 +59,7 @@ abstract class AbstractConfigurationDependentValidator extends AbstractValidator
     public function setSettings(array $settings): void
     {
         $requiredFieldsSetting = $settings[$this->configurationKey] ?? '';
-        if (\is_string($requiredFieldsSetting)) {
-            $this->requiredFields = GeneralUtility::trimExplode(',', $requiredFieldsSetting, true);
-        }
+        $this->requiredFields = GeneralUtility::trimExplode(',', $requiredFieldsSetting, true);
     }
 
     /**

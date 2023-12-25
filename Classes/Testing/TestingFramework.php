@@ -236,17 +236,12 @@ final class TestingFramework
 
     /**
      * @param non-empty-string $tableName
-     *
-     * @return Connection
      */
     private function getConnectionForTable(string $tableName): Connection
     {
         return $this->getConnectionPool()->getConnectionForTable($tableName);
     }
 
-    /**
-     * @return ConnectionPool
-     */
     private function getConnectionPool(): ConnectionPool
     {
         return GeneralUtility::makeInstance(ConnectionPool::class);
@@ -617,8 +612,6 @@ final class TestingFramework
      *
      * @param non-empty-string $table the name of the table to check
      * @param string $column the column name to check
-     *
-     * @return bool
      */
     private function tableHasColumn(string $table, string $column): bool
     {
@@ -932,11 +925,9 @@ routes: {  }";
         $this->suppressFrontEndCookies();
 
         $frontEndUser = $this->getFrontEndController()->fe_user;
-        if ($frontEndUser instanceof FrontendUserAuthentication) {
-            $frontEndUser->createUserSession(['uid' => $userId, 'disableIPlock' => true]);
-            $frontEndUser->user = $dataToSet;
-            $frontEndUser->fetchGroupData(new ServerRequest());
-        }
+        $frontEndUser->createUserSession(['uid' => $userId, 'disableIPlock' => true]);
+        $frontEndUser->user = $dataToSet;
+        $frontEndUser->fetchGroupData(new ServerRequest());
 
         GeneralUtility::makeInstance(Context::class)->setAspect('frontend.user', new UserAspect($frontEndUser));
     }
@@ -962,9 +953,7 @@ routes: {  }";
 
         $this->suppressFrontEndCookies();
         $frontEndUser = $this->getFrontEndController()->fe_user;
-        if ($frontEndUser instanceof FrontendUserAuthentication) {
-            $frontEndUser->logoff();
-        }
+        $frontEndUser->logoff();
 
         GeneralUtility::makeInstance(Context::class)->setAspect('frontend.user', new UserAspect());
     }
@@ -1193,8 +1182,6 @@ routes: {  }";
      * Returns the current front-end instance.
      *
      * This method must only be called when there is a front-end instance.
-     *
-     * @return TypoScriptFrontendController
      */
     private function getFrontEndController(): TypoScriptFrontendController
     {
