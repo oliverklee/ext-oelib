@@ -73,13 +73,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
             ->getConnectionForTable('tx_oelib_test_article_mm');
         $result = $connection
             ->select(['*'], 'tx_oelib_test_article_mm', ['uid_local' => $uidLocal, 'uid_foreign' => $uidForeign]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $data */
-            $data = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $data */
-            $data = $result->fetch();
-        }
+        /** @var DatabaseRow|false $data */
+        $data = $result->fetchAssociative();
         self::assertIsArray($data);
 
         return (int)$data['sorting'];
@@ -117,13 +112,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_oelib_test');
         $result = $connection->select(['*'], 'tx_oelib_test', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame($title, $row['title']);
@@ -175,11 +165,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
         $query = 'SELECT COUNT(*) as count from tx_oelib_test WHERE uid = :uid AND hidden = :hidden';
         $queryResult = $connection->executeQuery($query, ['uid' => $uid, 'hidden' => 1]);
-        if (\method_exists($queryResult, 'fetchAssociative')) {
-            $row = $queryResult->fetchAssociative();
-        } else {
-            $row = $queryResult->fetch();
-        }
+        $row = $queryResult->fetchAssociative();
         self::assertIsArray($row);
         self::assertSame(1, $row['count']);
     }
@@ -195,11 +181,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         // We cannot use `$connection->count()` here because it automatically ignores hidden or deleted records.
         $query = 'SELECT COUNT(*) as count from tx_oelib_test WHERE uid = :uid AND deleted = :deleted';
         $queryResult = $connection->executeQuery($query, ['uid' => $uid, 'deleted' => 1]);
-        if (\method_exists($queryResult, 'fetchAssociative')) {
-            $row = $queryResult->fetchAssociative();
-        } else {
-            $row = $queryResult->fetch();
-        }
+        $row = $queryResult->fetchAssociative();
         self::assertIsArray($row);
         self::assertSame(1, $row['count']);
     }
@@ -253,13 +235,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_oelib_test');
         $result = $connection->select(['*'], 'tx_oelib_test', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame('bar', $row['title']);
@@ -543,13 +520,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_oelib_test');
         $result = $connection->select(['*'], 'tx_oelib_test', ['uid' => $firstRecordUid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame(1, (int)$row['related_records']);
@@ -575,13 +547,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_oelib_test');
         $result = $connection->select(['*'], 'tx_oelib_test', ['uid' => $firstRecordUid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame(2, (int)$row['related_records']);
@@ -624,13 +591,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_oelib_test');
         $result = $connection->select(['*'], 'tx_oelib_test', ['uid' => $firstRecordUid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame(1, (int)$row['bidirectional']);
@@ -653,13 +615,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_oelib_test');
         $result = $connection->select(['*'], 'tx_oelib_test', ['uid' => $secondRecordUid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame(1, (int)$row['related_records']);
@@ -768,13 +725,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('pages');
         $result = $connection->select(['*'], 'pages', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame('/' . $uid, $row['slug']);
@@ -791,13 +743,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('pages');
         $result = $connection->select(['*'], 'pages', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame($title, $row['title']);
@@ -814,13 +761,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('pages');
         $result = $connection->select(['*'], 'pages', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame($slug, $row['slug']);
@@ -836,13 +778,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('pages');
         $result = $connection->select(['*'], 'pages', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame(1, (int)$row['doktype']);
@@ -858,13 +795,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('pages');
         $result = $connection->select(['*'], 'pages', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame(0, (int)$row['pid']);
@@ -880,13 +812,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('pages');
         $result = $connection->select(['*'], 'pages', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame($parentUid, (int)$row['pid']);
@@ -901,13 +828,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('pages');
         $result = $connection->select(['*'], 'pages', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame('', $row['title']);
@@ -938,13 +860,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('pages');
         $result = $connection->select(['*'], 'pages', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame(254, (int)$row['doktype']);
@@ -961,13 +878,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('pages');
         $result = $connection->select(['*'], 'pages', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame(0, (int)$row['pid']);
@@ -984,13 +896,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('pages');
         $result = $connection->select(['*'], 'pages', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame($parent, (int)$row['pid']);
@@ -1005,13 +912,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('pages');
         $result = $connection->select(['*'], 'pages', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame('', $row['title']);
@@ -1066,13 +968,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('sys_template');
         $result = $connection->select(['*'], 'sys_template', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertFalse(isset($row['config']));
@@ -1091,13 +988,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('sys_template');
         $result = $connection->select(['*'], 'sys_template', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame(
@@ -1116,13 +1008,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('sys_template');
         $result = $connection->select(['*'], 'sys_template', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertFalse(isset($row['constants']));
@@ -1141,13 +1028,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('sys_template');
         $result = $connection->select(['*'], 'sys_template', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame('plugin.tx_oelib.test = 1', $row['constants']);
@@ -1176,13 +1058,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('fe_groups');
         $result = $connection->select(['*'], 'fe_groups', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame('', $row['title']);
@@ -1197,13 +1074,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('fe_groups');
         $result = $connection->select(['*'], 'fe_groups', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame('Test title', $row['title']);
@@ -1232,13 +1104,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('fe_users');
         $result = $connection->select(['*'], 'fe_users', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame('', $row['username']);
@@ -1253,13 +1120,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('fe_users');
         $result = $connection->select(['*'], 'fe_users', ['uid' => $uid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame('Test name', $row['username']);
@@ -1752,13 +1614,8 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('fe_users');
         $result = $connection->select(['*'], 'fe_users', ['uid' => $frontEndUserUid]);
-        if (\method_exists($result, 'fetchAssociative')) {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetchAssociative();
-        } else {
-            /** @var DatabaseRow|false $row */
-            $row = $result->fetch();
-        }
+        /** @var DatabaseRow|false $row */
+        $row = $result->fetchAssociative();
 
         self::assertIsArray($row);
         self::assertSame($frontEndUserGroupUid, (int)$row['usergroup']);
