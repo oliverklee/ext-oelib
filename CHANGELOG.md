@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Add Rector to our toolchain (#1659)
+- Add Rector to our toolchain (#1659, #1662)
 
 ### Changed
 - Upgrade to PHPUnit 9 (#1634)
