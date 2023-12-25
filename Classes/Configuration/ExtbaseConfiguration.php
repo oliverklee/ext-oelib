@@ -15,7 +15,7 @@ final class ExtbaseConfiguration extends AbstractReadOnlyObjectWithPublicAccesso
     /**
      * @var array<string, mixed>
      */
-    private $data;
+    private array $data;
 
     /**
      * @param array<string, mixed> $data

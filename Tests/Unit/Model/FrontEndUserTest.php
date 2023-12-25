@@ -17,10 +17,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class FrontEndUserTest extends UnitTestCase
 {
-    /**
-     * @var FrontEndUser
-     */
-    private $subject;
+    private FrontEndUser $subject;
 
     /**
      * @var int a backup of $GLOBALS['EXEC_TIME']

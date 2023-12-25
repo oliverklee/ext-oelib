@@ -17,16 +17,13 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class AbstractModelTest extends UnitTestCase
 {
-    /**
-     * @var TestingModel
-     */
-    private $subject;
+    private TestingModel $subject;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        $GLOBALS['SIM_EXEC_TIME'] = 1_524_751_343;
 
         $this->subject = new TestingModel();
     }

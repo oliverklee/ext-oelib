@@ -16,15 +16,12 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class ConfigurationRegistry
 {
-    /**
-     * @var ConfigurationRegistry|null the Singleton instance
-     */
-    private static $instance;
+    private static ?ConfigurationRegistry $instance = null;
 
     /**
      * @var array<non-empty-string, ConfigurationInterface> already created configurations (by namespace)
      */
-    private $configurations = [];
+    private array $configurations = [];
 
     /**
      * The constructor. Use getInstance() instead.
@@ -122,7 +119,7 @@ class ConfigurationRegistry
     private function checkForNonEmptyNamespace(string $namespace): void
     {
         if ($namespace === '') {
-            throw new \InvalidArgumentException('$namespace must not be empty.', 1331318549);
+            throw new \InvalidArgumentException('$namespace must not be empty.', 1_331_318_549);
         }
     }
 

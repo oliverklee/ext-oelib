@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class LanguageMapperTest extends UnitTestCase
 {
-    /**
-     * @var LanguageMapper
-     */
-    private $subject;
+    private LanguageMapper $subject;
 
     protected function setUp(): void
     {

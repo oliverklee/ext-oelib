@@ -15,12 +15,12 @@ final class DummyConfiguration extends AbstractObjectWithPublicAccessors impleme
     /**
      * @var array<string, mixed>
      */
-    private $data;
+    private array $data;
 
     /**
      * @var non-empty-string
      */
-    private $sourceName = 'dummy configuration for testing';
+    private string $sourceName = 'dummy configuration for testing';
 
     /**
      * @param array<string, mixed> $data

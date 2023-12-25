@@ -12,10 +12,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class CountryTest extends UnitTestCase
 {
-    /**
-     * @var Country
-     */
-    private $subject;
+    private Country $subject;
 
     protected function setUp(): void
     {

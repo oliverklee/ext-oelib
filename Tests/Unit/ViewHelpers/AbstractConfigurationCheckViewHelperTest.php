@@ -44,9 +44,7 @@ final class AbstractConfigurationCheckViewHelperTest extends UnitTestCase
     {
         parent::setUp();
 
-        $this->renderChildrenClosure = static function (): string {
-            return '';
-        };
+        $this->renderChildrenClosure = static fn (): string => '';
         $this->variableProviderMock = $this->createMock(VariableProviderInterface::class);
         $this->renderingContextMock = $this->createMock(RenderingContextInterface::class);
         $this->renderingContextMock->method('getVariableProvider')->willReturn($this->variableProviderMock);
@@ -141,7 +139,7 @@ final class AbstractConfigurationCheckViewHelperTest extends UnitTestCase
     {
         $this->expectExceptionCode(\UnexpectedValueException::class);
         $this->expectExceptionMessage('No settings in the variable container found.');
-        $this->expectExceptionCode(1651153736);
+        $this->expectExceptionCode(1_651_153_736);
 
         $this->variableProviderMock->method('get')->with('settings')->willReturn(null);
 

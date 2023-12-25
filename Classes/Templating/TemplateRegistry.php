@@ -11,15 +11,12 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class TemplateRegistry
 {
-    /**
-     * @var TemplateRegistry|null the Singleton instance
-     */
-    private static $instance;
+    private static ?TemplateRegistry $instance = null;
 
     /**
      * @var array<string, Template> already created templates (by file name)
      */
-    private $templates = [];
+    private array $templates = [];
 
     /**
      * The constructor. Use getInstance() instead.

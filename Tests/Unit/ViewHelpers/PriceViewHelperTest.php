@@ -14,10 +14,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\ViewHelperInterface;
  */
 class PriceViewHelperTest extends UnitTestCase
 {
-    /**
-     * @var PriceViewHelper
-     */
-    private $subject;
+    private PriceViewHelper $subject;
 
     protected function setUp(): void
     {

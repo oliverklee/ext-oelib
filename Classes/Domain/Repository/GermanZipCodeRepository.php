@@ -18,7 +18,7 @@ class GermanZipCodeRepository extends Repository
     /**
      * @var array<string, GermanZipCode|null>
      */
-    protected $cachedResults = [];
+    protected array $cachedResults = [];
 
     public function findOneByZipCode(string $zipCode): ?GermanZipCode
     {
@@ -92,7 +92,7 @@ class GermanZipCodeRepository extends Repository
     {
         throw new \BadMethodCallException(
             'This is a read-only repository in which the removeAll method must not be called.',
-            1537544385
+            1_537_544_385
         );
     }
 }

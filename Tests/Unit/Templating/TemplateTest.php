@@ -13,10 +13,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class TemplateTest extends UnitTestCase
 {
-    /**
-     * @var Template
-     */
-    private $subject;
+    private Template $subject;
 
     protected function setUp(): void
     {
@@ -58,7 +55,7 @@ final class TemplateTest extends UnitTestCase
         $this->expectExceptionMessage(
             '$key contained the subpart name "FOOBAR", but only the following subparts are available: ()'
         );
-        $this->expectExceptionCode(1632760625);
+        $this->expectExceptionCode(1_632_760_625);
 
         self::assertSame(
             '',
@@ -75,7 +72,7 @@ final class TemplateTest extends UnitTestCase
         $this->expectExceptionMessage(
             '$key contained the subpart name "COFFEE", but only the following subparts are available: (FOO, BAR)'
         );
-        $this->expectExceptionCode(1632760625);
+        $this->expectExceptionCode(1_632_760_625);
 
         $this->subject->processTemplate(
             '<!-- ###FOO### -->' .
@@ -3824,7 +3821,7 @@ final class TemplateTest extends UnitTestCase
         $this->expectExceptionMessage(
             '$key contained the subpart name "my_subpart", but only the following subparts are available: ()'
         );
-        $this->expectExceptionCode(1632760625);
+        $this->expectExceptionCode(1_632_760_625);
 
         $this->subject->processTemplate(
             '<!-- ###my_subpart### -->' .
@@ -3844,7 +3841,7 @@ final class TemplateTest extends UnitTestCase
         $this->expectExceptionMessage(
             '$key contained the subpart name "MY_SUBPART", but only the following subparts are available: ()'
         );
-        $this->expectExceptionCode(1632760625);
+        $this->expectExceptionCode(1_632_760_625);
 
         $this->subject->processTemplate(
             '<!-- ###my_subpart### -->' .

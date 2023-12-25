@@ -17,20 +17,17 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 abstract class AbstractConfigurationCheck
 {
-    /**
-     * @var ConfigurationInterface
-     */
-    protected $configuration;
+    protected ConfigurationInterface $configuration;
 
     /**
      * @var list<non-empty-string>
      */
-    protected $warnings = [];
+    protected array $warnings = [];
 
     /**
      * @var non-empty-string
      */
-    private $namespace;
+    private string $namespace;
 
     /**
      * @param ConfigurationInterface $configurationToCheck the configuration to check
@@ -57,7 +54,7 @@ abstract class AbstractConfigurationCheck
     {
         // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
         if ($extensionKey === '') {
-            throw new \InvalidArgumentException('Please provide a non-empty extension key.', 1634575363);
+            throw new \InvalidArgumentException('Please provide a non-empty extension key.', 1_634_575_363);
         }
 
         /** @var BackendUserAuthentication|null $backEndUser */
@@ -376,7 +373,7 @@ abstract class AbstractConfigurationCheck
     protected function checkIfIntegerInRange(string $key, int $minimum, int $maximum, string $explanation): bool
     {
         if ($minimum > $maximum) {
-            throw new \InvalidArgumentException('$minimum must be <= $maximum.', 1616069185);
+            throw new \InvalidArgumentException('$minimum must be <= $maximum.', 1_616_069_185);
         }
         if (!$this->checkIfNonNegativeIntegerOrEmpty($key, $explanation)) {
             return false;

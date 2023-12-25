@@ -15,7 +15,7 @@ class TypoScriptConfiguration extends AbstractReadOnlyObjectWithPublicAccessors 
     /**
      * @var array<string|int, mixed> the data for this configuration
      */
-    private $data = [];
+    private array $data = [];
 
     /**
      * Returns the name of the configuration source, e.g., "TypoScript setup" or "Flexforms".

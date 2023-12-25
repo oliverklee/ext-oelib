@@ -9,10 +9,7 @@ namespace OliverKlee\Oelib\Model;
  */
 class Language extends AbstractModel
 {
-    /**
-     * @var bool whether this model is read-only
-     */
-    protected $readOnly = true;
+    protected bool $readOnly = true;
 
     /**
      * Returns the language's local name.

@@ -30,7 +30,10 @@ class PageRepository implements SingletonInterface
     {
         // @phpstan-ignore-next-line We are explicitly checking for contract violations here.
         if ($recursion < 0) {
-            throw new \InvalidArgumentException('$recursion must be >= 0, but actually is: ' . $recursion, 1608389744);
+            throw new \InvalidArgumentException(
+                '$recursion must be >= 0, but actually is: ' . $recursion,
+                1_608_389_744
+            );
         }
         $result = $this->cleanUids($pageUids);
         if ($result === [] || $recursion === 0) {

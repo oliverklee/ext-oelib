@@ -15,15 +15,12 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class FlexformsConfiguration extends AbstractReadOnlyObjectWithPublicAccessors implements ConfigurationInterface
 {
-    /**
-     * @var \DOMXPath|null
-     */
-    private $xPath;
+    private ?\DOMXPath $xPath = null;
 
     /**
      * @var array<string, mixed>|null
      */
-    private $data;
+    private ?array $data = null;
 
     public function __construct(ContentObjectRenderer $contentObject)
     {
@@ -76,7 +73,7 @@ class FlexformsConfiguration extends AbstractReadOnlyObjectWithPublicAccessors i
     private function getFromXml(string $key): ?string
     {
         if (!$this->xPath instanceof \DOMXPath) {
-            throw new \BadMethodCallException('$this->xPath is not initialized.', 1645719281);
+            throw new \BadMethodCallException('$this->xPath is not initialized.', 1_645_719_281);
         }
 
         $matchingNodes = $this->xPath->query("/T3FlexForms/data/sheet/language/field[@index='$key']/value");

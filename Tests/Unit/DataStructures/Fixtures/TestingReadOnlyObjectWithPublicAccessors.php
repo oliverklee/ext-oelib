@@ -14,7 +14,7 @@ final class TestingReadOnlyObjectWithPublicAccessors extends AbstractReadOnlyObj
     /**
      * @var array<string, mixed> the data for this object
      */
-    private $data = [];
+    private array $data = [];
 
     /**
      * Sets the data of this object.

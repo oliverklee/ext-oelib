@@ -23,15 +23,9 @@ final class AbstractModelTest extends FunctionalTestCase
 
     protected array $testExtensionsToLoad = ['typo3conf/ext/oelib'];
 
-    /**
-     * @var TestingModel
-     */
-    private $subject;
+    private TestingModel $subject;
 
-    /**
-     * @var TestingMapper
-     */
-    private $dataMapper;
+    private TestingMapper $dataMapper;
 
     protected function setUp(): void
     {
@@ -53,7 +47,7 @@ final class AbstractModelTest extends FunctionalTestCase
         $uid = (int)$connection->lastInsertId('tx_oelib_test');
 
         if ($uid <= 0) {
-            throw new \RuntimeException('Could not create test record.', 1699653383);
+            throw new \RuntimeException('Could not create test record.', 1_699_653_383);
         }
 
         return $uid;

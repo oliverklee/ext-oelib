@@ -8,10 +8,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 final class TestingValidatableModel extends AbstractEntity
 {
-    /**
-     * @var string
-     */
-    protected $title;
+    protected string $title;
 
     public function __construct(string $title = '')
     {

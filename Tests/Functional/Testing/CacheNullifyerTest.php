@@ -21,10 +21,7 @@ final class CacheNullifyerTest extends FunctionalTestCase
 
     protected bool $initializeDatabase = false;
 
-    /**
-     * @var CacheNullifyer
-     */
-    private $subject;
+    private CacheNullifyer $subject;
 
     protected function setUp(): void
     {

@@ -12,25 +12,16 @@ use OliverKlee\Oelib\Model\AbstractModel;
  */
 class TestingGeo extends AbstractModel implements Geo
 {
-    /**
-     * @var bool
-     */
-    private $hasGeoError = false;
+    private bool $hasGeoError = false;
 
-    /**
-     * @var string
-     */
-    private $geoErrorReason = '';
+    private string $geoErrorReason = '';
 
-    /**
-     * @var string
-     */
-    private $address = '';
+    private string $address = '';
 
     /**
      * @var array{latitude: float, longitude: float}|null
      */
-    private $coordinates;
+    private ?array $coordinates = null;
 
     /**
      * Returns this object's address formatted for a geocoding lookup, for example
@@ -67,7 +58,7 @@ class TestingGeo extends AbstractModel implements Geo
     public function getGeoCoordinates(): array
     {
         if (!\is_array($this->coordinates)) {
-            throw new \BadMethodCallException('Missing geo coordinates!', 1633018227);
+            throw new \BadMethodCallException('Missing geo coordinates!', 1_633_018_227);
         }
 
         return $this->coordinates;

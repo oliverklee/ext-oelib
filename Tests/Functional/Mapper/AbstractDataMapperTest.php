@@ -29,10 +29,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = ['typo3conf/ext/oelib'];
 
-    /**
-     * @var TestingMapper
-     */
-    private $subject;
+    private TestingMapper $subject;
 
     protected function setUp(): void
     {

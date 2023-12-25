@@ -16,10 +16,7 @@ final class LanguageMapperTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/static_info_tables'];
 
-    /**
-     * @var LanguageMapper
-     */
-    private $subject;
+    private LanguageMapper $subject;
 
     protected function setUp(): void
     {

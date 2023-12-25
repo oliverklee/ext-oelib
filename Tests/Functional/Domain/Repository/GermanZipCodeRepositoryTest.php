@@ -17,10 +17,7 @@ final class GermanZipCodeRepositoryTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = ['typo3conf/ext/oelib'];
 
-    /**
-     * @var GermanZipCodeRepository
-     */
-    private $subject;
+    private GermanZipCodeRepository $subject;
 
     protected function setUp(): void
     {

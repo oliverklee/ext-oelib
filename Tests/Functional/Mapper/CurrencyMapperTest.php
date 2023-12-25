@@ -16,10 +16,7 @@ final class CurrencyMapperTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/static_info_tables'];
 
-    /**
-     * @var CurrencyMapper
-     */
-    private $subject;
+    private CurrencyMapper $subject;
 
     protected function setUp(): void
     {

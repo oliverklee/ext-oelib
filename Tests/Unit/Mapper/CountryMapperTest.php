@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class CountryMapperTest extends UnitTestCase
 {
-    /**
-     * @var CountryMapper
-     */
-    private $subject;
+    private CountryMapper $subject;
 
     protected function setUp(): void
     {

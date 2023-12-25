@@ -21,10 +21,7 @@ final class AbstractConfigurationDependentValidatorTest extends FunctionalTestCa
 {
     protected array $testExtensionsToLoad = ['typo3conf/ext/oelib'];
 
-    /**
-     * @var TestingConfigurationDependentValidator
-     */
-    private $subject;
+    private TestingConfigurationDependentValidator $subject;
 
     protected function setUp(): void
     {

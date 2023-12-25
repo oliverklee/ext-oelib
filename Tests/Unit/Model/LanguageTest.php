@@ -12,10 +12,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class LanguageTest extends UnitTestCase
 {
-    /**
-     * @var Language
-     */
-    private $subject;
+    private Language $subject;
 
     protected function setUp(): void
     {

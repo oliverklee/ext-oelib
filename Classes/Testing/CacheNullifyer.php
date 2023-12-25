@@ -187,7 +187,7 @@ final class CacheNullifyer
     {
         $typo3Version = (new Typo3Version())->getMajorVersion();
         if (!array_key_exists($typo3Version, self::CACHE_CONFIGURATIONS)) {
-            throw new \UnexpectedValueException('Unsupported TYPO3 version: ' . $typo3Version, 1702811886);
+            throw new \UnexpectedValueException('Unsupported TYPO3 version: ' . $typo3Version, 1_702_811_886);
         }
         $this->getCacheManager()->setCacheConfigurations(self::CACHE_CONFIGURATIONS[$typo3Version]);
     }

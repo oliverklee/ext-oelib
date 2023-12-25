@@ -36,9 +36,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
     {
         parent::setUp();
 
-        $this->renderChildrenClosure = static function (): string {
-            return '';
-        };
+        $this->renderChildrenClosure = static fn (): string => '';
         $this->renderingContextMock = $this->createMock(RenderingContextInterface::class);
         $this->variableProviderMock = $this->createMock(VariableProviderInterface::class);
         $this->renderingContextMock->method('getVariableProvider')->willReturn($this->variableProviderMock);
@@ -102,7 +100,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
     {
         $this->expectExceptionCode(\UnexpectedValueException::class);
         $this->expectExceptionMessage('No settings in the variable container found.');
-        $this->expectExceptionCode(1651153736);
+        $this->expectExceptionCode(1_651_153_736);
 
         $this->variableProviderMock->method('get')->with('settings')->willReturn(null);
 
@@ -120,7 +118,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
     {
         $this->expectExceptionCode(\UnexpectedValueException::class);
         $this->expectExceptionMessage('No field "fieldsToShow" in settings found.');
-        $this->expectExceptionCode(1651154598);
+        $this->expectExceptionCode(1_651_154_598);
 
         $this->variableProviderMock->method('get')->with('settings')->willReturn([]);
 
@@ -153,7 +151,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
     {
         $this->expectExceptionCode(\UnexpectedValueException::class);
         $this->expectExceptionMessage('The setting "fieldsToShow" needs to be a string.');
-        $this->expectExceptionCode(1651155151);
+        $this->expectExceptionCode(1_651_155_151);
 
         $this->variableProviderMock->method('get')->with('settings')->willReturn(['fieldsToShow' => $value]);
 
@@ -171,7 +169,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
     {
         $this->expectExceptionCode(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The argument "fieldName" must not be empty.');
-        $this->expectExceptionCode(1651155957);
+        $this->expectExceptionCode(1_651_155_957);
 
         $this->variableProviderMock->method('get')->with('settings')->willReturn(['fieldsToShow' => 'company']);
 
@@ -189,7 +187,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
     {
         $this->expectExceptionCode(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The argument "fieldName" must not be empty.');
-        $this->expectExceptionCode(1651155957);
+        $this->expectExceptionCode(1_651_155_957);
 
         $this->variableProviderMock->method('get')->with('settings')->willReturn(['fieldsToShow' => 'company']);
 
@@ -207,7 +205,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
     {
         $this->expectExceptionCode(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The argument "fieldName" must be a string, but was array');
-        $this->expectExceptionCode(1651496544);
+        $this->expectExceptionCode(1_651_496_544);
 
         $this->variableProviderMock->method('get')->with('settings')->willReturn(['fieldsToShow' => 'company']);
 

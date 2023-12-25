@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class CurrencyMapperTest extends UnitTestCase
 {
-    /**
-     * @var CurrencyMapper
-     */
-    private $subject;
+    private CurrencyMapper $subject;
 
     protected function setUp(): void
     {

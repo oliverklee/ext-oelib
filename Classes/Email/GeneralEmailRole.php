@@ -11,15 +11,9 @@ use OliverKlee\Oelib\Interfaces\MailRole;
  */
 class GeneralEmailRole implements MailRole
 {
-    /**
-     * @var string
-     */
-    protected $emailAddress = '';
+    protected string $emailAddress;
 
-    /**
-     * @var string
-     */
-    protected $name = '';
+    protected string $name;
 
     /**
      * @param string $emailAddress

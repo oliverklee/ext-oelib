@@ -17,12 +17,12 @@ class IdentityMap
     /**
      * @var array<positive-int, AbstractModel> the items in this map with their UIDs as keys
      */
-    protected $items = [];
+    protected array $items = [];
 
     /**
      * @var int<0, max> the highest used UID
      */
-    private $highestUid = 0;
+    private int $highestUid = 0;
 
     /**
      * Adds a model to the identity map.
@@ -32,7 +32,7 @@ class IdentityMap
     public function add(AbstractModel $model): void
     {
         if (!$model->hasUid()) {
-            throw new \InvalidArgumentException('Add() requires a model that has a UID.', 1331488748);
+            throw new \InvalidArgumentException('Add() requires a model that has a UID.', 1_331_488_748);
         }
 
         $uid = $model->getUid();
@@ -54,7 +54,7 @@ class IdentityMap
     {
         // @phpstan-ignore-next-line We're testing for a contract violation here.
         if ($uid <= 0) {
-            throw new \InvalidArgumentException('$uid must be > 0.', 1331488761);
+            throw new \InvalidArgumentException('$uid must be > 0.', 1_331_488_761);
         }
 
         if (!isset($this->items[$uid])) {

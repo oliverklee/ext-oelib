@@ -16,10 +16,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class DirectPersistTest extends UnitTestCase
 {
-    /**
-     * @var DirectPersistRepository
-     */
-    private $subject;
+    private DirectPersistRepository $subject;
 
     /**
      * @var PersistenceManagerInterface&MockObject

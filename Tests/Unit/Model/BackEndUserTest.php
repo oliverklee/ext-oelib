@@ -13,10 +13,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class BackEndUserTest extends UnitTestCase
 {
-    /**
-     * @var BackEndUser
-     */
-    private $subject;
+    private BackEndUser $subject;
 
     protected function setUp(): void
     {

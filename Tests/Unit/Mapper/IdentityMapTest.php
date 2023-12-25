@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class IdentityMapTest extends UnitTestCase
 {
-    /**
-     * @var IdentityMap
-     */
-    private $subject;
+    private IdentityMap $subject;
 
     protected function setUp(): void
     {

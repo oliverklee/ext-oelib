@@ -15,10 +15,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class TestingFrameworkTest extends UnitTestCase
 {
-    /**
-     * @var TestingFramework
-     */
-    private $subject;
+    private TestingFramework $subject;
 
     protected function setUp(): void
     {

@@ -13,10 +13,7 @@ final class TestingConfigurationCheck extends AbstractConfigurationCheck
      */
     private const TEST_TABLE_NAME = 'tx_oelib_test';
 
-    /**
-     * @var string
-     */
-    private $checkMethod = '';
+    private string $checkMethod = '';
 
     public function setCheckMethod(string $method): void
     {
@@ -134,7 +131,7 @@ final class TestingConfigurationCheck extends AbstractConfigurationCheck
             default:
                 throw new \BadMethodCallException(
                     'Unknown value for the check method: "' . $this->checkMethod . '"',
-                    1616068312
+                    1_616_068_312
                 );
         }
     }

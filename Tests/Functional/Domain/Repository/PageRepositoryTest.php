@@ -14,10 +14,7 @@ final class PageRepositoryTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = ['typo3conf/ext/oelib'];
 
-    /**
-     * @var PageRepository
-     */
-    private $subject;
+    private PageRepository $subject;
 
     protected function setUp(): void
     {
@@ -34,7 +31,7 @@ final class PageRepositoryTest extends FunctionalTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$recursion must be >= 0, but actually is: -1');
-        $this->expectExceptionCode(1608389744);
+        $this->expectExceptionCode(1_608_389_744);
 
         // @phpstan-ignore-next-line We are explicitly testing the contract violation here.
         $this->subject->findWithinParentPages([], -1);

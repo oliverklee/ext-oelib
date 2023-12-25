@@ -20,10 +20,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class AbstractDataMapperTest extends UnitTestCase
 {
-    /**
-     * @var TestingMapper
-     */
-    private $subject;
+    private TestingMapper $subject;
 
     protected function setUp(): void
     {
@@ -88,7 +85,7 @@ final class AbstractDataMapperTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$data["uid"] must be a positive integer.');
-        $this->expectExceptionCode(1699655040);
+        $this->expectExceptionCode(1_699_655_040);
 
         $this->subject->getModel(['uid' => 0]);
     }
@@ -100,7 +97,7 @@ final class AbstractDataMapperTest extends UnitTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('$data["uid"] must be a positive integer.');
-        $this->expectExceptionCode(1699655040);
+        $this->expectExceptionCode(1_699_655_040);
 
         $this->subject->getModel(['uid' => -1]);
     }

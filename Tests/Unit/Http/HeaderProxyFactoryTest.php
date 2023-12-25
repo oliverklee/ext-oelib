@@ -15,10 +15,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class HeaderProxyFactoryTest extends UnitTestCase
 {
-    /**
-     * @var HeaderCollector
-     */
-    private $subject;
+    private HeaderCollector $subject;
 
     protected function setUp(): void
     {
@@ -151,7 +148,7 @@ final class HeaderProxyFactoryTest extends UnitTestCase
     public function getHeaderCollectorInNonTestModeThrowsException(): void
     {
         $this->expectException(\BadMethodCallException::class);
-        $this->expectExceptionCode(1630827563);
+        $this->expectExceptionCode(1_630_827_563);
         $this->expectExceptionMessage('getHeaderCollector() may only be called in test mode.');
 
         // new instances always have a disabled test mode

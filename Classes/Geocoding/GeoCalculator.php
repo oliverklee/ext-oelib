@@ -155,7 +155,7 @@ class GeoCalculator implements SingletonInterface
         if ($maximumDistance < 0) {
             throw new \InvalidArgumentException(
                 '$distance must be >= 0, but actually is: ' . $maximumDistance,
-                1407432668
+                1_407_432_668
             );
         }
 

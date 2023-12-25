@@ -14,10 +14,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class FrontEndUserGroupMapperTest extends UnitTestCase
 {
-    /**
-     * @var FrontEndUserGroupMapper
-     */
-    private $subject;
+    private FrontEndUserGroupMapper $subject;
 
     protected function setUp(): void
     {

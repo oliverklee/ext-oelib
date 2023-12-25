@@ -39,7 +39,7 @@ class SystemEmailFromBuilder
         if (!$this->canBuild()) {
             throw new \UnexpectedValueException(
                 'Please set a TYPO3_CONF_VARS/MAIL/defaultMailFromAddress configuration first.',
-                1542793620
+                1_542_793_620
             );
         }
 
