@@ -15,7 +15,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 final class ExtbaseConfigurationTest extends UnitTestCase
 {
     /**
-     * @var \OliverKlee\Oelib\Configuration\ExtbaseConfiguration
+     * @var ExtbaseConfiguration
      */
     private $subject;
 

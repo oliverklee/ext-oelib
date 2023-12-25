@@ -13,7 +13,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 final class ParentModel extends AbstractEntity
 {
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\OliverKlee\Oelib\Tests\Unit\Domain\Fixtures\ParentModel>
+     * @var ObjectStorage<ParentModel>
      * @Extbase\ORM\Lazy
      */
     protected $children;
