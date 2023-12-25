@@ -720,7 +720,9 @@ final class CollectionTest extends UnitTestCase
     public function sortWithTwoModelsAndSortByTitleAscendingFunctionSortsModelsByTitleAscending(): void
     {
         $this->addModelsToFixture(['Beta', 'Alpha']);
-        $this->subject->sort([$this, 'sortByTitleAscending']);
+        $this->subject->sort(function (TestingModel $firstModel, TestingModel $secondModel): int {
+            return $this->sortByTitleAscending($firstModel, $secondModel);
+        });
 
         /** @var TestingModel $firstItem */
         $firstItem = $this->subject->first();
@@ -736,7 +738,9 @@ final class CollectionTest extends UnitTestCase
     public function sortWithThreeModelsAndSortByTitleAscendingFunctionSortsModelsByTitleAscending(): void
     {
         $this->addModelsToFixture(['Zeta', 'Beta', 'Alpha']);
-        $this->subject->sort([$this, 'sortByTitleAscending']);
+        $this->subject->sort(function (TestingModel $firstModel, TestingModel $secondModel): int {
+            return $this->sortByTitleAscending($firstModel, $secondModel);
+        });
 
         /** @var TestingModel $firstItem */
         $firstItem = $this->subject->first();
@@ -752,7 +756,9 @@ final class CollectionTest extends UnitTestCase
     public function sortWithTwoModelsAndSortByTitleDescendingFunctionSortsModelsByTitleDescending(): void
     {
         $this->addModelsToFixture(['Alpha', 'Beta']);
-        $this->subject->sort([$this, 'sortByTitleDescending']);
+        $this->subject->sort(function (TestingModel $firstModel, TestingModel $secondModel): int {
+            return $this->sortByTitleDescending($firstModel, $secondModel);
+        });
 
         /** @var TestingModel $firstItem */
         $firstItem = $this->subject->first();
@@ -770,7 +776,9 @@ final class CollectionTest extends UnitTestCase
         $subject = $this->createPartialMock(Collection::class, ['markAsDirty']);
         $subject->expects(self::once())->method('markAsDirty');
 
-        $subject->sort([$this, 'sortByTitleAscending']);
+        $subject->sort(function (TestingModel $firstModel, TestingModel $secondModel): int {
+            return $this->sortByTitleAscending($firstModel, $secondModel);
+        });
     }
 
     /**

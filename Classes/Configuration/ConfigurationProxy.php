@@ -165,13 +165,7 @@ class ConfigurationProxy extends AbstractReadOnlyObjectWithPublicAccessors imple
     {
         $this->loadConfigurationLazily();
 
-        if ($this->hasConfigurationValue($key)) {
-            $result = $this->configuration[$key];
-        } else {
-            $result = '';
-        }
-
-        return $result;
+        return $this->hasConfigurationValue($key) ? $this->configuration[$key] : '';
     }
 
     /**
