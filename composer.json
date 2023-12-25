@@ -55,9 +55,6 @@
 	"replace": {
 		"typo3-ter/oelib": "self.version"
 	},
-	"suggest": {
-		"sjbr/static-info-tables": "for the country, currency and federal state data mappers"
-	},
 	"prefer-stable": true,
 	"autoload": {
 		"psr-4": {
