@@ -431,11 +431,6 @@ parameters:
 			path: Tests/Unit/DataStructures/AbstractObjectWithPublicAccessorsTest.php
 
 		-
-			message: "#^PHPDoc tag @var with type object\\|null is not subtype of type OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Model\\\\Fixtures\\\\TestingModel\\.$#"
-			count: 2
-			path: Tests/Unit/DataStructures/CollectionTest.php
-
-		-
 			message: "#^Class OliverKlee\\\\Oelib\\\\Domain\\\\Repository\\\\GermanZipCodeRepository constructor invoked with 1 parameter, 0 required\\.$#"
 			count: 1
 			path: Tests/Unit/Domain/Repository/GermanZipCodeRepositoryTest.php
