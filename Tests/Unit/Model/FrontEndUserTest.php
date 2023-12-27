@@ -20,11 +20,6 @@ final class FrontEndUserTest extends UnitTestCase
     private FrontEndUser $subject;
 
     /**
-     * @var int a backup of $GLOBALS['EXEC_TIME']
-     */
-    private $globalExecTimeBackup = 0;
-
-    /**
      * @var array<string, mixed>
      */
     private $tcaBackup = [];
@@ -35,7 +30,6 @@ final class FrontEndUserTest extends UnitTestCase
 
         $this->subject = new FrontEndUser();
 
-        $this->globalExecTimeBackup = $GLOBALS['EXEC_TIME'];
         $this->tcaBackup = $GLOBALS['TCA']['fe_users'] ?? [];
     }
 
@@ -43,7 +37,6 @@ final class FrontEndUserTest extends UnitTestCase
     {
         parent::tearDown();
         $GLOBALS['TCA']['fe_users'] = $this->tcaBackup;
-        $GLOBALS['EXEC_TIME'] = $this->globalExecTimeBackup;
     }
 
     /**

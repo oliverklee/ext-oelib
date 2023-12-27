@@ -8,6 +8,8 @@ use OliverKlee\Oelib\DataStructures\AbstractObjectWithAccessors;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Interfaces\Identity;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class represents a general domain model which is capable of lazy loading (using ghosts).
@@ -608,7 +610,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
      */
     public function setTimestamp(): void
     {
-        $timestamp = $GLOBALS['SIM_EXEC_TIME'] > 0 ? $GLOBALS['SIM_EXEC_TIME'] : 0;
+        $timestamp = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         \assert(\is_int($timestamp));
         $this->setAsInteger('tstamp', $timestamp);
     }
@@ -632,7 +634,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
             throw new \BadMethodCallException('Only new objects (without UID) may receive "crdate".', 1_331_489_449);
         }
 
-        $timestamp = $GLOBALS['SIM_EXEC_TIME'] > 0 ? $GLOBALS['SIM_EXEC_TIME'] : 0;
+        $timestamp = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
         \assert(\is_int($timestamp));
         $this->setAsInteger('crdate', $timestamp);
     }

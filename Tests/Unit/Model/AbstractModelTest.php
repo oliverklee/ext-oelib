@@ -10,6 +10,8 @@ use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Tests\Unit\Model\Fixtures\ReadOnlyModel;
 use OliverKlee\Oelib\Tests\Unit\Model\Fixtures\TestingChildModel;
 use OliverKlee\Oelib\Tests\Unit\Model\Fixtures\TestingModel;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -17,6 +19,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 final class AbstractModelTest extends UnitTestCase
 {
+    protected bool $resetSingletonInstances = true;
+
     private TestingModel $subject;
 
     protected function setUp(): void
@@ -1276,7 +1280,7 @@ final class AbstractModelTest extends UnitTestCase
         $this->subject->setTimestamp();
 
         self::assertSame(
-            $GLOBALS['SIM_EXEC_TIME'],
+            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
             $this->subject->getModificationDateAsUnixTimeStamp()
         );
     }
@@ -1327,7 +1331,7 @@ final class AbstractModelTest extends UnitTestCase
         $this->subject->setCreationDate();
 
         self::assertSame(
-            $GLOBALS['SIM_EXEC_TIME'],
+            GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
             $this->subject->getCreationDateAsUnixTimeStamp()
         );
     }
