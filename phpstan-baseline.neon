@@ -456,11 +456,6 @@ parameters:
 			path: Tests/Unit/Model/FrontEndUserTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Model\\\\FrontEndUserTest\\:\\:\\$globalExecTimeBackup \\(int\\) does not accept mixed\\.$#"
-			count: 1
-			path: Tests/Unit/Model/FrontEndUserTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Model\\\\FrontEndUserTest\\:\\:\\$tcaBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
 			count: 1
 			path: Tests/Unit/Model/FrontEndUserTest.php

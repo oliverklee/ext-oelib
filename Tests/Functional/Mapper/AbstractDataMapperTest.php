@@ -14,6 +14,7 @@ use OliverKlee\Oelib\Tests\Unit\Mapper\Fixtures\TestingMapper;
 use OliverKlee\Oelib\Tests\Unit\Model\Fixtures\ReadOnlyModel;
 use OliverKlee\Oelib\Tests\Unit\Model\Fixtures\TestingChildModel;
 use OliverKlee\Oelib\Tests\Unit\Model\Fixtures\TestingModel;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -1786,7 +1787,10 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'foo', 'tstamp' => $GLOBALS['SIM_EXEC_TIME']])
+            $connection->count('*', 'tx_oelib_test', [
+                'title' => 'foo',
+                'tstamp' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+            ])
         );
     }
 
@@ -1805,7 +1809,10 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'foo', 'tstamp' => $GLOBALS['SIM_EXEC_TIME']])
+            $connection->count('*', 'tx_oelib_test', [
+                'title' => 'foo',
+                'tstamp' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+            ])
         );
     }
 
@@ -1973,7 +1980,10 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'bar', 'tstamp' => $GLOBALS['SIM_EXEC_TIME']])
+            $connection->count('*', 'tx_oelib_test', [
+                'title' => 'bar',
+                'tstamp' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+            ])
         );
     }
 
@@ -1997,7 +2007,11 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $connection->count('*', 'tx_oelib_test', ['tstamp' => $GLOBALS['SIM_EXEC_TIME']])
+            $connection->count(
+                '*',
+                'tx_oelib_test',
+                ['tstamp' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')]
+            )
         );
     }
 
@@ -2203,7 +2217,10 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
         self::assertSame(
             1,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'bar', 'tstamp' => $GLOBALS['SIM_EXEC_TIME']])
+            $connection->count('*', 'tx_oelib_test', [
+                'title' => 'bar',
+                'tstamp' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+            ])
         );
     }
 
@@ -2225,7 +2242,10 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
         self::assertSame(
             1,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'bar', 'crdate' => $GLOBALS['SIM_EXEC_TIME']])
+            $connection->count('*', 'tx_oelib_test', [
+                'title' => 'bar',
+                'crdate' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+            ])
         );
     }
 
@@ -2242,7 +2262,10 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'foo', 'tstamp' => $GLOBALS['SIM_EXEC_TIME']])
+            $connection->count('*', 'tx_oelib_test', [
+                'title' => 'foo',
+                'tstamp' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+            ])
         );
 
         $model = $this->subject->find($uid);
@@ -2252,7 +2275,10 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'foo', 'tstamp' => $GLOBALS['SIM_EXEC_TIME']])
+            $connection->count('*', 'tx_oelib_test', [
+                'title' => 'foo',
+                'tstamp' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
+            ])
         );
     }
 

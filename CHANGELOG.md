@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add Rector to our toolchain (#1659, #1662)
 
 ### Changed
+- Use the `Context` for getting the current timestamp (#1682)
 - Use more native type declarations (#1664, #1665)
 - Upgrade to PHPUnit 9 (#1634)
 - Make `TestingFramework::isLoggedIn()` private (#1622)
