@@ -117,7 +117,7 @@ final class TestingFramework
     private static bool $hooksHaveBeenRetrieved = false;
 
     /**
-     * @var array<string, string|bool|null>|null
+     * @var array<mixed>|null
      */
     private ?array $serverVariablesBackup = null;
 
@@ -604,7 +604,7 @@ final class TestingFramework
         WritableEnvironment::restoreCurrentScript();
         GeneralUtility::flushInternalRuntimeCaches();
         if (\is_array($this->serverVariablesBackup)) {
-            $GLOBALS['_SERVER'] = $this->serverVariablesBackup;
+            $_SERVER = $this->serverVariablesBackup;
             $this->serverVariablesBackup = null;
         }
 
@@ -796,7 +796,7 @@ routes: {  }";
     private function setPageIndependentGlobalsForFakeFrontEnd(): void
     {
         if (!\is_array($this->serverVariablesBackup)) {
-            $this->serverVariablesBackup = $GLOBALS['_SERVER'] ?? null;
+            $this->serverVariablesBackup = $_SERVER;
         }
 
         GeneralUtility::flushInternalRuntimeCaches();
@@ -806,7 +806,7 @@ routes: {  }";
         $documentRoot = '/var/www/html/public';
         $relativeScriptPath = '/index.php';
         $absoluteScriptPath = $documentRoot . '/index.php';
-        $server = &$GLOBALS['_SERVER'];
+        $server = &$_SERVER;
 
         $server['DOCUMENT_ROOT'] = $documentRoot;
         $server['HOSTNAME'] = $hostName;
@@ -837,7 +837,7 @@ routes: {  }";
             $slug .= $pageUid;
         }
 
-        $GLOBALS['_SERVER']['REQUEST_URI'] = $slug;
+        $_SERVER['REQUEST_URI'] = $slug;
     }
 
     /**
@@ -887,8 +887,8 @@ routes: {  }";
         // avoid cookies from the phpMyAdmin extension
         $GLOBALS['PHP_UNIT_TEST_RUNNING'] = true;
 
-        $GLOBALS['_POST']['FE_SESSION_KEY'] = '';
-        $GLOBALS['_GET']['FE_SESSION_KEY'] = '';
+        $_POST['FE_SESSION_KEY'] = '';
+        $_GET['FE_SESSION_KEY'] = '';
     }
 
     // FE user activities

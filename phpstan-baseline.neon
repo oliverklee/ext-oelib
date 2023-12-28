@@ -166,57 +166,12 @@ parameters:
 			path: Classes/Testing/TestingFramework.php
 
 		-
-			message: "#^Cannot access offset 'DOCUMENT_ROOT' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
 			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
 			count: 1
 			path: Classes/Testing/TestingFramework.php
 
 		-
 			message: "#^Cannot access offset 'FE' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'FE_SESSION_KEY' on mixed\\.$#"
-			count: 2
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'HOSTNAME' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'HTTP' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'HTTP_ACCEPT_ENCODING' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'HTTP_ACCEPT_LANGUAGE' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'HTTP_HOST' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'HTTP_REFERER' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'HTTP_USER_AGENT' on mixed\\.$#"
 			count: 1
 			path: Classes/Testing/TestingFramework.php
 
@@ -232,61 +187,6 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'Objects' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'PHP_SELF' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'QUERY_STRING' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'REMOTE_ADDR' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'REMOTE_HOST' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'REQUEST_SCHEME' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'REQUEST_URI' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'SCRIPT_FILENAME' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'SCRIPT_NAME' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'SERVER_ADDR' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'SERVER_NAME' on mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
-			message: "#^Cannot access offset 'SERVER_SOFTWARE' on mixed\\.$#"
 			count: 1
 			path: Classes/Testing/TestingFramework.php
 
@@ -356,11 +256,6 @@ parameters:
 			path: Classes/Testing/TestingFramework.php
 
 		-
-			message: "#^Property OliverKlee\\\\Oelib\\\\Testing\\\\TestingFramework\\:\\:\\$serverVariablesBackup \\(array\\<string, bool\\|string\\|null\\>\\|null\\) does not accept mixed\\.$#"
-			count: 1
-			path: Classes/Testing/TestingFramework.php
-
-		-
 			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
 			count: 1
 			path: Classes/Validation/AbstractConfigurationDependentValidator.php
@@ -379,16 +274,6 @@ parameters:
 			message: "#^PHPDoc tag @var with type OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Model\\\\Fixtures\\\\TestingModel is not subtype of type OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Model\\\\Fixtures\\\\TestingChildModel\\|null\\.$#"
 			count: 2
 			path: Tests/Functional/Mapper/AbstractDataMapperTest.php
-
-		-
-			message: "#^Cannot access offset 'HTTP_HOST' on mixed\\.$#"
-			count: 4
-			path: Tests/Functional/Testing/TestingFrameworkTest.php
-
-		-
-			message: "#^Cannot access offset 'QUERY_STRING' on mixed\\.$#"
-			count: 2
-			path: Tests/Functional/Testing/TestingFrameworkTest.php
 
 		-
 			message: "#^Casting to int something that's already int\\.$#"
