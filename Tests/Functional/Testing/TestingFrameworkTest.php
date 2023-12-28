@@ -657,12 +657,12 @@ final class TestingFrameworkTest extends FunctionalTestCase
      */
     public function cleanUpWithoutDatabaseRestoresHttpHostAfterCreateFakeFrontEnd(): void
     {
-        $previous = $GLOBALS['_SERVER']['HTTP_HOST'] ?? null;
+        $previous = $_SERVER['HTTP_HOST'] ?? null;
         $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());
 
         $this->subject->cleanUpWithoutDatabase();
 
-        self::assertSame($previous, $GLOBALS['_SERVER']['HTTP_HOST'] ?? null);
+        self::assertSame($previous, $_SERVER['HTTP_HOST'] ?? null);
     }
 
     /**
@@ -684,7 +684,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
     public function cleanUpWithoutDatabaseReplacesExistingSystemEnvironmentVariables(): void
     {
         $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());
-        $GLOBALS['_SERVER']['QUERY_STRING'] = 'hello.php';
+        $_SERVER['QUERY_STRING'] = 'hello.php';
         $previous = GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST');
 
         $this->subject->cleanUpWithoutDatabase();
@@ -1471,12 +1471,12 @@ final class TestingFrameworkTest extends FunctionalTestCase
     public function createFakeFrontSetsDummyGlobalHttpHost(): void
     {
         $expected = 'typo3-test.dev';
-        $previous = $GLOBALS['_SERVER']['HTTP_HOST'] ?? null;
+        $previous = $_SERVER['HTTP_HOST'] ?? null;
         self::assertNotSame($expected, $previous);
 
         $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());
 
-        self::assertSame($expected, $GLOBALS['_SERVER']['HTTP_HOST'] ?? null);
+        self::assertSame($expected, $_SERVER['HTTP_HOST'] ?? null);
     }
 
     /**
@@ -1497,7 +1497,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
      */
     public function createFakeFrontEndReplacesExistingSystemEnvironmentVariables(): void
     {
-        $GLOBALS['_SERVER']['QUERY_STRING'] = 'hello.php';
+        $_SERVER['QUERY_STRING'] = 'hello.php';
         $previous = GeneralUtility::getIndpEnv('QUERY_STRING');
 
         $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());
