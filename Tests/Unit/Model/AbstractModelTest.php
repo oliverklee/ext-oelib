@@ -11,6 +11,7 @@ use OliverKlee\Oelib\Tests\Unit\Model\Fixtures\ReadOnlyModel;
 use OliverKlee\Oelib\Tests\Unit\Model\Fixtures\TestingChildModel;
 use OliverKlee\Oelib\Tests\Unit\Model\Fixtures\TestingModel;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\DateTimeAspect;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -27,7 +28,8 @@ final class AbstractModelTest extends UnitTestCase
     {
         parent::setUp();
 
-        $GLOBALS['SIM_EXEC_TIME'] = 1_524_751_343;
+        GeneralUtility::makeInstance(Context::class)
+            ->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('2018-04-26 12:42:23')));
 
         $this->subject = new TestingModel();
     }
