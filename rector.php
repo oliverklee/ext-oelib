@@ -22,7 +22,7 @@ return static function (RectorConfig $rectorConfig): void {
     // $parameters->set(Typo3Option::TYPOSCRIPT_INDENT_SIZE, 2);
 
     $rectorConfig->sets([
-        Typo3SetList::TYPO3_104,
+        Typo3SetList::TYPO3_11,
         // Typo3LevelSetList::UP_TO_TYPO3_11,
 
         // LevelSetList::UP_TO_PHP_73,
