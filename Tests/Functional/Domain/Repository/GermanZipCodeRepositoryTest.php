@@ -25,7 +25,7 @@ final class GermanZipCodeRepositoryTest extends FunctionalTestCase
 
         $this->subject = $this->get(GermanZipCodeRepository::class);
 
-        $this->importDataSet(__DIR__ . '/Fixtures/ZipCodes.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/ZipCodes.csv');
     }
 
     /**
