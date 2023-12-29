@@ -33,7 +33,7 @@ final class CountryMapperTest extends FunctionalTestCase
     {
         $connection = $this->getConnectionPool()->getConnectionForTable('static_countries');
         if ($connection->count('*', 'static_countries', []) === 0) {
-            $this->importDataSet(__DIR__ . '/../Fixtures/Countries.xml');
+            $this->importCSVDataSet(__DIR__ . '/../Fixtures/Countries.csv');
         }
     }
 
