@@ -21,7 +21,7 @@ final class PageRepositoryTest extends FunctionalTestCase
         parent::setUp();
 
         $this->subject = new PageRepository();
-        $this->importDataSet(__DIR__ . '/Fixtures/NestedPages.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/NestedPages.csv');
     }
 
     /**
