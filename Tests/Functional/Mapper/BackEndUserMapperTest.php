@@ -32,7 +32,7 @@ final class BackEndUserMapperTest extends FunctionalTestCase
      */
     public function loadForExistingRecordLoadsScalarData(): void
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/BackEndUsers.xml');
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/BackEndUsers.csv');
         $model = $this->subject->find(1);
 
         $this->subject->load($model);
