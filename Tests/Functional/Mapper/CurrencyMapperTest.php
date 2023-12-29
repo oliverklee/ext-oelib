@@ -34,7 +34,7 @@ final class CurrencyMapperTest extends FunctionalTestCase
     {
         $connection = $this->getConnectionPool()->getConnectionForTable('static_currencies');
         if ($connection->count('*', 'static_currencies', []) === 0) {
-            $this->importCSVDataSet(__DIR__ . '/../Fixtures/Currencies.csv');
+            $this->importCSVDataSet(__DIR__ . '/Fixtures/Currencies.csv');
         }
     }
 

@@ -26,7 +26,7 @@ final class TemplateRegistryTest extends FunctionalTestCase
     {
         self::assertInstanceOf(
             Template::class,
-            TemplateRegistry::get('EXT:oelib/Tests/Functional/Fixtures/Template.html')
+            TemplateRegistry::get('EXT:oelib/Tests/Functional/Templating/Fixtures/Template.html')
         );
     }
 
@@ -36,8 +36,8 @@ final class TemplateRegistryTest extends FunctionalTestCase
     public function getForExistingTemplateFileNameCalledTwoTimesReturnsNewInstance(): void
     {
         self::assertNotSame(
-            TemplateRegistry::get('EXT:oelib/Tests/Functional/Fixtures/Template.html'),
-            TemplateRegistry::get('EXT:oelib/Tests/Functional/Fixtures/Template.html')
+            TemplateRegistry::get('EXT:oelib/Tests/Functional/Templating/Fixtures/Template.html'),
+            TemplateRegistry::get('EXT:oelib/Tests/Functional/Templating/Fixtures/Template.html')
         );
     }
 
@@ -46,7 +46,7 @@ final class TemplateRegistryTest extends FunctionalTestCase
      */
     public function getForExistingTemplateFileNameReturnsProcessedTemplate(): void
     {
-        $template = TemplateRegistry::get('EXT:oelib/Tests/Functional/Fixtures/Template.html');
+        $template = TemplateRegistry::get('EXT:oelib/Tests/Functional/Templating/Fixtures/Template.html');
 
         self::assertSame(
             "Hello world!\n",

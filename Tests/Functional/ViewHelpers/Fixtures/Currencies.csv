@@ -1,0 +1,8 @@
+"static_currencies"
+,"uid","cu_iso_3","cu_iso_nr","cu_name_en","cu_symbol_left","cu_thousands_point","cu_decimal_digits","cu_sub_divisor","cu_decimal_point","cu_symbol_right"
+,33,"CLP",152,"Chilean Peso","$",".",0,1,"",""
+,40,"CZK",203,"Czech koruna","",".",2,100,",","Kč"
+,49,"EUR",978,"Euro","€",".",2,100,",",""
+,81,"KWD",414,"Kuwaiti dinar","KD",".",3,1000,",",""
+,155,"USD",840,"US dollar","$",",",2,100,".",""
+,173,"MGA",969,"Malagasy ariary","",".",1,5,",",""
