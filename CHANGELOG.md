@@ -11,7 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 - Convert the DB fixtures from XML to CSV
-  (#1689,#1690, #1692, #1693, #1694, #1695)
+  (#1689,#1690, #1692, #1693, #1694, #1695, #1696)
 - Use the `Context` for getting the current timestamp (#1682, #1684)
 - Use more native type declarations (#1664, #1665)
 - Upgrade to PHPUnit 9 (#1634)

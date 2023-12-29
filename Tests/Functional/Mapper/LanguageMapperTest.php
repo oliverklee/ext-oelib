@@ -32,7 +32,7 @@ final class LanguageMapperTest extends FunctionalTestCase
     {
         $connection = $this->getConnectionPool()->getConnectionForTable('static_languages');
         if ($connection->count('*', 'static_languages', []) === 0) {
-            $this->importCSVDataSet(__DIR__ . '/../Fixtures/Languages.csv');
+            $this->importCSVDataSet(__DIR__ . '/Fixtures/Languages.csv');
         }
     }
 

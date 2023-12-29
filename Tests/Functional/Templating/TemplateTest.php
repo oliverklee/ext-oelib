@@ -32,7 +32,7 @@ final class TemplateTest extends FunctionalTestCase
      */
     public function processTemplateFromFileProcessesTemplateFromFile(): void
     {
-        $this->subject->processTemplateFromFile('EXT:oelib/Tests/Functional/Fixtures/Template.html');
+        $this->subject->processTemplateFromFile('EXT:oelib/Tests/Functional/Templating/Fixtures/Template.html');
 
         self::assertSame("Hello world!\n", $this->subject->render());
     }
