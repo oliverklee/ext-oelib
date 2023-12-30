@@ -1339,7 +1339,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
             'REMOTE_HOST' => ['REMOTE_HOST', ''],
             'HTTP_USER_AGENT' => [
                 'HTTP_USER_AGENT',
-                'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:93.0) Gecko/20100101 Firefox/93.0',
+                'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:121.0) Gecko/20100101 Firefox/121.0',
             ],
             'HTTP_ACCEPT_LANGUAGE' => ['HTTP_ACCEPT_LANGUAGE', 'de,en-US;q=0.7,en;q=0.3'],
             'HTTP_ACCEPT_ENCODING' => ['HTTP_ACCEPT_ENCODING', 'gzip, deflate, br'],

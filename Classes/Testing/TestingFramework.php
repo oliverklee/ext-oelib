@@ -803,7 +803,7 @@ routes: {  }";
         GeneralUtility::setIndpEnv('HTTP_REFERER', $this->getFakeSiteUrl());
         GeneralUtility::setIndpEnv(
             'HTTP_USER_AGENT',
-            'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:93.0) Gecko/20100101 Firefox/93.0'
+            'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:121.0) Gecko/20100101 Firefox/121.0'
         );
         GeneralUtility::setIndpEnv('PHP_SELF', '/index.php');
         GeneralUtility::setIndpEnv('QUERY_STRING', '');
