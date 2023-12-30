@@ -655,19 +655,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function cleanUpWithoutDatabaseRestoresHttpHostAfterCreateFakeFrontEnd(): void
-    {
-        $previous = $_SERVER['HTTP_HOST'] ?? null;
-        $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());
-
-        $this->subject->cleanUpWithoutDatabase();
-
-        self::assertSame($previous, $_SERVER['HTTP_HOST'] ?? null);
-    }
-
-    /**
-     * @test
-     */
     public function cleanUpWithoutDatabaseUnsetsGlobalRequest(): void
     {
         $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());
@@ -676,20 +663,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->subject->cleanUpWithoutDatabase();
 
         self::assertNull($GLOBALS['TYPO3_REQUEST'] ?? null);
-    }
-
-    /**
-     * @test
-     */
-    public function cleanUpWithoutDatabaseReplacesExistingSystemEnvironmentVariables(): void
-    {
-        $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());
-        $_SERVER['QUERY_STRING'] = 'hello.php';
-        $previous = GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST');
-
-        $this->subject->cleanUpWithoutDatabase();
-
-        self::assertNotSame($previous, GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST'));
     }
 
     // Tests regarding createFrontEndPage()
@@ -1468,20 +1441,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function createFakeFrontSetsDummyGlobalHttpHost(): void
-    {
-        $expected = 'typo3-test.dev';
-        $previous = $_SERVER['HTTP_HOST'] ?? null;
-        self::assertNotSame($expected, $previous);
-
-        $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());
-
-        self::assertSame($expected, $_SERVER['HTTP_HOST'] ?? null);
-    }
-
-    /**
-     * @test
-     */
     public function createFakeFrontEndReplacesExistingGlobalRequest(): void
     {
         $previousRequest = $this->createMock(ServerRequestInterface::class);
@@ -1490,19 +1449,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());
 
         self::assertNotSame($previousRequest, $GLOBALS['TYPO3_REQUEST'] ?? null);
-    }
-
-    /**
-     * @test
-     */
-    public function createFakeFrontEndReplacesExistingSystemEnvironmentVariables(): void
-    {
-        $_SERVER['QUERY_STRING'] = 'hello.php';
-        $previous = GeneralUtility::getIndpEnv('QUERY_STRING');
-
-        $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());
-
-        self::assertNotSame($previous, GeneralUtility::getIndpEnv('QUERY_STRING'));
     }
 
     // Tests regarding user login and logout

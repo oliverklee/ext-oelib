@@ -117,11 +117,6 @@ final class TestingFramework
     private static bool $hooksHaveBeenRetrieved = false;
 
     /**
-     * @var array<mixed>|null
-     */
-    private ?array $serverVariablesBackup = null;
-
-    /**
      * This testing framework can be instantiated for one extension at a time.
      * Example: In your testcase, you'll have something similar to this line of code:
      *
@@ -603,10 +598,6 @@ final class TestingFramework
         $this->discardFakeFrontEnd();
         WritableEnvironment::restoreCurrentScript();
         GeneralUtility::flushInternalRuntimeCaches();
-        if (\is_array($this->serverVariablesBackup)) {
-            $_SERVER = $this->serverVariablesBackup;
-            $this->serverVariablesBackup = null;
-        }
 
         foreach ($this->getHooks() as $hook) {
             if (method_exists($hook, 'cleanUp')) {
@@ -795,10 +786,6 @@ routes: {  }";
 
     private function setPageIndependentGlobalsForFakeFrontEnd(): void
     {
-        if (!\is_array($this->serverVariablesBackup)) {
-            $this->serverVariablesBackup = $_SERVER;
-        }
-
         GeneralUtility::flushInternalRuntimeCaches();
         unset($GLOBALS['TYPO3_REQUEST']);
 
@@ -806,26 +793,28 @@ routes: {  }";
         $documentRoot = '/var/www/html/public';
         $relativeScriptPath = '/index.php';
         $absoluteScriptPath = $documentRoot . '/index.php';
-        $server = &$_SERVER;
 
-        $server['DOCUMENT_ROOT'] = $documentRoot;
-        $server['HOSTNAME'] = $hostName;
-        $server['HTTP'] = 'off';
-        $server['HTTP_ACCEPT_ENCODING'] = 'gzip, deflate, br';
-        $server['HTTP_ACCEPT_LANGUAGE'] = 'de,en-US;q=0.7,en;q=0.3';
-        $server['HTTP_HOST'] = $hostName;
-        $server['HTTP_REFERER'] = $this->getFakeSiteUrl();
-        $server['HTTP_USER_AGENT'] = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:93.0) Gecko/20100101 Firefox/93.0';
-        $server['PHP_SELF'] = '/index.php';
-        $server['QUERY_STRING'] = '';
-        $server['REMOTE_ADDR'] = '127.0.0.1';
-        $server['REMOTE_HOST'] = '';
-        $server['REQUEST_SCHEME'] = 'http';
-        $server['SCRIPT_FILENAME'] = $absoluteScriptPath;
-        $server['SCRIPT_NAME'] = $relativeScriptPath;
-        $server['SERVER_ADDR'] = '127.0.0.1';
-        $server['SERVER_NAME'] = $hostName;
-        $server['SERVER_SOFTWARE'] = 'Apache/2.4.48 (Debian)';
+        GeneralUtility::setIndpEnv('DOCUMENT_ROOT', $documentRoot);
+        GeneralUtility::setIndpEnv('HOSTNAME', $hostName);
+        GeneralUtility::setIndpEnv('HTTP', 'off');
+        GeneralUtility::setIndpEnv('HTTP_ACCEPT_ENCODING', 'gzip, deflate, br');
+        GeneralUtility::setIndpEnv('HTTP_ACCEPT_LANGUAGE', 'de,en-US;q=0.7,en;q=0.3');
+        GeneralUtility::setIndpEnv('HTTP_HOST', $hostName);
+        GeneralUtility::setIndpEnv('HTTP_REFERER', $this->getFakeSiteUrl());
+        GeneralUtility::setIndpEnv(
+            'HTTP_USER_AGENT',
+            'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:93.0) Gecko/20100101 Firefox/93.0'
+        );
+        GeneralUtility::setIndpEnv('PHP_SELF', '/index.php');
+        GeneralUtility::setIndpEnv('QUERY_STRING', '');
+        GeneralUtility::setIndpEnv('REMOTE_ADDR', '127.0.0.1');
+        GeneralUtility::setIndpEnv('REMOTE_HOST', '');
+        GeneralUtility::setIndpEnv('REQUEST_SCHEME', 'http');
+        GeneralUtility::setIndpEnv('SCRIPT_FILENAME', $absoluteScriptPath);
+        GeneralUtility::setIndpEnv('SCRIPT_NAME', $relativeScriptPath);
+        GeneralUtility::setIndpEnv('SERVER_ADDR', '127.0.0.1');
+        GeneralUtility::setIndpEnv('SERVER_NAME', $hostName);
+        GeneralUtility::setIndpEnv('SERVER_SOFTWARE', 'Apache/2.4.48 (Debian)');
 
         WritableEnvironment::setCurrentScript($absoluteScriptPath);
     }
