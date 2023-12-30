@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add Rector to our toolchain (#1659, #1662)
 
 ### Changed
+- Update the faked user agent in the testing framework (#1700)
 - Use `GeneralUtility::setIndpEnv` instead of server/request globals (#1699)
 - Convert the DB fixtures from XML to CSV
   (#1689,#1690, #1692, #1693, #1694, #1695, #1696)
