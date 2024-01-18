@@ -55,7 +55,7 @@ jobs:
       - name: "Show the Composer configuration"
         run: composer config --global --list
       - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: "php${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}"
           path: ~/.cache/composer
@@ -96,7 +96,7 @@ jobs:
       - name: "Show the Composer configuration"
         run: composer config --global --list
       - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: "php${{ matrix.php-version }}-typo3${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-${{ hashFiles('**/composer.json') }}"
           path: ~/.cache/composer
@@ -198,7 +198,7 @@ jobs:
       - name: "Show the Composer configuration"
         run: composer config --global --list
       - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: "php${{ matrix.php-version }}-typo3${{ matrix.typo3-version }}-${{ matrix.composer-dependencies }}-composer-${{ hashFiles('**/composer.json') }}"
           path: ~/.cache/composer
