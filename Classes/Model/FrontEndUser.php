@@ -208,9 +208,9 @@ class FrontEndUser extends AbstractModel implements MailRole, Address
     }
 
     /**
-     * Gets this user's e-mail address.
+     * Gets this user's email address.
      *
-     * @return string this user's e-mail address, may be empty
+     * @return string this user's email address, may be empty
      */
     public function getEmailAddress(): string
     {
@@ -218,9 +218,9 @@ class FrontEndUser extends AbstractModel implements MailRole, Address
     }
 
     /**
-     * Checks whether this user has a non-empty e-mail address set.
+     * Checks whether this user has a non-empty email address set.
      *
-     * @return bool TRUE if this user has an e-mail address set, FALSE
+     * @return bool TRUE if this user has an email address set, FALSE
      *                 otherwise
      */
     public function hasEmailAddress(): bool
@@ -229,9 +229,9 @@ class FrontEndUser extends AbstractModel implements MailRole, Address
     }
 
     /**
-     * Sets the e-mail address.
+     * Sets the email address.
      *
-     * @param string $eMailAddress the e-mail address to set, may be empty
+     * @param string $eMailAddress the email address to set, may be empty
      */
     public function setEmailAddress(string $eMailAddress): void
     {

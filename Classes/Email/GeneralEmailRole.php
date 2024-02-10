@@ -22,9 +22,9 @@ class GeneralEmailRole implements MailRole
     }
 
     /**
-     * Returns the e-mail address of the e-mail role.
+     * Returns the email address of the email role.
      *
-     * @return string the e-mail address of the e-mail role, might be empty
+     * @return string the email address of the email role, might be empty
      */
     public function getEmailAddress(): string
     {
@@ -32,9 +32,9 @@ class GeneralEmailRole implements MailRole
     }
 
     /**
-     * Returns the real name of the e-mail role.
+     * Returns the real name of the email role.
      *
-     * @return string the real name of the e-mail role, might be empty
+     * @return string the real name of the email role, might be empty
      */
     public function getName(): string
     {
