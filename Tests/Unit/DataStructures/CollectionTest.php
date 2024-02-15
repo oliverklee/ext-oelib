@@ -682,9 +682,10 @@ final class CollectionTest extends UnitTestCase
     public function sortWithTwoModelsAndSortByTitleAscendingFunctionSortsModelsByTitleAscending(): void
     {
         $this->addModelsToFixture(['Beta', 'Alpha']);
-        $this->subject->sort(function (TestingModel $firstModel, TestingModel $secondModel): int {
-            return $this->sortByTitleAscending($firstModel, $secondModel);
-        });
+        $this->subject->sort(fn (
+            TestingModel $firstModel,
+            TestingModel $secondModel
+        ): int => $this->sortByTitleAscending($firstModel, $secondModel));
 
         /** @var TestingModel $firstItem */
         $firstItem = $this->subject->first();
@@ -700,9 +701,10 @@ final class CollectionTest extends UnitTestCase
     public function sortWithThreeModelsAndSortByTitleAscendingFunctionSortsModelsByTitleAscending(): void
     {
         $this->addModelsToFixture(['Zeta', 'Beta', 'Alpha']);
-        $this->subject->sort(function (TestingModel $firstModel, TestingModel $secondModel): int {
-            return $this->sortByTitleAscending($firstModel, $secondModel);
-        });
+        $this->subject->sort(fn (
+            TestingModel $firstModel,
+            TestingModel $secondModel
+        ): int => $this->sortByTitleAscending($firstModel, $secondModel));
 
         /** @var TestingModel $firstItem */
         $firstItem = $this->subject->first();
@@ -718,9 +720,10 @@ final class CollectionTest extends UnitTestCase
     public function sortWithTwoModelsAndSortByTitleDescendingFunctionSortsModelsByTitleDescending(): void
     {
         $this->addModelsToFixture(['Alpha', 'Beta']);
-        $this->subject->sort(function (TestingModel $firstModel, TestingModel $secondModel): int {
-            return $this->sortByTitleDescending($firstModel, $secondModel);
-        });
+        $this->subject->sort(fn (
+            TestingModel $firstModel,
+            TestingModel $secondModel
+        ): int => $this->sortByTitleDescending($firstModel, $secondModel));
 
         /** @var TestingModel $firstItem */
         $firstItem = $this->subject->first();
@@ -738,9 +741,10 @@ final class CollectionTest extends UnitTestCase
         $subject = $this->createPartialMock(Collection::class, ['markAsDirty']);
         $subject->expects(self::once())->method('markAsDirty');
 
-        $subject->sort(function (TestingModel $firstModel, TestingModel $secondModel): int {
-            return $this->sortByTitleAscending($firstModel, $secondModel);
-        });
+        $subject->sort(fn (
+            TestingModel $firstModel,
+            TestingModel $secondModel
+        ): int => $this->sortByTitleAscending($firstModel, $secondModel));
     }
 
     /**
