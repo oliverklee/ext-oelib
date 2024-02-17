@@ -65,7 +65,7 @@ Bug fixes:
 - [#5730] Fix deprecation log warnings in TYPO3 7LTS
 - [#5696] Framework crashes with Redis rootline cache
 - [#5691] Warning about headers already sent when running the tests
-- [#5683] E-mail salutation is in German even for English BE
+- [#5683] Email salutation is in German even for English BE
 - [#5668] 1:n associations also load deleted models
 - [#5661] Fix the static-info-tables dependency in the composer.json
 - [#5411] Test failure if no FE user records are in the DB
@@ -223,11 +223,11 @@ Changes:
 - [#5114] Bugfix: Crash in AbstractMailer in PHP 5.3
 - [#4155] Cleanup: Deprecate templatehelper::getFeUserUid
 - [#5052] Cleanup: Deprecate TemplateHelper::createRestrictedImage
-- [#5111] Feature: Check for empty or invalid e-mail addresses when sending e-mails
+- [#5111] Feature: Check for empty or invalid email addresses when sending emails
 - [#5107] Bugfix: Drop the use of forceReturnPath
 - [#5106] Change: Add more specific exceptions to Tx_Oelib_AbstractMailer::send
-- [#5104] Bugfix: E-Mail attachments with file name with content from memory are read from disk
-- [#5103] Bugfix: TestingFramework::cleanUp needs to discard stored e-mails
+- [#5104] Bugfix: EMail attachments with file name with content from memory are read from disk
+- [#5103] Bugfix: TestingFramework::cleanUp needs to discard stored emails
 - [#5100] Feature: Add convenience function for accessing sent SwiftMails
 - [#4283] Feature: Delegate to SwiftMailer
 - [#5099] Cleanup: Move the require calls to inside methods
@@ -418,17 +418,17 @@ Changes:
 - [#3701] Feature: Add Model::markAsVisible and ::markAsHidden
 - [#3679] Change: Update all PEAR and emogrifier classes to the latest versions
 - [#3650] Fix: Objects overwrite/delete each other's configuration arrays
-- [#3677] Fix: Return-path in e-mails has additional <> around it when forceReturnPath is used
+- [#3677] Fix: Return-path in emails has additional <> around it when forceReturnPath is used
 - [#3670] Fix: PEAR classes can get included twice
 - [#3673] Fix: Model::existsKey returns false for null data
 - [#3556] Fix: Use PATH_tslib in require once for tslib_content
 - [#3550] Fix: getUid should return an integer, not a string
 - [#3659] Fix: getSubpart('foo') fails for certain characters within the subpart delimiters
-- [#3372] Fix: Umlauts not encoded correctly in the e-mail headers (again)
+- [#3372] Fix: Umlauts not encoded correctly in the email headers (again)
 - [#3656] Fix: Don't use TYPO3_branch or compat_version
 - [#3657] Fix: ObjectFactory::make needs to pass an array to call_user_func_array
 - [#3641] Change: Update all copyrights to 2010
-- [#3322] Fix: Return-Path needs to have <> around the e-mail address
+- [#3322] Fix: Return-Path needs to have <> around the email address
 - [#3606] Feature: Add a getter for the last login to the FE user model
 - [#3562] Fix: Warning in EM: XCLASS line for PriceViewHelper is wrong
 - [#3551] Fix: The configuration registry needs to make sure the configuration is loaded in the FE
@@ -465,18 +465,18 @@ Changes:
 - [#3370] Fix: Models should be marked as dead on __destruct
 - [#3384] Fix: Add XCLASS stuff for the PEAR and emogrifier classes
 - [#3360] Feature: Only list aux records from the GRSP in the FE editor
-- [#3335] Fix: The e-mail function tests need to take forceCharset into account
+- [#3335] Fix: The email function tests need to take forceCharset into account
 - [#3359] Feature: Add a function for reading the current GRSP
 - [#3354] Feature: add findByWhereClause to mapper
 - [#3356] Feature: The mappers in test mode should ignore all non-dummy records
 - [#3272] Feature: Provide a parameter "sorting" to mapper::findAll
-- [#3338] Fix: E-Mails still contain CRLF
+- [#3338] Fix: EMails still contain CRLF
 - [#3281] Fix: Free memory more agressively
 - [#3340] Change: Move the creation of the headers and the body out of the loop in abstractMailer::send
 - [#3328] Fix: Ghost acquired via getNewGhost must not be loaded
 - [#3317] Fix: Check for object comparisons / recursive nesting
-- [#3320] Fix: Unbreak GMX by changing the default encoding for e-mails from base64 back to quoted-printable
-- [#3319] Change: Use only LF in the e-mail body
+- [#3320] Fix: Unbreak GMX by changing the default encoding for emails from base64 back to quoted-printable
+- [#3319] Change: Use only LF in the email body
 - [#3250] Change: Throw an exception when trying to save a model that has been created using getNewGhost or getLoadedTestingModel
 - [#3239] Change: Test that newly saved models are registered in the mapper
 - [#920] Fix: Umlauts in sender names are broken
@@ -485,15 +485,15 @@ Changes:
 - [#3218] Feature: When calling mail, exhibit the same behavior as t3lib_htmlmail::sendTheMail
 - [#3917] Fix: A data mapper in testing mode must mark new records as dummy records
 - [#3186] Fix: The translator overrides localized keys
-- [#3165] Fix: Umlauts not encoded correctly in the e-mail subject
+- [#3165] Fix: Umlauts not encoded correctly in the email subject
 - [#3176] Fix: Locallang strings cannot be overwritten using TS setup
-- [#3081] Feature: Add a TS setup setting for the return path of the e-mails
+- [#3081] Feature: Add a TS setup setting for the return path of the emails
 - [#3158] Feature: Add getFirstOrFullName and getLastOrFullName to front-end user model
 - [#2988] Fix: Skip the ZipArchive tests if no ZipArchive is available
 - [#3138] Change: Add ?: to subpatterns in preg* functions to deactivate capturing of subpatterns where it makes sense
 - [#3136] Change: Remove srand() call from Mail_mime class
 - [#3135] Change: Use $_SERVER['REQUEST_TIME'] in Mail_mime class
-- [#3056] Fix: E-mails have double line breaks
+- [#3056] Fix: Emails have double line breaks
 - [#3062] Feature: Add getters for the last name and the first name to the oelib front-end user model
 - [#2885] Feature: Add FrontEndUser::getGender
 - [#3044] Change: Remove deprecated functions for 0.7.0
@@ -555,9 +555,9 @@ Changes:
 - [#2708] Feature: Add a FrontEndLoginManager
 - [#2119] Feature: Add a class "configurationRegistry"
 - [#2678] Feature: Enhance the exception that is thrown when accessing a dead model's data
-- [#2594] Feature: Use HTML for the thank-you and unregistration e-mails to the attendees
+- [#2594] Feature: Use HTML for the thank-you and unregistration emails to the attendees
 - [#2643] Feature: Add a list class
-- [#2710] Fix: Character set for the e-mail tests must not be constant
+- [#2710] Fix: Character set for the email tests must not be constant
 - [#2661] Change: The front-end user mapper should use the logged-in user's data whenever possible
 - [#2676] Fix: Test errors for inexistent objects in the specialized contact form and thumbnails view
 - [#2658] Change: Add more tests for the mappers and model
@@ -565,7 +565,7 @@ Changes:
 - [#2663] Feature: Create a model and mapper FrontEndUserGroup
 - [#2659] Fix: Autoloader should not bail out on an empty class name
 - [#2662] Fix: Include of the FE class fails if tslib is not defined
-- [#2530] Feature: Enhance the mailer classes to also send HTML e-mails
+- [#2530] Feature: Enhance the mailer classes to also send HTML emails
 - [#2664] Feature: Add dataMapper::getNewGhost
 - [#2457] Feature: Add foreign key mapping
 - [#2653] Change: Rename the "empty" state to "virgin"
@@ -586,7 +586,7 @@ Changes:
 - [#2481] Feature: Add a function DataMapper::existsModelWithUid
 - [#2642] Fix: Login fails with TYPO3 4.2.5
 - [#2451] Fix: Undefined variable in createRelationAndUpdateCounter
-- [#2554] Feature: Create new Mail class that represents one e-mail
+- [#2554] Feature: Create new Mail class that represents one email
 - [#2311] Change: Move most of countRecords from the testing framework to oelib_db
 - [#2503] Feature: Add DB result and DB query exceptions and wrappers for executing queries
 - [#2542] Change: Remove the Autoloader includes from all oelib non-test classes except for the templatehelper
@@ -675,7 +675,7 @@ Changes:
 - [#1457] Change: Use the configuration proxy in the template helper
 - [#1739] Fix: template.php imported twice
 - [#1744] Fix: CSS bug in the configuration check warning
-- [#1262] Feature: Automatically remove surplus blank lines from the e-mail body
+- [#1262] Feature: Automatically remove surplus blank lines from the email body
 
 0.4.0 - released 2008-03-10
 - [#1726] Fix: Parts of testingFramework broken with TYPO3 4.2 (>rev 3365)
@@ -684,13 +684,13 @@ Changes:
 - [#1548] Change: Move templating functions from realty_pi1 to the template helper
 - [#1694] Fix: templatehelper::pi_getLL drops the $useHtmlSpecialChars parameter
 - [#1439] Feature: Add functions in the testing framework to create dummy FE users and FE user groups
-- [#1550] Feature: Add a config check for e-mail addresses
+- [#1550] Feature: Add a config check for email addresses
 - [#1681] Feature: Add templatehelper::getListViewConfValueInteger and ::getListViewConfValueBoolean
 - [#1104] Change: Use type hinting for function parameters
 - [#1661] Feature: Add a config check for config.locale_all and for that the requested locale actually is installed
 - [#999] Change: Require PHP 5.1
 - [#1599] Feature: Add a function getMarker()
-- [#1525, #1635] Feature: Make the content of e-mails testable
+- [#1525, #1635] Feature: Make the content of emails testable
 - [#1568] Feature: Add a public function isSubpartVisible
 - [#1552] Feature: Add an extension icon
 - [#1520] Feature: Allow to create dummy template records
@@ -754,7 +754,7 @@ Changes:
 
 0.2.6 - released 2007-04-25
 - Fix: TypoScript configuration doesn't exist in class.tx_seminars_tcemain.php (#733)
-- Fix: E-mails are empty if a HTML template is selected via flexforms (#710)
+- Fix: Emails are empty if a HTML template is selected via flexforms (#710)
 - Change: Cache $this->conf for plugin.seminars page-wise (#670)
 - Feature: Add some benchmarking code (#395)
 - Change: Removed the "This feature is new" message from the config check (#388)
