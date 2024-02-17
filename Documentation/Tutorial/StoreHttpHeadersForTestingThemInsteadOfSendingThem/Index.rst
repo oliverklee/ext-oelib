@@ -82,7 +82,7 @@ essage($htmlMessage)
 
 
 Add CSS to these HTML emails
-"""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""
 
 To add CSS to these HTML emails simply user the addCssFile function
 of the oelib mailer.
