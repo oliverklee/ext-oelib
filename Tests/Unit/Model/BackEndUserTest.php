@@ -241,7 +241,7 @@ final class BackEndUserTest extends UnitTestCase
     }
 
     ////////////////////////////////////////////////
-    // Tests concerning getting the e-mail address
+    // Tests concerning getting the email address
     ////////////////////////////////////////////////
 
     /**

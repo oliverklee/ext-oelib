@@ -231,11 +231,11 @@ class FrontEndUser extends AbstractModel implements MailRole, Address
     /**
      * Sets the email address.
      *
-     * @param string $eMailAddress the email address to set, may be empty
+     * @param string $emailAddress the email address to set, may be empty
      */
-    public function setEmailAddress(string $eMailAddress): void
+    public function setEmailAddress(string $emailAddress): void
     {
-        $this->setAsString('email', $eMailAddress);
+        $this->setAsString('email', $emailAddress);
     }
 
     /**
