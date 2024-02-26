@@ -587,7 +587,7 @@ abstract class AbstractConfigurationCheck
     }
 
     /**
-     * Checks that an e-mail address is valid or empty.
+     * Checks that an email address is valid or empty.
      *
      * @param non-empty-string $key
      */
@@ -609,7 +609,7 @@ abstract class AbstractConfigurationCheck
     }
 
     /**
-     * Checks that an e-mail address is valid and non-empty.
+     * Checks that an email address is valid and non-empty.
      *
      * @param non-empty-string $key
      * @param non-empty-string $explanation

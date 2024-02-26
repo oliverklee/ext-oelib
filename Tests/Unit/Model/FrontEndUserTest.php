@@ -628,7 +628,7 @@ final class FrontEndUserTest extends UnitTestCase
         );
     }
 
-    // Tests concerning the e-mail address
+    // Tests concerning the email address
 
     /**
      * @test

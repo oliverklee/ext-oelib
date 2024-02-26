@@ -76,13 +76,13 @@ since the last clean-up:
 Send HTML mails
 """""""""""""""
 
-To send e-mails in HTML Format simply add the HTML body to the mails
+To send emails in HTML Format simply add the HTML body to the mails
 by usingtx\_oelib\_mailerFactory::getInstance()->getMailer()->setHTMLM
 essage($htmlMessage)
 
 
-Add CSS to these HTML e-mails
-"""""""""""""""""""""""""""""
+Add CSS to these HTML emails
+""""""""""""""""""""""""""""
 
-To add CSS to these HTML e-mails simply user the addCssFile function
+To add CSS to these HTML emails simply user the addCssFile function
 of the oelib mailer.

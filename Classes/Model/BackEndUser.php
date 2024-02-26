@@ -37,9 +37,9 @@ class BackEndUser extends AbstractModel implements MailRole
     }
 
     /**
-     * Gets the user's e-mail address.
+     * Gets the user's email address.
      *
-     * @return string the e-mail address, might be empty
+     * @return string the email address, might be empty
      */
     public function getEmailAddress(): string
     {

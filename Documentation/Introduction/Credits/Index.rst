@@ -31,7 +31,7 @@ doing code reviews:
 
 - Ralph Brugger
 
-- Saskia Metzler (configuration proxy, e-mail abstraction)
+- Saskia Metzler (configuration proxy, email abstraction)
 
 - Sebastian Wittig (icons)
 

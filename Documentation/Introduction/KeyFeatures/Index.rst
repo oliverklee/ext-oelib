@@ -33,7 +33,7 @@ Key features
 - provides a proxy to access the EM configuration values and also to
   fake them for unit tests
 
-- tool to fake the sending of e-mails and receive the contents for unit
+- tool to fake the sending of emails and receive the contents for unit
   tests instead
 
 - tool to collect HTTP headers for testing instead of sending them
