@@ -126,8 +126,23 @@ parameters:
 			path: Classes/Mapper/AbstractDataMapper.php
 
 		-
+			message: "#^Parameter \\#1 \\$data of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<M of OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\:\\:createRelations\\(\\) expects array\\<string, int\\|string\\>, array\\<string, bool\\|float\\|int\\|string\\|null\\> given\\.$#"
+			count: 1
+			path: Classes/Mapper/AbstractDataMapper.php
+
+		-
+			message: "#^Parameter \\#1 \\$data of method OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\:\\:setData\\(\\) expects array\\<non\\-empty\\-string, bool\\|float\\|int\\|object\\|string\\|null\\>, array\\<string, int\\|string\\> given\\.$#"
+			count: 1
+			path: Classes/Mapper/AbstractDataMapper.php
+
+		-
 			message: "#^Parameter \\#1 \\$dataOfModels of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<M of OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\:\\:getListOfModels\\(\\) expects array\\<array\\<string, bool\\|float\\|int\\|string\\|null\\>\\>, array\\<int, array\\<string, mixed\\>\\> given\\.$#"
 			count: 1
+			path: Classes/Mapper/AbstractDataMapper.php
+
+		-
+			message: "#^Parameter &\\$data by\\-ref type of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\:\\:createRelations\\(\\) expects array\\<string, int\\|string\\>, array\\<string, mixed\\> given\\.$#"
+			count: 4
 			path: Classes/Mapper/AbstractDataMapper.php
 
 		-
@@ -273,6 +288,11 @@ parameters:
 		-
 			message: "#^PHPDoc tag @var with type OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Model\\\\Fixtures\\\\TestingModel is not subtype of type OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Model\\\\Fixtures\\\\TestingChildModel\\|null\\.$#"
 			count: 2
+			path: Tests/Functional/Mapper/AbstractDataMapperTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$data of method OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\:\\:setData\\(\\) expects array\\<non\\-empty\\-string, bool\\|float\\|int\\|object\\|string\\|null\\>, array\\<string, int\\|string\\> given\\.$#"
+			count: 7
 			path: Tests/Functional/Mapper/AbstractDataMapperTest.php
 
 		-
