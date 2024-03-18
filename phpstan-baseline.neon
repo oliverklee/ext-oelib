@@ -26,11 +26,6 @@ parameters:
 			path: Classes/Configuration/ConfigurationRegistry.php
 
 		-
-			message: "#^Parameter \\#1 \\$data of method OliverKlee\\\\Oelib\\\\Configuration\\\\TypoScriptConfiguration\\:\\:setData\\(\\) expects array\\<int\\|string, mixed\\>, array given\\.$#"
-			count: 1
-			path: Classes/Configuration/ConfigurationRegistry.php
-
-		-
 			message: "#^Parameter \\#1 \\$haystack of method OliverKlee\\\\Oelib\\\\Configuration\\\\FlexformsConfiguration\\:\\:getFromArray\\(\\) expects array\\<array\\<int\\|string, mixed\\>\\|int\\|string\\>, array\\<int\\|string, mixed\\> given\\.$#"
 			count: 1
 			path: Classes/Configuration/FlexformsConfiguration.php
