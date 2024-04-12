@@ -3,10 +3,10 @@
 	<file source-language="en" datatype="plaintext" original="messages">
 		<header/>
 		<body>
-			<trans-unit id="label_test">
+			<trans-unit id="label_test" resname="label_test" approved="yes">
 				<source>I am from file.</source>
 			</trans-unit>
-			<trans-unit id="validationError.fillInField">
+			<trans-unit id="validationError.fillInField" resname="validationError.fillInField" approved="yes">
 				<source>Please fill in this field.</source>
 			</trans-unit>
 		</body>
