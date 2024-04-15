@@ -96,11 +96,6 @@ parameters:
 			path: Classes/Email/SystemEmailFromBuilder.php
 
 		-
-			message: "#^Call to an undefined static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\HttpUtility\\:\\:setResponseCode\\(\\)\\.$#"
-			count: 1
-			path: Classes/Http/RealHeaderProxy.php
-
-		-
 			message: "#^Cannot access offset non\\-empty\\-string on mixed\\.$#"
 			count: 1
 			path: Classes/Mapper/AbstractDataMapper.php
