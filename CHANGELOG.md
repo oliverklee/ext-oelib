@@ -23,6 +23,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Delete localizations that are now on Crowdin (#1772)
 - Drop Composer suggestion for static_info_tables (#1650)
 - Drop `MapperRegistry::denyDatabaseAccess` (#1646)
 - Drop deprecated methods from `AbstractDataMapper`
