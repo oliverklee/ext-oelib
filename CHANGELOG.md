@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 6.0.0
+
+### Added
 - Add support for TYPO3 12LTS (#1669, #1671, #1672)
 - Add Rector to our toolchain (#1659, #1662)
 
@@ -19,8 +31,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Upgrade to PHPUnit 9 (#1634)
 - Make `TestingFramework::isLoggedIn()` private (#1622)
 - Raise the required TYPO3 bugfix version (#1619)
-
-### Deprecated
 
 ### Removed
 - Drop the HTTP classes (#1647)
