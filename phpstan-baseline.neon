@@ -116,6 +116,16 @@ parameters:
 			path: Classes/Mapper/AbstractDataMapper.php
 
 		-
+			message: "#^Method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\:\\:saveManyToManyAndCommaSeparatedRelatedModels\\(\\) has parameter \\$mapper with generic class OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper but does not specify its types\\: M$#"
+			count: 1
+			path: Classes/Mapper/AbstractDataMapper.php
+
+		-
+			message: "#^Method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\:\\:saveManyToOneRelatedModels\\(\\) has parameter \\$mapper with generic class OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper but does not specify its types\\: M$#"
+			count: 1
+			path: Classes/Mapper/AbstractDataMapper.php
+
+		-
 			message: "#^Parameter \\#1 \\$data of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<M of OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\:\\:createRelations\\(\\) expects array\\<string, int\\|string\\>, array\\<string, bool\\|float\\|int\\|string\\|null\\> given\\.$#"
 			count: 1
 			path: Classes/Mapper/AbstractDataMapper.php
@@ -134,6 +144,21 @@ parameters:
 			message: "#^Parameter &\\$data by\\-ref type of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\:\\:createRelations\\(\\) expects array\\<string, int\\|string\\>, array\\<string, mixed\\> given\\.$#"
 			count: 4
 			path: Classes/Mapper/AbstractDataMapper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\:\\:\\$relations with generic class OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper does not specify its types\\: M$#"
+			count: 1
+			path: Classes/Mapper/AbstractDataMapper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Oelib\\\\Mapper\\\\FrontEndUserMapper\\:\\:\\$relations with generic class OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper does not specify its types\\: M$#"
+			count: 1
+			path: Classes/Mapper/FrontEndUserMapper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Oelib\\\\Mapper\\\\MapperRegistry\\:\\:\\$mappers with generic class OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper does not specify its types\\: M$#"
+			count: 1
+			path: Classes/Mapper/MapperRegistry.php
 
 		-
 			message: "#^Method OliverKlee\\\\Oelib\\\\Model\\\\BackEndUser\\:\\:getConfiguration\\(\\) should return array\\<string, string\\> but returns array\\.$#"
@@ -346,6 +371,26 @@ parameters:
 			path: Tests/Unit/Email/SystemEmailFromBuilderTest.php
 
 		-
+			message: "#^Class OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Mapper\\\\Fixtures\\\\ModelLessTestingMapper extends generic class OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper but does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Unit/Mapper/Fixtures/ModelLessTestingMapper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Mapper\\\\Fixtures\\\\TestingChildMapper\\:\\:\\$relations with generic class OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Unit/Mapper/Fixtures/TestingChildMapper.php
+
+		-
+			message: "#^Property OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Mapper\\\\Fixtures\\\\TestingMapper\\:\\:\\$relations with generic class OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper does not specify its types\\: M$#"
+			count: 1
+			path: Tests/Unit/Mapper/Fixtures/TestingMapper.php
+
+		-
+			message: "#^Expression \"clone \\$this\\-\\>subject\" on a separate line does not do anything\\.$#"
+			count: 2
+			path: Tests/Unit/Model/AbstractModelTest.php
+
+		-
 			message: "#^Cannot access offset 'fe_users' on mixed\\.$#"
 			count: 2
 			path: Tests/Unit/Model/FrontEndUserTest.php
@@ -354,3 +399,8 @@ parameters:
 			message: "#^Property OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Model\\\\FrontEndUserTest\\:\\:\\$tcaBackup \\(array\\<string, mixed\\>\\) does not accept mixed\\.$#"
 			count: 1
 			path: Tests/Unit/Model/FrontEndUserTest.php
+
+		-
+			message: "#^Class OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\ViewHelpers\\\\Fixtures\\\\TestingConfigurationCheckViewHelper extends generic class OliverKlee\\\\Oelib\\\\ViewHelpers\\\\AbstractConfigurationCheckViewHelper but does not specify its types\\: C$#"
+			count: 1
+			path: Tests/Unit/ViewHelpers/Fixtures/TestingConfigurationCheckViewHelper.php
