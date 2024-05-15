@@ -5,15 +5,15 @@
     <body>
       <trans-unit id="tx_oelib_domain_model_germanzipcode" resname="tx_oelib_domain_model_germanzipcode">
         <source>German ZIP codes</source>
-        <target state="needs-translation">German ZIP codes</target>
+        <target state="translated">Duitse postcodes</target>
       </trans-unit>
       <trans-unit id="tx_oelib_domain_model_germanzipcode.zip_code" resname="tx_oelib_domain_model_germanzipcode.zip_code">
         <source>ZIP code</source>
-        <target state="needs-translation">ZIP code</target>
+        <target state="translated">Postcode</target>
       </trans-unit>
       <trans-unit id="tx_oelib_domain_model_germanzipcode.city_name" resname="tx_oelib_domain_model_germanzipcode.city_name">
         <source>City</source>
-        <target state="needs-translation">City</target>
+        <target state="translated">Stad</target>
       </trans-unit>
       <trans-unit id="tx_oelib_domain_model_germanzipcode.longitude" resname="tx_oelib_domain_model_germanzipcode.longitude">
         <source>Longitude</source>
