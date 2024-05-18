@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Drop obsolete options from the `ext_emconf.php` (#1814)
 
 ## 6.0.0
 
