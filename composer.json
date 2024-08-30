@@ -46,7 +46,7 @@
 		"saschaegerer/phpstan-typo3": "^1.10.2",
 		"sjbr/static-info-tables": "^6.9.6 || ^11.5.5 || ^12.4.2",
 		"squizlabs/php_codesniffer": "^3.10.2",
-		"ssch/typo3-rector": "^2.6.4",
+		"ssch/typo3-rector": "^2.6.5",
 		"ssch/typo3-rector-testing-framework": "^2.0.1",
 		"typo3/cms-extensionmanager": "^11.5.17 || ^12.4.2",
 		"typo3/coding-standards": "~0.6.1",
