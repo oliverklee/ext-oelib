@@ -11,7 +11,7 @@ use TYPO3\CMS\Extbase\Persistence\RepositoryInterface;
 /**
  * This trait for repositories makes the repository ignore the storage page setting when fetching models.
  *
- * @mixin RepositoryInterface
+ * @phpstan-require-implements RepositoryInterface
  */
 trait StoragePageAgnostic
 {

@@ -86,16 +86,6 @@ parameters:
 			path: Classes/Domain/Repository/PageRepository.php
 
 		-
-			message: "#^PHPDoc tag @mixin contains generic interface TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\RepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: Classes/Domain/Repository/Traits/DirectPersist.php
-
-		-
-			message: "#^PHPDoc tag @mixin contains generic interface TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\RepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: Classes/Domain/Repository/Traits/StoragePageAgnostic.php
-
-		-
 			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
 			count: 1
 			path: Classes/Email/SystemEmailFromBuilder.php
