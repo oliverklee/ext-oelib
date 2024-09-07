@@ -16,7 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 - Drop unnecessary type checks (#1879)
-- Improve type annotations (#1871)
+- Improve type annotations (#1871, #1880)
 - Drop obsolete options from the `ext_emconf.php` (#1814)
 
 ## 6.0.0

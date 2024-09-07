@@ -37,18 +37,16 @@ class Collection extends \SplObjectStorage
     private bool $hasItemWithoutUid = false;
 
     /**
-     * Adds a model to this list (as last element) if it is not already in the
-     * list.
+     * Adds a model to this list (as last element) if it is not already in the list.
      *
      * The model to add need not necessarily have a UID.
      *
-     * @param AbstractModel $model the model to add, need not have a UID
+     * @param M $model the model to add, need not have a UID
      *
      * @throws \UnexpectedValueException
      */
     public function add(AbstractModel $model): void
     {
-        /** @var M $model */
         $this->attach($model);
 
         $uid = $model->getUid();
