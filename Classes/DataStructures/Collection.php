@@ -51,18 +51,8 @@ class Collection extends \SplObjectStorage
         /** @var M $model */
         $this->attach($model);
 
-        if ($model->hasUid()) {
-            $uid = $model->getUid();
-            \assert($uid > 0);
-            // This should never happen, but still seems to happen sometimes.
-            // This exception should help debugging the problem.
-            if (!\is_array($this->uids)) {
-                throw new \UnexpectedValueException(
-                    '$this->uids was expected to be an array, but actually is: ' . \gettype($this->uids),
-                    1_440_104_082
-                );
-            }
-
+        $uid = $model->getUid();
+        if ($uid > 0) {
             $this->uids[$uid] = $uid;
         } else {
             $this->hasItemWithoutUid = true;
