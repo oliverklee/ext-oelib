@@ -14,7 +14,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 final class CurrencyMapperTest extends FunctionalTestCase
 {
-    protected array $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/static_info_tables'];
+    protected array $testExtensionsToLoad = ['oliverklee/oelib', 'sjbr/static-info-tables'];
 
     private CurrencyMapper $subject;
 
