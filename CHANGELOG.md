@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Drop `approved="yes"` from the English locallang files (#1894)
 - Drop unnecessary type checks (#1879)
 - Improve type annotations (#1871, #1880)
 - Drop obsolete options from the `ext_emconf.php` (#1814)
