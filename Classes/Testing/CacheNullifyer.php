@@ -8,6 +8,7 @@ use TYPO3\CMS\Core\Cache\Backend\NullBackend;
 use TYPO3\CMS\Core\Cache\Backend\SimpleFileBackend;
 use TYPO3\CMS\Core\Cache\Backend\TransientMemoryBackend;
 use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Cache\Frontend\NullFrontend;
 use TYPO3\CMS\Core\Cache\Frontend\PhpFrontend;
 use TYPO3\CMS\Core\Cache\Frontend\VariableFrontend;
 use TYPO3\CMS\Core\Information\Typo3Version;
@@ -167,7 +168,7 @@ final class CacheNullifyer
             ],
             'typoscript' => [
                 'backend' => SimpleFileBackend::class,
-                'frontend' => VariableFrontend::class,
+                'frontend' => NullFrontend::class,
                 'groups' => ['system'],
                 'options' => [],
             ],

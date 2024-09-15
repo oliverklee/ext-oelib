@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Use the correct cache frontend in the testing framework (#1901)
 - Drop `approved="yes"` from the English locallang files (#1894)
 - Drop unnecessary type checks (#1879)
 - Improve type annotations (#1871, #1880)
