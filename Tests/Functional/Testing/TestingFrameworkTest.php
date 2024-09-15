@@ -24,7 +24,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 final class TestingFrameworkTest extends FunctionalTestCase
 {
-    protected array $testExtensionsToLoad = ['typo3conf/ext/oelib'];
+    protected array $testExtensionsToLoad = ['oliverklee/oelib'];
 
     private TestingFramework $subject;
 

@@ -13,7 +13,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 final class BackEndUserMapperTest extends FunctionalTestCase
 {
-    protected array $testExtensionsToLoad = ['typo3conf/ext/oelib'];
+    protected array $testExtensionsToLoad = ['oliverklee/oelib'];
 
     /**
      * @var BackEndUserMapper the object to test

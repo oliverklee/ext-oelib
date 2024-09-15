@@ -12,7 +12,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 class PriceViewHelperTest extends FunctionalTestCase
 {
-    protected array $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/static_info_tables'];
+    protected array $testExtensionsToLoad = ['oliverklee/oelib', 'sjbr/static-info-tables'];
 
     private PriceViewHelper $subject;
 

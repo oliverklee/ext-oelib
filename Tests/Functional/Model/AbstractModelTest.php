@@ -21,7 +21,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     private const TEST_RECORD_TITLE = 'Hello world';
 
-    protected array $testExtensionsToLoad = ['typo3conf/ext/oelib'];
+    protected array $testExtensionsToLoad = ['oliverklee/oelib'];
 
     private TestingModel $subject;
 
