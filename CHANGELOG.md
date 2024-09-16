@@ -7,6 +7,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 6.0.1: Bug fixes and cleanup
+
+### Added
+
 - Add a Rector CI job (#1908)
 - Add XLIFF linting to the CI workflow (#1907, #1909)
 
@@ -16,10 +28,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Require at least version 12.4.15 for TYPO3 12LTS (#1897)
 - Require TYPO3 >= 11.5.37 (#1889)
 - Import classes in `ext_localconf.php` (#1815)
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 
