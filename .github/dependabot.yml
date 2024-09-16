@@ -19,6 +19,7 @@ updates:
       - dependency-name: "phpunit/phpunit"
         versions: [ ">= 10" ]
       - dependency-name: "sjbr/static-info-tables"
+      - dependency-name: "symfony/*"
       - dependency-name: "typo3/cms-*"
       - dependency-name: "typo3/coding-standards"
         versions: [ ">= 0.7.0" ]

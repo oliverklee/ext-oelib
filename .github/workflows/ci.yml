@@ -74,6 +74,7 @@ jobs:
           - "php:cs-fixer"
           - "php:sniff"
           - "php:stan"
+          - "xliff:lint"
         php-version:
           - "8.3"
   rector:
