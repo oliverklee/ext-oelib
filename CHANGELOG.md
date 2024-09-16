@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Require Fluid >= 2.7.4 (#1906)
 - Require at least version 12.4.15 for TYPO3 12LTS (#1897)
 - Require TYPO3 >= 11.5.37 (#1889)
 - Import classes in `ext_localconf.php` (#1815)
