@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add a Rector CI job (#1908)
 - Add XLIFF linting to the CI workflow (#1907)
 
 ### Changed

@@ -74,6 +74,7 @@ jobs:
           - "php:cs-fixer"
           - "php:sniff"
           - "php:stan"
+          - "php:rector"
           - "xliff:lint"
         php-version:
           - "8.3"
