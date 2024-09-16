@@ -7,6 +7,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add XLIFF linting to the CI workflow (#1907)
+
 ### Changed
 
 - Require Fluid >= 2.7.4 (#1906)
