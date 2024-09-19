@@ -29,6 +29,7 @@
 		"ext-zip": "*",
 		"doctrine/dbal": "^2.13.8 || ^3.9",
 		"psr/log": "^1.0 || ^2.0 || ^3.0",
+		"symfony/polyfill-php80": "^1.31.0",
 		"typo3/cms-core": "^11.5.37 || ^12.4.15",
 		"typo3/cms-extbase": "^11.5.37 || ^12.4.15",
 		"typo3/cms-fluid": "^11.5.37 || ^12.4.15",
