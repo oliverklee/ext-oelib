@@ -868,7 +868,7 @@ abstract class AbstractDataMapper
                 );
             }
 
-            if (\strncmp($foreignField, 'tx_', 3) === 0) {
+            if (str_starts_with($foreignField, 'tx_')) {
                 $foreignKey = \ucfirst((string)\preg_replace('/tx_[a-z]+_/', '', $foreignField));
             } else {
                 $foreignKey = \ucfirst($foreignField);

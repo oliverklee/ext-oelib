@@ -101,7 +101,7 @@ class Template
         // If there are no HTML comments in  the template code, there cannot be
         // any subparts. So there's no need to use an expensive regular
         // expression to find any subparts in that case.
-        if (strpos($templateCode, '<!--') === false) {
+        if (!str_contains($templateCode, '<!--')) {
             return;
         }
 
@@ -140,7 +140,7 @@ class Template
 
         foreach (\array_unique($matches[1]) as $markerName) {
             /** @var non-empty-string $markerName */
-            if (\strncmp($markerName, 'LABEL_', 6) === 0) {
+            if (str_starts_with($markerName, 'LABEL_')) {
                 $this->labelMarkerNames[] = \strtolower($markerName);
             }
         }

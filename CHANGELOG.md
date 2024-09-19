@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Use modern string functions (#1917)
 - Require Fluid >= 2.7.4 (#1906)
 - Require at least version 12.4.15 for TYPO3 12LTS (#1897)
 - Require TYPO3 >= 11.5.37 (#1889)
