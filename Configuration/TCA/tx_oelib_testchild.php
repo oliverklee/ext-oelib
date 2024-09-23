@@ -19,21 +19,21 @@ return [
         ],
         'parent' => [
             'l10n_mode' => 'exclude',
-            'exclude' => 1,
+            'exclude' => true,
             'config' => [
                 'type' => 'passthrough',
             ],
         ],
         'tx_oelib_parent2' => [
             'l10n_mode' => 'exclude',
-            'exclude' => 1,
+            'exclude' => true,
             'config' => [
                 'type' => 'passthrough',
             ],
         ],
         'tx_oelib_parent3' => [
             'l10n_mode' => 'exclude',
-            'exclude' => 1,
+            'exclude' => true,
             'config' => [
                 'type' => 'passthrough',
             ],
