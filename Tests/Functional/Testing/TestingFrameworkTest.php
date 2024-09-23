@@ -8,7 +8,9 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -658,7 +660,6 @@ final class TestingFrameworkTest extends FunctionalTestCase
     public function cleanUpWithoutDatabaseUnsetsGlobalRequest(): void
     {
         $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());
-        $GLOBALS['TYPO3_REQUEST'] = $this->createMock(ServerRequestInterface::class);
 
         $this->subject->cleanUpWithoutDatabase();
 
@@ -1436,6 +1437,30 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());
 
         self::assertNotSame($previous, Environment::getCurrentScript());
+    }
+
+    /**
+     * @test
+     */
+    public function createFakeFrontEndSetsRequest(): void
+    {
+        $pageUid = $this->subject->createFrontEndPage();
+        $this->subject->createFakeFrontEnd($pageUid);
+
+        self::assertInstanceOf(ServerRequest::class, $GLOBALS['TYPO3_REQUEST']);
+    }
+
+    /**
+     * @test
+     */
+    public function createFakeFrontEndSetsFrontEndApplicationTypeInRequest(): void
+    {
+        $pageUid = $this->subject->createFrontEndPage();
+        $this->subject->createFakeFrontEnd($pageUid);
+
+        $request = $GLOBALS['TYPO3_REQUEST'];
+        self::assertInstanceOf(ServerRequest::class, $request);
+        self::assertSame(SystemEnvironmentBuilder::REQUESTTYPE_FE, $request->getAttribute('applicationType'));
     }
 
     /**
