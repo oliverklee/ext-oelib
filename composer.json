@@ -114,16 +114,16 @@
 		],
 		"ci:coverage:unit": [
 			"@coverage:create-directories",
-			".Build/vendor/bin/phpunit -c Configuration/UnitTests.xml --whitelist Classes --coverage-php=.Build/coverage/unit.cov Tests/Unit"
+			"phpunit -c Configuration/UnitTests.xml --whitelist Classes --coverage-php=.Build/coverage/unit.cov Tests/Unit"
 		],
 		"ci:dynamic": [
 			"@ci:tests"
 		],
 		"ci:php:cs-fixer": "php-cs-fixer fix --config .php-cs-fixer.php -v --dry-run --diff",
 		"ci:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
-		"ci:php:rector": ".Build/vendor/bin/rector --dry-run",
-		"ci:php:sniff": ".Build/vendor/bin/phpcs Classes Configuration Tests",
-		"ci:php:stan": ".Build/vendor/bin/phpstan --no-progress",
+		"ci:php:rector": "rector --dry-run",
+		"ci:php:sniff": "phpcs Classes Configuration Tests",
+		"ci:php:stan": "phpstan --no-progress",
 		"ci:static": [
 			"@ci:composer:normalize",
 			"@ci:php:lint",
@@ -138,7 +138,7 @@
 			"@ci:tests:functional"
 		],
 		"ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml {}';",
-		"ci:tests:unit": ".Build/vendor/bin/phpunit -c Configuration/UnitTests.xml Tests/Unit",
+		"ci:tests:unit": "phpunit -c Configuration/UnitTests.xml Tests/Unit",
 		"ci:xliff:lint": "php Build/bin/console lint:xliff Resources/Private/Language",
 		"coverage:create-directories": "mkdir -p build/logs .Build/coverage",
 		"fix": [
@@ -152,9 +152,9 @@
 			"@fix:php:sniff"
 		],
 		"fix:php:cs": "php-cs-fixer fix --config .php-cs-fixer.php",
-		"fix:php:rector": ".Build/vendor/bin/rector",
+		"fix:php:rector": "rector",
 		"fix:php:sniff": "phpcbf Classes Configuration Tests",
-		"phpstan:baseline": ".Build/vendor/bin/phpstan  --generate-baseline=phpstan-baseline.neon",
+		"phpstan:baseline": "phpstan  --generate-baseline=phpstan-baseline.neon",
 		"prepare-release": [
 			"rm -rf .Build",
 			"rm -rf .github",
