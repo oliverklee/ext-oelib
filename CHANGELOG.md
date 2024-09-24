@@ -15,6 +15,10 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+## 6.0.2: TestingFramework bug fixes for TYPO3 12LTS
+
+### Fixed
+
 - Provide the request with a language for the fake frontend (#1925)
 - Set `$GLOBALS['TYPO3_REQUEST']` when creating a fake frontend (#1924)
 
