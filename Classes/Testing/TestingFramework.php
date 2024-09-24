@@ -13,6 +13,7 @@ use TYPO3\CMS\Core\Configuration\SiteConfiguration;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\UserAspect;
 use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Http\ServerRequest;
@@ -698,7 +699,7 @@ final class TestingFramework
         $this->setRequestUriForFakeFrontEnd($pageUid);
 
         $frontEndUser = GeneralUtility::makeInstance(FrontendUserAuthentication::class);
-        $request = new ServerRequest();
+        $request = (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE);
         $frontEndUser->start($request);
         $frontEndUser->fetchGroupData($request);
         if ((new Typo3Version())->getMajorVersion() <= 11) {
@@ -722,6 +723,7 @@ final class TestingFramework
             $frontEndUser
         );
         $GLOBALS['TSFE'] = $frontEnd;
+        $GLOBALS['TYPO3_REQUEST'] = $request;
 
         $frontEnd->fe_user = $frontEndUser;
         $frontEnd->id = $pageUid;

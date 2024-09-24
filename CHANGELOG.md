@@ -15,6 +15,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Set `$GLOBALS['TYPO3_REQUEST']` when creating a fake frontend (#1924)
+
 ## 6.0.1: Bug fixes and cleanup
 
 ### Added
