@@ -11,6 +11,8 @@ use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\Http\Uri;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -1453,6 +1455,19 @@ final class TestingFrameworkTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function createFakeFrontEndReplacesExistingGlobalRequest(): void
+    {
+        $previousRequest = $this->createMock(ServerRequestInterface::class);
+        $GLOBALS['TYPO3_REQUEST'] = $previousRequest;
+
+        $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());
+
+        self::assertNotSame($previousRequest, $GLOBALS['TYPO3_REQUEST'] ?? null);
+    }
+
+    /**
+     * @test
+     */
     public function createFakeFrontEndSetsFrontEndApplicationTypeInRequest(): void
     {
         $pageUid = $this->subject->createFrontEndPage();
@@ -1466,14 +1481,33 @@ final class TestingFrameworkTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function createFakeFrontEndReplacesExistingGlobalRequest(): void
+    public function createFakeFrontEndSetsLanguageInRequest(): void
     {
-        $previousRequest = $this->createMock(ServerRequestInterface::class);
-        $GLOBALS['TYPO3_REQUEST'] = $previousRequest;
+        $pageUid = $this->subject->createFrontEndPage();
+        $this->subject->createFakeFrontEnd($pageUid);
 
-        $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());
+        $request = $GLOBALS['TYPO3_REQUEST'];
+        self::assertInstanceOf(ServerRequest::class, $request);
 
-        self::assertNotSame($previousRequest, $GLOBALS['TYPO3_REQUEST'] ?? null);
+        self::assertInstanceOf(SiteLanguage::class, $request->getAttribute('language'));
+    }
+
+    /**
+     * @test
+     */
+    public function createFakeFrontEndSetsLanguageInRequestToDefault(): void
+    {
+        $pageUid = $this->subject->createFrontEndPage();
+        $this->subject->createFakeFrontEnd($pageUid);
+
+        $request = $GLOBALS['TYPO3_REQUEST'];
+        self::assertInstanceOf(ServerRequest::class, $request);
+        $language = $request->getAttribute('language');
+        self::assertInstanceOf(SiteLanguage::class, $language);
+
+        $uri = new Uri($this->subject->getFakeSiteUrl());
+        $expectedLanguage = new SiteLanguage(0, 'en_US.UTF-8', $uri, []);
+        self::assertEquals($expectedLanguage, $language);
     }
 
     // Tests regarding user login and logout
