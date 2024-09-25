@@ -33,7 +33,7 @@ interface Configuration
      *
      * @param non-empty-string $key the key of the element to retrieve
      *
-     * @return list<string> the array value of the given key, may be empty
+     * @return list<non-empty-string> the array value of the given key, may be empty
      */
     public function getAsTrimmedArray(string $key): array;
 }
