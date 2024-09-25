@@ -15,6 +15,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Improve some type annotations (#1929)
+
 ## 6.0.2: TestingFramework bug fixes for TYPO3 12LTS
 
 ### Fixed
