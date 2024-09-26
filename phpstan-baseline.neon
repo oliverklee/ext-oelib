@@ -166,7 +166,7 @@ parameters:
 			path: Classes/Mapper/MapperRegistry.php
 
 		-
-			message: "#^Strict comparison using \\=\\=\\= between class\\-string\\<M of OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\> and '' will always evaluate to false\\.$#"
+			message: "#^Strict comparison using \\=\\=\\= between class\\-string\\<M of OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper \\(method OliverKlee\\\\Oelib\\\\Mapper\\\\MapperRegistry\\:\\:getByClassName\\(\\), argument\\)\\> and '' will always evaluate to false\\.$#"
 			count: 1
 			path: Classes/Mapper/MapperRegistry.php
 
