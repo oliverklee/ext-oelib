@@ -356,11 +356,6 @@ parameters:
 			path: Tests/Unit/DataStructures/AbstractObjectWithPublicAccessorsTest.php
 
 		-
-			message: "#^Class OliverKlee\\\\Oelib\\\\Domain\\\\Repository\\\\GermanZipCodeRepository constructor invoked with 1 parameter, 0 required\\.$#"
-			count: 1
-			path: Tests/Unit/Domain/Repository/GermanZipCodeRepositoryTest.php
-
-		-
 			message: "#^Class OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Domain\\\\Repository\\\\Fixtures\\\\DirectPersistRepository constructor invoked with 1 parameter, 0 required\\.$#"
 			count: 1
 			path: Tests/Unit/Domain/Repository/Traits/DirectPersistTest.php

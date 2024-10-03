@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Oelib\Tests\Functional\Domain\Repository;
 
 use OliverKlee\Oelib\Domain\Repository\PageRepository;
+use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -22,6 +23,14 @@ final class PageRepositoryTest extends FunctionalTestCase
 
         $this->subject = new PageRepository();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/NestedPages.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function isSingleton(): void
+    {
+        self::assertInstanceOf(SingletonInterface::class, $this->subject);
     }
 
     /**
