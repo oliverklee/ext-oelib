@@ -6,6 +6,7 @@ namespace OliverKlee\Oelib\Tests\Functional\Domain\Repository;
 
 use OliverKlee\Oelib\Domain\Model\GermanZipCode;
 use OliverKlee\Oelib\Domain\Repository\GermanZipCodeRepository;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -26,6 +27,54 @@ final class GermanZipCodeRepositoryTest extends FunctionalTestCase
         $this->subject = $this->get(GermanZipCodeRepository::class);
 
         $this->importCSVDataSet(__DIR__ . '/Fixtures/ZipCodes.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function isRepository(): void
+    {
+        self::assertInstanceOf(Repository::class, $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function addThrowsException(): void
+    {
+        $this->expectException(\BadMethodCallException::class);
+
+        $this->subject->add(new GermanZipCode());
+    }
+
+    /**
+     * @test
+     */
+    public function removeThrowsException(): void
+    {
+        $this->expectException(\BadMethodCallException::class);
+
+        $this->subject->remove(new GermanZipCode());
+    }
+
+    /**
+     * @test
+     */
+    public function updateThrowsException(): void
+    {
+        $this->expectException(\BadMethodCallException::class);
+
+        $this->subject->update(new GermanZipCode());
+    }
+
+    /**
+     * @test
+     */
+    public function removeAllThrowsException(): void
+    {
+        $this->expectException(\BadMethodCallException::class);
+
+        $this->subject->removeAll();
     }
 
     /**
