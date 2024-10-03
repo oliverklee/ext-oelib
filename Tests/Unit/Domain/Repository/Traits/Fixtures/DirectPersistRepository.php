@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Oelib\Tests\Unit\Domain\Repository\Fixtures;
+namespace OliverKlee\Oelib\Tests\Unit\Domain\Repository\Traits\Fixtures;
 
 use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
-use OliverKlee\Oelib\Tests\Unit\Domain\Fixtures\EmptyModel;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**

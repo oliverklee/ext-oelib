@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Oelib\Tests\Unit\Domain\Repository\Traits;
 
 use OliverKlee\Oelib\Domain\Repository\Interfaces\DirectPersist;
-use OliverKlee\Oelib\Tests\Unit\Domain\Repository\Fixtures\DirectPersistRepository;
+use OliverKlee\Oelib\Tests\Unit\Domain\Repository\Traits\Fixtures\DirectPersistRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
