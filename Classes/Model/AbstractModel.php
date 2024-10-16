@@ -660,7 +660,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     {
         // @phpstan-ignore-next-line We're explicitly checking for a contract violation here.
         if ($pageUid < 0) {
-            throw new \InvalidArgumentException('$pageUid must be >= 0.');
+            throw new \InvalidArgumentException('$pageUid must be >= 0.', 2440827722);
         }
 
         $this->setAsInteger('pid', $pageUid);

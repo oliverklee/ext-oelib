@@ -40,22 +40,24 @@ class GeoCalculator implements SingletonInterface
     public function calculateDistanceInKilometers(Geo $object1, Geo $object2): float
     {
         if ($object1->hasGeoError()) {
-            throw new \InvalidArgumentException('$object1 has a geo error.');
+            throw new \InvalidArgumentException('$object1 has a geo error.', 7969563665);
         }
 
         if ($object2->hasGeoError()) {
-            throw new \InvalidArgumentException('$object2 has a geo error.');
+            throw new \InvalidArgumentException('$object2 has a geo error.', 4083730606);
         }
 
         if (!$object1->hasGeoCoordinates()) {
             throw new \InvalidArgumentException(
-                '$object1 needs to have coordinates, but has none.'
+                '$object1 needs to have coordinates, but has none.',
+                4175034309
             );
         }
 
         if (!$object2->hasGeoCoordinates()) {
             throw new \InvalidArgumentException(
-                '$object2 needs to have coordinates, but has none.'
+                '$object2 needs to have coordinates, but has none.',
+                5245310674
             );
         }
 
