@@ -15,6 +15,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- Remove unneeded `resname` from the language files (#1963)
+
 ### Fixed
 
 - Make implicit nullable parameter explicit (#1962)
