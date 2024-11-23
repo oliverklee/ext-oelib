@@ -1128,7 +1128,7 @@ abstract class AbstractDataMapper
     public function findAllByRelation(
         AbstractModel $model,
         string $relationKey,
-        Collection $ignoreList = null
+        ?Collection $ignoreList = null
     ): Collection {
         if (!$model->hasUid()) {
             throw new \InvalidArgumentException('$model must have a UID.', 1_331_319_915);

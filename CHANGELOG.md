@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Make implicit nullable parameter explicit (#1962)
 - Add missing exception codes (#1945)
 - Improve some type annotations (#1929)
 
