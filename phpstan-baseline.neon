@@ -454,3 +454,23 @@ parameters:
 			message: "#^Class OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\ViewHelpers\\\\Fixtures\\\\TestingConfigurationCheckViewHelper extends generic class OliverKlee\\\\Oelib\\\\ViewHelpers\\\\AbstractConfigurationCheckViewHelper but does not specify its types\\: C$#"
 			count: 1
 			path: Tests/Unit/ViewHelpers/Fixtures/TestingConfigurationCheckViewHelper.php
+
+		-
+			message: "#^Cannot access an offset on mixed\\.$#"
+			count: 1
+			path: ext_localconf.php
+
+		-
+			message: "#^Cannot access offset 'EXTCONF' on mixed\\.$#"
+			count: 1
+			path: ext_localconf.php
+
+		-
+			message: "#^Cannot access offset 'oelib' on mixed\\.$#"
+			count: 1
+			path: ext_localconf.php
+
+		-
+			message: "#^Cannot access offset 'testingFrameworkCle…' on mixed\\.$#"
+			count: 1
+			path: ext_localconf.php
