@@ -12,6 +12,7 @@ parameters:
   paths:
     - Classes
     - Tests
+    - ext_localconf.php
 
   ignoreErrors:
     -
