@@ -101,6 +101,11 @@ parameters:
 			path: Classes/Email/SystemEmailFromBuilder.php
 
 		-
+			message: "#^Call to function is_string\\(\\) with class\\-string\\<M of OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\> will always evaluate to true\\.$#"
+			count: 1
+			path: Classes/Mapper/AbstractDataMapper.php
+
+		-
 			message: "#^Cannot access offset non\\-empty\\-string on mixed\\.$#"
 			count: 1
 			path: Classes/Mapper/AbstractDataMapper.php
@@ -321,6 +326,16 @@ parameters:
 			path: Tests/Functional/Mapper/AbstractDataMapperTest.php
 
 		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertIsArray\\(\\) with array\\<string, mixed\\> will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/Functional/Testing/TestingFrameworkTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertNotSame\\(\\) with 0 and int\\<1, max\\> will always evaluate to true\\.$#"
+			count: 16
+			path: Tests/Functional/Testing/TestingFrameworkTest.php
+
+		-
 			message: "#^Casting to int something that's already int\\.$#"
 			count: 1
 			path: Tests/Functional/Testing/TestingFrameworkTest.php
@@ -356,6 +371,11 @@ parameters:
 			path: Tests/Unit/DataStructures/AbstractObjectWithPublicAccessorsTest.php
 
 		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertTrue\\(\\) with true will always evaluate to true\\.$#"
+			count: 3
+			path: Tests/Unit/Domain/Model/GermanZipCodeTest.php
+
+		-
 			message: "#^Class OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Domain\\\\Repository\\\\Traits\\\\Fixtures\\\\DirectPersistRepository constructor invoked with 1 parameter, 0 required\\.$#"
 			count: 1
 			path: Tests/Unit/Domain/Repository/Traits/DirectPersistTest.php
@@ -374,6 +394,31 @@ parameters:
 			message: "#^Cannot access offset 'defaultMailFromName' on mixed\\.$#"
 			count: 7
 			path: Tests/Unit/Email/SystemEmailFromBuilderTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with 31536000 and 31536000 will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/Unit/Interfaces/TimeTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with 3600 and 3600 will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/Unit/Interfaces/TimeTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with 60 and 60 will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/Unit/Interfaces/TimeTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with 604800 and 604800 will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/Unit/Interfaces/TimeTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with 86400 and 86400 will always evaluate to true\\.$#"
+			count: 1
+			path: Tests/Unit/Interfaces/TimeTest.php
 
 		-
 			message: "#^Class OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\Mapper\\\\Fixtures\\\\ModelLessTestingMapper extends generic class OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper but does not specify its types\\: M$#"
