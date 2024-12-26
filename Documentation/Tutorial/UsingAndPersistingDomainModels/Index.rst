@@ -1,20 +1,5 @@
-.. ==================================================
-.. FOR YOUR INFORMATION
-.. --------------------------------------------------
-.. -*- coding: utf-8 -*- with BOM.
-
-.. ==================================================
-.. DEFINE SOME TEXTROLES
-.. --------------------------------------------------
-.. role::   underline
-.. role::   typoscript(code)
-.. role::   ts(typoscript)
-   :class:  typoscript
-.. role::   php(code)
-
-
-Using and persisting domain models
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Using domain models
+^^^^^^^^^^^^^^^^^^^
 
 This extension already provides ready-to-use domain model and data
 mapper classes for the following:
@@ -37,7 +22,7 @@ mapper classes for the following:
 Models
 """"""
 
-All models needto inherit from AbstractModel and be located in the
+All models need to inherit from AbstractModel and be located in the
 Model/ directory of your extension. Have a look at the front-end user
 model in oelib as an example:
 
@@ -172,48 +157,3 @@ mapper:
          ->method('findAllByCityUidOrUnassigned')->with(42)
          ->will($this->returnValue($cities));
    tx_oelib_MapperRegistry::set('tx_realty_Mapper_District', $mapper);
-
-
-Persisting a model to the database
-""""""""""""""""""""""""""""""""""
-
-Updating a model that has been fetched from the database and been
-modified looks like this:
-
-::
-
-   MapperRegistry::get('tx_realty_Mapper_RealtyObject')->save($model);
-
-
-Creating a new model in memory and saving it looks like this:
-
-$tender = GeneralUtility::makeInstance('tx\_geotenders\_Model\_Tender');
-
-$tender->setData(array(
-
-'pid'=>$this->pageUid,
-
-'title'=>$title,
-
-'client'=>$client,
-
-'award\_procedure'=>$awardProcedure,
-
-'expiry'=>$expiry,
-
-'zip'=>$zip,
-
-'city'=>$city,
-
-'description'=>$description,
-
-'publication\_date'=>$timestamp,
-
-));
-
-$tender->markAsDirty();
-
-MapperRegistry::get(TenderMapper::class)->save($tender);
-
-Related records are automatically saved recursively. Unmodified record
-are not saved.

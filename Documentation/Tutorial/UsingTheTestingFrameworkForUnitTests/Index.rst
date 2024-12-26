@@ -1,18 +1,3 @@
-.. ==================================================
-.. FOR YOUR INFORMATION
-.. --------------------------------------------------
-.. -*- coding: utf-8 -*- with BOM.
-
-.. ==================================================
-.. DEFINE SOME TEXTROLES
-.. --------------------------------------------------
-.. role::   underline
-.. role::   typoscript(code)
-.. role::   ts(typoscript)
-   :class:  typoscript
-.. role::   php(code)
-
-
 Using the testing framework for unit tests
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -41,19 +26,7 @@ The testing framework enables you to easily
 
 - Create a fake front end for testing front-end plugins
 
-- Clean up all the dummy records
-
-  - automatically deletes all the dummy records from all allowed tables
-
-  - automatically resets the auto\_increment index for each table
-
 - Count records
-
-- Add, change and remove dummy records on foreign extension tables
-
-- Create and delete dummy files in your extension's upload directory
-
-- Create and delete dummy folders in your extension's upload directory
 
 
 Before you start
@@ -62,25 +35,6 @@ Before you start
 You need the following stuff before you start:
 
 - This extension (tx\_oelib) must be installed
-
-- PHPUnit must be installed - we prefer to use the extension tx\_phpunit
-  by Kasper Ligaard that integrates PHPUnit in the TYPO3 back end
-
-- All non-system tables of the extension you're about to write unit
-  tests need to contain the column “is\_dummy\_record” (needed for easy
-  removal of the dummy records) – you can see an example for the SQL
-  definition in the ext\_tables.sql file of oelib. You don't need to add
-  this column to the system tables  *pages, tt\_content* etc., though,
-  as this extension already provides the necessary columns for those
-  tables.
-
-- For non-system but foreign extension tables you're about to write unit
-  tests need to contain the column built using your extension key as
-  prefix followed by “\_is\_dummy\_record” e.g.
-  “tx\_seminars\_is\_dummy\_record” if your extension key is
-  “tx\_seminars”. The extension key then has to be set via the second
-  parameter of the constructor when creating an instance of the testing
-  framework.
 
 - You'll have to write your own test suite for your extension
 
@@ -144,13 +98,3 @@ You can have a deeper look into our example in the subdirectory
 “tests/” of oelib: All methods of this testing framework are covered
 with at least one unit test. So it will be easy to see how these tools
 can be used for your own unit tests.
-
-
-Known problems with unit testing
-""""""""""""""""""""""""""""""""
-
-- Currently, the createFakeFrontEnd function in the testing framework
-  uses huge amounts of memory. We’re working on reducing this. As a
-  workaround, please set the PHP memory limit to at least 256 MB on you
-  local development machine. (And don’t run the unit tests on a
-  production server, of course.)
