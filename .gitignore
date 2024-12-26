@@ -3,7 +3,8 @@
 /.Build/*
 /.php-cs-fixer.cache
 /.php_cs.cache
+/Documentation-GENERATED-temp
 /composer.lock
 /nbproject
 /tools
-/var/
+/var
