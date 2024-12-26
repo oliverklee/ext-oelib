@@ -9,9 +9,17 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
-- Require TYPO3 >= 11.5.40 (#1958)
-
 ### Deprecated
+
+### Removed
+
+### Fixed
+
+## 6.0.3: Bug fixes and cleanup
+
+### Changed
+
+- Require TYPO3 >= 11.5.40 (#1958)
 
 ### Removed
 
