@@ -91,6 +91,11 @@ parameters:
 			path: Classes/Domain/Repository/PageRepository.php
 
 		-
+			message: "#^Trait OliverKlee\\\\Oelib\\\\Domain\\\\Repository\\\\Traits\\\\StoragePageAgnostic is used zero times and is not analysed\\.$#"
+			count: 1
+			path: Classes/Domain/Repository/Traits/StoragePageAgnostic.php
+
+		-
 			message: "#^Cannot access offset 'MAIL' on mixed\\.$#"
 			count: 1
 			path: Classes/Email/SystemEmailFromBuilder.php

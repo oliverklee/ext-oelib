@@ -12,7 +12,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 /**
  * @covers \OliverKlee\Oelib\Domain\Model\GermanZipCode
  * @covers \OliverKlee\Oelib\Domain\Repository\GermanZipCodeRepository
- * @covers \OliverKlee\Oelib\Domain\Repository\Traits\StoragePageAgnostic
  */
 final class GermanZipCodeRepositoryTest extends FunctionalTestCase
 {
