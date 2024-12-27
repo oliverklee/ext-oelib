@@ -6,6 +6,8 @@ namespace OliverKlee\Oelib\Model;
 
 /**
  * This class represents a currency.
+ *
+ * @deprecated #1573 will be removed in version 7.0
  */
 class Currency extends AbstractModel
 {
