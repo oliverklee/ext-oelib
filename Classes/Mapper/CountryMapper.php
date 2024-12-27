@@ -9,6 +9,8 @@ use OliverKlee\Oelib\Model\Country;
 
 /**
  * @extends AbstractDataMapper<Country>
+ *
+ * @deprecated #1559 will be removed in version 7.0
  */
 class CountryMapper extends AbstractDataMapper
 {
