@@ -8,6 +8,8 @@ use OliverKlee\Oelib\Model\FrontEndUserGroup;
 
 /**
  * @extends AbstractDataMapper<FrontEndUserGroup>
+ *
+ * @deprecated #1928 will be removed in version 7.0
  */
 class FrontEndUserGroupMapper extends AbstractDataMapper
 {

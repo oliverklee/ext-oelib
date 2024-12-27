@@ -17,6 +17,7 @@ class FrontEndUserMapper extends AbstractDataMapper
     protected $modelClassName = FrontEndUser::class;
 
     protected $relations = [
+        // @deprecated #1928 will be removed in version 7.0
         'usergroup' => FrontEndUserGroupMapper::class,
     ];
 

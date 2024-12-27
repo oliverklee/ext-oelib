@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Deprecated
 
+- Deprecate `BackEndUser` and `FrontEndUserGroup` (#1997)
 - Deprecate `AbstractDataMapper::save()` (#1996)
 - Deprecate the `Currency` model and mapper (#1995)
 - Deprecate the `PriceViewHelper` (#1994)

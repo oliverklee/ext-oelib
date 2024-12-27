@@ -242,6 +242,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address
      * Gets this user's user groups.
      *
      * @return Collection<FrontEndUserGroup> this user's FE user groups, will not be empty if the user data is valid
+     *
+     * @deprecated #1928 will be removed in version 7.0
      */
     public function getUserGroups(): Collection
     {
@@ -255,6 +257,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address
      * Sets this user's direct user groups.
      *
      * @param Collection<FrontEndUserGroup> $userGroups the user groups to set, may be empty
+     *
+     * @deprecated #1928 will be removed in version 7.0
      */
     public function setUserGroups(Collection $userGroups): void
     {
@@ -271,6 +275,8 @@ class FrontEndUser extends AbstractModel implements MailRole, Address
      * @return bool TRUE if the user is member of at least one of the user groups provided, FALSE otherwise
      *
      * @throws \InvalidArgumentException
+     *
+     * @deprecated #1928 will be removed in version 7.0
      */
     public function hasGroupMembership(string $uidList): bool
     {

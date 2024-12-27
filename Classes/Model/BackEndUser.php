@@ -8,6 +8,8 @@ use OliverKlee\Oelib\Interfaces\MailRole;
 
 /**
  * This class represents a back-end user.
+ *
+ * @deprecated #1928 will be removed in version 7.0
  */
 class BackEndUser extends AbstractModel implements MailRole
 {
