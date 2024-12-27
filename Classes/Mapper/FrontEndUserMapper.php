@@ -21,6 +21,7 @@ class FrontEndUserMapper extends AbstractDataMapper
         'usergroup' => FrontEndUserGroupMapper::class,
     ];
 
+    // @deprecated #1992 will be removed in version 7.0
     protected $additionalKeys = ['username'];
 
     /**
@@ -32,6 +33,8 @@ class FrontEndUserMapper extends AbstractDataMapper
      * @return FrontEndUser model of the front-end user with the provided username
      *
      * @throws NotFoundException if there is no front-end user with the provided username in the database
+     *
+     * @deprecated #1992 will be removed in version 7.0
      */
     public function findByUserName(string $username): FrontEndUser
     {

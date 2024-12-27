@@ -57,12 +57,16 @@ abstract class AbstractDataMapper
 
     /**
      * @var array<non-empty-string> the column names of additional string keys
+     *
+     * @deprecated #1992 will be removed in version 7.0
      */
     protected $additionalKeys = [];
 
     /**
      * @var array<string, array<string, M>> two-dimensional cache for the objects by key:
      *            `[key name][key value] => model`
+     *
+     * @deprecated #1992 will be removed in version 7.0
      */
     private array $cacheByKey = [];
 
@@ -1122,6 +1126,8 @@ abstract class AbstractDataMapper
      * @return M the cached model
      *
      * @throws NotFoundException if there is no match (neither in the cache nor in the database)
+     *
+     * @deprecated #1992 will be removed in version 7.0
      */
     public function findOneByKey(string $key, string $value): AbstractModel
     {

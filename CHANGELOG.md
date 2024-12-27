@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Deprecated
 
+- Deprecate `FrontEndUserMapper::findByUserName()` (#2002)
 - Deprecate the `PageRepository` (#2001)
 - Deprecate the `DirectPersist` trait and interface (#1998)
 - Deprecate `BackEndUser` and `FrontEndUserGroup` (#1997)
