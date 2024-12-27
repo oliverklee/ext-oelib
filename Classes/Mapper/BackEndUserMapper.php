@@ -8,6 +8,8 @@ use OliverKlee\Oelib\Model\BackEndUser;
 
 /**
  * @extends AbstractDataMapper<BackEndUser>
+ *
+ * @deprecated #1928 will be removed in version 7.0
  */
 class BackEndUserMapper extends AbstractDataMapper
 {
