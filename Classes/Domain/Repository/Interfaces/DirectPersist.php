@@ -9,6 +9,8 @@ namespace OliverKlee\Oelib\Domain\Repository\Interfaces;
  * care about the persistence manager.
  *
  * The corresponding trait is the default implementation.
+ *
+ * @deprecated #1935 will be removed in version 7.0
  */
 interface DirectPersist
 {
