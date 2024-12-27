@@ -657,6 +657,8 @@ abstract class AbstractDataMapper
      * ghost, if the model is read-only or if there is no data to set.
      *
      * @param M $model the model to write to the database
+     *
+     * @deprecated #1678 will be removed in version 7.0
      */
     public function save(AbstractModel $model): void
     {
@@ -709,6 +711,8 @@ abstract class AbstractDataMapper
      * @param M $model the model to write to the database
      *
      * @return DatabaseRow the model's data prepared for the database, will not be empty
+     *
+     * @deprecated #1678 will be removed in version 7.0
      */
     private function getPreparedModelData(AbstractModel $model): array
     {
@@ -757,6 +761,8 @@ abstract class AbstractDataMapper
      *
      * @param AbstractModel $model the model to save
      * @param AbstractDataMapper $mapper the mapper to use for saving
+     *
+     * @deprecated #1678 will be removed in version 7.0
      */
     private function saveManyToOneRelatedModels(AbstractModel $model, AbstractDataMapper $mapper): void
     {
@@ -768,6 +774,8 @@ abstract class AbstractDataMapper
      *
      * @param Collection<AbstractModel> $list the list of models to save
      * @param AbstractDataMapper $mapper the mapper to use for saving
+     *
+     * @deprecated #1678 will be removed in version 7.0
      */
     private function saveManyToManyAndCommaSeparatedRelatedModels(Collection $list, AbstractDataMapper $mapper): void
     {
@@ -782,6 +790,8 @@ abstract class AbstractDataMapper
      * given model.
      *
      * @param M $model the model to delete the records in the intermediate table of m:n relations for
+     *
+     * @deprecated #1678 will be removed in version 7.0
      */
     private function deleteManyToManyRelationIntermediateRecords(AbstractModel $model): void
     {
@@ -805,6 +815,8 @@ abstract class AbstractDataMapper
      * Creates records in the intermediate table of m:n relations for a given model.
      *
      * @param M $model the model to create the records in the intermediate table of m:n relations for
+     *
+     * @deprecated #1678 will be removed in version 7.0
      */
     private function createManyToManyRelationIntermediateRecords(AbstractModel $model): void
     {
@@ -844,6 +856,8 @@ abstract class AbstractDataMapper
      * Saves records that this model relates to as 1:n.
      *
      * @param M $model the model to save the related records for
+     *
+     * @deprecated #1678 will be removed in version 7.0
      */
     private function saveOneToManyRelationRecords(AbstractModel $model): void
     {
@@ -934,6 +948,8 @@ abstract class AbstractDataMapper
      * @param M $model the model to delete, must not be a memory-only dummy, must not be read-only
      *
      * @internal
+     *
+     * @deprecated #1678 will be removed in version 7.0
      */
     public function delete(AbstractModel $model): void
     {
@@ -969,6 +985,8 @@ abstract class AbstractDataMapper
      * Deletes all one-to-many related models of this model.
      *
      * @param M $model the model for which to delete the related models
+     *
+     * @deprecated #1678 will be removed in version 7.0
      */
     private function deleteOneToManyRelations(AbstractModel $model): void
     {
