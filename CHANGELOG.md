@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Deprecated
 
+- Deprecate the `PriceViewHelper` (#1994)
 - Deprecate the `Country` and `Language` models and mappers (#1993)
 
 ### Removed
