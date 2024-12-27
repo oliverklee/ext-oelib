@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add `::getAsNonNegativeInteger()` and `::getAsPositiveInteger()` (#1988)
 - Add support for PHP 8.4 (#1960)
 
 ### Changed

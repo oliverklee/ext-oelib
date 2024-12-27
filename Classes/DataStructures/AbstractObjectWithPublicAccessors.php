@@ -81,6 +81,48 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
     }
 
     /**
+     * Gets the value stored in under the key $key, converted to an integer.
+     *
+     * @param non-empty-string $key
+     *
+     * @return int<0, max>
+     */
+    public function getAsNonNegativeInteger(string $key): int
+    {
+        $value = $this->getAsInteger($key);
+
+        if ($value < 0) {
+            throw new \UnexpectedValueException(
+                'The value for the key "' . $key . '" must be a non-negative integer, but it is ' . $value . '.',
+                1735299608
+            );
+        }
+
+        return $value;
+    }
+
+    /**
+     * Gets the value stored in under the key $key, converted to an integer.
+     *
+     * @param non-empty-string $key
+     *
+     * @return positive-int
+     */
+    public function getAsPositiveInteger(string $key): int
+    {
+        $value = $this->getAsInteger($key);
+
+        if ($value <= 0) {
+            throw new \UnexpectedValueException(
+                'The value for the key "' . $key . '" must be a positive integer, but it is ' . $value . '.',
+                1735299700
+            );
+        }
+
+        return $value;
+    }
+
+    /**
      * Gets the value stored under the provided key, converted to an array of trimmed strings.
      *
      * @param non-empty-string $key
