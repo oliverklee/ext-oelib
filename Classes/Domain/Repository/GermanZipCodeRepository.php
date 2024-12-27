@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Oelib\Domain\Repository;
 
 use OliverKlee\Oelib\Domain\Model\GermanZipCode;
-use OliverKlee\Oelib\Domain\Repository\Traits\StoragePageAgnostic;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
@@ -13,12 +14,16 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class GermanZipCodeRepository extends Repository
 {
-    use StoragePageAgnostic;
-
     /**
      * @var array<string, GermanZipCode|null>
      */
     protected array $cachedResults = [];
+
+    public function initializeObject(): void
+    {
+        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
+        $this->setDefaultQuerySettings($querySettings->setRespectStoragePage(false));
+    }
 
     public function findOneByZipCode(string $zipCode): ?GermanZipCode
     {
