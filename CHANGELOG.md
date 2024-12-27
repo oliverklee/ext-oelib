@@ -7,6 +7,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 6.1.0: Add support for PHP 8.4
+
+### Added
+
 - Add `::getAsNonNegativeInteger()` and `::getAsPositiveInteger()` (#1988)
 - Add support for PHP 8.4 (#1960)
 
@@ -27,10 +39,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Deprecate the `Currency` model and mapper (#1995)
 - Deprecate the `PriceViewHelper` (#1994)
 - Deprecate the `Country` and `Language` models and mappers (#1993)
-
-### Removed
-
-### Fixed
 
 ## 6.0.3: Bug fixes and cleanup
 
