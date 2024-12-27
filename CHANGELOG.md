@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Allow Fluid 4.0 (#1986)
 - Require TYPO3 >= 11.5.41 (#1985)
 
 ### Deprecated
