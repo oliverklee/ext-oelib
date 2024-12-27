@@ -9,6 +9,8 @@ use OliverKlee\Oelib\Model\Currency;
 
 /**
  * @extends AbstractDataMapper<Currency>
+ *
+ * @deprecated #1573 will be removed in version 7.0
  */
 class CurrencyMapper extends AbstractDataMapper
 {
