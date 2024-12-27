@@ -7,6 +7,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add support for PHP 8.4 (#1960)
+
 ### Changed
 
 - Allow Fluid 4.0 (#1986)
