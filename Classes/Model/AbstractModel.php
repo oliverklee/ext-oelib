@@ -564,6 +564,10 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
      * Sets the "deleted" property for the current model.
      *
      * Note: This function is intended to be called only by a data mapper.
+     *
+     * @internal
+     *
+     * @deprecated #1678 will be removed in version 7.0
      */
     public function setToDeleted(): void
     {
@@ -607,6 +611,8 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
 
     /**
      * Sets the modification date and time.
+     *
+     * @deprecated #1678 will be removed in version 7.0
      */
     public function setTimestamp(): void
     {
@@ -627,6 +633,8 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
 
     /**
      * Sets the creation date and time.
+     *
+     * @deprecated #1678 will be removed in version 7.0
      */
     public function setCreationDate(): void
     {
