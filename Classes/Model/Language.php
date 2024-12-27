@@ -6,6 +6,8 @@ namespace OliverKlee\Oelib\Model;
 
 /**
  * This class represents a language.
+ *
+ * @deprecated #1559 will be removed in version 7.0
  */
 class Language extends AbstractModel
 {
