@@ -44,6 +44,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
      */
     public const STATUS_DEAD = 4;
 
+    // @deprecated #1991 will be removed in version 7.0
     protected bool $readOnly = false;
 
     /**
@@ -593,6 +594,8 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
      * Checks whether this model is read-only.
      *
      * @return bool TRUE if this model is read-only, FALSE if it is writable
+     *
+     * @deprecated #1991 will be removed in version 7.0
      */
     public function isReadOnly(): bool
     {

@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Deprecated
 
+- Deprecate the feature of readonly models (#2003)
 - Deprecate `FrontEndUserMapper::findByUserName()` (#2002)
 - Deprecate the `PageRepository` (#2001)
 - Deprecate the `DirectPersist` trait and interface (#1998)
