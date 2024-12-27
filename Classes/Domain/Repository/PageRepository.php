@@ -12,6 +12,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Repository for finding page records by UID.
+ *
+ * @deprecated #1940 will be removed in version 7.0
  */
 class PageRepository implements SingletonInterface
 {
