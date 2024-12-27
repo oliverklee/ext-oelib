@@ -13,6 +13,8 @@ use TYPO3\CMS\Extbase\Persistence\RepositoryInterface;
  * This is the default implementation of the corresponding interface.
  *
  * @phpstan-require-implements RepositoryInterface
+ *
+ * @deprecated #1935 will be removed in version 7.0
  */
 trait DirectPersist
 {
