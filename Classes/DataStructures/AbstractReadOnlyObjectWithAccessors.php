@@ -85,6 +85,8 @@ abstract class AbstractReadOnlyObjectWithAccessors
      * @param non-empty-string $key
      *
      * @return int<0, max>
+     *
+     * @throws \UnexpectedValueException if the value is negative
      */
     protected function getAsNonNegativeInteger(string $key): int
     {
@@ -106,6 +108,8 @@ abstract class AbstractReadOnlyObjectWithAccessors
      * @param non-empty-string $key
      *
      * @return positive-int
+     *
+     * @throws \UnexpectedValueException if the value is zero or negative
      */
     protected function getAsPositiveInteger(string $key): int
     {

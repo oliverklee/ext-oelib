@@ -77,6 +77,8 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
      * @param non-empty-string $key
      *
      * @return int<0, max>
+     *
+     * @throws \UnexpectedValueException if the value is negative
      */
     public function getAsNonNegativeInteger(string $key): int
     {
@@ -89,6 +91,8 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
      * @param non-empty-string $key
      *
      * @return positive-int
+     *
+     * @throws \UnexpectedValueException if the value is zero or negative
      */
     public function getAsPositiveInteger(string $key): int
     {
