@@ -16,7 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Fixed
 
 - Move `getAs*Integer` to the correct superclass (#2009)
-- Improve some type annotations and PHPDoc comments (#2008, #2010)
+- Improve some type annotations and PHPDoc comments (#2008, #2010, #2013)
 
 ## 6.1.0: Add support for PHP 8.4
 
