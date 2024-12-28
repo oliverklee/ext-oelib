@@ -77,6 +77,52 @@ class FallbackConfiguration implements ConfigurationInterface
     }
 
     /**
+     * Gets the value stored under the given key, converted to an integer.
+     *
+     * @param non-empty-string $key
+     *
+     * @return int<0, max>
+     *
+     * @throws \UnexpectedValueException if the value is negative
+     */
+    public function getAsNonNegativeInteger(string $key): int
+    {
+        $value = $this->getAsInteger($key);
+
+        if ($value < 0) {
+            throw new \UnexpectedValueException(
+                'The value for "' . $key . '" must be a non-negative integer, but it is ' . $value . '.',
+                1573030133
+            );
+        }
+
+        return $value;
+    }
+
+    /**
+     * Gets the value stored under the given key, converted to an integer.
+     *
+     * @param non-empty-string $key
+     *
+     * @return positive-int
+     *
+     * @throws \UnexpectedValueException if the value is zero or negative
+     */
+    public function getAsPositiveInteger(string $key): int
+    {
+        $value = $this->getAsInteger($key);
+
+        if ($value <= 0) {
+            throw new \UnexpectedValueException(
+                'The value for "' . $key . '" must be a positive integer, but it is ' . $value . '.',
+                1573030133
+            );
+        }
+
+        return $value;
+    }
+
+    /**
      * Gets the value stored under the given key, converted to a boolean.
      *
      * @param non-empty-string $key

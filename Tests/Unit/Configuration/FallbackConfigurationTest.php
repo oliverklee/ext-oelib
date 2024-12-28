@@ -266,6 +266,251 @@ final class FallbackConfigurationTest extends UnitTestCase
     /**
      * @test
      */
+    public function getAsNonNegativeIntegerForBothZeroReturnsZero(): void
+    {
+        $key = 'something';
+        $primary = new DummyConfiguration([$key => 0]);
+        $secondary = new DummyConfiguration([$key => 0]);
+        $subject = new FallbackConfiguration($primary, $secondary);
+
+        self::assertSame(0, $subject->getAsNonNegativeInteger($key));
+    }
+
+    /**
+     * @test
+     */
+    public function getAsNonNegativeIntegerForBothPositiveReturnsValueFromPrimary(): void
+    {
+        $key = 'something';
+        $primaryValue = 1;
+        $primary = new DummyConfiguration([$key => $primaryValue]);
+        $secondaryValue = 2;
+        $secondary = new DummyConfiguration([$key => $secondaryValue]);
+        $subject = new FallbackConfiguration($primary, $secondary);
+
+        self::assertSame($primaryValue, $subject->getAsNonNegativeInteger($key));
+    }
+
+    /**
+     * @test
+     */
+    public function getAsNonNegativeIntegerForPrimaryPositiveAndSecondaryZeroReturnsValueFromPrimary(): void
+    {
+        $key = 'something';
+        $primaryValue = 1;
+        $primary = new DummyConfiguration([$key => $primaryValue]);
+        $secondaryValue = 0;
+        $secondary = new DummyConfiguration([$key => $secondaryValue]);
+        $subject = new FallbackConfiguration($primary, $secondary);
+
+        self::assertSame($primaryValue, $subject->getAsNonNegativeInteger($key));
+    }
+
+    /**
+     * @test
+     */
+    public function getAsNonNegativeIntegerForPrimaryPositiveAndSecondaryNegativeReturnsValueFromPrimary(): void
+    {
+        $key = 'something';
+        $primaryValue = 1;
+        $primary = new DummyConfiguration([$key => $primaryValue]);
+        $secondaryValue = -1;
+        $secondary = new DummyConfiguration([$key => $secondaryValue]);
+        $subject = new FallbackConfiguration($primary, $secondary);
+
+        self::assertSame($primaryValue, $subject->getAsNonNegativeInteger($key));
+    }
+
+    /**
+     * @test
+     */
+    public function getAsNonNegativeIntegerForPrimaryZeroAndSecondaryPositiveReturnsValueFromSecondary(): void
+    {
+        $key = 'something';
+        $primaryValue = 0;
+        $primary = new DummyConfiguration([$key => $primaryValue]);
+        $secondaryValue = 2;
+        $secondary = new DummyConfiguration([$key => $secondaryValue]);
+        $subject = new FallbackConfiguration($primary, $secondary);
+
+        self::assertSame($secondaryValue, $subject->getAsNonNegativeInteger($key));
+    }
+
+    /**
+     * @test
+     */
+    public function getAsNonNegativeIntegerForPrimaryNegativeAndSecondaryPositiveThrowsException(): void
+    {
+        $key = 'something';
+        $primaryValue = -1;
+        $primary = new DummyConfiguration([$key => $primaryValue]);
+        $secondaryValue = 1;
+        $secondary = new DummyConfiguration([$key => $secondaryValue]);
+        $subject = new FallbackConfiguration($primary, $secondary);
+
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionMessage('The value for "something" must be a non-negative integer, but it is -1.');
+        $this->expectExceptionCode(1573030133);
+
+        $subject->getAsNonNegativeInteger($key);
+    }
+
+    /**
+     * @test
+     */
+    public function getAsNonNegativeIntegerForBothNegativeThrowsException(): void
+    {
+        $key = 'something';
+        $primaryValue = -1;
+        $primary = new DummyConfiguration([$key => $primaryValue]);
+        $secondaryValue = -1;
+        $secondary = new DummyConfiguration([$key => $secondaryValue]);
+        $subject = new FallbackConfiguration($primary, $secondary);
+
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionMessage('The value for "something" must be a non-negative integer, but it is -1.');
+        $this->expectExceptionCode(1573030133);
+
+        $subject->getAsNonNegativeInteger($key);
+    }
+
+    /**
+     * @test
+     */
+    public function getAsNonNegativeIntegerForPrimaryZeroAndSecondaryNegativeThrowsException(): void
+    {
+        $key = 'something';
+        $primaryValue = 0;
+        $primary = new DummyConfiguration([$key => $primaryValue]);
+        $secondaryValue = -1;
+        $secondary = new DummyConfiguration([$key => $secondaryValue]);
+        $subject = new FallbackConfiguration($primary, $secondary);
+
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionMessage('The value for "something" must be a non-negative integer, but it is -1.');
+        $this->expectExceptionCode(1573030133);
+
+        $subject->getAsNonNegativeInteger($key);
+    }
+
+    /**
+     * @test
+     */
+    public function getAsPositiveIntegerForBothZeroThrowsException(): void
+    {
+        $key = 'something';
+        $primary = new DummyConfiguration([$key => 0]);
+        $secondary = new DummyConfiguration([$key => 0]);
+        $subject = new FallbackConfiguration($primary, $secondary);
+
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionMessage('The value for "something" must be a positive integer, but it is 0.');
+        $this->expectExceptionCode(1573030133);
+
+        $subject->getAsPositiveInteger($key);
+    }
+
+    /**
+     * @test
+     */
+    public function getAsPositiveIntegerForBothPositiveReturnsValueFromPrimary(): void
+    {
+        $key = 'something';
+        $primaryValue = 1;
+        $primary = new DummyConfiguration([$key => $primaryValue]);
+        $secondaryValue = 2;
+        $secondary = new DummyConfiguration([$key => $secondaryValue]);
+        $subject = new FallbackConfiguration($primary, $secondary);
+
+        self::assertSame($primaryValue, $subject->getAsPositiveInteger($key));
+    }
+
+    /**
+     * @test
+     */
+    public function getAsPositiveIntegerForPrimaryPositiveAndSecondaryZeroReturnsValueFromPrimary(): void
+    {
+        $key = 'something';
+        $primaryValue = 1;
+        $primary = new DummyConfiguration([$key => $primaryValue]);
+        $secondaryValue = 0;
+        $secondary = new DummyConfiguration([$key => $secondaryValue]);
+        $subject = new FallbackConfiguration($primary, $secondary);
+
+        self::assertSame($primaryValue, $subject->getAsPositiveInteger($key));
+    }
+
+    /**
+     * @test
+     */
+    public function getAsPositiveIntegerForPrimaryPositiveAndSecondaryNegativeReturnsValueFromPrimary(): void
+    {
+        $key = 'something';
+        $primaryValue = 1;
+        $primary = new DummyConfiguration([$key => $primaryValue]);
+        $secondaryValue = -1;
+        $secondary = new DummyConfiguration([$key => $secondaryValue]);
+        $subject = new FallbackConfiguration($primary, $secondary);
+
+        self::assertSame($primaryValue, $subject->getAsPositiveInteger($key));
+    }
+
+    /**
+     * @test
+     */
+    public function getAsPositiveIntegerForPrimaryNegativeAndSecondaryPositiveThrowsException(): void
+    {
+        $key = 'something';
+        $primaryValue = -1;
+        $primary = new DummyConfiguration([$key => $primaryValue]);
+        $secondaryValue = 1;
+        $secondary = new DummyConfiguration([$key => $secondaryValue]);
+        $subject = new FallbackConfiguration($primary, $secondary);
+
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionMessage('The value for "something" must be a positive integer, but it is -1.');
+        $this->expectExceptionCode(1573030133);
+
+        $subject->getAsPositiveInteger($key);
+    }
+
+    /**
+     * @test
+     */
+    public function getAsPositiveIntegerForPrimaryZeroAndSecondaryNegativeThrowsException(): void
+    {
+        $key = 'something';
+        $primaryValue = 0;
+        $primary = new DummyConfiguration([$key => $primaryValue]);
+        $secondaryValue = -1;
+        $secondary = new DummyConfiguration([$key => $secondaryValue]);
+        $subject = new FallbackConfiguration($primary, $secondary);
+
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionMessage('The value for "something" must be a positive integer, but it is -1.');
+        $this->expectExceptionCode(1573030133);
+
+        $subject->getAsPositiveInteger($key);
+    }
+
+    /**
+     * @test
+     */
+    public function getAsPositiveIntegerForPrimaryZeroAndSecondaryPositiveReturnsValueFromSecondary(): void
+    {
+        $key = 'something';
+        $primaryValue = 0;
+        $primary = new DummyConfiguration([$key => $primaryValue]);
+        $secondaryValue = 2;
+        $secondary = new DummyConfiguration([$key => $secondaryValue]);
+        $subject = new FallbackConfiguration($primary, $secondary);
+
+        self::assertSame($secondaryValue, $subject->getAsPositiveInteger($key));
+    }
+
+    /**
+     * @test
+     */
     public function getAsBooleanForBothFalseReturnsFalse(): void
     {
         $key = 'something';
