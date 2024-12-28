@@ -47,6 +47,28 @@ interface Configuration
     public function hasInteger(string $key): bool;
 
     /**
+     * Gets the value stored under the given key, converted to an integer.
+     *
+     * @param non-empty-string $key
+     *
+     * @return int<0, max>
+     *
+     * @throws \UnexpectedValueException if the value is negative
+     */
+    public function getAsNonNegativeInteger(string $key): int;
+
+    /**
+     * Gets the value stored under the given key, converted to an integer.
+     *
+     * @param non-empty-string $key
+     *
+     * @return positive-int
+     *
+     * @throws \UnexpectedValueException if the value is zero or negative
+     */
+    public function getAsPositiveInteger(string $key): int;
+
+    /**
      * Gets the value stored under the given key, converted to a boolean.
      *
      * @param non-empty-string $key
