@@ -607,9 +607,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
      */
     public function getModificationDateAsUnixTimeStamp(): int
     {
-        $timestamp = $this->getAsInteger('tstamp');
-
-        return $timestamp > 0 ? $timestamp : 0;
+        return $this->getAsNonNegativeInteger('tstamp');
     }
 
     /**
@@ -629,9 +627,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
      */
     public function getCreationDateAsUnixTimeStamp(): int
     {
-        $timestamp = $this->getAsInteger('crdate');
-
-        return $timestamp > 0 ? $timestamp : 0;
+        return $this->getAsNonNegativeInteger('crdate');
     }
 
     /**
@@ -653,13 +649,11 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     /**
      * Returns the page UID of this model.
      *
-     * @return int<0, max> the page UID of this model, will be >= 0
+     * @return int<0, max>
      */
     public function getPageUid(): int
     {
-        $pageUid = $this->getAsInteger('pid');
-
-        return $pageUid >= 0 ? $pageUid : 0;
+        return $this->getAsNonNegativeInteger('pid');
     }
 
     /**
