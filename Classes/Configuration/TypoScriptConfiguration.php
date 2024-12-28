@@ -42,11 +42,11 @@ class TypoScriptConfiguration extends AbstractReadOnlyObjectWithPublicAccessors 
     }
 
     /**
-     * Gets the value of the data item for the key $key.
+     * Gets the value of the data item for the given key.
      *
      * @param non-empty-string $key
      *
-     * @return string|mixed the data for the key $key, will be an empty string if the key has not been set yet
+     * @return string|mixed the data for the given key, will be an empty string if the key has not been set yet
      */
     protected function get(string $key)
     {
@@ -70,13 +70,13 @@ class TypoScriptConfiguration extends AbstractReadOnlyObjectWithPublicAccessors 
     }
 
     /**
-     * Returns the array keys of the data item for the key $key.
+     * Returns the array keys of the data item for the given key.
      *
      * If $key is an empty string the array keys of $this->data are returned.
      *
      * @param string $key the key of the data item to get the array keys for, may be empty
      *
-     * @return list<string|int> the array keys of the data item for the key $key, may be empty
+     * @return list<string|int> the array keys of the data item for the given key, may be empty
      */
     public function getArrayKeys(string $key = ''): array
     {
@@ -92,7 +92,7 @@ class TypoScriptConfiguration extends AbstractReadOnlyObjectWithPublicAccessors 
     }
 
     /**
-     * Returns the data for the key $key as a multidimensional array.
+     * Returns the data for the given key as a multidimensional array.
      *
      * The return value will be an empty array:
      * - if the data item is an empty array,
@@ -101,7 +101,7 @@ class TypoScriptConfiguration extends AbstractReadOnlyObjectWithPublicAccessors 
      *
      * @param non-empty-string $key the key of the data item to get as a multidimensional array
      *
-     * @return array<string, array<string|int, mixed>|string|int> the data for the key $key, may be empty
+     * @return array<string, array<string|int, mixed>|string|int> the data for the given key, may be empty
      */
     public function getAsMultidimensionalArray(string $key): array
     {

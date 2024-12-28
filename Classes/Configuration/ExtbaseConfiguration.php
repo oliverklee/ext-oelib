@@ -26,11 +26,11 @@ final class ExtbaseConfiguration extends AbstractReadOnlyObjectWithPublicAccesso
     }
 
     /**
-     * Gets the value of the data item for the key $key.
+     * Gets the value of the data item for the given key.
      *
      * @param non-empty-string $key
      *
-     * @return mixed the data for the key $key, will be null if the key has not been set yet
+     * @return mixed the data for the given key, will be null if the key has not been set yet
      */
     protected function get(string $key)
     {

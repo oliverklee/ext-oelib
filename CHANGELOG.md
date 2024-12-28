@@ -15,6 +15,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Improve some type annotations and PHPDoc comments (#2008)
+
 ## 6.1.0: Add support for PHP 8.4
 
 ### Added
