@@ -90,7 +90,7 @@ abstract class AbstractReadOnlyObjectWithPublicAccessors extends AbstractReadOnl
      *
      * @param non-empty-string $key
      *
-     * @return list<int> the array value of the given key, may be empty
+     * @return array<int, int> the array value of the given key, may be empty
      */
     public function getAsIntegerArray(string $key): array
     {

@@ -106,7 +106,6 @@ class IsFieldEnabledViewHelper extends AbstractConditionViewHelper
             throw new \InvalidArgumentException('The argument "fieldName" must not be empty.', 1_651_155_957);
         }
 
-        /** @var list<non-empty-string> $result */
         $result = GeneralUtility::trimExplode('|', $fieldsNamesArgument, true);
 
         return $result;

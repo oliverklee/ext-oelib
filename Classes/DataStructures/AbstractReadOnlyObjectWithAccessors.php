@@ -138,7 +138,7 @@ abstract class AbstractReadOnlyObjectWithAccessors
      *
      * @param non-empty-string $key
      *
-     * @return list<int> the array value of the given key, may be empty
+     * @return array<int, int> the array value of the given key, may be empty
      */
     protected function getAsIntegerArray(string $key): array
     {
@@ -148,7 +148,6 @@ abstract class AbstractReadOnlyObjectWithAccessors
             return [];
         }
 
-        /** @var list<int> $result */
         $result = GeneralUtility::intExplode(',', $stringValue, true);
 
         return $result;
