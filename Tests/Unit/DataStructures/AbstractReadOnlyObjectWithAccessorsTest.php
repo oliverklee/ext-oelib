@@ -160,6 +160,135 @@ final class AbstractReadOnlyObjectWithAccessorsTest extends UnitTestCase
     /**
      * @test
      */
+    public function getAsNonNegativeIntegerWithEmptyKeyThrowsException(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('$key must not be empty.');
+        $this->expectExceptionCode(1_331_488_963);
+
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
+        $this->subject->getAsNonNegativeInteger('');
+    }
+
+    /**
+     * @test
+     */
+    public function getAsPositiveIntegerWithEmptyKeyThrowsException(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('$key must not be empty.');
+        $this->expectExceptionCode(1_331_488_963);
+
+        // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
+        $this->subject->getAsPositiveInteger('');
+    }
+
+    /**
+     * @test
+     */
+    public function getAsNonNegativeIntegerForZeroReturnsSetValue(): void
+    {
+        $key = 'foo';
+        $value = 0;
+        $this->subject->setData([$key => $value]);
+
+        self::assertSame($value, $this->subject->getAsNonNegativeInteger($key));
+    }
+
+    /**
+     * @test
+     */
+    public function getAsNonNegativeIntegerForPositiveValueReturnsSetValue(): void
+    {
+        $key = 'foo';
+        $value = 1;
+        $this->subject->setData([$key => $value]);
+
+        self::assertSame($value, $this->subject->getAsNonNegativeInteger($key));
+    }
+
+    /**
+     * @test
+     */
+    public function getAsNonNegativeIntegerForPositiveStringValueReturnsSetIntegerValue(): void
+    {
+        $key = 'foo';
+        $this->subject->setData([$key => '2']);
+
+        self::assertSame(2, $this->subject->getAsNonNegativeInteger($key));
+    }
+
+    /**
+     * @test
+     */
+    public function getAsNonNegativeIntegerForNegativeValueThrowsException(): void
+    {
+        $key = 'foo';
+        $this->subject->setData([$key => -1]);
+
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionMessage('The value for the key "foo" must be a non-negative integer, but it is -1.');
+        $this->expectExceptionCode(1735299608);
+
+        $this->subject->getAsNonNegativeInteger($key);
+    }
+
+    /**
+     * @test
+     */
+    public function getAsPositiveIntegerForPositiveIntegerValueReturnsSetValue(): void
+    {
+        $key = 'foo';
+        $value = 1;
+        $this->subject->setData([$key => $value]);
+
+        self::assertSame($value, $this->subject->getAsPositiveInteger($key));
+    }
+
+    /**
+     * @test
+     */
+    public function getAsPositiveIntegerForPositiveStringValueReturnsSetIntegerValue(): void
+    {
+        $key = 'foo';
+        $this->subject->setData([$key => '2']);
+
+        self::assertSame(2, $this->subject->getAsPositiveInteger($key));
+    }
+
+    /**
+     * @test
+     */
+    public function getAsPositiveIntegerForZeroThrowsException(): void
+    {
+        $key = 'foo';
+        $this->subject->setData([$key => 0]);
+
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionMessage('The value for the key "foo" must be a positive integer, but it is 0');
+        $this->expectExceptionCode(1735299700);
+
+        $this->subject->getAsPositiveInteger($key);
+    }
+
+    /**
+     * @test
+     */
+    public function getAsPositiveIntegerForNegativeValueThrowsException(): void
+    {
+        $key = 'foo';
+        $this->subject->setData([$key => -1]);
+
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionMessage('The value for the key "foo" must be a positive integer, but it is -1.');
+        $this->expectExceptionCode(1735299700);
+
+        $this->subject->getAsPositiveInteger($key);
+    }
+
+    /**
+     * @test
+     */
     public function getAsTrimmedArrayWithEmptyKeyThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
