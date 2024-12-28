@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Add `getAs*Integer` to the `Configuration` interface (#2014, #2015)
 - Move `getAs*Integer` to the correct superclass (#2009)
 - Improve some type annotations and PHPDoc comments (#2008, #2010, #2013)
 
