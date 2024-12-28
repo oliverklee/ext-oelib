@@ -13,11 +13,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 abstract class AbstractReadOnlyObjectWithAccessors
 {
     /**
-     * Gets the value of the data item for the key $key.
+     * Gets the value of the data item for the given key.
      *
      * @param non-empty-string $key
      *
-     * @return mixed the data for the key $key, will be null or an empty string if the key has not been set yet
+     * @return mixed the data for the given key, will be null or an empty string if the key has not been set yet
      */
     abstract protected function get(string $key);
 
@@ -36,11 +36,9 @@ abstract class AbstractReadOnlyObjectWithAccessors
     }
 
     /**
-     * Gets the value stored in under the key $key, converted to a string.
+     * Gets the value stored under the given key, converted to a string.
      *
      * @param non-empty-string $key
-     *
-     * @return string the string value of the given key, may be empty
      */
     protected function getAsString(string $key): string
     {
@@ -50,11 +48,9 @@ abstract class AbstractReadOnlyObjectWithAccessors
     }
 
     /**
-     * Checks whether a non-empty string is stored under the key $key.
+     * Checks whether a non-empty string is stored under the given key.
      *
      * @param non-empty-string $key
-     *
-     * @return bool true if the value for the given key is non-empty, false otherwise
      */
     protected function hasString(string $key): bool
     {
@@ -62,11 +58,9 @@ abstract class AbstractReadOnlyObjectWithAccessors
     }
 
     /**
-     * Gets the value stored in under the key $key, converted to an integer.
+     * Gets the value stored under the given key, converted to an integer.
      *
      * @param non-empty-string $key
-     *
-     * @return int the integer value of the given key, may be positive, negative or zero
      */
     protected function getAsInteger(string $key): int
     {
@@ -76,11 +70,9 @@ abstract class AbstractReadOnlyObjectWithAccessors
     }
 
     /**
-     * Checks whether a non-zero integer is stored under the key $key.
+     * Checks whether a non-zero integer is stored under the given key.
      *
      * @param non-empty-string $key
-     *
-     * @return bool true if the value for the given key is non-zero, false otherwise
      */
     protected function hasInteger(string $key): bool
     {
@@ -100,7 +92,7 @@ abstract class AbstractReadOnlyObjectWithAccessors
     }
 
     /**
-     * Gets the value stored under the key $key, converted to an array of integers.
+     * Gets the value stored under the given key, converted to an array of integers.
      *
      * @param non-empty-string $key
      *
@@ -121,11 +113,9 @@ abstract class AbstractReadOnlyObjectWithAccessors
     }
 
     /**
-     * Gets the value stored in under the key $key, converted to a boolean.
+     * Gets the value stored under the given key, converted to a boolean.
      *
      * @param non-empty-string $key
-     *
-     * @return bool the boolean value of the given key
      */
     protected function getAsBoolean(string $key): bool
     {
@@ -135,11 +125,9 @@ abstract class AbstractReadOnlyObjectWithAccessors
     }
 
     /**
-     * Gets the value stored in under the key $key, converted to a float.
+     * Gets the value stored under the given key, converted to a float.
      *
      * @param non-empty-string $key
-     *
-     * @return float the float value of the given key, may be positive, negative or zero
      */
     protected function getAsFloat(string $key): float
     {
@@ -149,11 +137,9 @@ abstract class AbstractReadOnlyObjectWithAccessors
     }
 
     /**
-     * Checks whether a non-zero float is stored under the key $key.
+     * Checks whether a non-zero float is stored under the given key.
      *
      * @param non-empty-string $key
-     *
-     * @return bool true if the value for the given key is non-zero, false otherwise
      */
     protected function hasFloat(string $key): bool
     {

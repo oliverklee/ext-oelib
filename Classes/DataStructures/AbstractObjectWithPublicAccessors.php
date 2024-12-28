@@ -10,11 +10,9 @@ namespace OliverKlee\Oelib\DataStructures;
 abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAccessors
 {
     /**
-     * Gets the value stored in under the key $key, converted to a string.
+     * Gets the value stored under the given key, converted to a string.
      *
      * @param non-empty-string $key
-     *
-     * @return string the string value of the given key, may be empty
      */
     public function getAsString(string $key): string
     {
@@ -22,11 +20,9 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
     }
 
     /**
-     * Checks whether a non-empty string is stored under the key $key.
+     * Checks whether a non-empty string is stored under the given key.
      *
      * @param non-empty-string $key
-     *
-     * @return bool true if the value for the given key is non-empty, false otherwise
      */
     public function hasString(string $key): bool
     {
@@ -34,7 +30,7 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
     }
 
     /**
-     * Sets a value for the key $key (and converts it to a string).
+     * Sets a value for the given key (and converts it to a string).
      *
      * @param non-empty-string $key
      * @param string|int|float|bool|null $value the value to set, may be empty
@@ -45,12 +41,9 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
     }
 
     /**
-     * Gets the value stored in under the key $key, converted to an integer.
+     * Gets the value stored under the given key, converted to an integer.
      *
      * @param non-empty-string $key
-     *
-     * @return int the integer value of the given key, may be positive,
-     *                 negative or zero
      */
     public function getAsInteger(string $key): int
     {
@@ -58,11 +51,9 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
     }
 
     /**
-     * Checks whether a non-zero integer is stored under the key $key.
+     * Checks whether a non-zero integer is stored under the given key.
      *
      * @param non-empty-string $key
-     *
-     * @return bool true if the value for the given key is non-zero, false otherwise
      */
     public function hasInteger(string $key): bool
     {
@@ -70,7 +61,7 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
     }
 
     /**
-     * Sets a value for the key $key (and converts it to an integer).
+     * Sets a value for the given key (and converts it to an integer).
      *
      * @param non-empty-string $key
      * @param string|int|float|bool|null $value the value to set, may be empty
@@ -81,7 +72,7 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
     }
 
     /**
-     * Gets the value stored in under the key $key, converted to an integer.
+     * Gets the value stored under the given key, converted to an integer.
      *
      * @param non-empty-string $key
      *
@@ -102,7 +93,7 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
     }
 
     /**
-     * Gets the value stored in under the key $key, converted to an integer.
+     * Gets the value stored under the given key, converted to an integer.
      *
      * @param non-empty-string $key
      *
@@ -135,8 +126,7 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
     }
 
     /**
-     * Gets the value stored under the key $key, converted to an array of
-     * integers.
+     * Gets the value stored under the given key, converted to an array of integers.
      *
      * @param non-empty-string $key
      *
@@ -148,7 +138,7 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
     }
 
     /**
-     * Sets an array value for the key $key.
+     * Sets an array value for the given key.
      *
      * Note: This function is intended for data that does not contain any
      * commas. Commas in the array elements cause getAsTrimmedArray and
@@ -167,11 +157,9 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
     }
 
     /**
-     * Gets the value stored in under the key $key, converted to a boolean.
+     * Gets the value stored under the given key, converted to a boolean.
      *
      * @param non-empty-string $key
-     *
-     * @return bool the boolean value of the given key
      */
     public function getAsBoolean(string $key): bool
     {
@@ -179,7 +167,7 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
     }
 
     /**
-     * Sets a value for the key $key (and converts it to a boolean).
+     * Sets a value for the given key (and converts it to a boolean).
      *
      * @param non-empty-string $key
      * @param string|int|float|bool|null $value the value to set, may be empty
@@ -190,11 +178,9 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
     }
 
     /**
-     * Gets the value stored in under the key $key, converted to a float.
+     * Gets the value stored under the given key, converted to a float.
      *
      * @param non-empty-string $key
-     *
-     * @return float the float value of the given key, may be positive, negative or zero
      */
     public function getAsFloat(string $key): float
     {
@@ -202,11 +188,9 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
     }
 
     /**
-     * Checks whether a non-zero float is stored under the key $key.
+     * Checks whether a non-zero float is stored under the given key.
      *
      * @param non-empty-string $key
-     *
-     * @return bool true if the value for the given key is non-zero, false otherwise
      */
     public function hasFloat(string $key): bool
     {
@@ -214,7 +198,7 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
     }
 
     /**
-     * Sets a value for the key $key (and converts it to a float).
+     * Sets a value for the given key (and converts it to a float).
      *
      * @param non-empty-string $key
      * @param string|int|float|bool|null $value the value to set, may be empty

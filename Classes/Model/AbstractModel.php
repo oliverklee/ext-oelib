@@ -247,7 +247,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     }
 
     /**
-     * Sets the value of the data item for the key $key.
+     * Sets the value of the data item for the given key.
      *
      * @param non-empty-string $key
      * @param string|int|float|bool|object|null $value the data for the given key
@@ -276,13 +276,13 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     }
 
     /**
-     * Gets the value of the data item for the key $key.
+     * Gets the value of the data item for the given key.
      *
      * Before this function may be called, `setData()` or `set()` must have been called once.
      *
      * @param non-empty-string $key
      *
-     * @return string|int|float|bool|object|null the data for the key $key,
+     * @return string|int|float|bool|object|null the data for the given key,
      *         will be an empty string if the key has not been set yet
      *
      * @throws NotFoundException if this model is dead
@@ -325,11 +325,11 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     }
 
     /**
-     * Gets the value stored in under the key $key as a model.
+     * Gets the value stored under the given key as a model.
      *
      * @param non-empty-string $key
      *
-     * @throws \UnexpectedValueException if there is a data item stored for the key $key that is not a model instance
+     * @throws \UnexpectedValueException if there is a data item stored for the given key that is not a model instance
      */
     protected function getAsModel(string $key): ?AbstractModel
     {
@@ -351,13 +351,13 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
     }
 
     /**
-     * Gets the value stored in under the key $key as a collection of models.
+     * Gets the value stored under the given key as a collection of models.
      *
      * @param non-empty-string $key
      *
      * @return Collection<AbstractModel> the data item for the given key
      *
-     * @throws \UnexpectedValueException if there is a data item stored for the key $key that is not a collection
+     * @throws \UnexpectedValueException if there is a data item stored for the given key that is not a collection
      *         or if that item has not been set yet
      */
     public function getAsCollection(string $key): Collection

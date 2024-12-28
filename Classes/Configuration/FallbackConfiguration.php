@@ -34,28 +34,53 @@ class FallbackConfiguration implements ConfigurationInterface
         return $this->primary->getSourceName() . ' or ' . $this->secondary->getSourceName();
     }
 
+    /**
+     * Gets the value stored under the given key, converted to a string.
+     *
+     * @param non-empty-string $key
+     */
     public function getAsString(string $key): string
     {
         return $this->primary->hasString($key)
             ? $this->primary->getAsString($key) : $this->secondary->getAsString($key);
     }
 
+    /**
+     * Checks whether a non-empty string is stored under the given key.
+     *
+     * @param non-empty-string $key
+     */
     public function hasString(string $key): bool
     {
         return $this->primary->hasString($key) || $this->secondary->hasString($key);
     }
 
+    /**
+     * Gets the value stored under the given key, converted to an integer.
+     *
+     * @param non-empty-string $key
+     */
     public function getAsInteger(string $key): int
     {
         return $this->primary->hasInteger($key)
             ? $this->primary->getAsInteger($key) : $this->secondary->getAsInteger($key);
     }
 
+    /**
+     * Checks whether a non-zero integer is stored under the given key.
+     *
+     * @param non-empty-string $key
+     */
     public function hasInteger(string $key): bool
     {
         return $this->primary->hasInteger($key) || $this->secondary->hasInteger($key);
     }
 
+    /**
+     * Gets the value stored under the given key, converted to a boolean.
+     *
+     * @param non-empty-string $key
+     */
     public function getAsBoolean(string $key): bool
     {
         return $this->primary->getAsBoolean($key) || $this->secondary->getAsBoolean($key);

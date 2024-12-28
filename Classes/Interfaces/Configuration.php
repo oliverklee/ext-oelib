@@ -18,20 +18,45 @@ interface Configuration
      */
     public function getSourceName(): string;
 
+    /**
+     * Gets the value stored under the given key, converted to a string.
+     *
+     * @param non-empty-string $key
+     */
     public function getAsString(string $key): string;
 
+    /**
+     * Checks whether a non-empty string is stored under the given key.
+     *
+     * @param non-empty-string $key
+     */
     public function hasString(string $key): bool;
 
+    /**
+     * Gets the value stored under the given key, converted to an integer.
+     *
+     * @param non-empty-string $key
+     */
     public function getAsInteger(string $key): int;
 
+    /**
+     * Checks whether a non-zero integer is stored under the given key.
+     *
+     * @param non-empty-string $key
+     */
     public function hasInteger(string $key): bool;
 
+    /**
+     * Gets the value stored under the given key, converted to a boolean.
+     *
+     * @param non-empty-string $key
+     */
     public function getAsBoolean(string $key): bool;
 
     /**
      * Gets the value stored under the provided key, converted to an array of trimmed strings.
      *
-     * @param non-empty-string $key the key of the element to retrieve
+     * @param non-empty-string $key
      *
      * @return list<non-empty-string> the array value of the given key, may be empty
      */

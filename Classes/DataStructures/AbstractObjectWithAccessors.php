@@ -11,15 +11,15 @@ namespace OliverKlee\Oelib\DataStructures;
 abstract class AbstractObjectWithAccessors extends AbstractReadOnlyObjectWithAccessors
 {
     /**
-     * Sets the value of the data item for the key $key.
+     * Sets the value of the data item for the given key.
      *
      * @param non-empty-string $key
-     * @param string|int|float|bool|object|null $value the data for the key $key
+     * @param string|int|float|bool|object|null $value the data for the given key
      */
     abstract protected function set(string $key, $value): void;
 
     /**
-     * Sets a value for the key $key (and converts it to a string).
+     * Sets a value for the given key (and converts it to a string).
      *
      * @param non-empty-string $key
      * @param string|int|float|bool|null $value the value to set, may be empty
@@ -32,7 +32,7 @@ abstract class AbstractObjectWithAccessors extends AbstractReadOnlyObjectWithAcc
     }
 
     /**
-     * Sets a value for the key $key (and converts it to an integer).
+     * Sets a value for the given key (and converts it to an integer).
      *
      * @param non-empty-string $key
      * @param string|int|float|bool|null $value the value to set, may be empty
@@ -45,7 +45,7 @@ abstract class AbstractObjectWithAccessors extends AbstractReadOnlyObjectWithAcc
     }
 
     /**
-     * Sets an array value for the key $key.
+     * Sets an array value for the given key.
      *
      * Note: This function is intended for data that does not contain any
      * commas. Commas in the array elements cause getAsTrimmedArray and
@@ -64,7 +64,7 @@ abstract class AbstractObjectWithAccessors extends AbstractReadOnlyObjectWithAcc
     }
 
     /**
-     * Sets a value for the key $key (and converts it to a boolean).
+     * Sets a value for the given key (and converts it to a boolean).
      *
      * @param non-empty-string $key
      * @param string|int|float|bool|null $value the value to set, may be empty
@@ -77,7 +77,7 @@ abstract class AbstractObjectWithAccessors extends AbstractReadOnlyObjectWithAcc
     }
 
     /**
-     * Sets a value for the key $key (and converts it to a float).
+     * Sets a value for the given key (and converts it to a float).
      *
      * @param non-empty-string $key
      * @param string|int|float|bool|null $value the value to set, may be empty
