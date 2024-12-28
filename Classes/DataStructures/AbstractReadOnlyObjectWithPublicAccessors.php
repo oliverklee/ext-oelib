@@ -50,6 +50,30 @@ abstract class AbstractReadOnlyObjectWithPublicAccessors extends AbstractReadOnl
     }
 
     /**
+     * Gets the value stored under the given key, converted to an integer.
+     *
+     * @param non-empty-string $key
+     *
+     * @return int<0, max>
+     */
+    public function getAsNonNegativeInteger(string $key): int
+    {
+        return parent::getAsNonNegativeInteger($key);
+    }
+
+    /**
+     * Gets the value stored under the given key, converted to an integer.
+     *
+     * @param non-empty-string $key
+     *
+     * @return positive-int
+     */
+    public function getAsPositiveInteger(string $key): int
+    {
+        return parent::getAsPositiveInteger($key);
+    }
+
+    /**
      * Gets the value stored under the provided key, converted to an array of trimmed strings.
      *
      * @param non-empty-string $key

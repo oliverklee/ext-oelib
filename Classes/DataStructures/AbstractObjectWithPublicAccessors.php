@@ -80,16 +80,7 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
      */
     public function getAsNonNegativeInteger(string $key): int
     {
-        $value = $this->getAsInteger($key);
-
-        if ($value < 0) {
-            throw new \UnexpectedValueException(
-                'The value for the key "' . $key . '" must be a non-negative integer, but it is ' . $value . '.',
-                1735299608
-            );
-        }
-
-        return $value;
+        return parent::getAsNonNegativeInteger($key);
     }
 
     /**
@@ -101,16 +92,7 @@ abstract class AbstractObjectWithPublicAccessors extends AbstractObjectWithAcces
      */
     public function getAsPositiveInteger(string $key): int
     {
-        $value = $this->getAsInteger($key);
-
-        if ($value <= 0) {
-            throw new \UnexpectedValueException(
-                'The value for the key "' . $key . '" must be a positive integer, but it is ' . $value . '.',
-                1735299700
-            );
-        }
-
-        return $value;
+        return parent::getAsPositiveInteger($key);
     }
 
     /**
