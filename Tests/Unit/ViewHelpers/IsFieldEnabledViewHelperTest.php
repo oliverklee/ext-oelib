@@ -6,6 +6,7 @@ namespace OliverKlee\Oelib\Tests\Unit\ViewHelpers;
 
 use OliverKlee\Oelib\ViewHelpers\IsFieldEnabledViewHelper;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\Variables\VariableProviderInterface;
@@ -23,9 +24,9 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
     private $renderChildrenClosure;
 
     /**
-     * @var RenderingContextInterface&MockObject
+     * @var RenderingContextInterface&Stub
      */
-    private $renderingContextMock;
+    private $renderingContextStub;
 
     /**
      * @var VariableProviderInterface&MockObject
@@ -37,9 +38,9 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
         parent::setUp();
 
         $this->renderChildrenClosure = static fn (): string => '';
-        $this->renderingContextMock = $this->createMock(RenderingContextInterface::class);
+        $this->renderingContextStub = $this->createStub(RenderingContextInterface::class);
         $this->variableProviderMock = $this->createMock(VariableProviderInterface::class);
-        $this->renderingContextMock->method('getVariableProvider')->willReturn($this->variableProviderMock);
+        $this->renderingContextStub->method('getVariableProvider')->willReturn($this->variableProviderMock);
     }
 
     /**
@@ -107,7 +108,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
         IsFieldEnabledViewHelper::renderStatic(
             ['fieldName' => 'company'],
             $this->renderChildrenClosure,
-            $this->renderingContextMock
+            $this->renderingContextStub
         );
     }
 
@@ -125,7 +126,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
         IsFieldEnabledViewHelper::renderStatic(
             ['fieldName' => 'company'],
             $this->renderChildrenClosure,
-            $this->renderingContextMock
+            $this->renderingContextStub
         );
     }
 
@@ -158,7 +159,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
         IsFieldEnabledViewHelper::renderStatic(
             ['fieldName' => 'company'],
             $this->renderChildrenClosure,
-            $this->renderingContextMock
+            $this->renderingContextStub
         );
     }
 
@@ -176,7 +177,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
         IsFieldEnabledViewHelper::renderStatic(
             [],
             $this->renderChildrenClosure,
-            $this->renderingContextMock
+            $this->renderingContextStub
         );
     }
 
@@ -194,7 +195,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
         IsFieldEnabledViewHelper::renderStatic(
             ['fieldName' => ''],
             $this->renderChildrenClosure,
-            $this->renderingContextMock
+            $this->renderingContextStub
         );
     }
 
@@ -212,7 +213,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
         IsFieldEnabledViewHelper::renderStatic(
             ['fieldName' => []],
             $this->renderChildrenClosure,
-            $this->renderingContextMock
+            $this->renderingContextStub
         );
     }
 
@@ -226,7 +227,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
         $result = IsFieldEnabledViewHelper::renderStatic(
             ['fieldName' => 'company', 'then' => 'THEN', 'else' => 'ELSE'],
             $this->renderChildrenClosure,
-            $this->renderingContextMock
+            $this->renderingContextStub
         );
 
         self::assertSame('THEN', $result);
@@ -242,7 +243,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
         $result = IsFieldEnabledViewHelper::renderStatic(
             ['fieldName' => 'company', 'then' => 'THEN', 'else' => 'ELSE'],
             $this->renderChildrenClosure,
-            $this->renderingContextMock
+            $this->renderingContextStub
         );
 
         self::assertSame('THEN', $result);
@@ -258,7 +259,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
         $result = IsFieldEnabledViewHelper::renderStatic(
             ['fieldName' => 'company', 'then' => 'THEN', 'else' => 'ELSE'],
             $this->renderChildrenClosure,
-            $this->renderingContextMock
+            $this->renderingContextStub
         );
 
         self::assertSame('THEN', $result);
@@ -274,7 +275,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
         $result = IsFieldEnabledViewHelper::renderStatic(
             ['fieldName' => 'company|name', 'then' => 'THEN', 'else' => 'ELSE'],
             $this->renderChildrenClosure,
-            $this->renderingContextMock
+            $this->renderingContextStub
         );
 
         self::assertSame('THEN', $result);
@@ -290,7 +291,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
         $result = IsFieldEnabledViewHelper::renderStatic(
             ['fieldName' => 'company|name', 'then' => 'THEN', 'else' => 'ELSE'],
             $this->renderChildrenClosure,
-            $this->renderingContextMock
+            $this->renderingContextStub
         );
 
         self::assertSame('THEN', $result);
@@ -306,7 +307,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
         $result = IsFieldEnabledViewHelper::renderStatic(
             ['fieldName' => 'name', 'then' => 'THEN', 'else' => 'ELSE'],
             $this->renderChildrenClosure,
-            $this->renderingContextMock
+            $this->renderingContextStub
         );
 
         self::assertSame('ELSE', $result);
@@ -322,7 +323,7 @@ final class IsFieldEnabledViewHelperTest extends UnitTestCase
         $result = IsFieldEnabledViewHelper::renderStatic(
             ['fieldName' => 'name', 'then' => 'THEN', 'else' => 'ELSE'],
             $this->renderChildrenClosure,
-            $this->renderingContextMock
+            $this->renderingContextStub
         );
 
         self::assertSame('ELSE', $result);

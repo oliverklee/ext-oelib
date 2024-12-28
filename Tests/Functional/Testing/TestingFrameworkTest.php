@@ -1457,7 +1457,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
      */
     public function createFakeFrontEndReplacesExistingGlobalRequest(): void
     {
-        $previousRequest = $this->createMock(ServerRequestInterface::class);
+        $previousRequest = $this->createStub(ServerRequestInterface::class);
         $GLOBALS['TYPO3_REQUEST'] = $previousRequest;
 
         $this->subject->createFakeFrontEnd($this->subject->createFrontEndPage());

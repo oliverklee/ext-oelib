@@ -11,6 +11,7 @@ use OliverKlee\Oelib\Tests\Unit\ViewHelpers\Fixtures\TestingConfigurationCheck;
 use OliverKlee\Oelib\Tests\Unit\ViewHelpers\Fixtures\TestingConfigurationCheckViewHelper;
 use OliverKlee\Oelib\ViewHelpers\AbstractConfigurationCheckViewHelper;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
@@ -31,9 +32,9 @@ final class AbstractConfigurationCheckViewHelperTest extends UnitTestCase
     private $renderChildrenClosure;
 
     /**
-     * @var RenderingContextInterface&MockObject
+     * @var RenderingContextInterface&Stub
      */
-    private $renderingContextMock;
+    private $renderingContextStub;
 
     /**
      * @var VariableProviderInterface&MockObject
@@ -46,8 +47,8 @@ final class AbstractConfigurationCheckViewHelperTest extends UnitTestCase
 
         $this->renderChildrenClosure = static fn (): string => '';
         $this->variableProviderMock = $this->createMock(VariableProviderInterface::class);
-        $this->renderingContextMock = $this->createMock(RenderingContextInterface::class);
-        $this->renderingContextMock->method('getVariableProvider')->willReturn($this->variableProviderMock);
+        $this->renderingContextStub = $this->createStub(RenderingContextInterface::class);
+        $this->renderingContextStub->method('getVariableProvider')->willReturn($this->variableProviderMock);
     }
 
     protected function tearDown(): void
@@ -119,14 +120,14 @@ final class AbstractConfigurationCheckViewHelperTest extends UnitTestCase
         $extensionConfiguration = new DummyConfiguration(['enableConfigCheck' => false]);
         ConfigurationProxy::setInstance($extensionKey, $extensionConfiguration);
 
-        $adminUserMock = $this->createMock(BackendUserAuthentication::class);
-        $adminUserMock->method('isAdmin')->willReturn(true);
-        $GLOBALS['BE_USER'] = $adminUserMock;
+        $adminUserStub = $this->createStub(BackendUserAuthentication::class);
+        $adminUserStub->method('isAdmin')->willReturn(true);
+        $GLOBALS['BE_USER'] = $adminUserStub;
 
         $result = TestingConfigurationCheckViewHelper::renderStatic(
             [],
             $this->renderChildrenClosure,
-            $this->renderingContextMock
+            $this->renderingContextStub
         );
 
         self::assertSame('', $result);
@@ -147,14 +148,14 @@ final class AbstractConfigurationCheckViewHelperTest extends UnitTestCase
         $extensionConfiguration = new DummyConfiguration(['enableConfigCheck' => true]);
         ConfigurationProxy::setInstance($extensionKey, $extensionConfiguration);
 
-        $adminUserMock = $this->createMock(BackendUserAuthentication::class);
-        $adminUserMock->method('isAdmin')->willReturn(true);
-        $GLOBALS['BE_USER'] = $adminUserMock;
+        $adminUserStub = $this->createStub(BackendUserAuthentication::class);
+        $adminUserStub->method('isAdmin')->willReturn(true);
+        $GLOBALS['BE_USER'] = $adminUserStub;
 
         $result = TestingConfigurationCheckViewHelper::renderStatic(
             [],
             $this->renderChildrenClosure,
-            $this->renderingContextMock
+            $this->renderingContextStub
         );
 
         self::assertSame('This is a configuration check warning.', $result);
@@ -170,14 +171,14 @@ final class AbstractConfigurationCheckViewHelperTest extends UnitTestCase
         ConfigurationProxy::setInstance($extensionKey, $extensionConfiguration);
         $this->variableProviderMock->method('get')->with('settings')->willReturn([]);
 
-        $adminUserMock = $this->createMock(BackendUserAuthentication::class);
-        $adminUserMock->method('isAdmin')->willReturn(true);
-        $GLOBALS['BE_USER'] = $adminUserMock;
+        $adminUserStub = $this->createStub(BackendUserAuthentication::class);
+        $adminUserStub->method('isAdmin')->willReturn(true);
+        $GLOBALS['BE_USER'] = $adminUserStub;
 
         $result = TestingConfigurationCheckViewHelper::renderStatic(
             [],
             $this->renderChildrenClosure,
-            $this->renderingContextMock
+            $this->renderingContextStub
         );
 
         self::assertStringContainsString('This is a configuration check warning.', $result);
@@ -196,14 +197,14 @@ final class AbstractConfigurationCheckViewHelperTest extends UnitTestCase
         ConfigurationProxy::setInstance($extensionKey, $extensionConfiguration);
         $this->variableProviderMock->method('get')->with('settings')->willReturn($settings);
 
-        $adminUserMock = $this->createMock(BackendUserAuthentication::class);
-        $adminUserMock->method('isAdmin')->willReturn(true);
-        $GLOBALS['BE_USER'] = $adminUserMock;
+        $adminUserStub = $this->createStub(BackendUserAuthentication::class);
+        $adminUserStub->method('isAdmin')->willReturn(true);
+        $GLOBALS['BE_USER'] = $adminUserStub;
 
         TestingConfigurationCheckViewHelper::renderStatic(
             [],
             $this->renderChildrenClosure,
-            $this->renderingContextMock
+            $this->renderingContextStub
         );
 
         $configuration = TestingConfigurationCheck::getCheckedConfiguration();

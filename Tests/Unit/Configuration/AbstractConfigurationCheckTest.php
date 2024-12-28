@@ -56,9 +56,9 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
         $extensionConfiguration = new DummyConfiguration(['enableConfigCheck' => true]);
         ConfigurationProxy::setInstance($extensionKey, $extensionConfiguration);
 
-        $adminUserMock = $this->createMock(BackendUserAuthentication::class);
-        $adminUserMock->method('isAdmin')->willReturn(true);
-        $GLOBALS['BE_USER'] = $adminUserMock;
+        $adminUserStub = $this->createStub(BackendUserAuthentication::class);
+        $adminUserStub->method('isAdmin')->willReturn(true);
+        $GLOBALS['BE_USER'] = $adminUserStub;
 
         self::assertTrue(TestingConfigurationCheck::shouldCheck($extensionKey));
     }
@@ -72,9 +72,9 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
         $extensionConfiguration = new DummyConfiguration(['enableConfigCheck' => true]);
         ConfigurationProxy::setInstance($extensionKey, $extensionConfiguration);
 
-        $adminUserMock = $this->createMock(BackendUserAuthentication::class);
-        $adminUserMock->method('isAdmin')->willReturn(false);
-        $GLOBALS['BE_USER'] = $adminUserMock;
+        $adminUserStub = $this->createStub(BackendUserAuthentication::class);
+        $adminUserStub->method('isAdmin')->willReturn(false);
+        $GLOBALS['BE_USER'] = $adminUserStub;
 
         self::assertFalse(TestingConfigurationCheck::shouldCheck($extensionKey));
     }
@@ -88,9 +88,9 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
         $extensionConfiguration = new DummyConfiguration(['enableConfigCheck' => false]);
         ConfigurationProxy::setInstance($extensionKey, $extensionConfiguration);
 
-        $adminUserMock = $this->createMock(BackendUserAuthentication::class);
-        $adminUserMock->method('isAdmin')->willReturn(true);
-        $GLOBALS['BE_USER'] = $adminUserMock;
+        $adminUserStub = $this->createStub(BackendUserAuthentication::class);
+        $adminUserStub->method('isAdmin')->willReturn(true);
+        $GLOBALS['BE_USER'] = $adminUserStub;
 
         self::assertFalse(TestingConfigurationCheck::shouldCheck($extensionKey));
     }
@@ -104,9 +104,9 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
         $extensionConfiguration = new DummyConfiguration([]);
         ConfigurationProxy::setInstance($extensionKey, $extensionConfiguration);
 
-        $adminUserMock = $this->createMock(BackendUserAuthentication::class);
-        $adminUserMock->method('isAdmin')->willReturn(true);
-        $GLOBALS['BE_USER'] = $adminUserMock;
+        $adminUserStub = $this->createStub(BackendUserAuthentication::class);
+        $adminUserStub->method('isAdmin')->willReturn(true);
+        $GLOBALS['BE_USER'] = $adminUserStub;
 
         self::assertFalse(TestingConfigurationCheck::shouldCheck($extensionKey));
     }
@@ -120,9 +120,9 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
         $extensionConfiguration = new DummyConfiguration([]);
         ConfigurationProxy::setInstance($extensionKey, $extensionConfiguration);
 
-        $adminUserMock = $this->createMock(BackendUserAuthentication::class);
-        $adminUserMock->method('isAdmin')->willReturn(true);
-        $GLOBALS['BE_USER'] = $adminUserMock;
+        $adminUserStub = $this->createStub(BackendUserAuthentication::class);
+        $adminUserStub->method('isAdmin')->willReturn(true);
+        $GLOBALS['BE_USER'] = $adminUserStub;
 
         self::assertFalse(TestingConfigurationCheck::shouldCheck($extensionKey));
     }
