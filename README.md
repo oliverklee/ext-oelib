@@ -3,7 +3,7 @@
 [![TYPO3 V11](https://img.shields.io/badge/TYPO3-11-orange.svg)](https://get.typo3.org/version/11)
 [![TYPO3 V12](https://img.shields.io/badge/TYPO3-12-orange.svg)](https://get.typo3.org/version/12)
 [![License](https://img.shields.io/github/license/oliverklee/ext-oelib)](https://packagist.org/packages/oliverklee/oelib)
-[![GitHub CI Status](https://github.com/oliverklee/ext-oelib/workflows/CI/badge.svg?branch=main)](https://github.com/oliverklee/ext-oelib/actions)
+[![GitHub CI Status](https://github.com/oliverklee/ext-oelib/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/oliverklee/ext-oelib/actions)
 [![Coverage Status](https://coveralls.io/repos/github/oliverklee/ext-oelib/badge.svg?branch=main)](https://coveralls.io/github/oliverklee/ext-oelib?branch=main)
 
 This extension provides useful stuff for extension development: helper functions for unit testing, templating and
