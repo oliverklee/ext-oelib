@@ -604,6 +604,8 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
 
     /**
      * @return int<0, max>
+     *
+     * @deprecated with be removed in version 7.0 with #1971
      */
     public function getModificationDateAsUnixTimeStamp(): int
     {
@@ -624,6 +626,8 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
 
     /**
      * @return int<0, max>
+     *
+     * @deprecated with be removed in version 7.0 with #1971
      */
     public function getCreationDateAsUnixTimeStamp(): int
     {
