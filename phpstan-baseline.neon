@@ -556,11 +556,6 @@ parameters:
 			path: Tests/Unit/Model/FrontEndUserTest.php
 
 		-
-			message: "#^Class OliverKlee\\\\Oelib\\\\Tests\\\\Unit\\\\ViewHelpers\\\\Fixtures\\\\TestingConfigurationCheckViewHelper extends generic class OliverKlee\\\\Oelib\\\\ViewHelpers\\\\AbstractConfigurationCheckViewHelper but does not specify its types\\: C$#"
-			count: 1
-			path: Tests/Unit/ViewHelpers/Fixtures/TestingConfigurationCheckViewHelper.php
-
-		-
 			message: "#^Cannot access an offset on mixed\\.$#"
 			count: 1
 			path: ext_localconf.php
