@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Deprecated
 
+- Deprecate the `PageFinder` (#2058)
 - Deprecate creation and change date from `AbstractModel` (#2057)
 - Deprecate the `ConfigurationProxy` (#2054)
 

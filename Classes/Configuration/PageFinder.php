@@ -8,6 +8,8 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * This class provides an abstraction for selecting a page in the FE or BE.
+ *
+ * @deprecated will be removed in version 7.0 in #2056
  */
 class PageFinder
 {
