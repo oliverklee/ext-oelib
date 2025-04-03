@@ -12,6 +12,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * This singleton class provides access to an extension's global configuration
  * and allows faking global configuration values for testing purposes.
+ *
+ * @deprecated will be removed in oelib 7.0 with #2031
+ *
+ * Use \TYPO3\CMS\Core\Configuration\ExtensionConfiguration instead.
  */
 class ConfigurationProxy extends AbstractReadOnlyObjectWithPublicAccessors implements ConfigurationInterface
 {
