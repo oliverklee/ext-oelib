@@ -233,4 +233,17 @@ final class IsFieldEnabledViewHelperTest extends FunctionalTestCase
 
         self::assertStringContainsString('ELSE', $result);
     }
+
+    /**
+     * @test
+     */
+    public function renderEscapesChildren(): void
+    {
+        $this->variableProvider->add('settings', ['fieldsToShow' => 'company,name']);
+
+        $html = '<oelib:isFieldEnabled fieldName="company|name"><f:then>a&amp;b</f:then></oelib:isFieldEnabled>';
+        $result = $this->renderViewHelper($html);
+
+        self::assertStringContainsString('a&amp;b', $result);
+    }
 }
