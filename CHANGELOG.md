@@ -7,19 +7,25 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
-- Make configuration key for `IsFieldEnabledViewHelper` configurable (#2059)
-
 ### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 6.2.0: View helper improvements and deprecations
+
+### Added
+
+- Make configuration key for `IsFieldEnabledViewHelper` configurable (#2059)
 
 ### Deprecated
 
 - Deprecate the `PageFinder` (#2058)
 - Deprecate creation and change date from `AbstractModel` (#2057)
 - Deprecate the `ConfigurationProxy` (#2054)
-
-### Removed
-
-### Fixed
 
 ## 6.1.1: Bug fixes and cleanup
 
