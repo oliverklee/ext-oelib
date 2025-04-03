@@ -13,7 +13,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * This class can check any configuration, e.g., TypoScript, Flexforms or extension manager.
  *
- * To use this class, override the 'checkAllConfigurationValues` method to call the available `check*` methods.
+ * To use this class, override the `checkAllConfigurationValues` method to call the available `check*` methods.
  */
 abstract class AbstractConfigurationCheck
 {

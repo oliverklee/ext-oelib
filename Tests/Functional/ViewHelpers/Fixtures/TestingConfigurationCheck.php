@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Oelib\Tests\Unit\ViewHelpers\Fixtures;
+namespace OliverKlee\Oelib\Tests\Functional\ViewHelpers\Fixtures;
 
 use OliverKlee\Oelib\Configuration\AbstractConfigurationCheck;
 use OliverKlee\Oelib\Interfaces\Configuration;
