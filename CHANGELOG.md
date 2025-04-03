@@ -7,6 +7,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Make configuration key for `IsFieldEnabledViewHelper` configurable (#2059)
+
 ### Changed
 
 ### Deprecated

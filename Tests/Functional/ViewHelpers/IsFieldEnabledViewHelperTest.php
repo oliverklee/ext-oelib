@@ -246,4 +246,73 @@ final class IsFieldEnabledViewHelperTest extends FunctionalTestCase
 
         self::assertStringContainsString('a&amp;b', $result);
     }
+
+    /**
+     * @test
+     */
+    public function renderForBothRequestedConfiguredFieldsEnabledRendersThenChild(): void
+    {
+        $this->variableProvider->add('settings', ['columns' => 'company,name']);
+
+        $html = '<oelib:isFieldEnabled configurationKey="columns" fieldName="company|name" then="THEN" else="ELSE"/>';
+        $result = $this->renderViewHelper($html);
+
+        self::assertStringContainsString('THEN', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function renderForSingleRequestedConfiguredFieldEnabledRendersThenChild(): void
+    {
+        $this->variableProvider->add('settings', ['columns' => 'company']);
+
+        $html = '<oelib:isFieldEnabled configurationKey="columns" fieldName="company" then="THEN" else="ELSE"/>';
+        $result = $this->renderViewHelper($html);
+
+        self::assertStringContainsString('THEN', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function renderForRequestedConfiguredFieldNotEnabledRendersElseChild(): void
+    {
+        $this->variableProvider->add('settings', ['columns' => 'company']);
+
+        $html = '<oelib:isFieldEnabled configurationKey="columns" fieldName="name" then="THEN" else="ELSE"/>';
+        $result = $this->renderViewHelper($html);
+
+        self::assertStringContainsString('ELSE', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function renderForNonStringConfigurationKeyThrowsException(): void
+    {
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionMessage('The variable "configurationKey" must be a string, but was: array');
+        $this->expectExceptionCode(1743708980);
+
+        $this->variableProvider->add('settings', ['fieldsToShow' => 'name']);
+
+        $html = '<oelib:isFieldEnabled configurationKey="{0: 1}" fieldName="name" then="THEN" else="ELSE"/>';
+        $this->renderViewHelper($html);
+    }
+
+    /**
+     * @test
+     */
+    public function renderForEmptyConfigurationKeyThrowsException(): void
+    {
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionMessage('The variable "configurationKey" must not be empty.');
+        $this->expectExceptionCode(1743709004);
+
+        $this->variableProvider->add('settings', ['fieldsToShow' => 'name']);
+
+        $html = '<oelib:isFieldEnabled configurationKey="" fieldName="name" then="THEN" else="ELSE"/>';
+        $this->renderViewHelper($html);
+    }
 }
