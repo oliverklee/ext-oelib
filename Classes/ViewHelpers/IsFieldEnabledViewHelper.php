@@ -15,8 +15,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
  * You can provide either a single field name or multiple field names separated by the pipe character (which serves
  * as a logical OR).
  *
- * The name of the fields in the settings carrying the list of enabled fields needs to be provided in the
- * :php:`SETTING_FOR_ENABLED_FIELDS` constant.
+ * The name of the fields in the settings carrying the list of enabled fields can be changed with the
+ * `configurationKey` argument.
  *
  * Examples
  * ========
@@ -56,15 +56,11 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
  */
 class IsFieldEnabledViewHelper extends AbstractConditionViewHelper
 {
-    /**
-     * @var non-empty-string
-     */
-    protected const SETTING_FOR_ENABLED_FIELDS = 'fieldsToShow';
-
     public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('fieldName', 'string', 'The name(s) of the fields to check, separated by |.', true);
+        $this->registerArgument('configurationKey', 'string', 'The configuration key to use.', false, 'fieldsToShow');
     }
 
     /**
@@ -72,7 +68,18 @@ class IsFieldEnabledViewHelper extends AbstractConditionViewHelper
      */
     public static function verdict(array $arguments, RenderingContextInterface $renderingContext): bool
     {
-        $enabledFields = self::getEnabledFields($renderingContext);
+        $configurationKey = $arguments['configurationKey'] ?? null;
+        if (!\is_string($configurationKey)) {
+            throw new \UnexpectedValueException(
+                'The variable "configurationKey" must be a string, but was: ' . \gettype($configurationKey),
+                1743708980
+            );
+        }
+        if ($configurationKey === '') {
+            throw new \UnexpectedValueException('The variable "configurationKey" must not be empty.', 1743709004);
+        }
+
+        $enabledFields = self::getEnabledFields($renderingContext, $configurationKey);
 
         $verdict = false;
         foreach (self::getFieldsToCheck($arguments) as $fieldName) {
@@ -106,35 +113,35 @@ class IsFieldEnabledViewHelper extends AbstractConditionViewHelper
             throw new \InvalidArgumentException('The argument "fieldName" must not be empty.', 1_651_155_957);
         }
 
-        $result = GeneralUtility::trimExplode('|', $fieldsNamesArgument, true);
-
-        return $result;
+        return GeneralUtility::trimExplode('|', $fieldsNamesArgument, true);
     }
 
     /**
+     * @param non-empty-string $configurationKey
+     *
      * @return list<non-empty-string>
      *
      * @throws \UnexpectedValueException
      */
-    private static function getEnabledFields(RenderingContextInterface $renderingContext): array
-    {
+    private static function getEnabledFields(
+        RenderingContextInterface $renderingContext,
+        string $configurationKey
+    ): array {
         $settings = $renderingContext->getVariableProvider()->get('settings');
         if (!\is_array($settings)) {
             throw new \UnexpectedValueException('No settings in the variable container found.', 1_651_153_736);
         }
-
-        $enabledFieldsVariable = self::SETTING_FOR_ENABLED_FIELDS;
-        if (!isset($settings[$enabledFieldsVariable])) {
+        if (!isset($settings[$configurationKey])) {
             throw new \UnexpectedValueException(
-                'No field "' . $enabledFieldsVariable . '" in settings found.',
+                'No field "' . $configurationKey . '" in settings found.',
                 1_651_154_598
             );
         }
 
-        $enabledFieldsConfiguration = $settings[$enabledFieldsVariable];
+        $enabledFieldsConfiguration = $settings[$configurationKey];
         if (!\is_string($enabledFieldsConfiguration)) {
             throw new \UnexpectedValueException(
-                'The setting "' . $enabledFieldsVariable . '" needs to be a string.',
+                'The setting "' . $configurationKey . '" needs to be a string.',
                 1_651_155_151
             );
         }
