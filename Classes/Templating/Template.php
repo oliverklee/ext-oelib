@@ -551,7 +551,7 @@ class Template
      * @param non-empty-string $markerName the name of the marker
      * @param string $prefix an optional prefix, may be empty
      *
-     * @return non-empty-string the created marker name (without the hashes)
+     * @return uppercase-string the created marker name (without the hashes)
      */
     private function createMarkerNameWithoutHashes(string $markerName, string $prefix = ''): string
     {
@@ -560,10 +560,7 @@ class Template
             $prefix .= '_';
         }
 
-        /** @var non-empty-string $result */
-        $result = \strtoupper($prefix . trim($markerName));
-
-        return $result;
+        return \strtoupper($prefix . trim($markerName));
     }
 
     /**
