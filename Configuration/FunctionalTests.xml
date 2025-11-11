@@ -20,7 +20,6 @@
          stopOnSkipped="false"
          verbose="false"
 >
-    <coverage cacheDirectory="../.Build/cache/coverage"/>
     <php>
         <!-- @deprecated: will be removed with next major version, constant TYPO3_MODE is deprecated -->
         <const name="TYPO3_MODE" value="BE"/>
