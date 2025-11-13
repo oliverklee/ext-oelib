@@ -32,7 +32,7 @@ final class PageFinderTest extends UnitTestCase
     {
         self::assertInstanceOf(
             PageFinder::class,
-            PageFinder::getInstance()
+            PageFinder::getInstance(),
         );
     }
 
@@ -43,7 +43,7 @@ final class PageFinderTest extends UnitTestCase
     {
         self::assertSame(
             PageFinder::getInstance(),
-            PageFinder::getInstance()
+            PageFinder::getInstance(),
         );
     }
 
@@ -57,7 +57,7 @@ final class PageFinderTest extends UnitTestCase
 
         self::assertNotSame(
             $firstInstance,
-            PageFinder::getInstance()
+            PageFinder::getInstance(),
         );
     }
 
@@ -74,7 +74,7 @@ final class PageFinderTest extends UnitTestCase
 
         self::assertSame(
             42,
-            $this->subject->getPageUid()
+            $this->subject->getPageUid(),
         );
     }
 
@@ -84,10 +84,10 @@ final class PageFinderTest extends UnitTestCase
     public function setPageUidWithZeroGivenThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            'The given page UID was "0". Only integer values greater than zero are allowed.'
+            'The given page UID was "0". Only integer values greater than zero are allowed.',
         );
 
         // @phpstan-ignore-next-line We're testing for a contract violation here.
@@ -100,10 +100,10 @@ final class PageFinderTest extends UnitTestCase
     public function setPageUidWithNegativeNumberGivenThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            'The given page UID was "-21". Only integer values greater than zero are allowed.'
+            'The given page UID was "-21". Only integer values greater than zero are allowed.',
         );
 
         // @phpstan-ignore-next-line We're testing for a contract violation here.

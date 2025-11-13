@@ -65,7 +65,7 @@ final class AbstractModelTest extends FunctionalTestCase
 
         $clone = clone $this->subject;
         self::assertTrue(
-            $clone->isDirty()
+            $clone->isDirty(),
         );
     }
 

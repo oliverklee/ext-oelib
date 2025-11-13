@@ -26,7 +26,7 @@ final class TemplateRegistryTest extends FunctionalTestCase
     {
         self::assertInstanceOf(
             Template::class,
-            TemplateRegistry::get('EXT:oelib/Tests/Functional/Templating/Fixtures/Template.html')
+            TemplateRegistry::get('EXT:oelib/Tests/Functional/Templating/Fixtures/Template.html'),
         );
     }
 
@@ -37,7 +37,7 @@ final class TemplateRegistryTest extends FunctionalTestCase
     {
         self::assertNotSame(
             TemplateRegistry::get('EXT:oelib/Tests/Functional/Templating/Fixtures/Template.html'),
-            TemplateRegistry::get('EXT:oelib/Tests/Functional/Templating/Fixtures/Template.html')
+            TemplateRegistry::get('EXT:oelib/Tests/Functional/Templating/Fixtures/Template.html'),
         );
     }
 
@@ -50,7 +50,7 @@ final class TemplateRegistryTest extends FunctionalTestCase
 
         self::assertSame(
             "Hello world!\n",
-            $template->getSubpart()
+            $template->getSubpart(),
         );
     }
 }

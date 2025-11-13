@@ -34,7 +34,7 @@ final class LanguageTest extends UnitTestCase
 
         self::assertSame(
             'Deutsch',
-            $this->subject->getLocalName()
+            $this->subject->getLocalName(),
         );
     }
 
@@ -47,7 +47,7 @@ final class LanguageTest extends UnitTestCase
 
         self::assertSame(
             'English',
-            $this->subject->getLocalName()
+            $this->subject->getLocalName(),
         );
     }
 
@@ -64,7 +64,7 @@ final class LanguageTest extends UnitTestCase
 
         self::assertSame(
             'DE',
-            $this->subject->getIsoAlpha2Code()
+            $this->subject->getIsoAlpha2Code(),
         );
     }
 
@@ -77,7 +77,7 @@ final class LanguageTest extends UnitTestCase
 
         self::assertSame(
             'EN',
-            $this->subject->getIsoAlpha2Code()
+            $this->subject->getIsoAlpha2Code(),
         );
     }
 
@@ -91,7 +91,7 @@ final class LanguageTest extends UnitTestCase
     public function isReadOnlyIsTrue(): void
     {
         self::assertTrue(
-            $this->subject->isReadOnly()
+            $this->subject->isReadOnly(),
         );
     }
 }

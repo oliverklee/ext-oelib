@@ -46,7 +46,7 @@ class PriceViewHelperTest extends UnitTestCase
     {
         self::assertSame(
             '0.00',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -59,7 +59,7 @@ class PriceViewHelperTest extends UnitTestCase
 
         self::assertSame(
             '12345.68',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 }

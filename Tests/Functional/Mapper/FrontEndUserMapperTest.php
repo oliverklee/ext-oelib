@@ -55,7 +55,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
         $user = $this->subject->find($uid);
         self::assertSame(
             $groupUids,
-            $user->getUserGroups()->getUids()
+            $user->getUserGroups()->getUids(),
         );
     }
 
@@ -84,7 +84,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
 
         self::assertInstanceOf(
             FrontEndUser::class,
-            $this->subject->findByUserName($username)
+            $this->subject->findByUserName($username),
         );
     }
 
@@ -101,7 +101,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $uid,
-            $this->subject->findByUserName($username)->getUid()
+            $this->subject->findByUserName($username)->getUid(),
         );
     }
 
@@ -118,7 +118,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $uid,
-            $this->subject->findByUserName(strtoupper($username))->getUid()
+            $this->subject->findByUserName(strtoupper($username))->getUid(),
         );
     }
 
@@ -135,7 +135,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $uid,
-            $this->subject->findByUserName($username)->getUid()
+            $this->subject->findByUserName($username)->getUid(),
         );
     }
 
@@ -152,7 +152,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $uid,
-            $this->subject->findByUserName($username)->getUid()
+            $this->subject->findByUserName($username)->getUid(),
         );
     }
 

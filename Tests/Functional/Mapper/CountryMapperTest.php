@@ -50,7 +50,7 @@ final class CountryMapperTest extends FunctionalTestCase
         $model = $this->subject->find(54);
         self::assertSame(
             'DE',
-            $model->getIsoAlpha2Code()
+            $model->getIsoAlpha2Code(),
         );
     }
 
@@ -65,7 +65,7 @@ final class CountryMapperTest extends FunctionalTestCase
     {
         self::assertInstanceOf(
             Country::class,
-            $this->subject->findByIsoAlpha2Code('DE')
+            $this->subject->findByIsoAlpha2Code('DE'),
         );
     }
 
@@ -76,7 +76,7 @@ final class CountryMapperTest extends FunctionalTestCase
     {
         self::assertSame(
             'DE',
-            $this->subject->findByIsoAlpha2Code('DE')->getIsoAlpha2Code()
+            $this->subject->findByIsoAlpha2Code('DE')->getIsoAlpha2Code(),
         );
     }
 
@@ -91,7 +91,7 @@ final class CountryMapperTest extends FunctionalTestCase
     {
         self::assertInstanceOf(
             Country::class,
-            $this->subject->findByIsoAlpha3Code('DEU')
+            $this->subject->findByIsoAlpha3Code('DEU'),
         );
     }
 
@@ -102,7 +102,7 @@ final class CountryMapperTest extends FunctionalTestCase
     {
         self::assertSame(
             'DE',
-            $this->subject->findByIsoAlpha3Code('DEU')->getIsoAlpha2Code()
+            $this->subject->findByIsoAlpha3Code('DEU')->getIsoAlpha2Code(),
         );
     }
 }

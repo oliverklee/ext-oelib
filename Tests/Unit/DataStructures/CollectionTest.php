@@ -71,7 +71,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             -1,
-            $this->sortByTitleAscending($firstModel, $secondModel)
+            $this->sortByTitleAscending($firstModel, $secondModel),
         );
     }
 
@@ -88,7 +88,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             1,
-            $this->sortByTitleAscending($firstModel, $secondModel)
+            $this->sortByTitleAscending($firstModel, $secondModel),
         );
     }
 
@@ -105,7 +105,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             0,
-            $this->sortByTitleAscending($firstModel, $secondModel)
+            $this->sortByTitleAscending($firstModel, $secondModel),
         );
     }
 
@@ -126,7 +126,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             1,
-            $this->sortByTitleDescending($firstModel, $secondModel)
+            $this->sortByTitleDescending($firstModel, $secondModel),
         );
     }
 
@@ -143,7 +143,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             -1,
-            $this->sortByTitleDescending($firstModel, $secondModel)
+            $this->sortByTitleDescending($firstModel, $secondModel),
         );
     }
 
@@ -160,7 +160,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             0,
-            $this->sortByTitleDescending($firstModel, $secondModel)
+            $this->sortByTitleDescending($firstModel, $secondModel),
         );
     }
 
@@ -185,7 +185,7 @@ final class CollectionTest extends UnitTestCase
         $firstItem = $this->subject->first();
         self::assertSame(
             'foo',
-            $firstItem->getTitle()
+            $firstItem->getTitle(),
         );
     }
 
@@ -210,7 +210,7 @@ final class CollectionTest extends UnitTestCase
         $firstItem = $this->subject->first();
         self::assertSame(
             'bar',
-            $firstItem->getTitle()
+            $firstItem->getTitle(),
         );
     }
 
@@ -230,7 +230,7 @@ final class CollectionTest extends UnitTestCase
     public function isEmptyForEmptyListReturnsTrue(): void
     {
         self::assertTrue(
-            $this->subject->isEmpty()
+            $this->subject->isEmpty(),
         );
     }
 
@@ -242,7 +242,7 @@ final class CollectionTest extends UnitTestCase
         $this->addModelsToFixture();
 
         self::assertFalse(
-            $this->subject->isEmpty()
+            $this->subject->isEmpty(),
         );
     }
 
@@ -309,7 +309,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             $model,
-            $this->subject->current()
+            $this->subject->current(),
         );
     }
 
@@ -325,7 +325,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             $model1,
-            $this->subject->current()
+            $this->subject->current(),
         );
     }
 
@@ -336,7 +336,7 @@ final class CollectionTest extends UnitTestCase
     {
         self::assertSame(
             0,
-            $this->subject->key()
+            $this->subject->key(),
         );
     }
 
@@ -350,7 +350,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             1,
-            $this->subject->key()
+            $this->subject->key(),
         );
     }
 
@@ -368,7 +368,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             $model2,
-            $this->subject->current()
+            $this->subject->current(),
         );
     }
 
@@ -382,7 +382,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             0,
-            $this->subject->key()
+            $this->subject->key(),
         );
     }
 
@@ -399,7 +399,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             $model,
-            $this->subject->current()
+            $this->subject->current(),
         );
     }
 
@@ -409,7 +409,7 @@ final class CollectionTest extends UnitTestCase
     public function firstForEmptyListReturnsNull(): void
     {
         self::assertNull(
-            $this->subject->first()
+            $this->subject->first(),
         );
     }
 
@@ -423,7 +423,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             $model,
-            $this->subject->first()
+            $this->subject->first(),
         );
     }
 
@@ -439,7 +439,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             $model1,
-            $this->subject->first()
+            $this->subject->first(),
         );
     }
 
@@ -457,7 +457,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             $model1,
-            $this->subject->first()
+            $this->subject->first(),
         );
     }
 
@@ -467,7 +467,7 @@ final class CollectionTest extends UnitTestCase
     public function validForEmptyListReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->valid()
+            $this->subject->valid(),
         );
     }
 
@@ -479,7 +479,7 @@ final class CollectionTest extends UnitTestCase
         $this->addModelsToFixture();
 
         self::assertTrue(
-            $this->subject->valid()
+            $this->subject->valid(),
         );
     }
 
@@ -493,7 +493,7 @@ final class CollectionTest extends UnitTestCase
         $this->subject->next();
 
         self::assertFalse(
-            $this->subject->valid()
+            $this->subject->valid(),
         );
     }
 
@@ -508,7 +508,7 @@ final class CollectionTest extends UnitTestCase
         $this->subject->rewind();
 
         self::assertTrue(
-            $this->subject->valid()
+            $this->subject->valid(),
         );
     }
 
@@ -527,7 +527,7 @@ final class CollectionTest extends UnitTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getUids()
+            $this->subject->getUids(),
         );
     }
 
@@ -540,7 +540,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             '',
-            $this->subject->getUids()
+            $this->subject->getUids(),
         );
     }
 
@@ -556,7 +556,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             '1',
-            $this->subject->getUids()
+            $this->subject->getUids(),
         );
     }
 
@@ -576,7 +576,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             '1,42',
-            $this->subject->getUids()
+            $this->subject->getUids(),
         );
     }
 
@@ -596,7 +596,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             '42,1',
-            $this->subject->getUids()
+            $this->subject->getUids(),
         );
     }
 
@@ -618,7 +618,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             '1,2',
-            $this->subject->getUids()
+            $this->subject->getUids(),
         );
     }
 
@@ -633,7 +633,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             '42',
-            $this->subject->getUids()
+            $this->subject->getUids(),
         );
     }
 
@@ -643,7 +643,7 @@ final class CollectionTest extends UnitTestCase
     public function hasUidForInexistentUidReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->hasUid(42)
+            $this->subject->hasUid(42),
         );
     }
 
@@ -658,7 +658,7 @@ final class CollectionTest extends UnitTestCase
         $this->subject->add($model);
 
         self::assertTrue(
-            $this->subject->hasUid(42)
+            $this->subject->hasUid(42),
         );
     }
 
@@ -672,7 +672,7 @@ final class CollectionTest extends UnitTestCase
         $model->setUid(42);
 
         self::assertTrue(
-            $this->subject->hasUid(42)
+            $this->subject->hasUid(42),
         );
     }
 
@@ -685,13 +685,14 @@ final class CollectionTest extends UnitTestCase
         $this->subject->sort(fn (
             TestingModel $firstModel,
             TestingModel $secondModel
-        ): int => $this->sortByTitleAscending($firstModel, $secondModel));
+        ): int
+            => $this->sortByTitleAscending($firstModel, $secondModel));
 
         /** @var TestingModel $firstItem */
         $firstItem = $this->subject->first();
         self::assertSame(
             'Alpha',
-            $firstItem->getTitle()
+            $firstItem->getTitle(),
         );
     }
 
@@ -704,13 +705,14 @@ final class CollectionTest extends UnitTestCase
         $this->subject->sort(fn (
             TestingModel $firstModel,
             TestingModel $secondModel
-        ): int => $this->sortByTitleAscending($firstModel, $secondModel));
+        ): int
+            => $this->sortByTitleAscending($firstModel, $secondModel));
 
         /** @var TestingModel $firstItem */
         $firstItem = $this->subject->first();
         self::assertSame(
             'Alpha',
-            $firstItem->getTitle()
+            $firstItem->getTitle(),
         );
     }
 
@@ -723,13 +725,14 @@ final class CollectionTest extends UnitTestCase
         $this->subject->sort(fn (
             TestingModel $firstModel,
             TestingModel $secondModel
-        ): int => $this->sortByTitleDescending($firstModel, $secondModel));
+        ): int
+            => $this->sortByTitleDescending($firstModel, $secondModel));
 
         /** @var TestingModel $firstItem */
         $firstItem = $this->subject->first();
         self::assertSame(
             'Beta',
-            $firstItem->getTitle()
+            $firstItem->getTitle(),
         );
     }
 
@@ -744,7 +747,8 @@ final class CollectionTest extends UnitTestCase
         $subject->sort(fn (
             TestingModel $firstModel,
             TestingModel $secondModel
-        ): int => $this->sortByTitleAscending($firstModel, $secondModel));
+        ): int
+            => $this->sortByTitleAscending($firstModel, $secondModel));
     }
 
     /**
@@ -757,7 +761,7 @@ final class CollectionTest extends UnitTestCase
         $this->subject->append($otherList);
 
         self::assertTrue(
-            $this->subject->isEmpty()
+            $this->subject->isEmpty(),
         );
     }
 
@@ -827,7 +831,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             $model1,
-            $this->subject->first()
+            $this->subject->first(),
         );
     }
 
@@ -848,7 +852,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             $model,
-            $this->subject->first()
+            $this->subject->first(),
         );
     }
 
@@ -873,7 +877,7 @@ final class CollectionTest extends UnitTestCase
         $this->subject->purgeCurrent();
 
         self::assertTrue(
-            $this->subject->isEmpty()
+            $this->subject->isEmpty(),
         );
     }
 
@@ -888,7 +892,7 @@ final class CollectionTest extends UnitTestCase
         $this->subject->purgeCurrent();
 
         self::assertFalse(
-            $this->subject->valid()
+            $this->subject->valid(),
         );
     }
 
@@ -904,7 +908,7 @@ final class CollectionTest extends UnitTestCase
         $this->subject->purgeCurrent();
 
         self::assertFalse(
-            $this->subject->isEmpty()
+            $this->subject->isEmpty(),
         );
     }
 
@@ -950,7 +954,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             $model,
-            $this->subject->current()
+            $this->subject->current(),
         );
     }
 
@@ -974,7 +978,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             2,
-            $completedIterations
+            $completedIterations,
         );
     }
 
@@ -993,7 +997,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             '',
-            $this->subject->getUids()
+            $this->subject->getUids(),
         );
     }
 
@@ -1004,7 +1008,7 @@ final class CollectionTest extends UnitTestCase
     {
         self::assertSame(
             [],
-            $this->subject->toArray()
+            $this->subject->toArray(),
         );
     }
 
@@ -1018,7 +1022,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             [$model],
-            $this->subject->toArray()
+            $this->subject->toArray(),
         );
     }
 
@@ -1034,7 +1038,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             [$model1, $model2],
-            $this->subject->toArray()
+            $this->subject->toArray(),
         );
     }
 
@@ -1056,7 +1060,7 @@ final class CollectionTest extends UnitTestCase
 
         self::assertSame(
             $model,
-            $this->subject->getParentModel()
+            $this->subject->getParentModel(),
         );
     }
 

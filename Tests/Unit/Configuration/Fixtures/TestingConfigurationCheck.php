@@ -131,7 +131,7 @@ final class TestingConfigurationCheck extends AbstractConfigurationCheck
             default:
                 throw new \BadMethodCallException(
                     'Unknown value for the check method: "' . $this->checkMethod . '"',
-                    1_616_068_312
+                    1_616_068_312,
                 );
         }
     }

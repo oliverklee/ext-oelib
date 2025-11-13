@@ -67,12 +67,12 @@ final class TypoScriptConfigurationTest extends UnitTestCase
     public function getAfterSetDataReturnsTheSetValue(): void
     {
         $this->subject->setData(
-            ['foo' => 'bar']
+            ['foo' => 'bar'],
         );
 
         self::assertSame(
             'bar',
-            $this->subject->getAsString('foo')
+            $this->subject->getAsString('foo'),
         );
     }
 
@@ -84,10 +84,10 @@ final class TypoScriptConfigurationTest extends UnitTestCase
     public function setDataCalledTwoTimesDoesNotFail(): void
     {
         $this->subject->setData(
-            ['title' => 'bar']
+            ['title' => 'bar'],
         );
         $this->subject->setData(
-            ['title' => 'bar']
+            ['title' => 'bar'],
         );
     }
 
@@ -104,7 +104,7 @@ final class TypoScriptConfigurationTest extends UnitTestCase
 
         self::assertSame(
             ['first', 'second'],
-            $this->subject->getArrayKeys()
+            $this->subject->getArrayKeys(),
         );
     }
 
@@ -115,7 +115,7 @@ final class TypoScriptConfigurationTest extends UnitTestCase
     {
         self::assertSame(
             [],
-            $this->subject->getArrayKeys('key')
+            $this->subject->getArrayKeys('key'),
         );
     }
 
@@ -128,7 +128,7 @@ final class TypoScriptConfigurationTest extends UnitTestCase
 
         self::assertSame(
             [],
-            $this->subject->getArrayKeys('key')
+            $this->subject->getArrayKeys('key'),
         );
     }
 
@@ -141,7 +141,7 @@ final class TypoScriptConfigurationTest extends UnitTestCase
 
         self::assertSame(
             ['test'],
-            $this->subject->getArrayKeys('key')
+            $this->subject->getArrayKeys('key'),
         );
     }
 
@@ -151,12 +151,12 @@ final class TypoScriptConfigurationTest extends UnitTestCase
     public function getArrayKeysForKeyOfDataItemWithTwoArrayElementsReturnsKeysOfArrayElements(): void
     {
         $this->subject->setData(
-            ['key' => ['first' => 'child', 'second' => 'child']]
+            ['key' => ['first' => 'child', 'second' => 'child']],
         );
 
         self::assertSame(
             ['first', 'second'],
-            $this->subject->getArrayKeys('key')
+            $this->subject->getArrayKeys('key'),
         );
     }
 
@@ -166,12 +166,12 @@ final class TypoScriptConfigurationTest extends UnitTestCase
     public function getAsMultidimensionalArrayReturnsMultidimensionalArray(): void
     {
         $this->subject->setData(
-            ['1' => ['1.1' => ['1.1.1' => 'child']]]
+            ['1' => ['1.1' => ['1.1.1' => 'child']]],
         );
 
         self::assertSame(
             ['1.1' => ['1.1.1' => 'child']],
-            $this->subject->getAsMultidimensionalArray('1')
+            $this->subject->getAsMultidimensionalArray('1'),
         );
     }
 
@@ -184,7 +184,7 @@ final class TypoScriptConfigurationTest extends UnitTestCase
 
         self::assertSame(
             [],
-            $this->subject->getAsMultidimensionalArray('1')
+            $this->subject->getAsMultidimensionalArray('1'),
         );
     }
 
@@ -194,12 +194,12 @@ final class TypoScriptConfigurationTest extends UnitTestCase
     public function getAsMultidimensionalArrayForStringReturnsEmptyArray(): void
     {
         $this->subject->setData(
-            ['1' => 'child']
+            ['1' => 'child'],
         );
 
         self::assertSame(
             [],
-            $this->subject->getAsMultidimensionalArray('1')
+            $this->subject->getAsMultidimensionalArray('1'),
         );
     }
 
@@ -209,12 +209,12 @@ final class TypoScriptConfigurationTest extends UnitTestCase
     public function getAsMultidimensionalArrayForIntegerReturnsEmptyArray(): void
     {
         $this->subject->setData(
-            ['1' => 42]
+            ['1' => 42],
         );
 
         self::assertSame(
             [],
-            $this->subject->getAsMultidimensionalArray('1')
+            $this->subject->getAsMultidimensionalArray('1'),
         );
     }
 
@@ -224,12 +224,12 @@ final class TypoScriptConfigurationTest extends UnitTestCase
     public function getAsMultidimensionalArrayForFloatReturnsEmptyArray(): void
     {
         $this->subject->setData(
-            ['1' => 42.42]
+            ['1' => 42.42],
         );
 
         self::assertSame(
             [],
-            $this->subject->getAsMultidimensionalArray('1')
+            $this->subject->getAsMultidimensionalArray('1'),
         );
     }
 }

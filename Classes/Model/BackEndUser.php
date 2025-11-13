@@ -78,7 +78,7 @@ class BackEndUser extends AbstractModel implements MailRole
 
         $this->setAsString(
             'lang',
-            ($language !== 'default') ? $language : ''
+            ($language !== 'default') ? $language : '',
         );
     }
 

@@ -239,14 +239,14 @@ abstract class AbstractDataMapper
         if ($this->isModelAMemoryOnlyDummy($model)) {
             throw new \InvalidArgumentException(
                 'This ghost was created via getNewGhost and must not be loaded.',
-                1_331_319_529
+                1_331_319_529,
             );
         }
 
         if (!$model->hasUid()) {
             throw new \InvalidArgumentException(
                 'load must only be called with models that already have a UID.',
-                1_331_319_554
+                1_331_319_554,
             );
         }
 
@@ -315,7 +315,7 @@ abstract class AbstractDataMapper
         if (!isset($tca['columns'][$key])) {
             throw new \BadMethodCallException(
                 'In the table ' . $this->getTableName() . ', the column ' . $key . ' does not have a TCA entry.',
-                1_331_319_627
+                1_331_319_627,
             );
         }
 
@@ -405,7 +405,7 @@ abstract class AbstractDataMapper
             if ($this->isModelAMemoryOnlyDummy($model)) {
                 throw new \InvalidArgumentException(
                     'This is a memory-only dummy which must not load any one-to-many relations from the database.',
-                    1_331_319_658
+                    1_331_319_658,
                 );
             }
 
@@ -425,7 +425,8 @@ abstract class AbstractDataMapper
             }
 
             $orderBy = $sortingField !== '' ? [$sortingField => 'ASC'] : [];
-            $queryResult = $this->getConnectionForTable($foreignTable)
+            $queryResult = $this
+                ->getConnectionForTable($foreignTable)
                 ->select(['*'], $foreignTable, [$foreignField => (int)($data['uid'] ?? 0)], [], $orderBy);
             /** @var DatabaseRow[] $modelData */
             $modelData = $queryResult->fetchAllAssociative();
@@ -514,7 +515,8 @@ abstract class AbstractDataMapper
                 $orderBy = 'sorting';
             }
 
-            $queryResult = $this->getConnectionForTable($mnTable)
+            $queryResult = $this
+                ->getConnectionForTable($mnTable)
                 ->select([$leftColumn], $mnTable, [$rightColumn => $rightUid], [], [$orderBy => 'ASC']);
             foreach (\array_column($queryResult->fetchAllAssociative(), $leftColumn) as $relationUid) {
                 // Some relations might have a junk 0 in it. We ignore it to avoid crashing.
@@ -558,9 +560,9 @@ abstract class AbstractDataMapper
             throw new NotFoundException(
                 'No records found in the table "' . $tableName . '" matching: ' . \json_encode(
                     $whereClauseParts,
-                    JSON_THROW_ON_ERROR
+                    JSON_THROW_ON_ERROR,
                 ),
-                8074950578
+                8074950578,
             );
         }
 
@@ -669,7 +671,7 @@ abstract class AbstractDataMapper
         if ($this->isModelAMemoryOnlyDummy($model)) {
             throw new \InvalidArgumentException(
                 'This model is a memory-only dummy that must not be saved.',
-                1_331_319_682
+                1_331_319_682,
             );
         }
 
@@ -883,7 +885,7 @@ abstract class AbstractDataMapper
             if ($foreignField === '') {
                 throw new \BadMethodCallException(
                     'The relation ' . $this->getTableName() . ':' . $key . ' is missing the "foreign_field" setting.',
-                    1_331_319_719
+                    1_331_319_719,
                 );
             }
 
@@ -902,7 +904,7 @@ abstract class AbstractDataMapper
                     throw new \BadMethodCallException(
                         'The class ' . \get_class($relatedModel) . ' is missing the function ' . $getter .
                         ' which is needed for saving a 1:n relation.',
-                        1_331_319_751
+                        1_331_319_751,
                     );
                 }
 
@@ -910,7 +912,7 @@ abstract class AbstractDataMapper
                     throw new \BadMethodCallException(
                         'The class ' . \get_class($relatedModel) . ' is missing the function ' . $setter .
                         ' which is needed for saving a 1:n relation.',
-                        1_331_319_803
+                        1_331_319_803,
                     );
                 }
 
@@ -960,7 +962,7 @@ abstract class AbstractDataMapper
         if ($this->isModelAMemoryOnlyDummy($model)) {
             throw new \InvalidArgumentException(
                 'This model is a memory-only dummy that must not be deleted.',
-                1_331_319_817
+                1_331_319_817,
             );
         }
 
@@ -1168,7 +1170,7 @@ abstract class AbstractDataMapper
         $query->andWhere($query->expr()->eq($relationKey, $query->createNamedParameter($model->getUid())));
         if ($ignoreList instanceof Collection && $ignoreList->getUids() !== '') {
             $query->andWhere(
-                $query->expr()->notIn('uid', GeneralUtility::intExplode(',', $ignoreList->getUids(), true))
+                $query->expr()->notIn('uid', GeneralUtility::intExplode(',', $ignoreList->getUids(), true)),
             );
         }
 

@@ -72,7 +72,7 @@ class IsFieldEnabledViewHelper extends AbstractConditionViewHelper
         if (!\is_string($configurationKey)) {
             throw new \UnexpectedValueException(
                 'The variable "configurationKey" must be a string, but was: ' . \gettype($configurationKey),
-                1743708980
+                1743708980,
             );
         }
         if ($configurationKey === '') {
@@ -105,7 +105,7 @@ class IsFieldEnabledViewHelper extends AbstractConditionViewHelper
         if (!\is_string($fieldsNamesArgument)) {
             throw new \InvalidArgumentException(
                 'The argument "fieldName" must be a string, but was ' . \gettype($fieldsNamesArgument),
-                1_651_496_544
+                1_651_496_544,
             );
         }
 
@@ -134,7 +134,7 @@ class IsFieldEnabledViewHelper extends AbstractConditionViewHelper
         if (!isset($settings[$configurationKey])) {
             throw new \UnexpectedValueException(
                 'No field "' . $configurationKey . '" in settings found.',
-                1_651_154_598
+                1_651_154_598,
             );
         }
 
@@ -142,7 +142,7 @@ class IsFieldEnabledViewHelper extends AbstractConditionViewHelper
         if (!\is_string($enabledFieldsConfiguration)) {
             throw new \UnexpectedValueException(
                 'The setting "' . $configurationKey . '" needs to be a string.',
-                1_651_155_151
+                1_651_155_151,
             );
         }
 

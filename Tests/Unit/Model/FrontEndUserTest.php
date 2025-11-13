@@ -59,11 +59,11 @@ final class FrontEndUserTest extends UnitTestCase
                 'name' => '',
                 'first_name' => '',
                 'last_name' => '',
-            ]
+            ],
         );
 
         self::assertFalse(
-            $this->subject->hasName()
+            $this->subject->hasName(),
         );
     }
 
@@ -75,11 +75,11 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(
             [
                 'username' => 'johndoe',
-            ]
+            ],
         );
 
         self::assertFalse(
-            $this->subject->hasName()
+            $this->subject->hasName(),
         );
     }
 
@@ -93,11 +93,11 @@ final class FrontEndUserTest extends UnitTestCase
                 'name' => 'John Doe',
                 'first_name' => '',
                 'last_name' => '',
-            ]
+            ],
         );
 
         self::assertTrue(
-            $this->subject->hasName()
+            $this->subject->hasName(),
         );
     }
 
@@ -111,11 +111,11 @@ final class FrontEndUserTest extends UnitTestCase
                 'name' => '',
                 'first_name' => 'John',
                 'last_name' => '',
-            ]
+            ],
         );
 
         self::assertTrue(
-            $this->subject->hasName()
+            $this->subject->hasName(),
         );
     }
 
@@ -129,11 +129,11 @@ final class FrontEndUserTest extends UnitTestCase
                 'name' => '',
                 'first_name' => '',
                 'last_name' => 'Doe',
-            ]
+            ],
         );
 
         self::assertTrue(
-            $this->subject->hasName()
+            $this->subject->hasName(),
         );
     }
 
@@ -145,12 +145,12 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(
             [
                 'name' => 'John Doe',
-            ]
+            ],
         );
 
         self::assertSame(
             'John Doe',
-            $this->subject->getName()
+            $this->subject->getName(),
         );
     }
 
@@ -164,12 +164,12 @@ final class FrontEndUserTest extends UnitTestCase
                 'name' => 'John Doe',
                 'first_name' => 'Peter',
                 'last_name' => 'Pan',
-            ]
+            ],
         );
 
         self::assertSame(
             'John Doe',
-            $this->subject->getName()
+            $this->subject->getName(),
         );
     }
 
@@ -183,12 +183,12 @@ final class FrontEndUserTest extends UnitTestCase
                 'name' => '',
                 'first_name' => 'Peter',
                 'last_name' => 'Pan',
-            ]
+            ],
         );
 
         self::assertSame(
             'Peter Pan',
-            $this->subject->getName()
+            $this->subject->getName(),
         );
     }
 
@@ -202,12 +202,12 @@ final class FrontEndUserTest extends UnitTestCase
                 'first_name' => 'Peter',
                 'last_name' => 'Pan',
                 'username' => 'johndoe',
-            ]
+            ],
         );
 
         self::assertSame(
             'Peter Pan',
-            $this->subject->getName()
+            $this->subject->getName(),
         );
     }
 
@@ -221,12 +221,12 @@ final class FrontEndUserTest extends UnitTestCase
                 'first_name' => '',
                 'last_name' => 'Pan',
                 'username' => 'johndoe',
-            ]
+            ],
         );
 
         self::assertSame(
             'Pan',
-            $this->subject->getName()
+            $this->subject->getName(),
         );
     }
 
@@ -240,12 +240,12 @@ final class FrontEndUserTest extends UnitTestCase
                 'first_name' => 'Peter',
                 'last_name' => '',
                 'username' => 'johndoe',
-            ]
+            ],
         );
 
         self::assertSame(
             'Peter',
-            $this->subject->getName()
+            $this->subject->getName(),
         );
     }
 
@@ -259,7 +259,7 @@ final class FrontEndUserTest extends UnitTestCase
                 'first_name' => '',
                 'last_name' => '',
                 'username' => 'johndoe',
-            ]
+            ],
         );
 
         self::assertSame('', $this->subject->getName());
@@ -274,7 +274,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             'Alfred E. Neumann',
-            $this->subject->getName()
+            $this->subject->getName(),
         );
     }
 
@@ -288,7 +288,7 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(['company' => '']);
 
         self::assertFalse(
-            $this->subject->hasCompany()
+            $this->subject->hasCompany(),
         );
     }
 
@@ -300,7 +300,7 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(['company' => 'Test Inc.']);
 
         self::assertTrue(
-            $this->subject->hasCompany()
+            $this->subject->hasCompany(),
         );
     }
 
@@ -313,7 +313,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             '',
-            $this->subject->getCompany()
+            $this->subject->getCompany(),
         );
     }
 
@@ -326,7 +326,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             'Test Inc.',
-            $this->subject->getCompany()
+            $this->subject->getCompany(),
         );
     }
 
@@ -339,7 +339,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             'Test Inc.',
-            $this->subject->getCompany()
+            $this->subject->getCompany(),
         );
     }
 
@@ -353,7 +353,7 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(['address' => '']);
 
         self::assertFalse(
-            $this->subject->hasStreet()
+            $this->subject->hasStreet(),
         );
     }
 
@@ -365,7 +365,7 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(['address' => 'Foo street 1']);
 
         self::assertTrue(
-            $this->subject->hasStreet()
+            $this->subject->hasStreet(),
         );
     }
 
@@ -378,7 +378,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             '',
-            $this->subject->getStreet()
+            $this->subject->getStreet(),
         );
     }
 
@@ -391,7 +391,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             'Foo street 1',
-            $this->subject->getStreet()
+            $this->subject->getStreet(),
         );
     }
 
@@ -403,12 +403,12 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(
             [
                 'address' => "Foo street 1\nFloor 3",
-            ]
+            ],
         );
 
         self::assertSame(
             "Foo street 1\nFloor 3",
-            $this->subject->getStreet()
+            $this->subject->getStreet(),
         );
     }
 
@@ -423,7 +423,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             $street,
-            $this->subject->getStreet()
+            $this->subject->getStreet(),
         );
     }
 
@@ -437,7 +437,7 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(['zip' => '']);
 
         self::assertFalse(
-            $this->subject->hasZip()
+            $this->subject->hasZip(),
         );
     }
 
@@ -449,7 +449,7 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(['zip' => '12345']);
 
         self::assertTrue(
-            $this->subject->hasZip()
+            $this->subject->hasZip(),
         );
     }
 
@@ -462,7 +462,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             '',
-            $this->subject->getZip()
+            $this->subject->getZip(),
         );
     }
 
@@ -475,7 +475,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             '12345',
-            $this->subject->getZip()
+            $this->subject->getZip(),
         );
     }
 
@@ -490,7 +490,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             $zip,
-            $this->subject->getZip()
+            $this->subject->getZip(),
         );
     }
 
@@ -504,7 +504,7 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(['city' => '']);
 
         self::assertFalse(
-            $this->subject->hasCity()
+            $this->subject->hasCity(),
         );
     }
 
@@ -516,7 +516,7 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(['city' => 'Test city']);
 
         self::assertTrue(
-            $this->subject->hasCity()
+            $this->subject->hasCity(),
         );
     }
 
@@ -529,7 +529,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             '',
-            $this->subject->getCity()
+            $this->subject->getCity(),
         );
     }
 
@@ -542,7 +542,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             'Test city',
-            $this->subject->getCity()
+            $this->subject->getCity(),
         );
     }
 
@@ -557,7 +557,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             $city,
-            $this->subject->getCity()
+            $this->subject->getCity(),
         );
     }
 
@@ -571,7 +571,7 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(['telephone' => '']);
 
         self::assertFalse(
-            $this->subject->hasPhoneNumber()
+            $this->subject->hasPhoneNumber(),
         );
     }
 
@@ -583,7 +583,7 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(['telephone' => '1234 5678']);
 
         self::assertTrue(
-            $this->subject->hasPhoneNumber()
+            $this->subject->hasPhoneNumber(),
         );
     }
 
@@ -596,7 +596,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             '',
-            $this->subject->getPhoneNumber()
+            $this->subject->getPhoneNumber(),
         );
     }
 
@@ -609,7 +609,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             '1234 5678',
-            $this->subject->getPhoneNumber()
+            $this->subject->getPhoneNumber(),
         );
     }
 
@@ -624,7 +624,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             $phoneNumber,
-            $this->subject->getPhoneNumber()
+            $this->subject->getPhoneNumber(),
         );
     }
 
@@ -638,7 +638,7 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(['email' => '']);
 
         self::assertFalse(
-            $this->subject->hasEmailAddress()
+            $this->subject->hasEmailAddress(),
         );
     }
 
@@ -650,7 +650,7 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(['email' => 'john@doe.com']);
 
         self::assertTrue(
-            $this->subject->hasEmailAddress()
+            $this->subject->hasEmailAddress(),
         );
     }
 
@@ -663,7 +663,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             '',
-            $this->subject->getEmailAddress()
+            $this->subject->getEmailAddress(),
         );
     }
 
@@ -676,7 +676,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             'john@doe.com',
-            $this->subject->getEmailAddress()
+            $this->subject->getEmailAddress(),
         );
     }
 
@@ -689,7 +689,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             'john@example.com',
-            $this->subject->getEmailAddress()
+            $this->subject->getEmailAddress(),
         );
     }
 
@@ -722,7 +722,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             $userGroups,
-            $this->subject->getUserGroups()
+            $this->subject->getUserGroups(),
         );
     }
 
@@ -751,7 +751,7 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(['usergroup' => $list]);
 
         self::assertTrue(
-            $this->subject->hasGroupMembership((string)$userGroup->getUid())
+            $this->subject->hasGroupMembership((string)$userGroup->getUid()),
         );
     }
 
@@ -769,7 +769,7 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(['usergroup' => $list]);
 
         self::assertTrue(
-            $this->subject->hasGroupMembership((string)$userGroup->getUid())
+            $this->subject->hasGroupMembership((string)$userGroup->getUid()),
         );
     }
 
@@ -787,8 +787,8 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertTrue(
             $this->subject->hasGroupMembership(
-                $userGroup->getUid() . ',' . $groupMapper->getNewGhost()->getUid()
-            )
+                $userGroup->getUid() . ',' . $groupMapper->getNewGhost()->getUid(),
+            ),
         );
     }
 
@@ -806,8 +806,8 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertFalse(
             $this->subject->hasGroupMembership(
-                $groupMapper->getNewGhost()->getUid() . ',' . $groupMapper->getNewGhost()->getUid()
-            )
+                $groupMapper->getNewGhost()->getUid() . ',' . $groupMapper->getNewGhost()->getUid(),
+            ),
         );
     }
 
@@ -821,7 +821,7 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData([]);
 
         self::assertFalse(
-            $this->subject->hasFirstName()
+            $this->subject->hasFirstName(),
         );
     }
 
@@ -833,7 +833,7 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(['first_name' => 'foo']);
 
         self::assertTrue(
-            $this->subject->hasFirstName()
+            $this->subject->hasFirstName(),
         );
     }
 
@@ -846,7 +846,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             '',
-            $this->subject->getFirstName()
+            $this->subject->getFirstName(),
         );
     }
 
@@ -859,7 +859,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             'foo',
-            $this->subject->getFirstName()
+            $this->subject->getFirstName(),
         );
     }
 
@@ -872,7 +872,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             'John',
-            $this->subject->getFirstName()
+            $this->subject->getFirstName(),
         );
     }
 
@@ -882,12 +882,12 @@ final class FrontEndUserTest extends UnitTestCase
     public function getFirstOrFullNameForUserWithFirstNameReturnsFirstName(): void
     {
         $this->subject->setData(
-            ['first_name' => 'foo', 'name' => 'foo bar']
+            ['first_name' => 'foo', 'name' => 'foo bar'],
         );
 
         self::assertSame(
             'foo',
-            $this->subject->getFirstOrFullName()
+            $this->subject->getFirstOrFullName(),
         );
     }
 
@@ -900,7 +900,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             'foo bar',
-            $this->subject->getFirstOrFullName()
+            $this->subject->getFirstOrFullName(),
         );
     }
 
@@ -914,7 +914,7 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData([]);
 
         self::assertFalse(
-            $this->subject->hasLastName()
+            $this->subject->hasLastName(),
         );
     }
 
@@ -926,7 +926,7 @@ final class FrontEndUserTest extends UnitTestCase
         $this->subject->setData(['last_name' => 'bar']);
 
         self::assertTrue(
-            $this->subject->hasLastName()
+            $this->subject->hasLastName(),
         );
     }
 
@@ -939,7 +939,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             '',
-            $this->subject->getLastName()
+            $this->subject->getLastName(),
         );
     }
 
@@ -952,7 +952,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             'bar',
-            $this->subject->getLastName()
+            $this->subject->getLastName(),
         );
     }
 
@@ -965,7 +965,7 @@ final class FrontEndUserTest extends UnitTestCase
 
         self::assertSame(
             'Jacuzzi',
-            $this->subject->getLastName()
+            $this->subject->getLastName(),
         );
     }
 }

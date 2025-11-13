@@ -86,7 +86,7 @@ class PriceViewHelper extends AbstractViewHelper
             $this->value,
             $currency->getDecimalDigits(),
             $currency->getDecimalSeparator(),
-            $currency->getThousandsSeparator()
+            $currency->getThousandsSeparator(),
         );
 
         if ($currency->hasRightSymbol()) {

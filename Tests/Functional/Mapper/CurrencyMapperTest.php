@@ -49,7 +49,7 @@ final class CurrencyMapperTest extends FunctionalTestCase
     {
         self::assertInstanceOf(
             Currency::class,
-            $this->subject->findByIsoAlpha3Code('EUR')
+            $this->subject->findByIsoAlpha3Code('EUR'),
         );
     }
 
@@ -60,7 +60,7 @@ final class CurrencyMapperTest extends FunctionalTestCase
     {
         self::assertSame(
             49,
-            $this->subject->findByIsoAlpha3Code('EUR')->getUid()
+            $this->subject->findByIsoAlpha3Code('EUR')->getUid(),
         );
     }
 }

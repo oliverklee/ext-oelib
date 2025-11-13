@@ -257,7 +257,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
         if ($key === 'deleted') {
             throw new \InvalidArgumentException(
                 '$key must not be "deleted". Please use setToDeleted() instead.',
-                1_331_489_276
+                1_331_489_276,
             );
         }
 
@@ -292,7 +292,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
         if ($key === 'uid') {
             throw new \InvalidArgumentException(
                 'The UID column needs to be accessed using the getUid function.',
-                1_331_489_310
+                1_331_489_310,
             );
         }
 
@@ -301,7 +301,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
             throw new NotFoundException(
                 'The ' . static::class . ' with the UID ' . $this->getUid() .
                 ' either has been deleted (or has never existed), but still is accessed.',
-                1_332_446_332
+                1_332_446_332,
             );
         }
 
@@ -343,7 +343,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
         if (!$result instanceof self) {
             throw new \UnexpectedValueException(
                 'The data item for the key "' . $key . '" is no model instance.',
-                1_331_489_359
+                1_331_489_359,
             );
         }
 
@@ -368,7 +368,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
         if (!$result instanceof Collection) {
             throw new \UnexpectedValueException(
                 'The data item for the key "' . $key . '" is no collection.',
-                1_331_489_379
+                1_331_489_379,
             );
         }
 
@@ -384,7 +384,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
             throw new \BadMethodCallException(
                 static::class . '#' . $this->getUid()
                 . ': Please call setData() directly after instantiation first.',
-                1_331_489_395
+                1_331_489_395,
             );
         }
 
@@ -392,7 +392,7 @@ abstract class AbstractModel extends AbstractObjectWithAccessors implements Iden
             if (!$this->loadCallback instanceof \Closure) {
                 throw new \BadMethodCallException(
                     'Ghosts need a load callback function before their data can be accessed.',
-                    1_331_489_414
+                    1_331_489_414,
                 );
             }
 

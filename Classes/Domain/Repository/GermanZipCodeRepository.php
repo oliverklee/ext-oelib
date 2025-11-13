@@ -98,7 +98,7 @@ class GermanZipCodeRepository extends Repository
     {
         throw new \BadMethodCallException(
             'This is a read-only repository in which the removeAll method must not be called.',
-            1_537_544_385
+            1_537_544_385,
         );
     }
 }

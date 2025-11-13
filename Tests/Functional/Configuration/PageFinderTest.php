@@ -60,7 +60,7 @@ final class PageFinderTest extends FunctionalTestCase
 
         self::assertSame(
             42,
-            $pageUid
+            $pageUid,
         );
     }
 
@@ -79,7 +79,7 @@ final class PageFinderTest extends FunctionalTestCase
 
         self::assertSame(
             $frontEndPageUid,
-            $pageUid
+            $pageUid,
         );
     }
 
@@ -94,7 +94,7 @@ final class PageFinderTest extends FunctionalTestCase
 
         self::assertSame(
             $frontEndPageUid + 1,
-            $this->subject->getPageUid()
+            $this->subject->getPageUid(),
         );
     }
 
@@ -115,7 +115,7 @@ final class PageFinderTest extends FunctionalTestCase
 
         self::assertSame(
             $frontEndPageUid,
-            $this->subject->getPageUid()
+            $this->subject->getPageUid(),
         );
     }
 
@@ -146,7 +146,7 @@ final class PageFinderTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $this->subject->getPageUid()
+            $this->subject->getPageUid(),
         );
     }
 
@@ -161,7 +161,7 @@ final class PageFinderTest extends FunctionalTestCase
     {
         self::assertSame(
             PageFinder::NO_SOURCE_FOUND,
-            $this->subject->getCurrentSource()
+            $this->subject->getCurrentSource(),
         );
     }
 
@@ -174,7 +174,7 @@ final class PageFinderTest extends FunctionalTestCase
 
         self::assertSame(
             PageFinder::SOURCE_FRONT_END,
-            $this->subject->getCurrentSource()
+            $this->subject->getCurrentSource(),
         );
     }
 
@@ -187,7 +187,7 @@ final class PageFinderTest extends FunctionalTestCase
 
         self::assertSame(
             PageFinder::SOURCE_BACK_END,
-            $this->subject->getCurrentSource()
+            $this->subject->getCurrentSource(),
         );
     }
 
@@ -200,7 +200,7 @@ final class PageFinderTest extends FunctionalTestCase
 
         self::assertSame(
             PageFinder::SOURCE_MANUAL,
-            $this->subject->getCurrentSource()
+            $this->subject->getCurrentSource(),
         );
     }
 
@@ -214,7 +214,7 @@ final class PageFinderTest extends FunctionalTestCase
 
         self::assertSame(
             PageFinder::SOURCE_FRONT_END,
-            $this->subject->getCurrentSource()
+            $this->subject->getCurrentSource(),
         );
     }
 
@@ -229,7 +229,7 @@ final class PageFinderTest extends FunctionalTestCase
 
         self::assertSame(
             PageFinder::SOURCE_BACK_END,
-            $pageSource
+            $pageSource,
         );
     }
 }

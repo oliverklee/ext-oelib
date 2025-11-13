@@ -92,7 +92,7 @@ class FallbackConfiguration implements ConfigurationInterface
         if ($value < 0) {
             throw new \UnexpectedValueException(
                 'The value for "' . $key . '" must be a non-negative integer, but it is ' . $value . '.',
-                1573030133
+                1573030133,
             );
         }
 
@@ -115,7 +115,7 @@ class FallbackConfiguration implements ConfigurationInterface
         if ($value <= 0) {
             throw new \UnexpectedValueException(
                 'The value for "' . $key . '" must be a positive integer, but it is ' . $value . '.',
-                1573030133
+                1573030133,
             );
         }
 

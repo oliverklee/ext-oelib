@@ -100,7 +100,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     {
         self::assertInstanceOf(
             AbstractModel::class,
-            $this->subject->getModel(['uid' => 2])
+            $this->subject->getModel(['uid' => 2]),
         );
     }
 
@@ -110,7 +110,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     public function getModelForNonMappedUidReturnsLoadedModel(): void
     {
         self::assertTrue(
-            $this->subject->getModel(['uid' => 2])->isLoaded()
+            $this->subject->getModel(['uid' => 2])->isLoaded(),
         );
     }
 
@@ -123,7 +123,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertInstanceOf(
             AbstractModel::class,
-            $this->subject->getModel(['uid' => $mappedUid])
+            $this->subject->getModel(['uid' => $mappedUid]),
         );
     }
 
@@ -135,7 +135,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $mappedUid = $this->subject->getNewGhost()->getUid();
 
         self::assertTrue(
-            $this->subject->getModel(['uid' => $mappedUid])->isLoaded()
+            $this->subject->getModel(['uid' => $mappedUid])->isLoaded(),
         );
     }
 
@@ -150,7 +150,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->getModel(['uid' => $mappedModel->getUid(), 'title' => 'new title']);
         self::assertSame(
             'new title',
-            $model->getTitle()
+            $model->getTitle(),
         );
     }
 
@@ -163,7 +163,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $mappedModel,
-            $this->subject->getModel(['uid' => $mappedModel->getUid()])
+            $this->subject->getModel(['uid' => $mappedModel->getUid()]),
         );
     }
 
@@ -177,7 +177,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $mappedModel,
-            $this->subject->getModel(['uid' => $mappedModel->getUid()])
+            $this->subject->getModel(['uid' => $mappedModel->getUid()]),
         );
     }
 
@@ -193,7 +193,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->getModel(['uid' => $mappedModel->getUid()]);
         self::assertSame(
             'foo',
-            $model->getTitle()
+            $model->getTitle(),
         );
     }
 
@@ -209,7 +209,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->getModel(['uid' => $mappedModel->getUid(), 'title' => 'new title']);
         self::assertSame(
             'foo',
-            $model->getTitle()
+            $model->getTitle(),
         );
     }
 
@@ -222,7 +222,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $mappedModel->markAsDead();
 
         self::assertTrue(
-            $this->subject->getModel(['uid' => $mappedModel->getUid()])->isDead()
+            $this->subject->getModel(['uid' => $mappedModel->getUid()])->isDead(),
         );
     }
 
@@ -235,7 +235,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->getModel(['uid' => 2]);
         self::assertInstanceOf(
             Collection::class,
-            $model->getChildren()
+            $model->getChildren(),
         );
     }
 
@@ -248,7 +248,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             [$model],
-            $this->subject->getCachedModels()
+            $this->subject->getCachedModels(),
         );
     }
 
@@ -263,7 +263,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     {
         self::assertInstanceOf(
             Collection::class,
-            $this->subject->getListOfModels([['uid' => 1]])
+            $this->subject->getListOfModels([['uid' => 1]]),
         );
     }
 
@@ -273,7 +273,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     public function getListOfModelsForAnEmptyArrayProvidedReturnsEmptyList(): void
     {
         self::assertTrue(
-            $this->subject->getListOfModels([])->isEmpty()
+            $this->subject->getListOfModels([])->isEmpty(),
         );
     }
 
@@ -300,7 +300,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     {
         self::assertInstanceOf(
             AbstractModel::class,
-            $this->subject->getListOfModels([['uid' => 1]])->current()
+            $this->subject->getListOfModels([['uid' => 1]])->current(),
         );
     }
 
@@ -336,7 +336,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $this->subject->load($model);
 
         self::assertTrue(
-            $model->isLoaded()
+            $model->isLoaded(),
         );
     }
 
@@ -357,7 +357,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $this->subject->load($model);
 
         self::assertFalse(
-            $model->isDirty()
+            $model->isDirty(),
         );
     }
 
@@ -379,7 +379,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             12.5,
-            $model->getFloatFromFloatData()
+            $model->getFloatFromFloatData(),
         );
     }
 
@@ -401,7 +401,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             12.5,
-            $model->getFloatFromDecimalData()
+            $model->getFloatFromDecimalData(),
         );
     }
 
@@ -423,7 +423,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             12.5,
-            $model->getFloatFromStringData()
+            $model->getFloatFromStringData(),
         );
     }
 
@@ -447,7 +447,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model->getTitle();
 
         self::assertTrue(
-            $model->isLoaded()
+            $model->isLoaded(),
         );
     }
 
@@ -466,7 +466,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model->isHidden();
 
         self::assertTrue(
-            $model->isLoaded()
+            $model->isLoaded(),
         );
     }
 
@@ -497,7 +497,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $this->subject->load($model);
 
         self::assertTrue(
-            $model->isLoaded()
+            $model->isLoaded(),
         );
     }
 
@@ -512,7 +512,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $this->subject->load($model);
 
         self::assertTrue(
-            $model->isDead()
+            $model->isDead(),
         );
     }
 
@@ -534,7 +534,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $this->subject->load($this->subject->find($uid));
 
         self::assertTrue(
-            $this->subject->existsModel($uid)
+            $this->subject->existsModel($uid),
         );
     }
 
@@ -550,7 +550,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         \assert($uid > 0);
 
         self::assertTrue(
-            $this->subject->existsModel($uid)
+            $this->subject->existsModel($uid),
         );
     }
 
@@ -560,7 +560,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     public function existsModelForInexistentUidReturnsFalse(): void
     {
         self::assertFalse(
-            $this->subject->existsModel(1)
+            $this->subject->existsModel(1),
         );
     }
 
@@ -573,7 +573,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $this->subject->find($uid);
 
         self::assertFalse(
-            $this->subject->existsModel($uid)
+            $this->subject->existsModel($uid),
         );
     }
 
@@ -591,7 +591,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $this->subject->existsModel($uid);
 
         self::assertTrue(
-            $this->subject->find($uid)->isLoaded()
+            $this->subject->find($uid)->isLoaded(),
         );
     }
 
@@ -607,7 +607,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         \assert($uid > 0);
 
         self::assertFalse(
-            $this->subject->existsModel($uid)
+            $this->subject->existsModel($uid),
         );
     }
 
@@ -623,7 +623,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         \assert($uid > 0);
 
         self::assertTrue(
-            $this->subject->existsModel($uid, true)
+            $this->subject->existsModel($uid, true),
         );
     }
 
@@ -641,7 +641,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $this->subject->load($this->subject->find($uid));
 
         self::assertFalse(
-            $this->subject->existsModel($uid)
+            $this->subject->existsModel($uid),
         );
     }
 
@@ -659,7 +659,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $this->subject->load($this->subject->find($uid));
 
         self::assertTrue(
-            $this->subject->existsModel($uid, true)
+            $this->subject->existsModel($uid, true),
         );
     }
 
@@ -677,7 +677,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $this->subject->load($this->subject->find($uid));
 
         self::assertTrue(
-            $this->subject->existsModel($uid, true)
+            $this->subject->existsModel($uid, true),
         );
     }
 
@@ -695,7 +695,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $this->subject->load($this->subject->find($uid));
 
         self::assertTrue(
-            $this->subject->existsModel($uid, true)
+            $this->subject->existsModel($uid, true),
         );
     }
 
@@ -710,7 +710,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     {
         self::assertInstanceOf(
             AbstractModel::class,
-            $this->subject->getLoadedTestingModel([])
+            $this->subject->getLoadedTestingModel([]),
         );
     }
 
@@ -720,7 +720,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     public function getLoadedTestingModelReturnsLoadedModel(): void
     {
         self::assertTrue(
-            $this->subject->getLoadedTestingModel([])->isLoaded()
+            $this->subject->getLoadedTestingModel([])->isLoaded(),
         );
     }
 
@@ -730,7 +730,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     public function getLoadedTestingModelReturnsModelWithUid(): void
     {
         self::assertTrue(
-            $this->subject->getLoadedTestingModel([])->hasUid()
+            $this->subject->getLoadedTestingModel([])->hasUid(),
         );
     }
 
@@ -745,7 +745,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $model,
-            $this->subject->find($uid)
+            $this->subject->find($uid),
         );
     }
 
@@ -756,12 +756,12 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     {
         /** @var TestingModel $model */
         $model = $this->subject->getLoadedTestingModel(
-            ['title' => 'foo']
+            ['title' => 'foo'],
         );
 
         self::assertSame(
             'foo',
-            $model->getTitle()
+            $model->getTitle(),
         );
     }
 
@@ -772,7 +772,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     {
         $relatedModel = $this->subject->getNewGhost();
         $model = $this->subject->getLoadedTestingModel(
-            ['friend' => $relatedModel->getUid()]
+            ['friend' => $relatedModel->getUid()],
         );
 
         $friend = $model->getFriend();
@@ -798,7 +798,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         /** @var TestingModel $model */
         $model = $this->subject->find($uid);
         self::assertNull(
-            $model->getFriend()
+            $model->getFriend(),
         );
     }
 
@@ -842,7 +842,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $model,
-            $model->getFriend()
+            $model->getFriend(),
         );
     }
 
@@ -867,7 +867,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->find($uid);
         self::assertInstanceOf(
             FrontEndUser::class,
-            $model->getOwner()
+            $model->getOwner(),
         );
     }
 
@@ -931,7 +931,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         /** @var TestingModel $model */
         $model = $this->subject->find($uid);
         self::assertTrue(
-            $model->getChildren()->isEmpty()
+            $model->getChildren()->isEmpty(),
         );
     }
 
@@ -954,7 +954,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->find($uid);
         self::assertSame(
             (string)$childUid,
-            $model->getChildren()->getUids()
+            $model->getChildren()->getUids(),
         );
     }
 
@@ -980,7 +980,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->find($uid);
         self::assertSame(
             $childUid1 . ',' . $childUid2,
-            $model->getChildren()->getUids()
+            $model->getChildren()->getUids(),
         );
     }
 
@@ -1002,7 +1002,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->find($uid);
         self::assertSame(
             (string)$childUid1,
-            $model->getChildren()->getUids()
+            $model->getChildren()->getUids(),
         );
     }
 
@@ -1022,7 +1022,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $model,
-            $model->getChildren()->getParentModel()
+            $model->getChildren()->getParentModel(),
         );
     }
 
@@ -1041,7 +1041,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->find($uid);
 
         self::assertFalse(
-            $model->getChildren()->isRelationOwnedByParent()
+            $model->getChildren()->isRelationOwnedByParent(),
         );
     }
 
@@ -1063,7 +1063,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         /** @var TestingModel $model */
         $model = $this->subject->find($uid);
         self::assertTrue(
-            $model->getRelatedRecords()->isEmpty()
+            $model->getRelatedRecords()->isEmpty(),
         );
     }
 
@@ -1087,7 +1087,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->find($uid);
         self::assertSame(
             (string)$relatedUid,
-            $model->getRelatedRecords()->getUids()
+            $model->getRelatedRecords()->getUids(),
         );
     }
 
@@ -1115,7 +1115,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->find($uid);
         self::assertSame(
             $relatedUid1 . ',' . $relatedUid2,
-            $model->getRelatedRecords()->getUids()
+            $model->getRelatedRecords()->getUids(),
         );
     }
 
@@ -1138,18 +1138,18 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $relationConnection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test_article_mm');
         $relationConnection->insert(
             'tx_oelib_test_article_mm',
-            ['uid_local' => $uid, 'uid_foreign' => $relatedUid1, 'sorting' => 2]
+            ['uid_local' => $uid, 'uid_foreign' => $relatedUid1, 'sorting' => 2],
         );
         $relationConnection->insert(
             'tx_oelib_test_article_mm',
-            ['uid_local' => $uid, 'uid_foreign' => $relatedUid2, 'sorting' => 1]
+            ['uid_local' => $uid, 'uid_foreign' => $relatedUid2, 'sorting' => 1],
         );
 
         /** @var TestingModel $model */
         $model = $this->subject->find($uid);
         self::assertSame(
             $relatedUid2 . ',' . $relatedUid1,
-            $model->getRelatedRecords()->getUids()
+            $model->getRelatedRecords()->getUids(),
         );
     }
 
@@ -1169,7 +1169,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $model,
-            $model->getRelatedRecords()->getParentModel()
+            $model->getRelatedRecords()->getParentModel(),
         );
     }
 
@@ -1188,7 +1188,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->find($uid);
 
         self::assertFalse(
-            $model->getRelatedRecords()->isRelationOwnedByParent()
+            $model->getRelatedRecords()->isRelationOwnedByParent(),
         );
     }
 
@@ -1210,7 +1210,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         /** @var TestingModel $model */
         $model = $this->subject->find($uid);
         self::assertTrue(
-            $model->getBidirectional()->isEmpty()
+            $model->getBidirectional()->isEmpty(),
         );
     }
 
@@ -1234,7 +1234,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->find($relatedUid);
         self::assertSame(
             (string)$uid,
-            $model->getBidirectional()->getUids()
+            $model->getBidirectional()->getUids(),
         );
     }
 
@@ -1262,7 +1262,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->find($relatedUid);
         self::assertSame(
             $uid1 . ',' . $uid2,
-            $model->getBidirectional()->getUids()
+            $model->getBidirectional()->getUids(),
         );
     }
 
@@ -1290,7 +1290,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->find($relatedUid);
         self::assertSame(
             $uid2 . ',' . $uid1,
-            $model->getBidirectional()->getUids()
+            $model->getBidirectional()->getUids(),
         );
     }
 
@@ -1310,7 +1310,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $model,
-            $model->getBidirectional()->getParentModel()
+            $model->getBidirectional()->getParentModel(),
         );
     }
 
@@ -1329,7 +1329,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->find($uid);
 
         self::assertFalse(
-            $model->getBidirectional()->isRelationOwnedByParent()
+            $model->getBidirectional()->isRelationOwnedByParent(),
         );
     }
 
@@ -1351,7 +1351,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         /** @var TestingModel $model */
         $model = $this->subject->find($uid);
         self::assertTrue(
-            $model->getComposition()->isEmpty()
+            $model->getComposition()->isEmpty(),
         );
     }
 
@@ -1375,7 +1375,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->find($uid);
         self::assertSame(
             (string)$relatedUid,
-            $model->getComposition()->getUids()
+            $model->getComposition()->getUids(),
         );
     }
 
@@ -1488,7 +1488,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->find($uid);
         self::assertSame(
             $relatedUid1 . ',' . $relatedUid2,
-            $model->getComposition()->getUids()
+            $model->getComposition()->getUids(),
         );
     }
 
@@ -1515,7 +1515,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->find($uid);
         self::assertSame(
             $relatedUid2 . ',' . $relatedUid1,
-            $model->getComposition()->getUids()
+            $model->getComposition()->getUids(),
         );
     }
 
@@ -1535,7 +1535,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $model,
-            $model->getComposition()->getParentModel()
+            $model->getComposition()->getParentModel(),
         );
     }
 
@@ -1554,7 +1554,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->find($uid);
 
         self::assertTrue(
-            $model->getComposition()->isRelationOwnedByParent()
+            $model->getComposition()->isRelationOwnedByParent(),
         );
     }
 
@@ -1725,7 +1725,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $this->expectException(NotFoundException::class);
 
         $this->subject->findSingleByWhereClause(
-            ['uid' => 1]
+            ['uid' => 1],
         );
     }
 
@@ -1741,7 +1741,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model = $this->subject->findSingleByWhereClause(['title' => 'foo']);
         self::assertSame(
             'foo',
-            $model->getTitle()
+            $model->getTitle(),
         );
     }
 
@@ -1763,7 +1763,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $model2 = $this->subject->findSingleByWhereClause(['title' => 'foo']);
         self::assertSame(
             'bar',
-            $model2->getTitle()
+            $model2->getTitle(),
         );
     }
 
@@ -1794,7 +1794,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
             $connection->count('*', 'tx_oelib_test', [
                 'title' => 'foo',
                 'tstamp' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
-            ])
+            ]),
         );
     }
 
@@ -1816,7 +1816,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
             $connection->count('*', 'tx_oelib_test', [
                 'title' => 'foo',
                 'tstamp' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
-            ])
+            ]),
         );
     }
 
@@ -1840,7 +1840,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'bar'])
+            $connection->count('*', 'tx_oelib_test', ['title' => 'bar']),
         );
     }
 
@@ -1864,7 +1864,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             0,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'bar'])
+            $connection->count('*', 'tx_oelib_test', ['title' => 'bar']),
         );
     }
 
@@ -1887,7 +1887,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'bar'])
+            $connection->count('*', 'tx_oelib_test', ['title' => 'bar']),
         );
     }
 
@@ -1926,14 +1926,15 @@ final class AbstractDataMapperTest extends FunctionalTestCase
                 'bool_data1' => true,
                 'bool_data2' => false,
                 'int_data' => 42,
-            ]
+            ],
         );
 
         $this->subject->save($model);
 
         $uid = $model->getUid();
 
-        $result = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test')
+        $result = $this
+            ->getConnectionPool()->getConnectionForTable('tx_oelib_test')
             ->select(['*'], 'tx_oelib_test', ['uid' => $uid]);
         /** @var DatabaseRow|false $data */
         $data = $result->fetchAssociative();
@@ -1961,7 +1962,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $uid,
-            $model->getUid()
+            $model->getUid(),
         );
     }
 
@@ -1987,7 +1988,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
             $connection->count('*', 'tx_oelib_test', [
                 'title' => 'bar',
                 'tstamp' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
-            ])
+            ]),
         );
     }
 
@@ -2014,8 +2015,8 @@ final class AbstractDataMapperTest extends FunctionalTestCase
             $connection->count(
                 '*',
                 'tx_oelib_test',
-                ['tstamp' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')]
-            )
+                ['tstamp' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp')],
+            ),
         );
     }
 
@@ -2033,7 +2034,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
         self::assertSame(
             1,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'foo'])
+            $connection->count('*', 'tx_oelib_test', ['title' => 'foo']),
         );
     }
 
@@ -2052,7 +2053,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $model,
-            $this->subject->find($uid)
+            $this->subject->find($uid),
         );
     }
 
@@ -2074,7 +2075,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $this->subject->save($model);
 
         self::assertFalse(
-            $this->subject->find($uid)->isDirty()
+            $this->subject->find($uid)->isDirty(),
         );
     }
 
@@ -2092,7 +2093,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
         self::assertSame(
             1,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'bar'])
+            $connection->count('*', 'tx_oelib_test', ['title' => 'bar']),
         );
     }
 
@@ -2114,7 +2115,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
         self::assertSame(
             1,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'bar'])
+            $connection->count('*', 'tx_oelib_test', ['title' => 'bar']),
         );
     }
 
@@ -2137,7 +2138,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $model,
-            $this->subject->find($uid)
+            $this->subject->find($uid),
         );
     }
 
@@ -2157,7 +2158,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $this->subject->save($model);
 
         self::assertTrue(
-            $model->hasUid()
+            $model->hasUid(),
         );
     }
 
@@ -2179,7 +2180,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
         self::assertSame(
             1,
-            $connection->count('*', 'tx_oelib_test', ['uid' => $model->getUid()])
+            $connection->count('*', 'tx_oelib_test', ['uid' => $model->getUid()]),
         );
     }
 
@@ -2199,7 +2200,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $this->subject->save($model);
 
         self::assertFalse(
-            $model->isDirty()
+            $model->isDirty(),
         );
     }
 
@@ -2224,7 +2225,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
             $connection->count('*', 'tx_oelib_test', [
                 'title' => 'bar',
                 'tstamp' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
-            ])
+            ]),
         );
     }
 
@@ -2249,7 +2250,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
             $connection->count('*', 'tx_oelib_test', [
                 'title' => 'bar',
                 'crdate' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
-            ])
+            ]),
         );
     }
 
@@ -2269,7 +2270,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
             $connection->count('*', 'tx_oelib_test', [
                 'title' => 'foo',
                 'tstamp' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
-            ])
+            ]),
         );
 
         $model = $this->subject->find($uid);
@@ -2282,7 +2283,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
             $connection->count('*', 'tx_oelib_test', [
                 'title' => 'foo',
                 'tstamp' => GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp'),
-            ])
+            ]),
         );
     }
 
@@ -2305,7 +2306,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $this->subject->save($model);
 
         self::assertTrue(
-            $this->subject->find($uid)->isDead()
+            $this->subject->find($uid)->isDead(),
         );
     }
 
@@ -2330,7 +2331,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'bar', 'friend' => $friendUid])
+            $connection->count('*', 'tx_oelib_test', ['title' => 'bar', 'friend' => $friendUid]),
         );
     }
 
@@ -2358,7 +2359,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'bar', 'children' => $childUid1 . ',' . $childUid2])
+            $connection->count('*', 'tx_oelib_test', ['title' => 'bar', 'children' => $childUid1 . ',' . $childUid2]),
         );
     }
 
@@ -2390,7 +2391,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'bar', 'related_records' => 2])
+            $connection->count('*', 'tx_oelib_test', ['title' => 'bar', 'related_records' => 2]),
         );
     }
 
@@ -2425,7 +2426,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'bar', 'composition' => 2])
+            $connection->count('*', 'tx_oelib_test', ['title' => 'bar', 'composition' => 2]),
         );
     }
 
@@ -2460,8 +2461,8 @@ final class AbstractDataMapperTest extends FunctionalTestCase
             $relationConnection->count(
                 '*',
                 'tx_oelib_testchild',
-                ['uid' => $component->getUid(), 'parent' => $model->getUid()]
-            )
+                ['uid' => $component->getUid(), 'parent' => $model->getUid()],
+            ),
         );
     }
 
@@ -2491,8 +2492,8 @@ final class AbstractDataMapperTest extends FunctionalTestCase
             $relationConnection->count(
                 '*',
                 'tx_oelib_testchild',
-                ['uid' => $component->getUid(), 'parent' => $model->getUid()]
-            )
+                ['uid' => $component->getUid(), 'parent' => $model->getUid()],
+            ),
         );
     }
 
@@ -2526,8 +2527,8 @@ final class AbstractDataMapperTest extends FunctionalTestCase
             $relationConnection->count(
                 '*',
                 'tx_oelib_testchild',
-                ['uid' => $newComponent2->getUid(), 'parent' => $model->getUid()]
-            )
+                ['uid' => $newComponent2->getUid(), 'parent' => $model->getUid()],
+            ),
         );
     }
 
@@ -2557,8 +2558,8 @@ final class AbstractDataMapperTest extends FunctionalTestCase
             $relationConnection->count(
                 '*',
                 'tx_oelib_testchild',
-                ['uid' => $component->getUid(), 'tx_oelib_parent2' => $model->getUid()]
-            )
+                ['uid' => $component->getUid(), 'tx_oelib_parent2' => $model->getUid()],
+            ),
         );
     }
 
@@ -2624,7 +2625,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'foo', 'uid' => $friendUid])
+            $connection->count('*', 'tx_oelib_test', ['title' => 'foo', 'uid' => $friendUid]),
         );
     }
 
@@ -2649,7 +2650,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $connection->count('*', 'tx_oelib_test', ['uid' => $friend->getUid()])
+            $connection->count('*', 'tx_oelib_test', ['uid' => $friend->getUid()]),
         );
     }
 
@@ -2680,7 +2681,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             1,
-            $connection->count('*', 'tx_oelib_test', ['title' => 'foo', 'uid' => $childUid1])
+            $connection->count('*', 'tx_oelib_test', ['title' => 'foo', 'uid' => $childUid1]),
         );
     }
 
@@ -2704,7 +2705,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $cachedModels = $this->subject->getCachedModels();
         self::assertSame(
             $model->getUid(),
-            $cachedModels[0]->getUid()
+            $cachedModels[0]->getUid(),
         );
     }
 
@@ -2726,7 +2727,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $parent->getChildren()->add($child);
 
         self::assertTrue(
-            $parent->isDirty()
+            $parent->isDirty(),
         );
     }
 
@@ -2751,7 +2752,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $parent->getChildren()->append($list);
 
         self::assertTrue(
-            $parent->isDirty()
+            $parent->isDirty(),
         );
     }
 
@@ -2775,7 +2776,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $parent->getChildren()->purgeCurrent();
 
         self::assertTrue(
-            $parent->isDirty()
+            $parent->isDirty(),
         );
     }
 
@@ -2808,8 +2809,8 @@ final class AbstractDataMapperTest extends FunctionalTestCase
             $relationConnection->count(
                 '*',
                 'tx_oelib_test_article_mm',
-                ['uid_local' => $parentUid, 'uid_foreign' => $childUid, 'sorting' => 0]
-            )
+                ['uid_local' => $parentUid, 'uid_foreign' => $childUid, 'sorting' => 0],
+            ),
         );
     }
 
@@ -2845,8 +2846,8 @@ final class AbstractDataMapperTest extends FunctionalTestCase
             $relationConnection->count(
                 '*',
                 'tx_oelib_test_article_mm',
-                ['uid_local' => $parentUid, 'uid_foreign' => $childUid2, 'sorting' => 1]
-            )
+                ['uid_local' => $parentUid, 'uid_foreign' => $childUid2, 'sorting' => 1],
+            ),
         );
     }
 
@@ -2877,8 +2878,8 @@ final class AbstractDataMapperTest extends FunctionalTestCase
             $relationConnection->count(
                 '*',
                 'tx_oelib_test_article_mm',
-                ['uid_local' => $parentUid, 'uid_foreign' => $childUid, 'sorting' => 0]
-            )
+                ['uid_local' => $parentUid, 'uid_foreign' => $childUid, 'sorting' => 0],
+            ),
         );
     }
 
@@ -2914,8 +2915,8 @@ final class AbstractDataMapperTest extends FunctionalTestCase
             $relationConnection->count(
                 '*',
                 'tx_oelib_test_article_mm',
-                ['uid_local' => $parentUid2, 'uid_foreign' => $childUid, 'sorting' => 1]
-            )
+                ['uid_local' => $parentUid2, 'uid_foreign' => $childUid, 'sorting' => 1],
+            ),
         );
     }
 
@@ -2987,12 +2988,12 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     public function findByKeyFindsLoadedModel(): void
     {
         $model = $this->subject->getLoadedTestingModel(
-            ['title' => 'Earl Grey']
+            ['title' => 'Earl Grey'],
         );
 
         self::assertSame(
             $model,
-            $this->subject->findOneByKeyFromCache('title', 'Earl Grey')
+            $this->subject->findOneByKeyFromCache('title', 'Earl Grey'),
         );
     }
 
@@ -3002,15 +3003,15 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     public function findByKeyFindsLastLoadedModelWithSameKey(): void
     {
         $this->subject->getLoadedTestingModel(
-            ['title' => 'Earl Grey']
+            ['title' => 'Earl Grey'],
         );
         $model = $this->subject->getLoadedTestingModel(
-            ['title' => 'Earl Grey']
+            ['title' => 'Earl Grey'],
         );
 
         self::assertSame(
             $model,
-            $this->subject->findOneByKeyFromCache('title', 'Earl Grey')
+            $this->subject->findOneByKeyFromCache('title', 'Earl Grey'),
         );
     }
 
@@ -3032,7 +3033,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $model,
-            $this->subject->findOneByKeyFromCache('title', 'Earl Grey')
+            $this->subject->findOneByKeyFromCache('title', 'Earl Grey'),
         );
     }
 
@@ -3063,7 +3064,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $model2,
-            $this->subject->findOneByKeyFromCache('title', 'Earl Grey')
+            $this->subject->findOneByKeyFromCache('title', 'Earl Grey'),
         );
     }
 
@@ -3073,12 +3074,12 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     public function findOneByKeyCanFindModelFromCache(): void
     {
         $model = $this->subject->getLoadedTestingModel(
-            ['title' => 'Earl Grey']
+            ['title' => 'Earl Grey'],
         );
 
         self::assertSame(
             $model,
-            $this->subject->findOneByKey('title', 'Earl Grey')
+            $this->subject->findOneByKey('title', 'Earl Grey'),
         );
     }
 
@@ -3095,7 +3096,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $uid,
-            $this->subject->findOneByKey('title', 'Earl Grey')->getUid()
+            $this->subject->findOneByKey('title', 'Earl Grey')->getUid(),
         );
     }
 
@@ -3136,7 +3137,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $this->subject->delete($model);
 
         self::assertTrue(
-            $model->isDead()
+            $model->isDead(),
         );
     }
 
@@ -3155,7 +3156,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         $this->subject->delete($model);
 
         self::assertTrue(
-            $model->isDead()
+            $model->isDead(),
         );
     }
 
@@ -3165,10 +3166,10 @@ final class AbstractDataMapperTest extends FunctionalTestCase
     public function deleteForGhostFromGetNewGhostThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            'This model is a memory-only dummy that must not be deleted.'
+            'This model is a memory-only dummy that must not be deleted.',
         );
 
         $model = $this->subject->getNewGhost();
@@ -3225,7 +3226,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         self::assertSame(
             $model,
-            $this->subject->find($uid)
+            $this->subject->find($uid),
         );
     }
 
@@ -3319,7 +3320,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         $mapper = MapperRegistry::get(TestingChildMapper::class);
         self::assertTrue(
-            $mapper->findAllByRelation($model, 'parent')->isEmpty()
+            $mapper->findAllByRelation($model, 'parent')->isEmpty(),
         );
     }
 
@@ -3343,7 +3344,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
 
         $mapper = MapperRegistry::get(TestingChildMapper::class);
         self::assertTrue(
-            $mapper->findAllByRelation($model, 'parent')->isEmpty()
+            $mapper->findAllByRelation($model, 'parent')->isEmpty(),
         );
     }
 
@@ -3370,7 +3371,7 @@ final class AbstractDataMapperTest extends FunctionalTestCase
         self::assertCount(1, $result);
         self::assertSame(
             $relatedModel,
-            $result->first()
+            $result->first(),
         );
     }
 

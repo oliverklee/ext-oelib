@@ -21,7 +21,7 @@ final class AbstractConfigurationCheckTest extends FunctionalTestCase
     public function checkTemplateFileForExistingTemplateFileGeneratesNoWarnings(): void
     {
         $configuration = new DummyConfiguration(
-            ['templateFile' => 'EXT:oelib/Tests/Functional/Configuration/Fixtures/Template.html']
+            ['templateFile' => 'EXT:oelib/Tests/Functional/Configuration/Fixtures/Template.html'],
         );
         $subject = new TestingConfigurationCheck($configuration, 'plugin.tx_oelib');
         $subject->setCheckMethod('checkTemplateFile');
@@ -71,7 +71,7 @@ final class AbstractConfigurationCheckTest extends FunctionalTestCase
     public function checkFileExistsForExistingFileGeneratesNoWarnings(): void
     {
         $configuration = new DummyConfiguration(
-            ['file' => 'EXT:oelib/Tests/Functional/Configuration/Fixtures/Template.html']
+            ['file' => 'EXT:oelib/Tests/Functional/Configuration/Fixtures/Template.html'],
         );
         $subject = new TestingConfigurationCheck($configuration, 'plugin.tx_oelib');
         $subject->setCheckMethod('checkFileExists');
@@ -239,7 +239,7 @@ final class AbstractConfigurationCheckTest extends FunctionalTestCase
     {
         $subject = new TestingConfigurationCheck(
             new DummyConfiguration(['columns' => 'title,comment']),
-            'plugin.tx_oelib'
+            'plugin.tx_oelib',
         );
         $subject->setCheckMethod('checkIfMultiInTableColumnsOrEmpty');
 
@@ -271,7 +271,7 @@ final class AbstractConfigurationCheckTest extends FunctionalTestCase
     {
         $subject = new TestingConfigurationCheck(
             new DummyConfiguration(['columns' => 'title,header']),
-            'plugin.tx_oelib'
+            'plugin.tx_oelib',
         );
         $subject->setCheckMethod('checkIfMultiInTableColumnsOrEmpty');
 
@@ -287,7 +287,7 @@ final class AbstractConfigurationCheckTest extends FunctionalTestCase
     {
         $subject = new TestingConfigurationCheck(
             new DummyConfiguration(['columns' => 'title, header']),
-            'plugin.tx_oelib'
+            'plugin.tx_oelib',
         );
         $subject->setCheckMethod('checkIfMultiInTableColumnsOrEmpty');
 
@@ -335,7 +335,7 @@ final class AbstractConfigurationCheckTest extends FunctionalTestCase
     {
         $subject = new TestingConfigurationCheck(
             new DummyConfiguration(['columns' => 'title,comment']),
-            'plugin.tx_oelib'
+            'plugin.tx_oelib',
         );
         $subject->setCheckMethod('checkIfMultiInTableColumnsNotEmpty');
 
@@ -354,7 +354,7 @@ final class AbstractConfigurationCheckTest extends FunctionalTestCase
     {
         $subject = new TestingConfigurationCheck(
             new DummyConfiguration(['columns' => 'title,header']),
-            'plugin.tx_oelib'
+            'plugin.tx_oelib',
         );
         $subject->setCheckMethod('checkIfMultiInTableColumnsNotEmpty');
 
@@ -370,7 +370,7 @@ final class AbstractConfigurationCheckTest extends FunctionalTestCase
     {
         $subject = new TestingConfigurationCheck(
             new DummyConfiguration(['columns' => 'title, header']),
-            'plugin.tx_oelib'
+            'plugin.tx_oelib',
         );
         $subject->setCheckMethod('checkIfMultiInTableColumnsNotEmpty');
 

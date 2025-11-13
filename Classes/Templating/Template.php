@@ -110,7 +110,7 @@ class Template
             self::SUBPART_PATTERN,
             $templateCode,
             $matches,
-            PREG_SET_ORDER
+            PREG_SET_ORDER,
         );
         foreach ($matches as $match) {
             $subpartName = $match[1];
@@ -135,7 +135,7 @@ class Template
         preg_match_all(
             '/###([A-Z\\d_]+)###/',
             $this->templateCode,
-            $matches
+            $matches,
         );
 
         foreach (\array_unique($matches[1]) as $markerName) {
@@ -472,7 +472,7 @@ class Template
             ((int)$content) !== 0,
             (string)$content,
             $markerPrefix,
-            $wrapperPrefix
+            $wrapperPrefix,
         );
     }
 
@@ -514,7 +514,7 @@ class Template
             $contentIsNonEmpty,
             $content,
             $markerPrefix,
-            $wrapperPrefix
+            $wrapperPrefix,
         );
     }
 
@@ -604,7 +604,7 @@ class Template
                 '$key contained the subpart name "' . $subpartKey
                 . '", but only the following subparts are available: (' .
                 implode(', ', array_keys($this->subparts)) . ')',
-                1_632_760_625
+                1_632_760_625,
             );
         }
 
@@ -640,7 +640,7 @@ class Template
         return (string)\preg_replace_callback(
             self::SUBPART_PATTERN,
             static fn (array $matches): string => $template->getSubpart($matches[1]),
-            $templateCode
+            $templateCode,
         );
     }
 

@@ -60,10 +60,10 @@ final class TestingFrameworkTest extends UnitTestCase
     public function templateMustNotHaveZeroPid(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            'The column "pid" must not be set in $recordData.'
+            'The column "pid" must not be set in $recordData.',
         );
         $this->subject->createTemplate(42, ['pid' => 0]);
     }
@@ -74,10 +74,10 @@ final class TestingFrameworkTest extends UnitTestCase
     public function templateMustNotHaveNonZeroPid(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            'The column "pid" must not be set in $recordData.'
+            'The column "pid" must not be set in $recordData.',
         );
         $this->subject->createTemplate(42, ['pid' => 99999]);
     }
@@ -88,10 +88,10 @@ final class TestingFrameworkTest extends UnitTestCase
     public function templateMustHaveNoZeroUid(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            'The column "uid" must not be set in $recordData.'
+            'The column "uid" must not be set in $recordData.',
         );
         $this->subject->createTemplate(42, ['uid' => 0]);
     }
@@ -102,10 +102,10 @@ final class TestingFrameworkTest extends UnitTestCase
     public function templateMustNotHaveNonZeroUid(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            'The column "uid" must not be set in $recordData.'
+            'The column "uid" must not be set in $recordData.',
         );
         $this->subject->createTemplate(42, ['uid' => 99999]);
     }
@@ -118,10 +118,10 @@ final class TestingFrameworkTest extends UnitTestCase
     public function frontEndUserGroupMustHaveNoZeroUid(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            'The column "uid" must not be set in $recordData.'
+            'The column "uid" must not be set in $recordData.',
         );
 
         $this->subject->createFrontEndUserGroup(['uid' => 0]);
@@ -133,10 +133,10 @@ final class TestingFrameworkTest extends UnitTestCase
     public function frontEndUserGroupMustHaveNoNonZeroUid(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            'The column "uid" must not be set in $recordData.'
+            'The column "uid" must not be set in $recordData.',
         );
 
         $this->subject->createFrontEndUserGroup(['uid' => 99999]);
@@ -176,10 +176,10 @@ final class TestingFrameworkTest extends UnitTestCase
     public function logoutFrontEndUserWithoutFrontEndThrowsException(): void
     {
         $this->expectException(
-            \BadMethodCallException::class
+            \BadMethodCallException::class,
         );
         $this->expectExceptionMessage(
-            'Please create a front end before calling logoutFrontEndUser.'
+            'Please create a front end before calling logoutFrontEndUser.',
         );
 
         $this->subject->logoutFrontEndUser();
