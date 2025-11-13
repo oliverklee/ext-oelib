@@ -43,7 +43,7 @@ final class BackEndUserTest extends UnitTestCase
 
         self::assertSame(
             '',
-            $this->subject->getUserName()
+            $this->subject->getUserName(),
         );
     }
 
@@ -56,7 +56,7 @@ final class BackEndUserTest extends UnitTestCase
 
         self::assertSame(
             'johndoe',
-            $this->subject->getUserName()
+            $this->subject->getUserName(),
         );
     }
 
@@ -73,7 +73,7 @@ final class BackEndUserTest extends UnitTestCase
 
         self::assertSame(
             'John Doe',
-            $this->subject->getName()
+            $this->subject->getName(),
         );
     }
 
@@ -86,7 +86,7 @@ final class BackEndUserTest extends UnitTestCase
 
         self::assertSame(
             '',
-            $this->subject->getName()
+            $this->subject->getName(),
         );
     }
 
@@ -103,7 +103,7 @@ final class BackEndUserTest extends UnitTestCase
 
         self::assertSame(
             'de',
-            $this->subject->getLanguage()
+            $this->subject->getLanguage(),
         );
     }
 
@@ -116,7 +116,7 @@ final class BackEndUserTest extends UnitTestCase
 
         self::assertSame(
             'default',
-            $this->subject->getLanguage()
+            $this->subject->getLanguage(),
         );
     }
 
@@ -129,7 +129,7 @@ final class BackEndUserTest extends UnitTestCase
 
         self::assertSame(
             'de',
-            $this->subject->getLanguage()
+            $this->subject->getLanguage(),
         );
     }
 
@@ -143,7 +143,7 @@ final class BackEndUserTest extends UnitTestCase
 
         self::assertSame(
             'fr',
-            $this->subject->getLanguage()
+            $this->subject->getLanguage(),
         );
     }
 
@@ -157,7 +157,7 @@ final class BackEndUserTest extends UnitTestCase
 
         self::assertSame(
             'fr',
-            $this->subject->getLanguage()
+            $this->subject->getLanguage(),
         );
     }
 
@@ -170,7 +170,7 @@ final class BackEndUserTest extends UnitTestCase
 
         self::assertSame(
             'de',
-            $this->subject->getLanguage()
+            $this->subject->getLanguage(),
         );
     }
 
@@ -183,7 +183,7 @@ final class BackEndUserTest extends UnitTestCase
 
         self::assertSame(
             'default',
-            $this->subject->getLanguage()
+            $this->subject->getLanguage(),
         );
     }
 
@@ -193,10 +193,10 @@ final class BackEndUserTest extends UnitTestCase
     public function setDefaultLanguageWithEmptyKeyThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            '$language must not be empty.'
+            '$language must not be empty.',
         );
 
         // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
@@ -211,7 +211,7 @@ final class BackEndUserTest extends UnitTestCase
         $this->subject->setData([]);
 
         self::assertFalse(
-            $this->subject->hasLanguage()
+            $this->subject->hasLanguage(),
         );
     }
 
@@ -224,7 +224,7 @@ final class BackEndUserTest extends UnitTestCase
         $this->subject->setDefaultLanguage('default');
 
         self::assertFalse(
-            $this->subject->hasLanguage()
+            $this->subject->hasLanguage(),
         );
     }
 
@@ -236,7 +236,7 @@ final class BackEndUserTest extends UnitTestCase
         $this->subject->setData(['lang' => 'de']);
 
         self::assertTrue(
-            $this->subject->hasLanguage()
+            $this->subject->hasLanguage(),
         );
     }
 
@@ -253,7 +253,7 @@ final class BackEndUserTest extends UnitTestCase
 
         self::assertSame(
             '',
-            $this->subject->getEmailAddress()
+            $this->subject->getEmailAddress(),
         );
     }
 
@@ -266,7 +266,7 @@ final class BackEndUserTest extends UnitTestCase
 
         self::assertSame(
             'john@doe.com',
-            $this->subject->getEmailAddress()
+            $this->subject->getEmailAddress(),
         );
     }
 }

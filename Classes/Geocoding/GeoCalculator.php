@@ -50,14 +50,14 @@ class GeoCalculator implements SingletonInterface
         if (!$object1->hasGeoCoordinates()) {
             throw new \InvalidArgumentException(
                 '$object1 needs to have coordinates, but has none.',
-                4175034309
+                4175034309,
             );
         }
 
         if (!$object2->hasGeoCoordinates()) {
             throw new \InvalidArgumentException(
                 '$object2 needs to have coordinates, but has none.',
-                5245310674
+                5245310674,
             );
         }
 
@@ -72,7 +72,7 @@ class GeoCalculator implements SingletonInterface
 
         return \acos(
             \sin($latitude1) * \sin($latitude2)
-                + \cos($latitude1) * \cos($latitude2) * \cos($longitude2 - $longitude1)
+            + \cos($latitude1) * \cos($latitude2) * \cos($longitude2 - $longitude1),
         ) * self::EARTH_RADIUS_IN_KILOMETERS;
     }
 
@@ -141,7 +141,7 @@ class GeoCalculator implements SingletonInterface
             [
                 'latitude' => $originalLatitude + $latitudeDelta,
                 'longitude' => $originalLongitude + $longitudeDelta,
-            ]
+            ],
         );
     }
 
@@ -160,7 +160,7 @@ class GeoCalculator implements SingletonInterface
         if ($maximumDistance < 0) {
             throw new \InvalidArgumentException(
                 '$distance must be >= 0, but actually is: ' . $maximumDistance,
-                1_407_432_668
+                1_407_432_668,
             );
         }
 

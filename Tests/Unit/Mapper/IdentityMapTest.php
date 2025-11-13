@@ -33,10 +33,10 @@ final class IdentityMapTest extends UnitTestCase
     public function getWithZeroUidThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            '$uid must be > 0.'
+            '$uid must be > 0.',
         );
 
         // @phpstan-ignore-next-line We're testing for a contract violation here.
@@ -49,10 +49,10 @@ final class IdentityMapTest extends UnitTestCase
     public function getWithNegativeUidThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            '$uid must be > 0.'
+            '$uid must be > 0.',
         );
 
         // @phpstan-ignore-next-line We're testing for a contract violation here.
@@ -65,10 +65,10 @@ final class IdentityMapTest extends UnitTestCase
     public function addWithModelWithoutUidThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            'Add() requires a model that has a UID.'
+            'Add() requires a model that has a UID.',
         );
 
         $model = new TestingModel();
@@ -89,7 +89,7 @@ final class IdentityMapTest extends UnitTestCase
 
         self::assertSame(
             $model,
-            $this->subject->get(42)
+            $this->subject->get(42),
         );
     }
 
@@ -110,11 +110,11 @@ final class IdentityMapTest extends UnitTestCase
 
         self::assertSame(
             1,
-            $this->subject->get(1)->getUid()
+            $this->subject->get(1)->getUid(),
         );
         self::assertSame(
             4,
-            $this->subject->get(4)->getUid()
+            $this->subject->get(4)->getUid(),
         );
     }
 
@@ -135,7 +135,7 @@ final class IdentityMapTest extends UnitTestCase
 
         self::assertSame(
             $model2,
-            $this->subject->get(1)
+            $this->subject->get(1),
         );
     }
 
@@ -146,7 +146,7 @@ final class IdentityMapTest extends UnitTestCase
     {
         $this->expectException(NotFoundException::class);
         $this->expectExceptionMessage(
-            'This map currently does not contain a model with the UID 42.'
+            'This map currently does not contain a model with the UID 42.',
         );
 
         $this->subject->get(42);

@@ -60,7 +60,7 @@ class IdentityMap
         if (!isset($this->items[$uid])) {
             throw new NotFoundException(
                 'This map currently does not contain a model with the UID ' . $uid . '.',
-                1003548784
+                1003548784,
             );
         }
 

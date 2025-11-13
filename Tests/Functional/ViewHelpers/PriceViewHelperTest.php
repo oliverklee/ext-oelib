@@ -46,7 +46,7 @@ class PriceViewHelperTest extends FunctionalTestCase
 
         self::assertSame(
             '12345.68',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -60,7 +60,7 @@ class PriceViewHelperTest extends FunctionalTestCase
 
         self::assertSame(
             '€ 123,45',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -74,7 +74,7 @@ class PriceViewHelperTest extends FunctionalTestCase
 
         self::assertSame(
             '123,45 Kč',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -88,7 +88,7 @@ class PriceViewHelperTest extends FunctionalTestCase
 
         self::assertSame(
             '$ 123',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -102,7 +102,7 @@ class PriceViewHelperTest extends FunctionalTestCase
 
         self::assertSame(
             '123,5',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -116,7 +116,7 @@ class PriceViewHelperTest extends FunctionalTestCase
 
         self::assertSame(
             '€ 123,45',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -130,7 +130,7 @@ class PriceViewHelperTest extends FunctionalTestCase
 
         self::assertSame(
             '€ 123,45',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -144,7 +144,7 @@ class PriceViewHelperTest extends FunctionalTestCase
 
         self::assertSame(
             '$ 123.45',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -158,7 +158,7 @@ class PriceViewHelperTest extends FunctionalTestCase
 
         self::assertSame(
             '€ 1.234,56',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 
@@ -172,7 +172,7 @@ class PriceViewHelperTest extends FunctionalTestCase
 
         self::assertSame(
             '$ 1,234.56',
-            $this->subject->render()
+            $this->subject->render(),
         );
     }
 }

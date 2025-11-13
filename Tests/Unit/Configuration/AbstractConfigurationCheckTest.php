@@ -233,11 +233,11 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
         $firstWarning = $warnings[0];
         self::assertStringContainsString(
             'The configuration check for this extension can be disabled in the extension settings in the backend:',
-            $firstWarning
+            $firstWarning,
         );
         self::assertStringContainsString(
             '<i>Admin Tools &gt; Settings &gt; Extension Configuration</i>',
-            $firstWarning
+            $firstWarning,
         );
     }
 
@@ -290,7 +290,7 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
     {
         $subject = new TestingConfigurationCheck(
             new DummyConfiguration(['isStaticTemplateLoaded' => 1]),
-            'plugin.tx_oelib'
+            'plugin.tx_oelib',
         );
         $subject->setCheckMethod('checkStaticIncluded');
 
@@ -343,7 +343,7 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
         $warning = $subject->getWarningsAsHtml()[0];
         self::assertStringContainsString(
             \htmlspecialchars(sprintf('%s.%s', $namespace, $key), ENT_QUOTES | ENT_HTML5),
-            $warning
+            $warning,
         );
     }
 
@@ -1150,7 +1150,7 @@ final class AbstractConfigurationCheckTest extends UnitTestCase
     {
         $subject = new TestingConfigurationCheck(
             new DummyConfiguration(['salutation' => $salutation]),
-            'plugin.tx_oelib'
+            'plugin.tx_oelib',
         );
         $subject->setCheckMethod('checkSalutationMode');
 

@@ -34,7 +34,7 @@ class PageRepository implements SingletonInterface
         if ($recursion < 0) {
             throw new \InvalidArgumentException(
                 '$recursion must be >= 0, but actually is: ' . $recursion,
-                1_608_389_744
+                1_608_389_744,
             );
         }
 
@@ -45,7 +45,7 @@ class PageRepository implements SingletonInterface
 
         $result = \array_merge(
             $result,
-            $this->findWithinParentPages($this->findDirectSubpages($result), $recursion - 1)
+            $this->findWithinParentPages($this->findDirectSubpages($result), $recursion - 1),
         );
         \sort($result, SORT_NUMERIC);
 
@@ -84,7 +84,7 @@ class PageRepository implements SingletonInterface
         $queryBuilder = $this->getQueryBuilderForTable('pages');
         $query = $queryBuilder->select('uid')->from('pages');
         $query->andWhere(
-            $query->expr()->in('pid', $queryBuilder->createNamedParameter($pageUids, Connection::PARAM_INT_ARRAY))
+            $query->expr()->in('pid', $queryBuilder->createNamedParameter($pageUids, Connection::PARAM_INT_ARRAY)),
         );
 
         $subpageUids = [];

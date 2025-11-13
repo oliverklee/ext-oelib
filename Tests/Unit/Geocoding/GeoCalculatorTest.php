@@ -125,7 +125,7 @@ final class GeoCalculatorTest extends UnitTestCase
     {
         $bonn = new TestingGeo();
         $bonn->setGeoCoordinates(
-            ['latitude' => 50.72254683, 'longitude' => 7.07519531]
+            ['latitude' => 50.72254683, 'longitude' => 7.07519531],
         );
         $cologne = new TestingGeo();
         $cologne->setGeoCoordinates(['latitude' => 50.94458443, 'longitude' => 6.9543457]);
@@ -133,7 +133,7 @@ final class GeoCalculatorTest extends UnitTestCase
         self::assertEqualsWithDelta(
             26.0,
             $this->subject->calculateDistanceInKilometers($bonn, $cologne),
-            2.0
+            2.0,
         );
     }
 
@@ -150,7 +150,7 @@ final class GeoCalculatorTest extends UnitTestCase
 
         self::assertSame(
             $this->subject->calculateDistanceInKilometers($bonn, $cologne),
-            $this->subject->calculateDistanceInKilometers($cologne, $bonn)
+            $this->subject->calculateDistanceInKilometers($cologne, $bonn),
         );
     }
 
@@ -390,7 +390,7 @@ final class GeoCalculatorTest extends UnitTestCase
         self::assertEqualsWithDelta(
             $distance,
             $this->subject->calculateDistanceInKilometers($this->geoObject, $otherGeoObject),
-            $distance / 10
+            $distance / 10,
         );
     }
 
@@ -409,7 +409,7 @@ final class GeoCalculatorTest extends UnitTestCase
         self::assertEqualsWithDelta(
             \abs($distance),
             $this->subject->calculateDistanceInKilometers($this->geoObject, $otherGeoObject),
-            \abs($distance) / 10
+            \abs($distance) / 10,
         );
     }
 
@@ -465,7 +465,7 @@ final class GeoCalculatorTest extends UnitTestCase
 
             self::assertLessThanOrEqual(
                 $maximumDistance,
-                $this->subject->calculateDistanceInKilometers($this->geoObject, $otherGeoObject)
+                $this->subject->calculateDistanceInKilometers($this->geoObject, $otherGeoObject),
             );
         }
     }
@@ -523,7 +523,7 @@ final class GeoCalculatorTest extends UnitTestCase
         self::assertEqualsWithDelta(
             $distance,
             $this->subject->calculateDistanceInKilometers($this->geoObject, $otherGeoObject),
-            $distance / 10
+            $distance / 10,
         );
     }
 
@@ -587,7 +587,7 @@ final class GeoCalculatorTest extends UnitTestCase
 
             self::assertLessThanOrEqual(
                 $maximumDistance,
-                $this->subject->calculateDistanceInKilometers($this->geoObject, $otherGeoObject)
+                $this->subject->calculateDistanceInKilometers($this->geoObject, $otherGeoObject),
             );
         }
     }

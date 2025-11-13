@@ -22,7 +22,7 @@ final class TemplateRegistryTest extends UnitTestCase
     {
         self::assertInstanceOf(
             TemplateRegistry::class,
-            TemplateRegistry::getInstance()
+            TemplateRegistry::getInstance(),
         );
     }
 
@@ -33,7 +33,7 @@ final class TemplateRegistryTest extends UnitTestCase
     {
         self::assertSame(
             TemplateRegistry::getInstance(),
-            TemplateRegistry::getInstance()
+            TemplateRegistry::getInstance(),
         );
     }
 
@@ -47,7 +47,7 @@ final class TemplateRegistryTest extends UnitTestCase
 
         self::assertNotSame(
             $firstInstance,
-            TemplateRegistry::getInstance()
+            TemplateRegistry::getInstance(),
         );
     }
 
@@ -60,7 +60,7 @@ final class TemplateRegistryTest extends UnitTestCase
     {
         self::assertInstanceOf(
             Template::class,
-            TemplateRegistry::get('')
+            TemplateRegistry::get(''),
         );
     }
 
@@ -71,7 +71,7 @@ final class TemplateRegistryTest extends UnitTestCase
     {
         self::assertNotSame(
             TemplateRegistry::get(''),
-            TemplateRegistry::get('')
+            TemplateRegistry::get(''),
         );
     }
 }

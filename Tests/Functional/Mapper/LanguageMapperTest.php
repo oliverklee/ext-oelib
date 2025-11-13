@@ -49,7 +49,7 @@ final class LanguageMapperTest extends FunctionalTestCase
         $model = $this->subject->find(43);
         self::assertSame(
             'DE',
-            $model->getIsoAlpha2Code()
+            $model->getIsoAlpha2Code(),
         );
     }
 
@@ -64,7 +64,7 @@ final class LanguageMapperTest extends FunctionalTestCase
     {
         self::assertInstanceOf(
             Language::class,
-            $this->subject->findByIsoAlpha2Code('DE')
+            $this->subject->findByIsoAlpha2Code('DE'),
         );
     }
 
@@ -75,7 +75,7 @@ final class LanguageMapperTest extends FunctionalTestCase
     {
         self::assertSame(
             'DE',
-            $this->subject->findByIsoAlpha2Code('DE')->getIsoAlpha2Code()
+            $this->subject->findByIsoAlpha2Code('DE')->getIsoAlpha2Code(),
         );
     }
 }

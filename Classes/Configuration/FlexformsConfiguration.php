@@ -79,8 +79,8 @@ class FlexformsConfiguration extends AbstractReadOnlyObjectWithPublicAccessors i
         $matchingNodes = $this->xPath->query(
             sprintf(
                 '/T3FlexForms/data/sheet/language/field[@index=\'%s\']/value',
-                $key
-            )
+                $key,
+            ),
         );
         $firstMatchingNode = $matchingNodes instanceof \DOMNodeList ? $matchingNodes->item(0) : null;
 

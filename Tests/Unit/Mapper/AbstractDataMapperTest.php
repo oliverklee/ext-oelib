@@ -110,10 +110,10 @@ final class AbstractDataMapperTest extends UnitTestCase
     public function loadWithModelWithoutUidThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            'load must only be called with models that already have a UID.'
+            'load must only be called with models that already have a UID.',
         );
 
         $model = new TestingModel();
@@ -154,7 +154,7 @@ final class AbstractDataMapperTest extends UnitTestCase
         $uid = 42;
 
         self::assertTrue(
-            $this->subject->find($uid)->isGhost()
+            $this->subject->find($uid)->isGhost(),
         );
     }
 
@@ -168,10 +168,10 @@ final class AbstractDataMapperTest extends UnitTestCase
     public function findWithZeroUidThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            '$uid must be > 0.'
+            '$uid must be > 0.',
         );
 
         // @phpstan-ignore-next-line We're testing for a contract violation here.
@@ -184,10 +184,10 @@ final class AbstractDataMapperTest extends UnitTestCase
     public function findWithNegativeUidThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            '$uid must be > 0.'
+            '$uid must be > 0.',
         );
 
         // @phpstan-ignore-next-line We're testing for a contract violation here.
@@ -203,7 +203,7 @@ final class AbstractDataMapperTest extends UnitTestCase
 
         self::assertSame(
             $uid,
-            $this->subject->find($uid)->getUid()
+            $this->subject->find($uid)->getUid(),
         );
     }
 
@@ -216,7 +216,7 @@ final class AbstractDataMapperTest extends UnitTestCase
 
         self::assertSame(
             $this->subject->find($uid),
-            $this->subject->find($uid)
+            $this->subject->find($uid),
         );
     }
 
@@ -248,7 +248,7 @@ final class AbstractDataMapperTest extends UnitTestCase
     public function getNewGhostReturnsGhost(): void
     {
         self::assertTrue(
-            $this->subject->getNewGhost()->isGhost()
+            $this->subject->getNewGhost()->isGhost(),
         );
     }
 
@@ -258,7 +258,7 @@ final class AbstractDataMapperTest extends UnitTestCase
     public function getNewGhostReturnsModelWithUid(): void
     {
         self::assertTrue(
-            $this->subject->getNewGhost()->hasUid()
+            $this->subject->getNewGhost()->hasUid(),
         );
     }
 
@@ -273,7 +273,7 @@ final class AbstractDataMapperTest extends UnitTestCase
 
         self::assertSame(
             $ghost,
-            $this->subject->find($uid)
+            $this->subject->find($uid),
         );
     }
 
@@ -283,10 +283,10 @@ final class AbstractDataMapperTest extends UnitTestCase
     public function loadingAGhostCreatedWithGetNewGhostThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            'This ghost was created via getNewGhost and must not be loaded.'
+            'This ghost was created via getNewGhost and must not be loaded.',
         );
 
         $ghost = $this->subject->getNewGhost();
@@ -376,10 +376,10 @@ final class AbstractDataMapperTest extends UnitTestCase
     public function findOneByKeyForInexistentKeyThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            '"foo" is not a valid key for this mapper.'
+            '"foo" is not a valid key for this mapper.',
         );
 
         $this->subject->findOneByKey('foo', 'bar');
@@ -407,10 +407,10 @@ final class AbstractDataMapperTest extends UnitTestCase
     public function findAllByRelationWithModelWithoutUidThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            '$model must have a UID.'
+            '$model must have a UID.',
         );
 
         $model = new TestingModel();
@@ -425,7 +425,7 @@ final class AbstractDataMapperTest extends UnitTestCase
     {
         self::assertSame(
             'tx_oelib_test',
-            $this->subject->getTableName()
+            $this->subject->getTableName(),
         );
     }
 }

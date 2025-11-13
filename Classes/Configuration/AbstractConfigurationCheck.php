@@ -226,7 +226,7 @@ abstract class AbstractConfigurationCheck
             'The static template is not included.
                  This has the effect that important default values do not get set.
                  To fix this, please include the static template of this extension under
-                 <em>Include static (from extensions)</em> in your TypoScript template.'
+                 <em>Include static (from extensions)</em> in your TypoScript template.',
         );
 
         return false;
@@ -536,7 +536,7 @@ abstract class AbstractConfigurationCheck
             'salutation',
             'This variable controls the salutation mode (formal or informal).
             If it is not set correctly, some output cannot be created at all.',
-            ['formal', 'informal']
+            ['formal', 'informal'],
         );
     }
 
@@ -632,7 +632,7 @@ abstract class AbstractConfigurationCheck
                 'Please set a valid email address in ' .
                 "<code>\$GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress']</code>. " .
                 'This makes sure that the emails sent from extensions have a valid From: address and can be ' .
-                'sent without problems.'
+                'sent without problems.',
             );
         }
 

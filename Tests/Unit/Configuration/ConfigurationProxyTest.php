@@ -72,7 +72,7 @@ final class ConfigurationProxyTest extends UnitTestCase
     {
         self::assertSame(
             'the extension settings in the backend (Admin Tools, Settings, Extension Configuration)',
-            $this->subject->getSourceName()
+            $this->subject->getSourceName(),
         );
     }
 
@@ -122,7 +122,7 @@ final class ConfigurationProxyTest extends UnitTestCase
     {
         self::assertSame(
             $this->testConfiguration,
-            $this->subject->getCompleteConfiguration()
+            $this->subject->getCompleteConfiguration(),
         );
     }
 

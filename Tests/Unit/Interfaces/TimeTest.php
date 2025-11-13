@@ -19,7 +19,7 @@ final class TimeTest extends UnitTestCase
     {
         self::assertSame(
             60,
-            Time::SECONDS_PER_MINUTE
+            Time::SECONDS_PER_MINUTE,
         );
     }
 
@@ -30,7 +30,7 @@ final class TimeTest extends UnitTestCase
     {
         self::assertSame(
             Time::SECONDS_PER_MINUTE * 60,
-            Time::SECONDS_PER_HOUR
+            Time::SECONDS_PER_HOUR,
         );
     }
 
@@ -41,7 +41,7 @@ final class TimeTest extends UnitTestCase
     {
         self::assertSame(
             Time::SECONDS_PER_HOUR * 24,
-            Time::SECONDS_PER_DAY
+            Time::SECONDS_PER_DAY,
         );
     }
 
@@ -52,7 +52,7 @@ final class TimeTest extends UnitTestCase
     {
         self::assertSame(
             Time::SECONDS_PER_DAY * 7,
-            Time::SECONDS_PER_WEEK
+            Time::SECONDS_PER_WEEK,
         );
     }
 
@@ -63,7 +63,7 @@ final class TimeTest extends UnitTestCase
     {
         self::assertSame(
             Time::SECONDS_PER_DAY * 365,
-            Time::SECONDS_PER_YEAR
+            Time::SECONDS_PER_YEAR,
         );
     }
 }

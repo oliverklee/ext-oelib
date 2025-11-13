@@ -88,7 +88,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
     {
         self::assertNotSame(
             0,
-            $this->subject->createRecord('tx_oelib_test', [])
+            $this->subject->createRecord('tx_oelib_test', []),
         );
     }
 
@@ -102,11 +102,11 @@ final class TestingFrameworkTest extends FunctionalTestCase
             'tx_oelib_test',
             [
                 'title' => $title,
-            ]
+            ],
         );
         self::assertNotSame(
             0,
-            $uid
+            $uid,
         );
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_oelib_test');
@@ -150,7 +150,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $this->subject->createRecord(
             'tx_oelib_test',
-            ['uid' => 99999]
+            ['uid' => 99999],
         );
     }
 
@@ -208,7 +208,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $connection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test');
         self::assertSame(
             1,
-            $connection->count('*', 'tx_oelib_test', ['bool_data1' => (int)$value])
+            $connection->count('*', 'tx_oelib_test', ['bool_data1' => (int)$value]),
         );
     }
 
@@ -221,13 +221,13 @@ final class TestingFrameworkTest extends FunctionalTestCase
     {
         $uid = $this->subject->createRecord(
             'tx_oelib_test',
-            ['title' => 'foo']
+            ['title' => 'foo'],
         );
 
         $this->subject->changeRecord(
             'tx_oelib_test',
             $uid,
-            ['title' => 'bar']
+            ['title' => 'bar'],
         );
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_oelib_test');
@@ -249,7 +249,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->subject->changeRecord(
             'tx_seminars_seminars',
             99999,
-            ['title' => 'foo']
+            ['title' => 'foo'],
         );
     }
 
@@ -263,7 +263,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->subject->changeRecord(
             'tx_oelib_DOESNOTEXIST',
             99999,
-            ['title' => 'foo']
+            ['title' => 'foo'],
         );
     }
 
@@ -277,13 +277,13 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->subject->changeRecord(
             'pages',
             $pid,
-            ['title' => 'bar']
+            ['title' => 'bar'],
         );
 
         $connection = $this->getConnectionPool()->getConnectionForTable('pages');
         self::assertSame(
             1,
-            $connection->count('*', 'pages', ['uid' => $pid, 'title' => 'bar'])
+            $connection->count('*', 'pages', ['uid' => $pid, 'title' => 'bar']),
         );
     }
 
@@ -297,7 +297,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->subject->changeRecord(
             'sys_domain',
             1,
-            ['title' => 'bar']
+            ['title' => 'bar'],
         );
     }
 
@@ -337,7 +337,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->subject->changeRecord(
             'tx_oelib_test',
             $uid,
-            ['uid' => '55742']
+            ['uid' => '55742'],
         );
     }
 
@@ -371,7 +371,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->subject->createRelation(
             'tx_oelib_test_article_mm',
             $uidLocal,
-            $uidForeign
+            $uidForeign,
         );
 
         // Checks whether the record really exists.
@@ -379,7 +379,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $count = $relationConnection->count(
             '*',
             'tx_oelib_test_article_mm',
-            ['uid_local' => $uidLocal, 'uid_foreign' => $uidForeign]
+            ['uid_local' => $uidLocal, 'uid_foreign' => $uidForeign],
         );
         self::assertSame(1, $count);
     }
@@ -475,24 +475,24 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->subject->createRelation(
             'tx_oelib_test_article_mm',
             $uidLocal,
-            $uidForeign
+            $uidForeign,
         );
         $previousSorting = $this->getSortingOfRelation($uidLocal, $uidForeign);
         self::assertGreaterThan(
             0,
-            $previousSorting
+            $previousSorting,
         );
 
         $uidForeign = $this->subject->createRecord('tx_oelib_test');
         $this->subject->createRelation(
             'tx_oelib_test_article_mm',
             $uidLocal,
-            $uidForeign
+            $uidForeign,
         );
         $nextSorting = $this->getSortingOfRelation($uidLocal, $uidForeign);
         self::assertSame(
             $previousSorting + 1,
-            $nextSorting
+            $nextSorting,
         );
     }
 
@@ -510,7 +510,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
             'tx_oelib_test',
             $firstRecordUid,
             $secondRecordUid,
-            'related_records'
+            'related_records',
         );
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_oelib_test');
@@ -529,7 +529,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
     {
         $firstRecordUid = $this->subject->createRecord(
             'tx_oelib_test',
-            ['related_records' => 1]
+            ['related_records' => 1],
         );
         $secondRecordUid = $this->subject->createRecord('tx_oelib_test');
 
@@ -537,7 +537,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
             'tx_oelib_test',
             $firstRecordUid,
             $secondRecordUid,
-            'related_records'
+            'related_records',
         );
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_oelib_test');
@@ -561,7 +561,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
             'tx_oelib_test',
             $firstRecordUid,
             $secondRecordUid,
-            'related_records'
+            'related_records',
         );
 
         $relationConnection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test_article_mm');
@@ -581,7 +581,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
             'tx_oelib_test',
             $firstRecordUid,
             $secondRecordUid,
-            'bidirectional'
+            'bidirectional',
         );
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_oelib_test');
@@ -605,7 +605,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
             'tx_oelib_test',
             $firstRecordUid,
             $secondRecordUid,
-            'bidirectional'
+            'bidirectional',
         );
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_oelib_test');
@@ -629,14 +629,14 @@ final class TestingFrameworkTest extends FunctionalTestCase
             'tx_oelib_test',
             $firstRecordUid,
             $secondRecordUid,
-            'bidirectional'
+            'bidirectional',
         );
 
         $relationConnection = $this->getConnectionPool()->getConnectionForTable('tx_oelib_test_article_mm');
         $count = $relationConnection->count(
             '*',
             'tx_oelib_test_article_mm',
-            ['uid_local' => $secondRecordUid, 'uid_foreign' => $firstRecordUid]
+            ['uid_local' => $secondRecordUid, 'uid_foreign' => $firstRecordUid],
         );
         self::assertSame(1, $count);
     }
@@ -950,7 +950,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $pageId = $this->subject->createFrontEndPage();
         $uid = $this->subject->createTemplate(
             $pageId,
-            ['config' => 'plugin.tx_oelib.test = 1']
+            ['config' => 'plugin.tx_oelib.test = 1'],
         );
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('sys_template');
@@ -961,7 +961,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         self::assertIsArray($row);
         self::assertSame(
             'plugin.tx_oelib.test = 1',
-            $row['config']
+            $row['config'],
         );
     }
 
@@ -990,7 +990,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $pageId = $this->subject->createFrontEndPage();
         $uid = $this->subject->createTemplate(
             $pageId,
-            ['constants' => 'plugin.tx_oelib.test = 1']
+            ['constants' => 'plugin.tx_oelib.test = 1'],
         );
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('sys_template');
@@ -1103,7 +1103,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $feUserGroupUidTwo = $this->subject->createFrontEndUserGroup();
         $feUserGroupUidThree = $this->subject->createFrontEndUserGroup();
         $uid = $this->subject->createFrontEndUser(
-            $feUserGroupUidOne . ', ' . $feUserGroupUidTwo . ', ' . $feUserGroupUidThree
+            $feUserGroupUidOne . ', ' . $feUserGroupUidTwo . ', ' . $feUserGroupUidThree,
         );
         self::assertNotSame(0, $uid);
 
@@ -1165,7 +1165,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         $this->subject->createFrontEndUser(
             '',
-            ['usergroup' => '1,2,4,5']
+            ['usergroup' => '1,2,4,5'],
         );
     }
 
@@ -1187,7 +1187,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(
-            '$frontEndUserGroups must contain a comma-separated list of UIDs. Each UID must be > 0.'
+            '$frontEndUserGroups must contain a comma-separated list of UIDs. Each UID must be > 0.',
         );
 
         $feUserGroupUidOne = $this->subject->createFrontEndUserGroup();
@@ -1195,7 +1195,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $feUserGroupUidThree = $this->subject->createFrontEndUserGroup();
 
         $this->subject->createFrontEndUser(
-            $feUserGroupUidOne . ', ' . $feUserGroupUidTwo . ', 0, ' . $feUserGroupUidThree
+            $feUserGroupUidOne . ', ' . $feUserGroupUidTwo . ', 0, ' . $feUserGroupUidThree,
         );
     }
 
@@ -1206,13 +1206,13 @@ final class TestingFrameworkTest extends FunctionalTestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(
-            '$frontEndUserGroups must contain a comma-separated list of UIDs. Each UID must be > 0.'
+            '$frontEndUserGroups must contain a comma-separated list of UIDs. Each UID must be > 0.',
         );
 
         $feUserGroupUid = $this->subject->createFrontEndUserGroup();
 
         $this->subject->createFrontEndUser(
-            $feUserGroupUid . ', abc'
+            $feUserGroupUid . ', abc',
         );
     }
 
@@ -1239,7 +1239,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         self::assertInstanceOf(
             FrontendUserAuthentication::class,
-            $this->getFrontEndController()->fe_user
+            $this->getFrontEndController()->fe_user,
         );
     }
 
@@ -1287,7 +1287,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
 
         self::assertSame(
             $pageUid,
-            $this->subject->createFakeFrontEnd($pageUid)
+            $this->subject->createFakeFrontEnd($pageUid),
         );
     }
 
@@ -1605,7 +1605,7 @@ final class TestingFrameworkTest extends FunctionalTestCase
         $this->subject->createFakeFrontEnd($pageUid);
         $frontEndUserGroupUid = $this->subject->createFrontEndUserGroup();
         $frontEndUserUid = $this->subject->createAndLoginFrontEndUser(
-            $frontEndUserGroupUid
+            $frontEndUserGroupUid,
         );
 
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('fe_users');

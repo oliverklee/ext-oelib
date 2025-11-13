@@ -95,7 +95,7 @@ abstract class AbstractReadOnlyObjectWithAccessors
         if ($value < 0) {
             throw new \UnexpectedValueException(
                 'The value for the key "' . $key . '" must be a non-negative integer, but it is ' . $value . '.',
-                1735299608
+                1735299608,
             );
         }
 
@@ -118,7 +118,7 @@ abstract class AbstractReadOnlyObjectWithAccessors
         if ($value <= 0) {
             throw new \UnexpectedValueException(
                 'The value for the key "' . $key . '" must be a positive integer, but it is ' . $value . '.',
-                1735299700
+                1735299700,
             );
         }
 

@@ -42,12 +42,12 @@ final class ConfigurationRegistryTest extends FunctionalTestCase
     public function getForNonEmptyNamespaceReturnsConfigurationInstance(): void
     {
         PageFinder::getInstance()->setPageUid(
-            $this->testingFramework->createFrontEndPage()
+            $this->testingFramework->createFrontEndPage(),
         );
 
         self::assertInstanceOf(
             TypoScriptConfiguration::class,
-            ConfigurationRegistry::get('plugin.tx_oelib')
+            ConfigurationRegistry::get('plugin.tx_oelib'),
         );
     }
 
@@ -57,12 +57,12 @@ final class ConfigurationRegistryTest extends FunctionalTestCase
     public function getForTheSameNamespaceCalledTwoTimesReturnsTheSameInstance(): void
     {
         PageFinder::getInstance()->setPageUid(
-            $this->testingFramework->createFrontEndPage()
+            $this->testingFramework->createFrontEndPage(),
         );
 
         self::assertSame(
             ConfigurationRegistry::get('plugin.tx_oelib'),
-            ConfigurationRegistry::get('plugin.tx_oelib')
+            ConfigurationRegistry::get('plugin.tx_oelib'),
         );
     }
 
@@ -78,14 +78,14 @@ final class ConfigurationRegistryTest extends FunctionalTestCase
         $pageUid = $this->testingFramework->createFrontEndPage();
         $this->testingFramework->createTemplate(
             $pageUid,
-            ['config' => 'plugin.tx_oelib.test = 42']
+            ['config' => 'plugin.tx_oelib.test = 42'],
         );
 
         PageFinder::getInstance()->setPageUid($pageUid);
 
         self::assertSame(
             42,
-            ConfigurationRegistry::get('plugin.tx_oelib')->getAsInteger('test')
+            ConfigurationRegistry::get('plugin.tx_oelib')->getAsInteger('test'),
         );
     }
 
@@ -102,7 +102,7 @@ final class ConfigurationRegistryTest extends FunctionalTestCase
 
         self::assertSame(
             42,
-            ConfigurationRegistry::get('plugin.tx_oelib')->getAsInteger('test')
+            ConfigurationRegistry::get('plugin.tx_oelib')->getAsInteger('test'),
         );
 
         unset($_POST['id']);
@@ -121,7 +121,7 @@ final class ConfigurationRegistryTest extends FunctionalTestCase
 
         self::assertSame(
             42,
-            ConfigurationRegistry::get('plugin.tx_oelib')->getAsInteger('test')
+            ConfigurationRegistry::get('plugin.tx_oelib')->getAsInteger('test'),
         );
     }
 

@@ -31,7 +31,7 @@ final class ConfigurationRegistryTest extends UnitTestCase
     {
         self::assertSame(
             ConfigurationRegistry::getInstance(),
-            ConfigurationRegistry::getInstance()
+            ConfigurationRegistry::getInstance(),
         );
     }
 
@@ -45,7 +45,7 @@ final class ConfigurationRegistryTest extends UnitTestCase
 
         self::assertNotSame(
             $firstInstance,
-            ConfigurationRegistry::getInstance()
+            ConfigurationRegistry::getInstance(),
         );
     }
 
@@ -57,10 +57,10 @@ final class ConfigurationRegistryTest extends UnitTestCase
     public function getForEmptyNamespaceThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            '$namespace must not be empty.'
+            '$namespace must not be empty.',
         );
 
         // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.
@@ -73,10 +73,10 @@ final class ConfigurationRegistryTest extends UnitTestCase
     public function setWithEmptyNamespaceThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            '$namespace must not be empty.'
+            '$namespace must not be empty.',
         );
 
         // @phpstan-ignore-next-line We are explicitly checking for a contract violation here.

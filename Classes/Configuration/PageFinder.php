@@ -121,7 +121,7 @@ class PageFinder
         if ($uidToStore <= 0) {
             throw new \InvalidArgumentException(
                 'The given page UID was "' . $uidToStore . '". Only integer values greater than zero are allowed.',
-                1_331_489_010
+                1_331_489_010,
             );
         }
 

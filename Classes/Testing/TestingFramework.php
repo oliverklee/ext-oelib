@@ -391,7 +391,7 @@ final class TestingFramework
         if (!\is_int($groupsCheckResult) || $groupsCheckResult === 0) {
             throw new \InvalidArgumentException(
                 '$frontEndUserGroups must contain a comma-separated list of UIDs. Each UID must be > 0.',
-                1_331_489_824
+                1_331_489_824,
             );
         }
 
@@ -402,7 +402,7 @@ final class TestingFramework
         if (isset($recordData['usergroup'])) {
             throw new \InvalidArgumentException(
                 'The column "usergroup" must not be set in $recordData.',
-                1_331_489_846
+                1_331_489_846,
             );
         }
 
@@ -464,7 +464,7 @@ final class TestingFramework
         if (isset($rawData['uid'])) {
             throw new \InvalidArgumentException(
                 'The parameter $recordData must not contain changes to the UID of a record.',
-                1_331_490_017
+                1_331_490_017,
             );
         }
 
@@ -534,7 +534,7 @@ final class TestingFramework
         if ($uidLocal <= 0) {
             throw new \InvalidArgumentException(
                 '$uidLocal must be > 0, but actually is "' . $uidLocal . '"',
-                1_331_490_425
+                1_331_490_425,
             );
         }
 
@@ -542,7 +542,7 @@ final class TestingFramework
         if ($uidForeign <= 0) {
             throw new \InvalidArgumentException(
                 '$uidForeign must be  > 0, but actually is "' . $uidForeign . '"',
-                1_331_490_429
+                1_331_490_429,
             );
         }
 
@@ -553,7 +553,7 @@ final class TestingFramework
             throw new \BadMethodCallException(
                 'The column ' . $columnName . ' in the table ' . $tableName .
                 ' is not configured to contain m:n relations using a m:n table.',
-                1_331_490_434
+                1_331_490_434,
             );
         }
 
@@ -564,13 +564,13 @@ final class TestingFramework
                 $relationConfiguration['config']['foreign_table'],
                 $uidForeign,
                 $uidLocal,
-                $relationConfiguration['config']['MM_opposite_field']
+                $relationConfiguration['config']['MM_opposite_field'],
             );
         } else {
             $this->createRelation(
                 $relationConfiguration['config']['MM'],
                 $uidLocal,
-                $uidForeign
+                $uidForeign,
             );
         }
 
@@ -726,7 +726,7 @@ final class TestingFramework
             $site,
             $language,
             new PageArguments($pageUid, '', []),
-            $frontEndUser
+            $frontEndUser,
         );
         $GLOBALS['TSFE'] = $frontEnd;
         $GLOBALS['TYPO3_REQUEST'] = $request;
@@ -811,7 +811,7 @@ routes: {  }";
         GeneralUtility::setIndpEnv('HTTP_REFERER', $this->getFakeSiteUrl());
         GeneralUtility::setIndpEnv(
             'HTTP_USER_AGENT',
-            'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:121.0) Gecko/20100101 Firefox/121.0'
+            'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:121.0) Gecko/20100101 Firefox/121.0',
         );
         GeneralUtility::setIndpEnv('PHP_SELF', '/index.php');
         GeneralUtility::setIndpEnv('QUERY_STRING', '');
@@ -859,7 +859,7 @@ routes: {  }";
         unset(
             $GLOBALS['TYPO3_REQUEST'],
             $GLOBALS['TYPO3_CONF_VARS']['FE']['dontSetCookie'],
-            $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][FrontendUserAuthentication::class]
+            $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][FrontendUserAuthentication::class],
         );
 
         $this->hasFakeFrontEnd = false;
@@ -914,7 +914,7 @@ routes: {  }";
         if (!$this->hasFakeFrontEnd()) {
             throw new \BadMethodCallException(
                 'Please create a front end before calling loginFrontEndUser.',
-                1_331_490_812
+                1_331_490_812,
             );
         }
 
@@ -957,7 +957,7 @@ routes: {  }";
         if (!$this->hasFakeFrontEnd()) {
             throw new \BadMethodCallException(
                 'Please create a front end before calling logoutFrontEndUser.',
-                1_331_490_825
+                1_331_490_825,
             );
         }
 
@@ -1145,7 +1145,7 @@ routes: {  }";
         if (!$this->tableHasColumn($tableName, $fieldName)) {
             throw new \InvalidArgumentException(
                 'The table ' . $tableName . ' has no column ' . $fieldName . '.',
-                1_331_490_986
+                1_331_490_986,
             );
         }
 
@@ -1156,7 +1156,7 @@ routes: {  }";
         if ($numberOfAffectedRows === 0) {
             throw new \BadMethodCallException(
                 'The table ' . $tableName . ' does not contain a record with UID ' . $uid . '.',
-                1_331_491_003
+                1_331_491_003,
             );
         }
     }

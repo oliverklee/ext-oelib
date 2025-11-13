@@ -92,7 +92,7 @@ class MapperRegistry
             if (!\class_exists($className)) {
                 throw new \InvalidArgumentException(
                     'No mapper class "' . $className . '" could be found.',
-                    1_632_844_178
+                    1_632_844_178,
                 );
             }
 
@@ -140,7 +140,7 @@ class MapperRegistry
         if (!$mapper instanceof $className) {
             throw new \InvalidArgumentException(
                 'The provided mapper is not an instance of ' . $className . '.',
-                1_331_488_915
+                1_331_488_915,
             );
         }
 
@@ -148,7 +148,7 @@ class MapperRegistry
             throw new \BadMethodCallException(
                 'There already is a ' . $className . ' mapper registered. ' .
                 ' Overwriting existing wrappers is not allowed.',
-                1_331_488_928
+                1_331_488_928,
             );
         }
 

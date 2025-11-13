@@ -39,14 +39,14 @@ class SystemEmailFromBuilder
         if (!$this->canBuild()) {
             throw new \UnexpectedValueException(
                 'Please set a TYPO3_CONF_VARS/MAIL/defaultMailFromAddress configuration first.',
-                1_542_793_620
+                1_542_793_620,
             );
         }
 
         return GeneralUtility::makeInstance(
             GeneralEmailRole::class,
             MailUtility::getSystemFromAddress(),
-            (string)MailUtility::getSystemFromName()
+            (string)MailUtility::getSystemFromName(),
         );
     }
 }

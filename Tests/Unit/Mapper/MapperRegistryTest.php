@@ -31,7 +31,7 @@ final class MapperRegistryTest extends UnitTestCase
     {
         self::assertInstanceOf(
             MapperRegistry::class,
-            MapperRegistry::getInstance()
+            MapperRegistry::getInstance(),
         );
     }
 
@@ -42,7 +42,7 @@ final class MapperRegistryTest extends UnitTestCase
     {
         self::assertSame(
             MapperRegistry::getInstance(),
-            MapperRegistry::getInstance()
+            MapperRegistry::getInstance(),
         );
     }
 
@@ -56,7 +56,7 @@ final class MapperRegistryTest extends UnitTestCase
 
         self::assertNotSame(
             $firstInstance,
-            MapperRegistry::getInstance()
+            MapperRegistry::getInstance(),
         );
     }
 
@@ -70,10 +70,10 @@ final class MapperRegistryTest extends UnitTestCase
     public function getForEmptyKeyThrowsException(): void
     {
         $this->expectException(
-            \InvalidArgumentException::class
+            \InvalidArgumentException::class,
         );
         $this->expectExceptionMessage(
-            '$className must not be empty.'
+            '$className must not be empty.',
         );
 
         // @phpstan-ignore-next-line We explicitly check for contract violations here.
@@ -106,7 +106,7 @@ final class MapperRegistryTest extends UnitTestCase
     {
         self::assertSame(
             MapperRegistry::get(TestingMapper::class),
-            MapperRegistry::get(TestingMapper::class)
+            MapperRegistry::get(TestingMapper::class),
         );
     }
 
@@ -124,7 +124,7 @@ final class MapperRegistryTest extends UnitTestCase
 
         self::assertSame(
             $mapper,
-            MapperRegistry::get(TestingMapper::class)
+            MapperRegistry::get(TestingMapper::class),
         );
     }
 
