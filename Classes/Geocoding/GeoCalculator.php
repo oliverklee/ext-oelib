@@ -14,16 +14,7 @@ use TYPO3\CMS\Core\SingletonInterface;
  */
 class GeoCalculator implements SingletonInterface
 {
-    /**
-     * the earth radius in kilometers
-     *
-     * @var float
-     */
     private const EARTH_RADIUS_IN_KILOMETERS = 6378.7;
-
-    /**
-     * @var float
-     */
     private const ONE_DEGREE_LATITUDE_IN_KILOMETERS = 111.0;
 
     /**

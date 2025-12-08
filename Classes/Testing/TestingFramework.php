@@ -37,8 +37,6 @@ final class TestingFramework
     /**
      * all system table names to which this instance of the testing framework
      * has access
-     *
-     * @var list<non-empty-string>
      */
     private const ALLOWED_SYSTEM_TABLES = [
         'fe_groups',
@@ -54,14 +52,7 @@ final class TestingFramework
         'sys_category_record_mm',
     ];
 
-    /**
-     * @var non-empty-string
-     */
     private const FAKE_FRONTEND_DOMAIN_NAME = 'typo3-test.dev';
-
-    /**
-     * @var non-empty-string
-     */
     private const SITE_IDENTIFIER = 'testing-framework';
 
     /**
