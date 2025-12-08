@@ -13,9 +13,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class Template
 {
-    /**
-     * @var non-empty-string the regular expression used to find subparts
-     */
     private const SUBPART_PATTERN = '/<!-- *###([A-Z\\d_]+)###.*-->(.*)<!-- *###\\1###.*-->/msU';
 
     /**

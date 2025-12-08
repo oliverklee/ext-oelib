@@ -16,9 +16,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 final class AbstractModelTest extends FunctionalTestCase
 {
-    /**
-     * @var string
-     */
     private const TEST_RECORD_TITLE = 'Hello world';
 
     protected array $testExtensionsToLoad = ['oliverklee/oelib'];

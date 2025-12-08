@@ -8,9 +8,6 @@ use OliverKlee\Oelib\Configuration\AbstractConfigurationCheck;
 
 final class TestingConfigurationCheck extends AbstractConfigurationCheck
 {
-    /**
-     * @var string
-     */
     private const TEST_TABLE_NAME = 'tx_oelib_test';
 
     private string $checkMethod = '';

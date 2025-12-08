@@ -13,29 +13,10 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class PageFinder
 {
-    /**
-     * @var int
-     */
     private const SOURCE_AUTO = 0;
-
-    /**
-     * @var int
-     */
     public const SOURCE_FRONT_END = 1;
-
-    /**
-     * @var int
-     */
     public const SOURCE_BACK_END = 2;
-
-    /**
-     * @var int
-     */
     public const SOURCE_MANUAL = 3;
-
-    /**
-     * @var int
-     */
     public const NO_SOURCE_FOUND = 4;
 
     private static ?PageFinder $instance = null;

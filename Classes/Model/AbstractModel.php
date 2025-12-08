@@ -19,28 +19,28 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 abstract class AbstractModel extends AbstractObjectWithAccessors implements Identity
 {
     /**
-     * @var int a status indicating that this model has neither data nor UID yet
+     * a status indicating that this model has neither data nor UID yet
      */
     public const STATUS_VIRGIN = 0;
 
     /**
-     * @var int a status indicating that this model's data has not been
-     *              loaded yet (lazily), but that the model already has a UID
+     * a status indicating that this model's data has not been
+     * loaded yet (lazily), but that the model already has a UID
      */
     public const STATUS_GHOST = 1;
 
     /**
-     * @var int a status indicating that this model's data currently is being loaded
+     * a status indicating that this model's data currently is being loaded
      */
     public const STATUS_LOADING = 2;
 
     /**
-     * @var int a status indicating that this model's data has already been loaded (with or without UID)
+     * a status indicating that this model's data has already been loaded (with or without UID)
      */
     public const STATUS_LOADED = 3;
 
     /**
-     * @var int a status indicating that this model's data could not be retrieved from the DB
+     * a status indicating that this model's data could not be retrieved from the DB
      */
     public const STATUS_DEAD = 4;
 
