@@ -6,7 +6,8 @@
 [![GitHub CI Status](https://github.com/oliverklee/ext-oelib/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/oliverklee/ext-oelib/actions)
 [![Coverage Status](https://coveralls.io/repos/github/oliverklee/ext-oelib/badge.svg?branch=main)](https://coveralls.io/github/oliverklee/ext-oelib?branch=main)
 
-This extension provides useful stuff for extension development: helper functions for unit testing, templating and
+This extension provides useful stuff for extension development: helper functions
+for unit testing, templating and
 automatic configuration checks.
 
 Most of the documentation is in ReST format
@@ -15,7 +16,8 @@ Most of the documentation is in ReST format
 
 ## Running the tests locally
 
-You will need to have a Git clone of the extension for this with the Composer dependencies installed.
+You will need to have a Git clone of the extension for this with the Composer
+dependencies installed.
 
 ### Running the unit tests
 
@@ -40,16 +42,19 @@ First, you need to configure the path to PHPUnit in the settings:
 
 Languages & Frameworks > PHP > Test Frameworks
 
-In this section, configure PhpStorm to use the Composer autoload and the script path `.Build/vendor/autoload.php` within
+In this section, configure PhpStorm to use the Composer autoload and the script
+path `.Build/vendor/autoload.php` within
 your project.
 
-In the Run/Debug configurations for PHPUnit, use an alternative configuration file:
+In the Run/Debug configurations for PHPUnit, use an alternative configuration
+file:
 
 `.Build/vendor/typo3/testing-framework/Resources/Core/Build/UnitTests.xml`
 
 ### Running the functional tests
 
-You will need a local MySQL user that has the permissions to create new databases.
+You will need a local MySQL user that has the permissions to create new
+databases.
 
 In the examples, the following credentials are used:
 
@@ -58,7 +63,8 @@ In the examples, the following credentials are used:
 - DB name prefix: `typo3_test` (optional)
 - DB host: `localhost` (omitted as this is the default)
 
-You will need to provide those credentials as environment variables when running the functional tests:
+You will need to provide those credentials as environment variables when running
+the functional tests:
 
 - `typo3DatabaseUsername`
 - `typo3DatabasePassword`
@@ -85,10 +91,12 @@ First, you need to configure the path to PHPUnit in the settings:
 
 Languages & Frameworks > PHP > Test Frameworks
 
-In this section, configure PhpStorm to use the Composer autoload and the script path `.Build/vendor/autoload.php` within
+In this section, configure PhpStorm to use the Composer autoload and the script
+path `.Build/vendor/autoload.php` within
 your project.
 
-In the Run/Debug configurations for PHPUnit, use an alternative configuration file:
+In the Run/Debug configurations for PHPUnit, use an alternative configuration
+file:
 
 `.Build/vendor/typo3/testing-framework/Resources/Core/Build/FunctionalTests.xml`
 
