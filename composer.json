@@ -101,51 +101,51 @@
 		}
 	},
 	"scripts": {
-		"ci": [
-			"@ci:static",
-			"@ci:dynamic"
+		"check": [
+			"@check:static",
+			"@check:dynamic"
 		],
-		"ci:composer:normalize": "@composer normalize --no-check-lock --dry-run",
-		"ci:coverage": [
-			"@ci:coverage:unit",
-			"@ci:coverage:functional"
+		"check:composer:normalize": "@composer normalize --no-check-lock --dry-run",
+		"check:coverage": [
+			"@check:coverage:unit",
+			"@check:coverage:functional"
 		],
-		"ci:coverage:functional": [
+		"check:coverage:functional": [
 			"@coverage:create-directories",
 			"find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml --whitelist Classes --coverage-php=\".Build/coverage/{}.cov\" {}';"
 		],
-		"ci:coverage:merge": [
+		"check:coverage:merge": [
 			"@coverage:create-directories",
 			"tools/phpcov merge --clover=./build/logs/clover.xml ./.Build/coverage/"
 		],
-		"ci:coverage:unit": [
+		"check:coverage:unit": [
 			"@coverage:create-directories",
 			"phpunit -c Configuration/UnitTests.xml --whitelist Classes --coverage-php=.Build/coverage/unit.cov Tests/Unit"
 		],
-		"ci:dynamic": [
-			"@ci:tests"
+		"check:dynamic": [
+			"@check:tests"
 		],
-		"ci:php:cs-fixer": "php-cs-fixer fix --config .php-cs-fixer.php -v --dry-run --diff",
-		"ci:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
-		"ci:php:rector": "rector --dry-run",
-		"ci:php:sniff": "phpcs Classes Configuration Tests",
-		"ci:php:stan": "phpstan --no-progress",
-		"ci:static": [
-			"@ci:composer:normalize",
-			"@ci:php:lint",
-			"@ci:php:sniff",
-			"@ci:php:cs-fixer",
-			"@ci:php:rector",
-			"@ci:php:stan",
-			"@ci:xliff:lint"
+		"check:php:cs-fixer": "php-cs-fixer fix --config .php-cs-fixer.php -v --dry-run --diff",
+		"check:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
+		"check:php:rector": "rector --dry-run",
+		"check:php:sniff": "phpcs Classes Configuration Tests",
+		"check:php:stan": "phpstan --no-progress",
+		"check:static": [
+			"@check:composer:normalize",
+			"@check:php:lint",
+			"@check:php:sniff",
+			"@check:php:cs-fixer",
+			"@check:php:rector",
+			"@check:php:stan",
+			"@check:xliff:lint"
 		],
-		"ci:tests": [
-			"@ci:tests:unit",
-			"@ci:tests:functional"
+		"check:tests": [
+			"@check:tests:unit",
+			"@check:tests:functional"
 		],
-		"ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml {}';",
-		"ci:tests:unit": "phpunit -c Configuration/UnitTests.xml Tests/Unit",
-		"ci:xliff:lint": "php Build/bin/console lint:xliff Resources/Private/Language",
+		"check:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c Configuration/FunctionalTests.xml {}';",
+		"check:tests:unit": "phpunit -c Configuration/UnitTests.xml Tests/Unit",
+		"check:xliff:lint": "php Build/bin/console lint:xliff Resources/Private/Language",
 		"coverage:create-directories": "mkdir -p build/logs .Build/coverage",
 		"fix": [
 			"@fix:composer",
@@ -182,16 +182,16 @@
 		]
 	},
 	"scripts-descriptions": {
-		"ci": "Runs all dynamic and static code checks.",
-		"ci:composer:normalize": "Checks the composer.json.",
-		"ci:coverage": "Generates the code coverage report for unit and functional tests.",
-		"ci:coverage:functional": "Generates the code coverage report for functional tests.",
-		"ci:coverage:merge": "Merges the code coverage reports for unit and functional tests.",
-		"ci:coverage:unit": "Generates the code coverage report for unit tests.",
-		"ci:php:rector": "Checks for code for changes by Rector.",
-		"ci:php:stan": "Checks the types with PHPStan.",
-		"ci:static": "Runs all static code analysis checks for the code.",
-		"ci:xliff:lint": "Lints the XLIFF files.",
+		"check": "Runs all dynamic and static code checks.",
+		"check:composer:normalize": "Checks the composer.json.",
+		"check:coverage": "Generates the code coverage report for unit and functional tests.",
+		"check:coverage:functional": "Generates the code coverage report for functional tests.",
+		"check:coverage:merge": "Merges the code coverage reports for unit and functional tests.",
+		"check:coverage:unit": "Generates the code coverage report for unit tests.",
+		"check:php:rector": "Checks for code for changes by Rector.",
+		"check:php:stan": "Checks the types with PHPStan.",
+		"check:static": "Runs all static code analysis checks for the code.",
+		"check:xliff:lint": "Lints the XLIFF files.",
 		"coverage:create-directories": "Creates the directories needed for recording and merging the code coverage reports.",
 		"fix": "Runs all automatic code style fixes.",
 		"fix:composer": "Normalizes all composer.json files.",
