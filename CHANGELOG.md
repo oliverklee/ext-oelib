@@ -7,6 +7,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Add a separate TCEForms record icon for ZIP codes/postal codes (#2164)
+
 ### Changed
 
 - Require the latest TYPO3 12LTS security release (#2076, #2161)
